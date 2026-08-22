@@ -1,0 +1,18 @@
+# Environnements Python
+venv/
+__pycache__/
+*.py[cod]
+
+# Loaders Radxa : binaires de 1,4 Mo retelechargeables depuis dl.radxa.com
+radxa-flash/*.bin
+
+# Clone de pyamlboot (depot git imbrique, ~28 Mo)
+# A convertir en submodule si on veut le versionner proprement.
+radxa-flash/pyamlboot/
+
+# Journaux de session
+radxa-flash/*.log
+
+# Images systeme
+*.img
+*.img.xz
