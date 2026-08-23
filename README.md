@@ -53,6 +53,8 @@ radxa-config/      configuration de la carte en service, déployée par SSH
 | Fichier | Rôle |
 | --- | --- |
 | `led-schedule.sh` | Éteint la LED verte de la carte de 22 h à 8 h — elle est fixée au dos du réveil, dans une chambre. Installe deux services `gpioset` qui se relaient et leurs minuteries systemd. À lancer en root sur la carte ; idempotent. Les détails (pourquoi la ligne 10 du GPIO AO, pourquoi relâcher la ligne ne rallume pas la LED) sont dans `AGENTS.md`. |
+| `wifi-roamoff.sh` | Pose `options brcmfmac roamoff=1` pour empêcher le firmware WiFi de basculer la carte en 5 GHz de son propre chef. **Se termine par un redémarrage** : le paramètre n'est lu qu'au chargement du module. Déjà appliqué ; utile après une réinstallation. |
+| `led-probe.sh` | Diagnostic : force successivement les lignes 10 puis 8 du GPIO AO pour identifier celle qui pilote la LED (elle varie selon la révision de carte). À lancer en vue de la LED. |
 
 ### `radxa-flash/`
 

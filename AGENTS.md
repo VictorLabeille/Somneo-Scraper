@@ -20,7 +20,7 @@ Le dépôt contient **deux ensembles sans rapport l'un avec l'autre**. Ne pas le
 | Ensemble | Statut | Consigne |
 | --- | --- | --- |
 | `radxa-flash/` | **Terminé et archivé** | Outillage ponctuel ayant servi à installer Armbian sur l'eMMC. La carte est en service depuis le 22 août 2026. **Ne pas modifier**, sauf demande explicite de réinstallation du système. |
-| `radxa-config/` | **Déployé sur la carte** | Configuration de la carte en service (extinction nocturne de la LED). Le dépôt et la carte doivent rester en phase : modifier le script sans le redéployer les fait diverger silencieusement. |
+| `radxa-config/` | **Déployé sur la carte** | Configuration de la carte en service : extinction nocturne de la LED, bande WiFi. Ces scripts ont déjà tourné — le dépôt et la carte doivent rester en phase, modifier un script sans le redéployer les fait diverger silencieusement. |
 | Le serveur FastAPI | **À écrire** | C'est le travail en cours. Tout nouveau code applicatif va là. |
 
 Concrètement : sauf demande portant explicitement sur la réinstallation de l'OS, `radxa-flash/`
@@ -96,7 +96,7 @@ AGENTS.md          ce fichier
 CLAUDE.md          pointeur vers AGENTS.md
 LICENSE            GPL-3.0
 radxa-flash/       outillage d'installation d'Armbian sur l'eMMC (ponctuel, pas du runtime)
-radxa-config/      configuration de la carte en service, à déployer par SSH (LED)
+radxa-config/      configuration de la carte en service, à déployer par SSH (LED, WiFi)
 ```
 
 Le serveur FastAPI n'est pas encore écrit — voir « Périmètre de travail » ci-dessus.
@@ -160,8 +160,8 @@ Associated with 62:…
 Associated with 72:…                                      <- firmware : 5 GHz, sans préavis
 ```
 
-La parade est `options brcmfmac roamoff=1` dans `/etc/modprobe.d/brcmfmac.conf`, effectif
-depuis le redémarrage du 23 août 2026 : retour au canal 6 à **-57 dBm** au lieu de -75, et
+La parade est `options brcmfmac roamoff=1` dans `/etc/modprobe.d/brcmfmac.conf`, posé par
+`radxa-config/wifi-roamoff.sh` et effectif depuis le redémarrage du 23 août 2026 : retour au canal 6 à **-57 dBm** au lieu de -75, et
 72 Mbit/s au lieu de 27. Le module n'étant pas embarqué dans l'initramfs (`lsinitramfs` le
 confirme), aucun `update-initramfs` n'est nécessaire — rien à toucher dans le chemin de boot.
 
@@ -218,6 +218,11 @@ Trois points à connaître avant d'y toucher :
 `radxa-led-boot.service` repose l'état correct au démarrage : les minuteries systemd ne
 rattrapent pas un déclenchement manqué, un redémarrage à 2 h du matin laisserait sinon la
 LED allumée jusqu'à 22 h le lendemain.
+
+`radxa-config/led-probe.sh` sert à retrouver la bonne ligne si le besoin se représente : il
+force successivement les lignes 10 puis 8 et laisse l'œil trancher. La ligne qui ne pilote
+pas la LED part vers le header 40 points, où rien n'est branché — les deux essais sont donc
+sans conséquence.
 
 ## Fichiers non versionnés
 
