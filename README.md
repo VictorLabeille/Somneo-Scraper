@@ -34,8 +34,9 @@ démarrage : l'application n'attend plus le réveil, elle lit un historique déj
 
 ## Contenu du dépôt
 
-À ce stade le dépôt ne contient que l'outillage ayant servi à **installer Armbian sur
-l'eMMC de la Radxa Zero**. Le serveur FastAPI lui-même n'est pas encore écrit.
+À ce stade le dépôt contient l'outillage ayant servi à **installer Armbian sur l'eMMC de la
+Radxa Zero**, plus la configuration appliquée à la carte en service. Le serveur FastAPI
+lui-même n'est pas encore écrit.
 
 ```
 LICENSE            GPL-3.0
@@ -44,7 +45,14 @@ AGENTS.md          conventions du dépôt (licence, structure, pièges connus)
 CLAUDE.md          pointeur de découverte vers AGENTS.md
 .gitignore         exclut venv, logs, images et le clone pyamlboot
 radxa-flash/       outillage de flash de l'eMMC (voir ci-dessous)
+radxa-config/      configuration de la carte en service, déployée par SSH
 ```
+
+### `radxa-config/`
+
+| Fichier | Rôle |
+| --- | --- |
+| `led-schedule.sh` | Éteint la LED verte de la carte de 22 h à 8 h — elle est fixée au dos du réveil, dans une chambre. Installe deux services `gpioset` qui se relaient et leurs minuteries systemd. À lancer en root sur la carte ; idempotent. Les détails (pourquoi la ligne 10 du GPIO AO, pourquoi relâcher la ligne ne rallume pas la LED) sont dans `AGENTS.md`. |
 
 ### `radxa-flash/`
 
@@ -127,6 +135,11 @@ configuration se fait donc dans `/etc/wpa_supplicant/wpa_supplicant-wlan0.conf` 
 clé dérivée PBKDF2 plutôt que mot de passe en clair) avec activation de
 `wpa_supplicant@wlan0.service`. `freq_list` restreint la carte aux canaux 2,4 GHz.
 
+Attention : `freq_list` ne lie que les associations décidées par wpa_supplicant. Le firmware
+du CYW43455 fait du roaming pour son propre compte et peut basculer la carte en 5 GHz sans
+préavis ; il faut `options brcmfmac roamoff=1` pour l'en empêcher. Le détail du diagnostic
+est dans `AGENTS.md`.
+
 ## État d'avancement
 
 - [x] Choix de la librairie (`pysomneo`), du matériel et de l'architecture
@@ -134,6 +147,8 @@ clé dérivée PBKDF2 plutôt que mot de passe en clair) avec activation de
 - [x] Préconfiguration du WiFi et accès SSH headless (`radxa-zero`, 2,4 GHz)
 - [x] Durcissement SSH : authentification par clé ed25519 uniquement, mot de passe et
       login root désactivés (`/etc/ssh/sshd_config.d/99-durcissement.conf`)
+- [x] Carte installée au dos du Somneo, alimentée par son port USB, en service continu
+- [x] WiFi maintenu en 2,4 GHz (`roamoff=1`) et LED éteinte de 22 h à 8 h
 - [ ] Test de la découverte SSDP et de la connexion locale au Somneo
 - [ ] Blocage de l'accès internet du Somneo (pare-feu / VLAN / DNS sinkhole)
 - [ ] Conception de l'API interne
