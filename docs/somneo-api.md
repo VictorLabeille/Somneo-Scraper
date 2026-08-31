@@ -87,9 +87,18 @@ L'appareil s'auto-décrit : `GET /di/v1/products/0/` renvoie la liste de ses por
 
 ## 4. Ports du produit 1 — fonctions du réveil
 
-`GET /di/v1/products/1/` **expire systématiquement** (`500 Timeout`) : l'appareil n'a pas
-assez de tas pour sérialiser l'index. La liste ci-dessous vient donc de l'APK
-(`com.philips.cdp2.brighteyes.ports.*`), chaque entrée ayant été vérifiée en direct.
+`GET /di/v1/products/1/` **expire systématiquement** (`500 Timeout`, cinq tentatives
+jusqu'à 60 s, appareil au repos) : il n'a pas assez de tas pour sérialiser l'index. La liste
+ci-dessous vient donc de l'APK (`com.philips.cdp2.brighteyes.ports.*`), chaque entrée ayant
+été vérifiée en direct.
+
+> **Limite d'exhaustivité, à assumer.** Le produit 0 est exhaustif : il s'auto-décrit. Le
+> produit 1 **ne l'est pas**. Cette liste couvre ce que *l'application* utilise ; un port que
+> le firmware exposerait sans que SleepMapper y touche n'y figurerait pas. Une vingtaine de
+> noms plausibles ont été testés en complément (`wuvol`, `wudsp`, `wuwiz`, `wuevt`…), tous en
+> `422` — mais l'espace des noms de cinq lettres ne peut pas être balayé sur un appareil qui
+> tombe en timeout. **Considérer cette liste comme un minorant vérifié, pas comme une preuve
+> de complétude.**
 
 | Port | Classe SleepMapper | Rôle | `pysomneo` |
 | --- | --- | --- | --- |
@@ -152,10 +161,43 @@ en douceur), `pwrsz`/`pszhr`/`pszmn` (PowerWake), `snztm` (snooze), `lgtds`.
 Masque `daynm` : bit 1 = lundi … bit 7 = dimanche. `62` = jours ouvrés, `192` = week-end,
 `254` = tous les jours, `0` = demain uniquement.
 
-**`wusts`.** `wusts` est un entier de bits d'état ; `pysomneo` n'en cartographie que 8
-valeurs (`off`, `sunset`, `light-on`, `snooze`, `wake-up`, `on`). Les autres champs sont
-lisibles tels quels : `snztm`, `brght` (luminosité de l'afficheur), `dspon`, `nrcur`,
-`wutim`/`dutim`/`sntim` (minutes restantes ; **`65535` = inactif**), `pwrsz`, `fmrna`.
+**`wusts` — état, et son décodage binaire.** `pysomneo` traite le champ `wusts` comme une
+table de 8 valeurs magiques (`1: off`, `2: sunset`, `257: light-on`, `2321: snooze`…), ce qui
+échoue dès qu'une combinaison non listée se présente. C'est en réalité un **champ de bits**,
+et `StatusProperties` en donne les tests exacts :
+
+| Bit | Signification (certaine — issue du code de l'app) |
+| --- | --- |
+| 0 | Composante « veille » |
+| 1 | Menu utilisateur affiché |
+| 2 | Alarme active |
+| 4 | Alarme en snooze |
+| 11 | **Appareil actif** (bit maître : 0 = veille) |
+
+```
+isStandBy()      = bit11 == 0 && bit0 == 1
+isUserMenu()     = bit11 == 0 && bit1 == 1
+isAlarmActive()  = bit2 == 1  || bit11 == 1
+isAlarmSnoozed() = bit4 == 1  && bit11 == 1
+```
+
+Recoupé avec la table de `pysomneo`, trois bits supplémentaires se déduisent — **hypothèse,
+non confirmée par le code** : bit 3 = coucher de soleil, bit 8 = lumière allumée,
+bit 9 = son actif. (`2321` = bits 0,4,8,11 → snooze ✓ ; `2309` = bits 0,2,8,11 → réveil ✓ ;
+`257` = bits 0,8 → lumière seule ✓.)
+
+Les autres champs du port se lisent tels quels : `snztm`, `nrcur`, `pwrsz`, `fmrna`,
+`wutim`/`dutim`/`sntim` (minutes restantes ; **`65535` = inactif**), `rpair`, `hmlay`.
+
+**Réglages d'afficheur** — `brght` et `dspon` sont sur ce même port et sont **écrivables** :
+
+```
+PUT wusts {"dspon": true, "brght": 4}   # allumé, intensité 4
+PUT wusts {"dspon": false}              # afficheur éteint
+```
+
+`brght` est borné à **1–6** (`isWithinLimit()` dans l'app). C'est la réponse à l'issue #13
+de `pysomneo`, ouverte depuis 2023.
 
 **`wudsk`** (coucher de soleil) : `durat`, `onoff`, `curve`, `ctype`, `sndtp`, `snddv`
 (`dus`/`fmr`/`off`), `sndch`, `sndlv`, `sndss`.
@@ -190,11 +232,41 @@ synchronisation HealthSuite, sous les types `sleepRoomSession`,
 `sleepRoomTemperatureAggregate`, `sleepRoomHumidityAggregate`,
 `sleepRoomIlluminationAggregate` et `sleepRoomSoundAggregate`.
 
+### Ce que le réveil garde en local avant de téléverser
+
+Les sous-ressources `dataupload/{temp,hum,snd,lux}.1/data` **ne sont pas vides** : elles
+exposent la fenêtre d'agrégation en cours, celle qui sera envoyée au prochain lot. C'est
+strictement plus riche que `wusrd`, et c'est ce qui alimente le `SensorReading(moyenne, min,
+max, période)` de l'application.
+
+```json
+temp.1/data → {"svper":898,"avtmp":26.3,"lotmp":26.3,"hitmp":26.4}
+hum.1/data  → {"svper":898,"avhum":56.2,"lohum":56.1,"hihum":56.4}
+snd.1/data  → {"svper":898,"avsnd":39,"losnd":26,"hisnd":70,
+               "absnd":[5,[0,30,11484],[30,40,35970],[0,0,0],[40,3276,42256],[0,0,0]],
+               "rlsnd":[5,[-3276,3,85589],[3,6,2225],[-6,-3,15],[6,3276,1676],[-3276,-6,7]]}
+lux.1/data  → {"svper":898,"avlux":8.4,"lolux":0.0,"hilux":114.8,"ablux":[…],"rllux":[…]}
+```
+
+- `svper` : secondes écoulées dans la fenêtre courante (plafond 900 s).
+- `av*` / `lo*` / `hi*` : **moyenne, minimum, maximum** sur la fenêtre.
+- `ab*` / `rl*` (bruit et lumière seulement) : **histogrammes**, `[n, [borne_basse, borne_haute,
+  compte] × n]` — `ab*` sur les valeurs absolues, `rl*` sur les variations. Le relevé ci-dessus
+  se lit : 11 484 échantillons entre 0 et 30 dB, 35 970 entre 30 et 40, 42 256 au-dessus de 40.
+
+**C'est directement exploitable par le scraper**, et supérieur à un simple `wusrd` échantillonné :
+un pic de bruit à 70 dB survenu entre deux interrogations est perdu par `wusrd`, mais reste
+dans `hisnd`. La bonne stratégie de collecte est donc de lire **`wusrd` pour l'instantané et
+`dataupload/*/data` pour les extrema de la fenêtre** — cela capture les pics sans avoir à
+interroger l'appareil à haute fréquence, ce que son tas ne supporterait pas.
+
 **Conséquences, à intégrer à l'architecture :**
 
-1. **L'API locale n'a aucune mémoire.** Aucun endpoint d'historique n'existe : `wusrd` ne
-   donne que l'instant et des moyennes, `wungt` que la nuit en cours. Toutes les variantes
-   testées (`wuhis`, `wusrd/history`, `wungt/history`, `wudta`, `wulog`…) répondent `422`.
+1. **L'API locale n'a aucune mémoire longue.** Aucun endpoint d'historique n'existe : ce qui
+   est accessible se limite à l'instant (`wusrd`), à la fenêtre de 15 min en cours
+   (`dataupload/*/data`) et à la nuit en cours (`wungt`). Rien n'est conservé au-delà : toutes
+   les variantes d'historique testées (`wuhis`, `wusrd/history`, `wungt/history`, `wudta`,
+   `wulog`…) répondent `422`. Dès que la fenêtre bascule, ce qui n'a pas été relevé est perdu.
 2. **Couper internet supprime donc l'intégralité de l'historique de SleepMapper.** Ce n'est
    pas un effet de bord : c'est la fonction principale de l'app qui disparaît.
 3. `Somneo-Scraper` n'est donc pas un simple cache d'accélération — il est la **seule**
@@ -204,7 +276,34 @@ synchronisation HealthSuite, sous les types `sleepRoomSession`,
    `www.ecdinterface.philips.com`, et l'on peut vérifier l'isolement en relisant
    `backend.lastsignon` et `transport.state`.
 
-## 6. Pièges relevés
+## 6. Notifications push — l'alternative à l'interrogation
+
+L'appareil sait **notifier** au lieu d'être interrogé, et l'application s'en sert. Le
+mécanisme, lisible dans `SubscribeRequest` :
+
+```
+POST /di/v1/products/{n}/{port}
+{"subscriber": "<identifiant client>", "ttl": <secondes>, "changeudp": <port UDP>}
+```
+
+L'appareil renvoie ensuite un **datagramme UDP** vers ce port (8080 par défaut) à chaque
+changement d'état du port souscrit ; côté client, `LocalSubscriptionHandler` ouvre le socket
+et reçoit les événements. Un en-tête `X-Condor-Features: changeindication-port` négocie la
+variante avec port personnalisé.
+
+Que les abonnements sont bien tenus côté appareil se vérifie dans
+`GET /di/v1/products/0/sub`, qui liste les souscriptions actives avec leur `ttl`.
+
+**Intérêt direct pour le projet :** sur un appareil qui tombe en `500 Timeout` sous une
+rafale, remplacer une partie de l'interrogation par des abonnements est le bon levier —
+notamment pour les états qui changent rarement mais qu'on veut voir tout de suite (alarme
+déclenchée, snooze, début de nuit dans `wungt`). Les capteurs, eux, restent à interroger.
+
+> **Non testé.** Souscrire est un `POST` qui crée un état persistant sur l'appareil ; l'essai
+> n'a pas été fait pour ne pas laisser de trace sur un réveil en service. À tenter avec un
+> `ttl` court et un écouteur UDP sur la Radxa, avant de bâtir la collecte dessus.
+
+## 7. Pièges relevés
 
 - **L'appareil sature.** `heap_free` ≈ 25 ko : l'index `/di/v1/products/1/` expire en `500`,
   et des rafales de requêtes provoquent des timeouts. Sérialiser les appels, espacer d'environ
@@ -218,9 +317,48 @@ synchronisation HealthSuite, sous les types `sleepRoomSession`,
   d'un NTP configurable mais de la liaison cloud. À surveiller après l'isolement — c'est le
   risque le plus concret de la coupure d'internet (dérive de l'horloge, changement d'heure).
 - **`pysomneo` couvre 11 des 21 ports** et ignore notamment `wungt`, donc tout le suivi de
-  sommeil. Il faudra des appels directs en complément — voir la colonne du §4.
+  sommeil. Il faudra des appels directs en complément — voir la colonne du §4, et le §8 pour
+  ce qui mérite de remonter en amont.
 
-## 7. Méthode (reproductible)
+## 8. Contribuer à `pysomneo` — ce qui est réellement nouveau
+
+État du dépôt amont au 31 août 2026 : actif (dernier push le 30 août), GPL-3.0, 4 issues
+ouvertes, et **toutes les PR externes depuis décembre 2022 ont été fusionnées** (6
+contributeurs différents) ; les deux seules écartées datent de 2021 et d'avril 2022. Le
+mainteneur accepte les apports extérieurs.
+
+**Ce qui n'est PAS nouveau.** L'issue #16 (« Additional settings found », février 2024)
+documente déjà `wufmr`, `wufmp/00`, `wurlx`, `wungt`, `wutmr` et `wutms`, obtenus par la même
+méthode — lecture du code de l'application. Elle est ouverte depuis deux ans et demi sans que
+personne n'en ait fait une PR. La liste des ports n'est donc pas une découverte ; **la
+transformer en code l'est**.
+
+**Ce qui est nouveau, et par ordre de valeur :**
+
+1. **Les agrégats `dataupload/*/data`** (§5). N'apparaissent ni dans `pysomneo`, ni dans
+   l'issue #16, ni nulle part ailleurs publiquement. Min, max et histogrammes de bruit et de
+   lumière sur la fenêtre courante — de la donnée que la bibliothèque n'expose pas du tout.
+2. **Le décodage binaire de `wusts`** (§4). `pysomneo` utilise une table de 8 valeurs magiques
+   qui échoue sur toute combinaison non listée ; les tests de bits exacts sont dans l'app.
+   Remplacement à correction de bug, pas seulement à ajout de fonction.
+3. **Les réglages d'afficheur** (`dspon`, `brght` bornés 1–6) — réponse directe à **l'issue
+   #13**, ouverte depuis mai 2023.
+4. **Le mécanisme d'abonnement UDP** (§6). Absent de `pysomneo`, qui n'interroge qu'en
+   boucle.
+5. **La cause des timeouts de l'issue #8** (ouverte depuis 2022, 9 commentaires, jamais
+   résolue) : le port `mem` montre ~25 ko de tas libre. Ce n'est pas la faute de `Session`
+   comme le suppose le rapporteur, c'est un appareil qui n'a pas la mémoire de servir des
+   requêtes concurrentes. Diagnostic mesurable, pas conjectural.
+6. **La sémantique des champs laissés en « ? »** dans l'issue #16 (`maxpr`, `rtype`, `intny`,
+   `gdngt`, `gdday`, `prfvs`, `pwrsv`, `ctype`, `curve`), résolue par les annotations
+   `@SerializedName` de l'application.
+
+**Marche à suivre suggérée**, cohérente avec les usages du dépôt (petit mainteneur) :
+commenter d'abord les issues #16, #13 et #8 avec les éléments ci-dessus, puis proposer des PR
+courtes et séparées plutôt qu'un gros apport — en commençant par #13 (petite, fermée par
+quelques lignes) avant `wungt` et les agrégats.
+
+## 9. Méthode (reproductible)
 
 1. Découverte SSDP depuis un hôte du LAN (§1).
 2. Relevé direct : `GET` sur chaque port, en HTTPS sans vérification de certificat.
