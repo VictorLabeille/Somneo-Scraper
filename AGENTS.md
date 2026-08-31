@@ -21,6 +21,7 @@ Le dépôt contient **deux ensembles sans rapport l'un avec l'autre**. Ne pas le
 | --- | --- | --- |
 | `radxa-flash/` | **Terminé et archivé** | Outillage ponctuel ayant servi à installer Armbian sur l'eMMC. La carte est en service depuis le 22 août 2026. **Ne pas modifier**, sauf demande explicite de réinstallation du système. |
 | `radxa-config/` | **Déployé sur la carte** | Configuration de la carte en service : extinction nocturne de la LED, bande WiFi. Ces scripts ont déjà tourné — le dépôt et la carte doivent rester en phase, modifier un script sans le redéployer les fait diverger silencieusement. |
+| `docs/` | **Référence** | `somneo-api.md` : protocole local du Somneo, relevé sur l'appareil et recoupé avec l'APK SleepMapper. Documentation, pas du code. À mettre à jour si un relevé contredit ce qui y est écrit. |
 | Le serveur FastAPI | **À écrire** | C'est le travail en cours. Tout nouveau code applicatif va là. |
 
 Concrètement : sauf demande portant explicitement sur la réinstallation de l'OS, `radxa-flash/`
@@ -50,15 +51,30 @@ note Obsidian.
 - Accès SSH par clé uniquement. Depuis le poste de dev : `ssh radxa`.
 - Sa LED verte est éteinte de 22 h à 8 h — voir « LED d'alimentation » plus bas.
 
-**Non vérifié — hypothèse centrale du projet encore non testée :**
+**Acquis depuis le 31 août 2026 — l'hypothèse centrale est validée :**
 
-- **Le Somneo n'a jamais été contacté.** Ni sa découverte SSDP, ni son API REST locale, ni
-  `pysomneo` n'ont fait l'objet du moindre essai. Son adresse IP n'est même pas connue.
-- On suppose que son API locale continue de répondre **une fois le réveil coupé d'internet**.
-  Cette hypothèse conditionne tout le projet et **doit être validée en premier**, avant
-  d'écrire la moindre ligne du serveur. Si elle est fausse, l'architecture est à revoir.
+- Le Somneo répond en SSDP (`ST: urn:philips-com:device:DiProduct:1`) et son API REST locale
+  a été relevée port par port. C'est un **HF3671/01**, nom de code interne *BrightEyes*.
+- **Aucune authentification n'est exigée**, ni en lecture ni en écriture : un `PUT` de test
+  est passé en `200` sans en-tête `Authorization`, le port `pairing` répond `501` et
+  `device.allowpairing` vaut `false`. Le pilotage local est donc acquis sans compte Philips.
+- Son adresse est en DHCP (192.168.1.97 au 31 août 2026) : **passer par SSDP**, jamais par
+  une IP en dur.
 
-Ne rien présumer du comportement du réveil tant que ce test n'est pas fait.
+**Ce que la rétro-ingénierie a changé dans le projet — à lire avant d'écrire le serveur :**
+
+- **L'API locale n'a aucune mémoire.** Aucun endpoint d'historique n'existe : `wusrd` ne
+  donne que l'instant et des moyennes, `wungt` que la nuit en cours. L'historique de
+  SleepMapper vient du **cloud** Philips, alimenté par le port `dataupload` du réveil.
+- Donc couper internet **supprime tout l'historique de l'application constructeur**.
+  `Somneo-Scraper` n'est pas un cache d'accélération : c'est la **seule** source
+  d'historique possible après isolement, et sa base SQLite devient la mémoire du réveil.
+- `pysomneo` ne couvre que 11 des 21 ports, et **ignore `wungt`** — donc tout le suivi de
+  coucher/lever. Des appels directs en complément seront nécessaires.
+
+Tout le détail (ports, sémantique des champs, pièges) est dans **`docs/somneo-api.md`**.
+S'y référer avant d'écrire du code qui parle au réveil, plutôt que de re-sonder l'appareil :
+son tas est de ~25 ko libres et il tombe en timeout sous une rafale de requêtes.
 
 ## Note Obsidian associée
 
@@ -97,6 +113,7 @@ CLAUDE.md          pointeur vers AGENTS.md
 LICENSE            GPL-3.0
 radxa-flash/       outillage d'installation d'Armbian sur l'eMMC (ponctuel, pas du runtime)
 radxa-config/      configuration de la carte en service, à déployer par SSH (LED, WiFi)
+docs/              référence protocolaire issue de la rétro-ingénierie (somneo-api.md)
 ```
 
 Le serveur FastAPI n'est pas encore écrit — voir « Périmètre de travail » ci-dessus.
@@ -108,6 +125,11 @@ Le serveur FastAPI n'est pas encore écrit — voir « Périmètre de travail »
 - Python : `pysomneo` pour tout dialogue avec le réveil — ne pas réimplémenter le protocole.
 - **Découverte SSDP** plutôt qu'une IP en dur : l'adresse du Somneo peut changer en DHCP.
 - SQLite pour l'historique ; pas de base séries temporelles dédiée sans besoin démontré.
+- **Le dépôt est public.** Ne jamais y versionner ce qui est propre à l'appareil ou au
+  réseau : clé du port `security`, numéro de série, adresses MAC, SSID, mots de passe.
+  `docs/somneo-api.md` est rédigé sous cette contrainte — la tenir en le complétant.
+- Espacer les appels au réveil (~200 ms) et les sérialiser : il tombe en `500 Timeout`
+  sous une rafale.
 
 ## Pièges connus — `radxa-flash/`
 

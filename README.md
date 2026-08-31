@@ -12,10 +12,18 @@ SleepMapper). Somneo-Scraper collecte et historise les données ; SleepMaxxer le
 Le Somneo est en permanence connecté aux serveurs Philips, et SleepMapper est lent au
 démarrage. Or le réveil expose une **API REST locale** (HTTPS sur le réseau domestique,
 découverte par SSDP) totalement indépendante du cloud. On peut donc l'isoler d'internet
-et le piloter soi-même.
+et le piloter soi-même — vérifié le 31 août 2026 : cette API ne demande **aucune
+authentification**, ni en lecture ni en écriture.
 
-Un serveur qui interroge les capteurs en permanence résout au passage la lenteur de
-démarrage : l'application n'attend plus le réveil, elle lit un historique déjà constitué.
+Mais elle **n'a aucune mémoire**. La rétro-ingénierie de SleepMapper a montré que ses
+graphiques d'historique viennent du cloud Philips, alimenté par le réveil lui-même
+(échantillon toutes les 15 min, port `dataupload`) : l'API locale ne donne que l'instant
+présent et la nuit en cours. Couper internet supprime donc tout l'historique.
+
+Ce serveur n'est donc pas un simple cache d'accélération, c'est la **seule** source
+d'historique possible une fois le réveil isolé — et, en échantillonnant plus vite que le
+quart d'heure, il fait mieux que l'original. Il résout au passage la lenteur de démarrage :
+l'application n'attend plus le réveil, elle lit un historique déjà constitué.
 
 ## Architecture cible
 
@@ -44,9 +52,18 @@ README.md          ce fichier
 AGENTS.md          conventions du dépôt (licence, structure, pièges connus)
 CLAUDE.md          pointeur de découverte vers AGENTS.md
 .gitignore         exclut venv, logs, images et le clone pyamlboot
+docs/              référence protocolaire du Somneo (voir ci-dessous)
 radxa-flash/       outillage de flash de l'eMMC (voir ci-dessous)
 radxa-config/      configuration de la carte en service, déployée par SSH
 ```
+
+### `docs/`
+
+`somneo-api.md` — **référence du protocole local du Somneo**, produite le 31 août 2026 en
+relevant l'appareil port par port et en décompilant l'application constructeur SleepMapper
+(`com.philips.src.hss` 3.22.0-rc.1). Elle donne les 21 ports de l'API, la sémantique des
+champs JSON, le schéma d'authentification (inutilisé sur ce firmware) et les pièges de
+l'appareil. À lire avant d'écrire du code qui parle au réveil.
 
 ### `radxa-config/`
 
@@ -151,7 +168,9 @@ est dans `AGENTS.md`.
       login root désactivés (`/etc/ssh/sshd_config.d/99-durcissement.conf`)
 - [x] Carte installée au dos du Somneo, alimentée par son port USB, en service continu
 - [x] WiFi maintenu en 2,4 GHz (`roamoff=1`) et LED éteinte de 22 h à 8 h
-- [ ] Test de la découverte SSDP et de la connexion locale au Somneo
+- [x] Découverte SSDP et connexion locale au Somneo — **API accessible sans
+      authentification, en lecture comme en écriture**
+- [x] Rétro-ingénierie de SleepMapper et cartographie complète de l'API (`docs/somneo-api.md`)
 - [ ] Blocage de l'accès internet du Somneo (pare-feu / VLAN / DNS sinkhole)
 - [ ] Conception de l'API interne
 - [ ] Service FastAPI + intégration `pysomneo`
