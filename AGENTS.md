@@ -76,6 +76,27 @@ Tout le détail (ports, sémantique des champs, pièges) est dans **`docs/somneo
 S'y référer avant d'écrire du code qui parle au réveil, plutôt que de re-sonder l'appareil :
 son tas est de ~25 ko libres et il tombe en timeout sous une rafale de requêtes.
 
+## Ordre de construction — arrêté le 2 septembre 2026
+
+Le code applicatif n'est pas encore écrit. L'ordre suivant a été décidé et **ne doit pas être
+réarbitré sans raison** :
+
+1. **Cadrage fonctionnel de SleepMaxxer d'abord.** La forme de l'API interne doit être dictée
+   par ce dont l'application a besoin, pas devinée depuis le protocole du réveil. Commencer
+   par le backend reviendrait à inventer un contrat que le client ne demandera pas.
+2. **Puis le serveur** (découverte SSDP, collecte, SQLite, endpoints FastAPI).
+3. **Puis les contributions à `pysomneo`** (voir `docs/somneo-api.md` §8). Contribuer *après*
+   avoir construit, et non avant : l'usage réel fait remonter les vrais pièges, et la PR en
+   sort meilleure que si elle était écrite d'après la seule lecture de l'APK décompilé.
+
+Stratégie de collecte retenue, à ne pas redécouvrir : lire **`wusrd` pour l'instantané** et
+**`dataupload/{temp,hum,snd,lux}.1/data` pour les extrema et histogrammes de la fenêtre de
+15 minutes**. Cela capture les pics sans interroger l'appareil à haute fréquence — ce que son
+tas de ~25 ko ne supporterait pas. Sérialiser les appels et les espacer d'environ 200 ms.
+
+Le répertoire applicatif reste à créer à la racine ; sa structure interne sera arrêtée par la
+session qui l'écrira, puis **reportée ici et dans la note Obsidian**.
+
 ## Note Obsidian associée
 
 Ce projet est catalogué dans le vault Obsidian personnel :
