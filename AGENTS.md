@@ -73,12 +73,9 @@ décider par la session qui l'écrira ; une fois arrêtée, la reporter ici et d
 **Vis-à-vis du projet**
 
 - **L'API interne est dictée par le cadrage de SleepMaxxer**, pas devinée depuis le protocole
-  du réveil. Décision du 2 septembre 2026, argumentée dans la note Obsidian.
-- **L'API doit exposer un point d'entrée paginé « tout ce qui est arrivé depuis telle date »**
-  (2026-09-06). L'application conserve une copie complète de l'historique sur le téléphone :
-  ce serveur ne peut pas rester le seul dépositaire d'une donnée qui ne se remesure pas. À
-  prévoir dès la conception du schéma — ajouté après coup, il oblige à le retoucher. Le
-  téléphone lit seulement, il n'écrit jamais dans la mémoire.
+  du réveil. **Le lire avant de concevoir le schéma** : il porte des exigences qui contraignent
+  la base, et qu'on ne peut pas ajouter après coup. Décision du 2 septembre 2026, argumentée
+  dans la note Obsidian.
 - **La remise à l'heure du réveil est une fonction de ce serveur**, pas de l'application :
   l'horloge dérive une fois le cloud coupé, et seul le collecteur tourne en continu.
 - **SQLite pour l'historique** ; pas de base séries temporelles dédiée sans besoin démontré.
