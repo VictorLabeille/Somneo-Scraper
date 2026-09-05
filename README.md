@@ -49,10 +49,10 @@ lui-même n'est pas encore écrit.
 ```
 LICENSE            GPL-3.0
 README.md          ce fichier
-AGENTS.md          conventions du dépôt (licence, structure, pièges connus)
+AGENTS.md          conventions du dépôt (règles impératives, périmètre, structure)
 CLAUDE.md          pointeur de découverte vers AGENTS.md
 .gitignore         exclut venv, logs, images et le clone pyamlboot
-docs/              référence protocolaire du Somneo (voir ci-dessous)
+docs/              référence technique : protocole du Somneo, carte Radxa (voir ci-dessous)
 radxa-flash/       outillage de flash de l'eMMC (voir ci-dessous)
 radxa-config/      configuration de la carte en service, déployée par SSH
 ```
@@ -65,11 +65,15 @@ relevant l'appareil port par port et en décompilant l'application constructeur 
 champs JSON, le schéma d'authentification (inutilisé sur ce firmware) et les pièges de
 l'appareil. À lire avant d'écrire du code qui parle au réveil.
 
+`radxa.md` — **référence de la carte** : état du matériel en service, accès SSH, roaming du
+firmware WiFi, pilotage de la LED, et les pièges du flash de l'eMMC. À lire avant toute
+manipulation de la carte.
+
 ### `radxa-config/`
 
 | Fichier | Rôle |
 | --- | --- |
-| `led-schedule.sh` | Éteint la LED verte de la carte de 22 h à 8 h — elle est fixée au dos du réveil, dans une chambre. Installe deux services `gpioset` qui se relaient et leurs minuteries systemd. À lancer en root sur la carte ; idempotent. Les détails (pourquoi la ligne 10 du GPIO AO, pourquoi relâcher la ligne ne rallume pas la LED) sont dans `AGENTS.md`. |
+| `led-schedule.sh` | Éteint la LED verte de la carte de 22 h à 8 h — elle est fixée au dos du réveil, dans une chambre. Installe deux services `gpioset` qui se relaient et leurs minuteries systemd. À lancer en root sur la carte ; idempotent. Les détails (pourquoi la ligne 10 du GPIO AO, pourquoi relâcher la ligne ne rallume pas la LED) sont dans `docs/radxa.md`. |
 | `wifi-roamoff.sh` | Pose `options brcmfmac roamoff=1` pour empêcher le firmware WiFi de basculer la carte en 5 GHz de son propre chef. **Se termine par un redémarrage** : le paramètre n'est lu qu'au chargement du module. Déjà appliqué ; utile après une réinstallation. |
 | `led-probe.sh` | Diagnostic : force successivement les lignes 10 puis 8 du GPIO AO pour identifier celle qui pilote la LED (elle varie selon la révision de carte). À lancer en vue de la LED. |
 
@@ -157,7 +161,7 @@ clé dérivée PBKDF2 plutôt que mot de passe en clair) avec activation de
 Attention : `freq_list` ne lie que les associations décidées par wpa_supplicant. Le firmware
 du CYW43455 fait du roaming pour son propre compte et peut basculer la carte en 5 GHz sans
 préavis ; il faut `options brcmfmac roamoff=1` pour l'en empêcher. Le détail du diagnostic
-est dans `AGENTS.md`.
+est dans `docs/radxa.md`.
 
 ## État d'avancement
 
