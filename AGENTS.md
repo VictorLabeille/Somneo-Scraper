@@ -53,7 +53,9 @@ décider par la session qui l'écrira ; une fois arrêtée, la reporter ici et d
 - **`pysomneo` pour tout dialogue avec le réveil** — ne pas réimplémenter le protocole. Il ne
   couvre que 11 des 21 ports : compléter par des appels directs, pas par un remplacement.
 - **Ne jamais chercher d'historique côté appareil** : l'API locale n'a aucune mémoire, toutes
-  les variantes ont été testées. La base SQLite du collecteur est la seule mémoire existante.
+  les variantes ont été testées. La base SQLite du collecteur en est la **source** — l'app en
+  tient une copie sur le téléphone depuis le 2026-09-06, mais c'est le collecteur qui fait
+  autorité en cas de divergence.
 - **Appareil en service dans une chambre.** Une écriture à la fois, choisie sans effet
   observable, jamais sur les alarmes ou la lumière le soir.
 
