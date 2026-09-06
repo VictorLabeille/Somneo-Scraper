@@ -51,6 +51,12 @@ décider par la session qui l'écrira ; une fois arrêtée, la reporter ici et d
 
 - **Toujours passer par la découverte SSDP**, jamais par une IP en dur : l'adresse du Somneo
   change en DHCP. Même règle pour la carte.
+- **Ne jamais lancer `pkill -f <motif>` depuis SSH si le motif figure dans la commande
+  envoyée.** `pkill` matche sa propre ligne de commande et **coupe la session** — erreur faite
+  deux fois le 2026-09-06. Déposer un script sur la carte et l'appeler par son nom.
+- **Comparer les heures en secondes depuis l'époque, jamais en texte.** `[ "$(date +%H%M)" \< "0730" ]`
+  est **faux** à 22 h 40 : `"2240" < "0730"` en comparaison de chaînes. Une minuterie écrite
+  ainsi se déclenche immédiatement — c'est ce qui a coupé la capture d'une nuit.
 - **Ne jamais suspendre une sonde par `SIGSTOP` pour en lancer une autre.** Le processus est
   figé **au milieu d'une requête** et laisse une connexion à moitié ouverte sur un appareil qui
   n'en sert qu'une seule — on fabrique soi-même la panne qu'on mesure. Arrêter proprement

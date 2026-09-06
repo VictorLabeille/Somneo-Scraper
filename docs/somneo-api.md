@@ -216,6 +216,30 @@ non confirmée par le code** : bit 3 = coucher de soleil, bit 8 = lumière allum
 bit 9 = son actif. (`2321` = bits 0,4,8,11 → snooze ✓ ; `2309` = bits 0,2,8,11 → réveil ✓ ;
 `257` = bits 0,8 → lumière seule ✓.)
 
+**Les états relevés sur l'appareil, le 2026-09-06.** Chaque état a été provoqué puis restauré,
+avec vérification du retour à l'état initial :
+
+| État provoqué | `wusts` | Bits | Dans la table de `pysomneo` ? |
+| --- | --- | --- | --- |
+| Repos, afficheur éteint | 1 | 0 | oui → `off` |
+| Lumière allumée (niveau 3) | 257 | 0, 8 | oui → `light-on` |
+| **Veilleuse allumée** | **258** | 1, 8 | **non → `unknown`** |
+| **Coucher de soleil lancé** | **264** | 3, 8 | **non → `unknown`** |
+
+C'est la démonstration du défaut, en trois secondes et sans outillage : **deux usages
+ordinaires du réveil produisent une valeur que la table de huit entrées ne couvre pas**, et
+`STATUS.get(...)` renvoie alors `unknown`.
+
+Deux corrections à apporter aux hypothèses du 31 août :
+
+- **bit 3 = coucher de soleil : confirmé** par la mesure (264 = bits 3 et 8). Ce n'était qu'une
+  déduction depuis la table de `pysomneo`.
+- **bit 1 n'est pas « menu utilisateur affiché »** — ou pas seulement : il apparaît avec la
+  **veilleuse**, sans qu'aucun menu ne soit ouvert. L'annotation tirée du code de l'application
+  est donc incomplète. Ne pas la reprendre telle quelle.
+- **bit 8 accompagne toute émission de lumière** — lampe, veilleuse et coucher de soleil le
+  portent tous les trois.
+
 Les autres champs du port se lisent tels quels : `snztm`, `nrcur`, `pwrsz`, `fmrna`,
 `wutim`/`dutim`/`sntim` (minutes restantes ; **`65535` = inactif**), `rpair`, `hmlay`.
 
@@ -345,9 +369,17 @@ rafale, remplacer une partie de l'interrogation par des abonnements est le bon l
 notamment pour les états qui changent rarement mais qu'on veut voir tout de suite (alarme
 déclenchée, snooze, début de nuit dans `wungt`). Les capteurs, eux, restent à interroger.
 
-> **Non testé.** Souscrire est un `POST` qui crée un état persistant sur l'appareil ; l'essai
-> n'a pas été fait pour ne pas laisser de trace sur un réveil en service. À tenter avec un
-> `ttl` court et un écouteur UDP sur la Radxa, avant de bâtir la collecte dessus.
+> **Première tentative, le 2026-09-06 — sans succès, et la forme employée est en doute.**
+> `POST wulgt {"subscriber": "...", "ttl": 120, "changeudp": 9999}`, avec l'en-tête
+> `X-Condor-Features`, renvoie **`200` accompagné du corps du port** — pas d'accusé
+> d'abonnement. Aucun datagramme n'est arrivé sur le port UDP pendant les dix secondes
+> suivantes, alors que trois changements d'état étaient provoqués sur ce port même.
+>
+> Le port `sub` du produit 0 liste pourtant des abonnements bien réels — pour `firmware` et
+> pour `1/wifiui` — avec un `ttl` de 9 223 371 272, c'est-à-dire une valeur qui n'expire pas.
+> Aucun n'a été créé par nous. Conclusion prudente : **le mécanisme existe, notre requête n'est
+> pas la bonne.** D'autres formes restent à essayer (sans l'en-tête, sans `changeudp`, sur le
+> produit 0) — mises en file pour le 7 septembre.
 
 ## 7. Pièges relevés
 
