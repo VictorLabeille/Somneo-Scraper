@@ -206,8 +206,24 @@ PUT wusts {"dspon": true, "brght": 4}   # allumé, intensité 4
 PUT wusts {"dspon": false}              # afficheur éteint
 ```
 
-`brght` est borné à **1–6** (`isWithinLimit()` dans l'app). C'est la réponse à l'issue #13
-de `pysomneo`, ouverte depuis 2023.
+`brght` est borné à **1–6** — et ce n'est pas seulement une limite de l'application
+constructeur (`isWithinLimit()`), **c'est l'appareil qui l'impose**. Vérifié par écriture le
+6 septembre 2026 sur le HF3671/01, firmware `swverwifi` 2.2.5, avec relecture après chaque
+essai et restauration de la valeur initiale :
+
+| Valeur écrite | Réponse | Valeur relue |
+| --- | --- | --- |
+| 1 | `200` | 1 |
+| 6 | `200` | 6 |
+| 0 | **`422`** | inchangée |
+| 7 | **`422`** | inchangée |
+| 128 | **`422`** | inchangée |
+
+C'est la réponse à l'issue #13 de `pysomneo`, ouverte depuis mai 2023 : la bibliothèque
+implémente déjà `set_display()`, mais sa docstring annonce `brightness: 0-255` et rien ne
+valide. Un appelant qui suit la documentation reçoit un `422`. Contrairement à `ltlvl`
+(lumière), que la bibliothèque met bien à l'échelle sur 0–255, `brght` est transmis tel quel :
+la docstring ne décrit donc aucune conversion, elle est simplement fausse.
 
 **`wudsk`** (coucher de soleil) : `durat`, `onoff`, `curve`, `ctype`, `sndtp`, `snddv`
 (`dus`/`fmr`/`off`), `sndch`, `sndlv`, `sndss`.
