@@ -342,6 +342,13 @@ déclenchée, snooze, début de nuit dans `wungt`). Les capteurs, eux, restent �
   depuis deux terminaux, la première connexion est éjectée quand la seconde arrive » — avec la
   même erreur `unexpected eof while reading`. Deux observations indépendantes, à quatre ans
   d'écart, sur deux appareils différents.
+- **C'est la requête déjà en vol qui tombe, pas la nouvelle.** Motif réel mesuré le
+  2026-09-06 : un fil enchaîne sept lectures comme le fait un rafraîchissement complet, un
+  second envoie **une** requête à un instant tiré au hasard dans cette fenêtre. Résultat sur
+  vingt essais — la requête isolée réussit **20/20**, le rafraîchissement perd 12 lectures sur
+  140, et **la moitié des rafraîchissements (10/20) est abîmée**. Sans concurrence, le même
+  rafraîchissement passe **70/70**. L'appareil sert donc la connexion arrivante et laisse
+  tomber la précédente.
 - **Réutiliser la connexion est un gain, pas un risque.** L'écart entre connexion neuve et
   connexion réutilisée est de ~480 ms, soit 93 % du temps d'une requête — établissement TCP et
   poignée de main TLS confondus, la part de chacun n'ayant pas été isolée. En keep-alive, une
