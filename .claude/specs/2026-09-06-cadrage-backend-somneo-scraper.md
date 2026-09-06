@@ -500,17 +500,16 @@ une PR fusionnée mais bâclée vaut moins que pas de PR du tout.
 
 ## 6. Questions ouvertes / à trancher
 
-- [x] **D'où vient une heure « estimée » ?** ~~Ouvert.~~ **Tranché le 2026-09-06 au soir** :
+- [x] **D'où vient une heure « estimée » ?** **Tranché le 2026-09-06 au soir** :
       `tg2bd` provient bien du geste (vérifié), `tendb` est calculé et inutilisable, et la fin
       de nuit se prend sur l'extinction de l'alarme — voir §5. Reste à confirmer sur une
       seconde nuit que `tendb` vaut systématiquement `tg2bd + 12 h`.
-- [ ] ~~Ancienne formulation :~~ Sûr : une heure issue du geste est confirmée.
-      Ouvert : le réveil **déduit-il** lui-même une mise au lit de ses capteurs et remplit-il
-      `tg2bd` / `tendb` seul, ou l'inférence vivait-elle dans le cloud Philips ? À **observer**
-      en instrumentant `wungt` sur plusieurs nuits sans jamais écrire. Le collecteur est le
-      seul à pouvoir voir la différence entre une heure qu'il a provoquée et une heure qu'il a
-      trouvée. Tant que ce n'est pas établi : rien n'est marqué estimé sans qu'on sache
-      pourquoi.
+- [ ] **Le réveil remplit-il `tg2bd` quand personne n'appuie ?** C'est ce qui reste de la
+      question précédente, et elle commande le cas « oubli du geste de coucher » du cadrage de
+      SleepMaxxer. Ce qui est établi : appui fait → `tg2bd` juste. Ce qui ne l'est pas : ce que
+      contient le champ après une nuit **sans** appui. À observer en laissant passer une nuit
+      sans rien écrire, `wungt` étant relevé toutes les minutes. Tant que ce n'est pas tranché,
+      aucune heure n'est marquée « estimée » sans qu'on sache d'où elle vient.
 - [ ] **Le palier de cadence retenu.** 1 min est le plancher. Reste à monter par paliers et à
       trouver celui qui tient 24 h sans erreur — 30 s, 15 s, ou rien de plus qu'une minute.
       Décide du volume et de la finesse des courbes.
