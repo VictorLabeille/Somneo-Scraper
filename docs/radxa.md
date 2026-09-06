@@ -22,6 +22,21 @@
 - Accès **SSH par clé uniquement**. Depuis le poste de dev : `ssh radxa`.
 - Sa LED verte est éteinte de 22 h à 8 h.
 
+## Outillage Python — ce que l'image minimale ne fournit pas
+
+Armbian minimal livre **Python 3.13.5 et rien d'autre** : ni `pip`, ni `venv`, ni `requests`
+(constaté le 2026-09-06). Ce n'est pas un interdit, c'est un point de départ — installer ce
+qu'il faut par `apt` est sans risque, cela ne touche ni le chemin de boot ni le réseau.
+
+Deux usages, deux traitements :
+
+- **Les sondes de diagnostic** tiennent en **bibliothèque standard** — `urllib.request` avec un
+  contexte SSL non vérifié (le Somneo a un certificat auto-signé) et `socket` pour le M-SEARCH
+  SSDP. Elles restent ainsi copiables et exécutables telles quelles, sans rien préparer.
+- **Le collecteur et les essais de bibliothèque** vivent dans un **venv**, Debian Trixie
+  refusant les installations dans le Python système (PEP 668). C'est là que `pysomneo` est
+  installé en mode éditable pour être éprouvé contre l'appareil réel.
+
 ## Accès au board
 
 Hôte `radxa-zero`, joignable en SSH sur le WiFi domestique (bail DHCP, IP non figée). Le WiFi

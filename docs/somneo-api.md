@@ -305,9 +305,58 @@ déclenchée, snooze, début de nuit dans `wungt`). Les capteurs, eux, restent �
 
 ## 7. Pièges relevés
 
-- **L'appareil sature.** `heap_free` ≈ 25 ko : l'index `/di/v1/products/1/` expire en `500`,
-  et des rafales de requêtes provoquent des timeouts. Sérialiser les appels, espacer d'environ
-  200 ms, et prévoir des relances — c'est un ThreadX, pas un serveur.
+- **Le tas a un plancher stable, ce n'est pas une pénurie.** Mesuré le 6 septembre 2026 sur
+  l'appareil en service : `heap_free` vaut **33 024 octets au repos**, descend sous charge
+  jusqu'à **24 824** et **s'y tient exactement**, sans bouger d'un octet, pendant 1 h 45 de
+  sondage continu — sans une seule erreur. Le « ~25 ko » relevé le 31 août est donc le
+  **plancher sous charge**, pas la mémoire disponible de l'appareil.
+- **Ce qui casse l'appareil, c'est la concurrence — pas le débit, pas la mémoire.** Mesuré le
+  6 septembre 2026, 21 requêtes par condition, à charge égale :
+
+  | Condition | Réussite | Latence médiane |
+  | --- | --- | --- |
+  | Sérialisé, connexion neuve à chaque fois | **21/21** | 516 ms |
+  | Sérialisé, **connexion réutilisée** (keep-alive) | **21/21** | **36 ms** |
+  | 3 requêtes en vol, connexions neuves | 11/21 | 511 ms |
+  | 3 requêtes en vol, connexions réutilisées | 7/21 | 388 ms |
+  | 7 requêtes en vol | 8/21 | 471 ms |
+
+  En sérialisé, **vingt `GET` enchaînés sans aucune pause passent tous**, et le tas ne bouge
+  pas d'un octet pendant ce temps : ce n'est pas une pénurie de mémoire.
+
+  **La marche est à deux connexions.** Mesurée le 6 septembre 2026, trois séries par palier,
+  connexions réutilisées :
+
+  | Requêtes en vol | Réussite | Erreur dominante |
+  | --- | --- | --- |
+  | 1 | **63/63** sur trois séries | — |
+  | 2 | **33/60** — 11/20 trois fois de suite | `RemoteDisconnected`, 9 par série |
+  | 3 | **21/63** — 6, 8 et 7 | `RemoteDisconnected` et `SSLEOFError` |
+
+  Le taux de réussite suit **1/N** : 100 %, 55 %, 33,3 % — ce que produit un serveur qui n'en
+  sert qu'une et laisse tomber les autres. (Un palier à 7 mesuré une seule fois, avec un autre
+  protocole, donne 38 % et ne s'y range pas : série unique, non retenue.)
+
+  **L'appareil ne sert qu'une connexion TLS à la fois**, et ce n'est pas une déduction isolée :
+  le rapporteur de l'issue #8 l'avait observé dès le 27 décembre 2022 — « si je me connecte
+  depuis deux terminaux, la première connexion est éjectée quand la seconde arrive » — avec la
+  même erreur `unexpected eof while reading`. Deux observations indépendantes, à quatre ans
+  d'écart, sur deux appareils différents.
+- **Réutiliser la connexion est un gain, pas un risque.** L'écart entre connexion neuve et
+  connexion réutilisée est de ~480 ms, soit 93 % du temps d'une requête — établissement TCP et
+  poignée de main TLS confondus, la part de chacun n'ayant pas été isolée. En keep-alive, une
+  lecture retombe à **36 ms**. C'est ce qui explique que le rapporteur ait vu ses timeouts
+  disparaître en **activant** la réutilisation TLS, en mars 2024, sans comprendre pourquoi :
+  elle supprime la seconde connexion.
+- **Conséquence attendue d'une réécriture asynchrone — inférence, pas encore vérifiée contre
+  l'appareil** : deux coroutines qui interrogent simultanément amènent le client à ouvrir une
+  seconde connexion, ce qui est exactement la condition d'échec mesurée. La sérialisation
+  devrait donc être garantie par construction — un verrou, ou une limite de connexions à 1 —
+  et non par la seule discipline d'appel.
+- **L'espacement de 200 ms reste une prudence raisonnable**, mais ce n'est pas lui qui évite
+  les échecs : c'est le fait de n'avoir qu'une requête en vol.
+- **L'index `/di/v1/products/1/` expire toujours en `500`** — lui seul, de façon reproductible.
+  C'est le seul échec constaté à ce jour.
 - **`/di/v1/products/0/` fonctionne, pas celui du produit 1.** Utiliser la liste de ce
   document pour le produit 1 plutôt que de compter sur l'auto-description.
 - **Le port `security` livre la clé sans authentification** ; le port `fac` (reset usine)
@@ -345,10 +394,20 @@ transformer en code l'est**.
    #13**, ouverte depuis mai 2023.
 4. **Le mécanisme d'abonnement UDP** (§6). Absent de `pysomneo`, qui n'interroge qu'en
    boucle.
-5. **La cause des timeouts de l'issue #8** (ouverte depuis 2022, 9 commentaires, jamais
-   résolue) : le port `mem` montre ~25 ko de tas libre. Ce n'est pas la faute de `Session`
-   comme le suppose le rapporteur, c'est un appareil qui n'a pas la mémoire de servir des
-   requêtes concurrentes. Diagnostic mesurable, pas conjectural.
+5. **Le diagnostic de l'issue #8** (ouverte depuis 2022, jamais résolue), établi par la mesure
+   le 2026-09-06 : **ce qui casse l'appareil est la concurrence, à partir de deux connexions.**
+   Sérialisé, il encaisse tout — vingt requêtes d'affilée sans pause, 1 h 45 de sondage
+   continu, 63/63 en trois séries, tas immobile.
+
+   **Le fil a été lu en entier, et il faut lui rendre ce qui lui revient.** Le rapporteur a
+   retiré lui-même l'hypothèse `Session` dès le 26 décembre 2022, puis observé le lendemain la
+   limite à une connexion TLS. Le fil s'achève en mars 2024 sur « ça marche maintenant, je ne
+   sais pas par quelle magie », et le mainteneur écrit ne pas pouvoir reproduire.
+
+   Ce que la mesure apporte n'est donc **pas la cause** — elle était devinée — mais le
+   **mécanisme chiffré** et la **marche exacte**, plus l'explication de la guérison de 2024 :
+   activer la réutilisation TLS supprime la seconde connexion. Le correctif n'est pas
+   d'abandonner la `Session`, c'est de garantir qu'une seule requête est en vol.
 6. **La sémantique des champs laissés en « ? »** dans l'issue #16 (`maxpr`, `rtype`, `intny`,
    `gdngt`, `gdday`, `prfvs`, `pwrsv`, `ctype`, `curve`), résolue par les annotations
    `@SerializedName` de l'application.
