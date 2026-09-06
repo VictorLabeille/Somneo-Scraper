@@ -147,10 +147,20 @@ l'obfuscation.
 
 | Clé | Sens |
 | --- | --- |
-| `tg2bd` | Horodatage de mise au lit (`go to bed`) |
-| `tendb` | Horodatage de sortie du lit (`end bed`) |
+| `tg2bd` | Horodatage de mise au lit (`go to bed`) — **provient du geste**, vérifié le 2026-09-06 |
+| `tendb` | Horodatage de sortie du lit (`end bed`) — **ne provient pas d'une mesure**, voir ci-dessous |
 | `ntstr` `ntend` `ntlen` | Début, fin et durée de nuit (vides hors session) |
 | `night` | Session de nuit active — **seul champ écrit par l'app** (`getKeyMapForNight`) |
+
+> **`tendb` est calculé, pas mesuré — observation du 2026-09-06, à confirmer.** Relevé sur
+> l'appareil : `tg2bd` = `2026-09-06T01:20:04`, `tendb` = `2026-09-06T13:20:04`. Exactement
+> douze heures d'écart, à la seconde. Or le propriétaire s'est couché vers 01 h 20 en appuyant
+> sur le bouton de SleepMapper, et **levé vers 09 h 40** : `tendb` ne correspond à aucun
+> événement réel. La valeur ressemble à un `tg2bd + 12 h` posé par défaut.
+>
+> Conséquence si cela se confirme : **le réveil ne détecte pas la fin de nuit.** Un collecteur
+> qui clôturerait une session sur `tendb` inventerait une heure de lever. Une seule observation
+> à ce jour ; un second point est attendu de la capture de la nuit du 6 au 7 septembre 2026.
 
 **`wualm/prfwu` — profil d'alarme.** `prfnr` (n° 1-16), `pname`, `prfen` (activé),
 `prfvs` (visible), `almhr`/`almmn`, `daynm` (masque de jours), `ayear`/`amnth`/`alday`
