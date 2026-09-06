@@ -108,7 +108,8 @@ est une œuvre dérivée.
 **Ne jamais versionner un relevé brut sans en avoir retiré les corps de réponse.** Les ports
 `device` et `wifiui` livrent le numéro de série et l'adresse MAC, et `wusrd` livre les
 conditions de la chambre. `probes/results/` ne contient que des relevés nettoyés ; les captures
-longues ne sont pas versionnées du tout.
+longues ne sont pas versionnées du tout. Les journaux de **balayage** (`balayage-*.jsonl`),
+eux, ne portent que des noms de ports et des codes HTTP : ils se versionnent tels quels.
 
 Ne jamais versionner ce qui est propre à l'appareil ou au réseau : clé du port `security`,
 numéro de série, adresses MAC, SSID, mots de passe. `docs/somneo-api.md` est rédigé sous

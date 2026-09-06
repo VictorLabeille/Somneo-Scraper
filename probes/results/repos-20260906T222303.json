@@ -1,0 +1,218 @@
+[
+  {
+    "attente": 10,
+    "chauffe": {
+      "ok": true,
+      "status": 200,
+      "ms": 524.1
+    },
+    "apres_repos": {
+      "ok": true,
+      "status": 200,
+      "ms": 28.1
+    },
+    "temoin_neuve": {
+      "ok": true,
+      "status": 200,
+      "ms": 515.0
+    }
+  },
+  {
+    "attente": 10,
+    "chauffe": {
+      "ok": true,
+      "status": 200,
+      "ms": 535.0
+    },
+    "apres_repos": {
+      "ok": true,
+      "status": 200,
+      "ms": 44.0
+    },
+    "temoin_neuve": {
+      "ok": true,
+      "status": 200,
+      "ms": 515.2
+    }
+  },
+  {
+    "attente": 10,
+    "chauffe": {
+      "ok": true,
+      "status": 200,
+      "ms": 523.1
+    },
+    "apres_repos": {
+      "ok": true,
+      "status": 200,
+      "ms": 560.0
+    },
+    "temoin_neuve": {
+      "ok": true,
+      "status": 200,
+      "ms": 543.4
+    }
+  },
+  {
+    "attente": 30,
+    "chauffe": {
+      "ok": true,
+      "status": 200,
+      "ms": 506.9
+    },
+    "apres_repos": {
+      "ok": true,
+      "status": 200,
+      "ms": 60.1
+    },
+    "temoin_neuve": {
+      "ok": true,
+      "status": 200,
+      "ms": 511.1
+    }
+  },
+  {
+    "attente": 30,
+    "chauffe": {
+      "ok": true,
+      "status": 200,
+      "ms": 515.1
+    },
+    "apres_repos": {
+      "ok": true,
+      "status": 200,
+      "ms": 28.0
+    },
+    "temoin_neuve": {
+      "ok": true,
+      "status": 200,
+      "ms": 515.2
+    }
+  },
+  {
+    "attente": 30,
+    "chauffe": {
+      "ok": true,
+      "status": 200,
+      "ms": 527.1
+    },
+    "apres_repos": {
+      "ok": true,
+      "status": 200,
+      "ms": 32.0
+    },
+    "temoin_neuve": {
+      "ok": true,
+      "status": 200,
+      "ms": 519.1
+    }
+  },
+  {
+    "attente": 60,
+    "chauffe": {
+      "ok": true,
+      "status": 200,
+      "ms": 527.1
+    },
+    "apres_repos": {
+      "ok": true,
+      "status": 200,
+      "ms": 40.0
+    },
+    "temoin_neuve": {
+      "ok": true,
+      "status": 200,
+      "ms": 511.2
+    }
+  },
+  {
+    "attente": 60,
+    "chauffe": {
+      "ok": true,
+      "status": 200,
+      "ms": 523.0
+    },
+    "apres_repos": {
+      "ok": true,
+      "status": 200,
+      "ms": 132.0
+    },
+    "temoin_neuve": {
+      "ok": true,
+      "status": 200,
+      "ms": 619.1
+    }
+  },
+  {
+    "attente": 60,
+    "chauffe": {
+      "ok": true,
+      "status": 200,
+      "ms": 527.1
+    },
+    "apres_repos": {
+      "ok": true,
+      "status": 200,
+      "ms": 32.1
+    },
+    "temoin_neuve": {
+      "ok": true,
+      "status": 200,
+      "ms": 523.2
+    }
+  },
+  {
+    "attente": 90,
+    "chauffe": {
+      "ok": true,
+      "status": 200,
+      "ms": 615.0
+    },
+    "apres_repos": {
+      "ok": true,
+      "status": 200,
+      "ms": 32.0
+    },
+    "temoin_neuve": {
+      "ok": true,
+      "status": 200,
+      "ms": 511.2
+    }
+  },
+  {
+    "attente": 90,
+    "chauffe": {
+      "ok": true,
+      "status": 200,
+      "ms": 523.1
+    },
+    "apres_repos": {
+      "ok": true,
+      "status": 200,
+      "ms": 28.0
+    },
+    "temoin_neuve": {
+      "ok": true,
+      "status": 200,
+      "ms": 527.2
+    }
+  },
+  {
+    "attente": 90,
+    "chauffe": {
+      "ok": true,
+      "status": 200,
+      "ms": 519.0
+    },
+    "apres_repos": {
+      "ok": true,
+      "status": 200,
+      "ms": 36.0
+    },
+    "temoin_neuve": {
+      "ok": true,
+      "status": 200,
+      "ms": 511.2
+    }
+  }
+]

@@ -1,0 +1,233 @@
+{
+  "pysomneo": {
+    "get_device_info": {
+      "ok": true,
+      "ms": 545.1,
+      "valeur": {
+        "manufacturer": "Royal Philips Electronics",
+        "model": "Wake-up Light",
+        "modelnumber": "HF367x",
+        "serial": "<retire>"
+      }
+    },
+    "fetch_data (complet)": {
+      "ok": false,
+      "ms": 1137.5,
+      "erreur": "AttributeError: 'int' object has no attribute 'lower'"
+    },
+    "fetch_data (rapide)": {
+      "ok": false,
+      "ms": 0.2,
+      "erreur": "AttributeError: 'int' object has no attribute 'lower'"
+    },
+    "wake_light_themes": {
+      "ok": true,
+      "ms": 0.0,
+      "valeur": {
+        "sunny day": 0,
+        "island red": 1,
+        "nordic white": 2,
+        "caribbean red": 3
+      }
+    },
+    "dusk_light_themes": {
+      "ok": true,
+      "ms": 0.0,
+      "valeur": {
+        "sunny day": 0,
+        "island red": 1,
+        "nordic white": 2,
+        "caribbean red": 3
+      }
+    },
+    "wake_sound_themes": {
+      "ok": true,
+      "ms": 0.0,
+      "valeur": {
+        "forest birds": 1,
+        "summer birds": 2,
+        "buddha wakeup": 3,
+        "morning alps": 4,
+        "yoga harmony": 5,
+        "nepal bowls": 6,
+        "summer lake": 7,
+        "ocean waves": 8
+      }
+    },
+    "dusk_sound_themes": {
+      "ok": true,
+      "ms": 0.0,
+      "valeur": {
+        "soft rain": 1,
+        "ocean waves": 2,
+        "under water": 3,
+        "summer lake": 4
+      }
+    },
+    "get_alarm_details('alarm0')": {
+      "ok": false,
+      "ms": 0.0,
+      "erreur": "KeyError: 'alarm0'"
+    }
+  },
+  "ports": {
+    "candidats": [
+      "wuvol",
+      "wudsp",
+      "wuwiz",
+      "wuevt",
+      "wucfg",
+      "wusnd",
+      "wulog",
+      "wuhis",
+      "wustat",
+      "wunet",
+      "wuupd",
+      "wusys",
+      "wumem",
+      "wudbg",
+      "wuusr",
+      "wupwr",
+      "wubat",
+      "wuclk",
+      "wucal",
+      "wuday",
+      "wunit",
+      "wusen",
+      "wuenv",
+      "wuair",
+      "wuco2",
+      "wuhum",
+      "wutmp",
+      "wulux",
+      "wumic",
+      "wubtn",
+      "wukey",
+      "wuled",
+      "wubuz",
+      "wuspk",
+      "wumod",
+      "wuscn",
+      "wuprf",
+      "wusch",
+      "wutim",
+      "wuzon",
+      "wuloc",
+      "wulng",
+      "wuver",
+      "wuinf",
+      "wudat",
+      "wuwdw",
+      "wusds",
+      "audio",
+      "clock",
+      "sensor",
+      "status",
+      "alarm",
+      "light",
+      "sound"
+    ],
+    "trouves": [
+      [
+        "wutim",
+        {
+          "yrltm": 2026,
+          "moltm": 9,
+          "dtltm": 6,
+          "hrltm": 22,
+          "miltm": 25,
+          "scltm": 30,
+          "daynm": 6
+        }
+      ]
+    ],
+    "codes": {
+      "422": 53,
+      "200": 1
+    }
+  },
+  "index": {
+    "produit1": [
+      {
+        "ok": false,
+        "status": 500,
+        "error": "HTTP 500",
+        "ms": 5505.8
+      },
+      {
+        "ok": false,
+        "status": 500,
+        "error": "HTTP 500",
+        "ms": 5531.8
+      },
+      {
+        "ok": false,
+        "status": 500,
+        "error": "HTTP 500",
+        "ms": 5479.8
+      }
+    ],
+    "produit0": {
+      "ok": true,
+      "ms": 571.3
+    }
+  },
+  "erreurs": {
+    "port inexistant": {
+      "status": 422,
+      "error": "HTTP 422",
+      "corps": "{'error': 'No such Port'}",
+      "ms": 499.9
+    },
+    "produit inexistant": {
+      "status": 404,
+      "error": "HTTP 404",
+      "corps": "{'error': 'Unknown product'}",
+      "ms": 493.9
+    },
+    "sous-ressource inexistante": {
+      "status": 422,
+      "error": "HTTP 422",
+      "corps": "{'error': 'No such Port'}",
+      "ms": 517.5
+    },
+    "port connu, sous-ressource vide": {
+      "status": 200,
+      "error": null,
+      "corps": "{'snztm': 8, 'aenvs': {}, 'alctr': {}, 'aalms': {}, 'prfnr': 1, 'prfwu': {}}",
+      "ms": 521.5
+    },
+    "casse differente": {
+      "status": 422,
+      "error": "HTTP 422",
+      "corps": "{'error': 'No such Port'}",
+      "ms": 506.0
+    },
+    "nom tres long": {
+      "status": null,
+      "error": "TimeoutError: The read operation timed out",
+      "corps": "",
+      "ms": 10492.0
+    }
+  },
+  "cout_422": {
+    "latences": [
+      10014.0,
+      3096.1,
+      15.6,
+      15.8,
+      15.8,
+      15.8,
+      15.9,
+      15.9,
+      19.8,
+      15.8
+    ],
+    "mediane_ms": 15.850000000000001,
+    "estimation_heures": 0.6
+  },
+  "sub": {
+    "ok": false,
+    "body": null
+  }
+}
