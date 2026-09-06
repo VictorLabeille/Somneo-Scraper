@@ -53,6 +53,7 @@ AGENTS.md          conventions du dépôt (règles impératives, périmètre, st
 CLAUDE.md          pointeur de découverte vers AGENTS.md
 .gitignore         exclut venv, logs, images et le clone pyamlboot
 docs/              référence technique : protocole du Somneo, carte Radxa (voir ci-dessous)
+probes/            sondes de mesure de l'appareil et leurs relevés (voir ci-dessous)
 radxa-flash/       outillage de flash de l'eMMC (voir ci-dessous)
 radxa-config/      configuration de la carte en service, déployée par SSH
 ```
@@ -68,6 +69,32 @@ l'appareil. À lire avant d'écrire du code qui parle au réveil.
 `radxa.md` — **référence de la carte** : état du matériel en service, accès SSH, roaming du
 firmware WiFi, pilotage de la LED, et les pièges du flash de l'eMMC. À lire avant toute
 manipulation de la carte.
+
+### `probes/`
+
+Sondes de diagnostic lancées **depuis la Radxa** — le poste de dev ne peut pas joindre le
+réveil. Elles n'ont aucune dépendance : bibliothèque standard seulement, rien à installer sur
+la carte. `somneo_probe.py` porte le socle commun (découverte SSDP, `GET` qui ne lève jamais,
+lecture du tas).
+
+| Sonde | Ce qu'elle établit |
+| --- | --- |
+| `discover.py` | Découverte SSDP : l'appareil répond-il, à quelle adresse |
+| `burst.py` | Comportement sous rafale sérialisée, et évolution du tas |
+| `concurrence.py` | Sérialisé contre concurrent, connexion neuve contre réutilisée |
+| `marche.py` | Où se situe la marche : 1, 2 ou 3 requêtes en vol, trois séries par palier |
+| `chevauchement.py` | Le motif réel de Home Assistant : une action pendant un rafraîchissement |
+| `repro_requests.py` | Le même phénomène dans la pile `requests`, avec la politique de relance de `pysomneo` |
+| `bornes_brght.py` | Bornes réelles de `brght` — **seule sonde qui écrit**, avec restauration vérifiée |
+| `capture.py` | Campagne longue : capteurs, état, suivi de nuit, agrégats de fenêtre |
+
+`probes/results/` conserve les relevés bruts, **corps de réponse retirés** : ils portaient le
+numéro de série de l'appareil, son adresse MAC et les conditions de la chambre. La valeur
+probante — latences, échecs, tas — est intacte. Les résultats chiffrés sont interprétés dans
+`docs/somneo-api.md`.
+
+Les **captures longues ne sont pas versionnées** : elles contiennent les mêmes données
+personnelles, en continu. Leur place est la base du collecteur.
 
 ### `radxa-config/`
 

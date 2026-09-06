@@ -18,6 +18,8 @@ SleepMapper). Voir `README.md`.
 | Question | Fichier |
 | --- | --- |
 | Que fait le projet, comment flasher, où en est l'avancement | `README.md` |
+| Ce que le collecteur doit être, et pourquoi | `.claude/specs/2026-09-06-cadrage-backend-somneo-scraper.md` |
+| Comment une mesure sur l'appareil a été obtenue, et comment la rejouer | `probes/` |
 | Protocole du Somneo : 21 ports, sémantique des champs, stratégie de collecte, pièges de l'appareil | `docs/somneo-api.md` |
 | La carte Radxa : état en service, WiFi, SSH, LED, pièges du flash | `docs/radxa.md` |
 | Ce que l'application attend du backend, et pourquoi | `.claude/specs/2026-09-05-spec-fonctionnelle-sleepmaxxer.md` **du dépôt SleepMaxxer** |
@@ -32,6 +34,7 @@ Le dépôt contient **deux ensembles sans rapport l'un avec l'autre**. Ne pas le
 | `radxa-flash/` | **Terminé et archivé** | Outillage ponctuel ayant servi à installer Armbian sur l'eMMC. La carte est en service depuis le 22 août 2026. **Ne pas modifier**, sauf demande explicite de réinstallation du système. |
 | `radxa-config/` | **Déployé sur la carte** | Configuration de la carte en service. Ces scripts ont déjà tourné — modifier un script sans le redéployer fait diverger le dépôt et la carte, silencieusement. |
 | `docs/` | **Référence** | Documentation, pas du code. À mettre à jour si un relevé contredit ce qui y est écrit. |
+| `probes/` | **Outillage vivant** | Sondes de mesure, lancées depuis la Radxa. Elles fondent les chiffres publiés dans `docs/` et ceux qu'on avancera en amont : une mesure qu'on ne peut plus rejouer ne se défend pas. `bornes_brght.py` est la seule qui écrive. |
 | Le serveur FastAPI | **À écrire** | C'est le travail en cours. Tout nouveau code applicatif va là. |
 
 Sauf demande portant explicitement sur la réinstallation de l'OS, `radxa-flash/` n'est jamais
@@ -92,6 +95,11 @@ est une œuvre dérivée.
 
 ## Dépôt public
 
+**Ne jamais versionner un relevé brut sans en avoir retiré les corps de réponse.** Les ports
+`device` et `wifiui` livrent le numéro de série et l'adresse MAC, et `wusrd` livre les
+conditions de la chambre. `probes/results/` ne contient que des relevés nettoyés ; les captures
+longues ne sont pas versionnées du tout.
+
 Ne jamais versionner ce qui est propre à l'appareil ou au réseau : clé du port `security`,
 numéro de série, adresses MAC, SSID, mots de passe. `docs/somneo-api.md` est rédigé sous
 cette contrainte — la tenir en le complétant.
@@ -104,6 +112,7 @@ AGENTS.md          ce fichier
 CLAUDE.md          pointeur vers AGENTS.md
 LICENSE            GPL-3.0
 docs/              somneo-api.md (protocole du réveil) · radxa.md (la carte)
+probes/            sondes de mesure de l'appareil, et results/ leurs relevés nettoyés
 radxa-flash/       outillage d'installation d'Armbian sur l'eMMC (ponctuel, archivé)
 radxa-config/      configuration de la carte en service, déployée par SSH
 ```

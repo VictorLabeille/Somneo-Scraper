@@ -1,0 +1,800 @@
+{
+  "temoin": {
+    "total": 70,
+    "echecs": 0
+  },
+  "essais": [
+    {
+      "delai": 0.34,
+      "refresh": [
+        {
+          "ok": true,
+          "port": "wusrd"
+        },
+        {
+          "ok": false,
+          "port": "wusts",
+          "error": "RemoteDisconnected"
+        },
+        {
+          "ok": true,
+          "port": "wulgt"
+        },
+        {
+          "ok": true,
+          "port": "wudsk"
+        },
+        {
+          "ok": true,
+          "port": "wualm"
+        },
+        {
+          "ok": true,
+          "port": "wualm/aenvs"
+        },
+        {
+          "ok": true,
+          "port": "wualm/aalms"
+        }
+      ],
+      "action": [
+        {
+          "ok": true,
+          "port": "wusts"
+        }
+      ]
+    },
+    {
+      "delai": 1.52,
+      "refresh": [
+        {
+          "ok": true,
+          "port": "wusrd"
+        },
+        {
+          "ok": true,
+          "port": "wusts"
+        },
+        {
+          "ok": true,
+          "port": "wulgt"
+        },
+        {
+          "ok": true,
+          "port": "wudsk"
+        },
+        {
+          "ok": true,
+          "port": "wualm"
+        },
+        {
+          "ok": true,
+          "port": "wualm/aenvs"
+        },
+        {
+          "ok": true,
+          "port": "wualm/aalms"
+        }
+      ],
+      "action": [
+        {
+          "ok": true,
+          "port": "wusts"
+        }
+      ]
+    },
+    {
+      "delai": 0.64,
+      "refresh": [
+        {
+          "ok": true,
+          "port": "wusrd"
+        },
+        {
+          "ok": true,
+          "port": "wusts"
+        },
+        {
+          "ok": true,
+          "port": "wulgt"
+        },
+        {
+          "ok": false,
+          "port": "wudsk",
+          "error": "RemoteDisconnected"
+        },
+        {
+          "ok": false,
+          "port": "wualm",
+          "error": "SSLEOFError"
+        },
+        {
+          "ok": true,
+          "port": "wualm/aenvs"
+        },
+        {
+          "ok": false,
+          "port": "wualm/aalms",
+          "error": "RemoteDisconnected"
+        }
+      ],
+      "action": [
+        {
+          "ok": true,
+          "port": "wusts"
+        }
+      ]
+    },
+    {
+      "delai": 0.51,
+      "refresh": [
+        {
+          "ok": true,
+          "port": "wusrd"
+        },
+        {
+          "ok": false,
+          "port": "wusts",
+          "error": "RemoteDisconnected"
+        },
+        {
+          "ok": true,
+          "port": "wulgt"
+        },
+        {
+          "ok": true,
+          "port": "wudsk"
+        },
+        {
+          "ok": true,
+          "port": "wualm"
+        },
+        {
+          "ok": true,
+          "port": "wualm/aenvs"
+        },
+        {
+          "ok": true,
+          "port": "wualm/aalms"
+        }
+      ],
+      "action": [
+        {
+          "ok": true,
+          "port": "wusts"
+        }
+      ]
+    },
+    {
+      "delai": 0.58,
+      "refresh": [
+        {
+          "ok": true,
+          "port": "wusrd"
+        },
+        {
+          "ok": true,
+          "port": "wusts"
+        },
+        {
+          "ok": true,
+          "port": "wulgt"
+        },
+        {
+          "ok": false,
+          "port": "wudsk",
+          "error": "RemoteDisconnected"
+        },
+        {
+          "ok": true,
+          "port": "wualm"
+        },
+        {
+          "ok": true,
+          "port": "wualm/aenvs"
+        },
+        {
+          "ok": true,
+          "port": "wualm/aalms"
+        }
+      ],
+      "action": [
+        {
+          "ok": true,
+          "port": "wusts"
+        }
+      ]
+    },
+    {
+      "delai": 0.54,
+      "refresh": [
+        {
+          "ok": true,
+          "port": "wusrd"
+        },
+        {
+          "ok": true,
+          "port": "wusts"
+        },
+        {
+          "ok": false,
+          "port": "wulgt",
+          "error": "RemoteDisconnected"
+        },
+        {
+          "ok": true,
+          "port": "wudsk"
+        },
+        {
+          "ok": true,
+          "port": "wualm"
+        },
+        {
+          "ok": true,
+          "port": "wualm/aenvs"
+        },
+        {
+          "ok": true,
+          "port": "wualm/aalms"
+        }
+      ],
+      "action": [
+        {
+          "ok": true,
+          "port": "wusts"
+        }
+      ]
+    },
+    {
+      "delai": 0.41,
+      "refresh": [
+        {
+          "ok": true,
+          "port": "wusrd"
+        },
+        {
+          "ok": false,
+          "port": "wusts",
+          "error": "RemoteDisconnected"
+        },
+        {
+          "ok": true,
+          "port": "wulgt"
+        },
+        {
+          "ok": true,
+          "port": "wudsk"
+        },
+        {
+          "ok": true,
+          "port": "wualm"
+        },
+        {
+          "ok": true,
+          "port": "wualm/aenvs"
+        },
+        {
+          "ok": true,
+          "port": "wualm/aalms"
+        }
+      ],
+      "action": [
+        {
+          "ok": true,
+          "port": "wusts"
+        }
+      ]
+    },
+    {
+      "delai": 0.73,
+      "refresh": [
+        {
+          "ok": true,
+          "port": "wusrd"
+        },
+        {
+          "ok": true,
+          "port": "wusts"
+        },
+        {
+          "ok": true,
+          "port": "wulgt"
+        },
+        {
+          "ok": true,
+          "port": "wudsk"
+        },
+        {
+          "ok": true,
+          "port": "wualm"
+        },
+        {
+          "ok": true,
+          "port": "wualm/aenvs"
+        },
+        {
+          "ok": false,
+          "port": "wualm/aalms",
+          "error": "RemoteDisconnected"
+        }
+      ],
+      "action": [
+        {
+          "ok": true,
+          "port": "wusts"
+        }
+      ]
+    },
+    {
+      "delai": 1.74,
+      "refresh": [
+        {
+          "ok": true,
+          "port": "wusrd"
+        },
+        {
+          "ok": true,
+          "port": "wusts"
+        },
+        {
+          "ok": true,
+          "port": "wulgt"
+        },
+        {
+          "ok": true,
+          "port": "wudsk"
+        },
+        {
+          "ok": true,
+          "port": "wualm"
+        },
+        {
+          "ok": true,
+          "port": "wualm/aenvs"
+        },
+        {
+          "ok": true,
+          "port": "wualm/aalms"
+        }
+      ],
+      "action": [
+        {
+          "ok": true,
+          "port": "wusts"
+        }
+      ]
+    },
+    {
+      "delai": 2.07,
+      "refresh": [
+        {
+          "ok": true,
+          "port": "wusrd"
+        },
+        {
+          "ok": true,
+          "port": "wusts"
+        },
+        {
+          "ok": true,
+          "port": "wulgt"
+        },
+        {
+          "ok": true,
+          "port": "wudsk"
+        },
+        {
+          "ok": true,
+          "port": "wualm"
+        },
+        {
+          "ok": true,
+          "port": "wualm/aenvs"
+        },
+        {
+          "ok": true,
+          "port": "wualm/aalms"
+        }
+      ],
+      "action": [
+        {
+          "ok": true,
+          "port": "wusts"
+        }
+      ]
+    },
+    {
+      "delai": 1.52,
+      "refresh": [
+        {
+          "ok": true,
+          "port": "wusrd"
+        },
+        {
+          "ok": true,
+          "port": "wusts"
+        },
+        {
+          "ok": true,
+          "port": "wulgt"
+        },
+        {
+          "ok": true,
+          "port": "wudsk"
+        },
+        {
+          "ok": true,
+          "port": "wualm"
+        },
+        {
+          "ok": true,
+          "port": "wualm/aenvs"
+        },
+        {
+          "ok": true,
+          "port": "wualm/aalms"
+        }
+      ],
+      "action": [
+        {
+          "ok": true,
+          "port": "wusts"
+        }
+      ]
+    },
+    {
+      "delai": 1.37,
+      "refresh": [
+        {
+          "ok": true,
+          "port": "wusrd"
+        },
+        {
+          "ok": true,
+          "port": "wusts"
+        },
+        {
+          "ok": true,
+          "port": "wulgt"
+        },
+        {
+          "ok": true,
+          "port": "wudsk"
+        },
+        {
+          "ok": true,
+          "port": "wualm"
+        },
+        {
+          "ok": true,
+          "port": "wualm/aenvs"
+        },
+        {
+          "ok": true,
+          "port": "wualm/aalms"
+        }
+      ],
+      "action": [
+        {
+          "ok": true,
+          "port": "wusts"
+        }
+      ]
+    },
+    {
+      "delai": 1.57,
+      "refresh": [
+        {
+          "ok": true,
+          "port": "wusrd"
+        },
+        {
+          "ok": true,
+          "port": "wusts"
+        },
+        {
+          "ok": true,
+          "port": "wulgt"
+        },
+        {
+          "ok": true,
+          "port": "wudsk"
+        },
+        {
+          "ok": true,
+          "port": "wualm"
+        },
+        {
+          "ok": true,
+          "port": "wualm/aenvs"
+        },
+        {
+          "ok": true,
+          "port": "wualm/aalms"
+        }
+      ],
+      "action": [
+        {
+          "ok": true,
+          "port": "wusts"
+        }
+      ]
+    },
+    {
+      "delai": 0.71,
+      "refresh": [
+        {
+          "ok": true,
+          "port": "wusrd"
+        },
+        {
+          "ok": true,
+          "port": "wusts"
+        },
+        {
+          "ok": true,
+          "port": "wulgt"
+        },
+        {
+          "ok": true,
+          "port": "wudsk"
+        },
+        {
+          "ok": true,
+          "port": "wualm"
+        },
+        {
+          "ok": true,
+          "port": "wualm/aenvs"
+        },
+        {
+          "ok": true,
+          "port": "wualm/aalms"
+        }
+      ],
+      "action": [
+        {
+          "ok": true,
+          "port": "wusts"
+        }
+      ]
+    },
+    {
+      "delai": 1.38,
+      "refresh": [
+        {
+          "ok": true,
+          "port": "wusrd"
+        },
+        {
+          "ok": true,
+          "port": "wusts"
+        },
+        {
+          "ok": true,
+          "port": "wulgt"
+        },
+        {
+          "ok": true,
+          "port": "wudsk"
+        },
+        {
+          "ok": true,
+          "port": "wualm"
+        },
+        {
+          "ok": true,
+          "port": "wualm/aenvs"
+        },
+        {
+          "ok": true,
+          "port": "wualm/aalms"
+        }
+      ],
+      "action": [
+        {
+          "ok": true,
+          "port": "wusts"
+        }
+      ]
+    },
+    {
+      "delai": 1.88,
+      "refresh": [
+        {
+          "ok": true,
+          "port": "wusrd"
+        },
+        {
+          "ok": true,
+          "port": "wusts"
+        },
+        {
+          "ok": true,
+          "port": "wulgt"
+        },
+        {
+          "ok": true,
+          "port": "wudsk"
+        },
+        {
+          "ok": true,
+          "port": "wualm"
+        },
+        {
+          "ok": true,
+          "port": "wualm/aenvs"
+        },
+        {
+          "ok": true,
+          "port": "wualm/aalms"
+        }
+      ],
+      "action": [
+        {
+          "ok": true,
+          "port": "wusts"
+        }
+      ]
+    },
+    {
+      "delai": 0.75,
+      "refresh": [
+        {
+          "ok": true,
+          "port": "wusrd"
+        },
+        {
+          "ok": true,
+          "port": "wusts"
+        },
+        {
+          "ok": true,
+          "port": "wulgt"
+        },
+        {
+          "ok": true,
+          "port": "wudsk"
+        },
+        {
+          "ok": true,
+          "port": "wualm"
+        },
+        {
+          "ok": true,
+          "port": "wualm/aenvs"
+        },
+        {
+          "ok": true,
+          "port": "wualm/aalms"
+        }
+      ],
+      "action": [
+        {
+          "ok": true,
+          "port": "wusts"
+        }
+      ]
+    },
+    {
+      "delai": 2.16,
+      "refresh": [
+        {
+          "ok": true,
+          "port": "wusrd"
+        },
+        {
+          "ok": false,
+          "port": "wusts",
+          "error": "RemoteDisconnected"
+        },
+        {
+          "ok": true,
+          "port": "wulgt"
+        },
+        {
+          "ok": true,
+          "port": "wudsk"
+        },
+        {
+          "ok": true,
+          "port": "wualm"
+        },
+        {
+          "ok": true,
+          "port": "wualm/aenvs"
+        },
+        {
+          "ok": true,
+          "port": "wualm/aalms"
+        }
+      ],
+      "action": [
+        {
+          "ok": true,
+          "port": "wusts"
+        }
+      ]
+    },
+    {
+      "delai": 0.73,
+      "refresh": [
+        {
+          "ok": true,
+          "port": "wusrd"
+        },
+        {
+          "ok": true,
+          "port": "wusts"
+        },
+        {
+          "ok": true,
+          "port": "wulgt"
+        },
+        {
+          "ok": true,
+          "port": "wudsk"
+        },
+        {
+          "ok": true,
+          "port": "wualm"
+        },
+        {
+          "ok": true,
+          "port": "wualm/aenvs"
+        },
+        {
+          "ok": false,
+          "port": "wualm/aalms",
+          "error": "RemoteDisconnected"
+        }
+      ],
+      "action": [
+        {
+          "ok": true,
+          "port": "wusts"
+        }
+      ]
+    },
+    {
+      "delai": 0.41,
+      "refresh": [
+        {
+          "ok": true,
+          "port": "wusrd"
+        },
+        {
+          "ok": false,
+          "port": "wusts",
+          "error": "RemoteDisconnected"
+        },
+        {
+          "ok": true,
+          "port": "wulgt"
+        },
+        {
+          "ok": true,
+          "port": "wudsk"
+        },
+        {
+          "ok": true,
+          "port": "wualm"
+        },
+        {
+          "ok": true,
+          "port": "wualm/aenvs"
+        },
+        {
+          "ok": true,
+          "port": "wualm/aalms"
+        }
+      ],
+      "action": [
+        {
+          "ok": true,
+          "port": "wusts"
+        }
+      ]
+    }
+  ]
+}

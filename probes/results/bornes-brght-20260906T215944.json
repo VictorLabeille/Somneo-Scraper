@@ -1,0 +1,110 @@
+{
+  "initial": {
+    "dspon": false,
+    "brght": 1
+  },
+  "essais": [
+    {
+      "demande": 1,
+      "relu": 1,
+      "accepte": true,
+      "ecriture": {
+        "payload": {
+          "brght": 1
+        },
+        "ok": true,
+        "status": 200,
+        "reponse": {
+          "brght": 1
+        }
+      }
+    },
+    {
+      "demande": 6,
+      "relu": 6,
+      "accepte": true,
+      "ecriture": {
+        "payload": {
+          "brght": 6
+        },
+        "ok": true,
+        "status": 200,
+        "reponse": {
+          "brght": 6
+        }
+      }
+    },
+    {
+      "demande": 0,
+      "relu": 6,
+      "accepte": false,
+      "ecriture": {
+        "payload": {
+          "brght": 0
+        },
+        "ok": false,
+        "status": 422,
+        "error": "HTTP 422",
+        "reponse": "{\"error\":\"No such Property\"}"
+      }
+    },
+    {
+      "demande": 7,
+      "relu": 6,
+      "accepte": false,
+      "ecriture": {
+        "payload": {
+          "brght": 7
+        },
+        "ok": false,
+        "status": 422,
+        "error": "HTTP 422",
+        "reponse": "{\"error\":\"No such Property\"}"
+      }
+    },
+    {
+      "demande": 128,
+      "relu": 6,
+      "accepte": false,
+      "ecriture": {
+        "payload": {
+          "brght": 128
+        },
+        "ok": false,
+        "status": 422,
+        "error": "HTTP 422",
+        "reponse": "{\"error\":\"No such Property\"}"
+      }
+    },
+    {
+      "restauration": 1,
+      "relu": 1,
+      "ecriture": {
+        "payload": {
+          "brght": 1
+        },
+        "ok": true,
+        "status": 200,
+        "reponse": {
+          "wusts": 1,
+          "rpair": false,
+          "prvmd": false,
+          "sdemo": false,
+          "pwrsz": false,
+          "nrcur": 4,
+          "snztm": 8,
+          "wizrd": 99,
+          "brght": 1,
+          "dspon": false,
+          "canup": false,
+          "fmrna": false,
+          "wutim": 65535,
+          "dutim": 65535,
+          "sntim": 65535,
+          "updtm": 65280,
+          "updln": 65310
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "1": {
+    "series": [
+      {
+        "envoyees": 21,
+        "echouees": 0,
+        "erreurs": {}
+      },
+      {
+        "envoyees": 21,
+        "echouees": 0,
+        "erreurs": {}
+      },
+      {
+        "envoyees": 21,
+        "echouees": 0,
+        "erreurs": {}
+      }
+    ],
+    "total": 63,
+    "echecs": 0
+  },
+  "2": {
+    "series": [
+      {
+        "envoyees": 20,
+        "echouees": 9,
+        "erreurs": {
+          "RemoteDisconnected": 9
+        }
+      },
+      {
+        "envoyees": 20,
+        "echouees": 9,
+        "erreurs": {
+          "RemoteDisconnected": 9
+        }
+      },
+      {
+        "envoyees": 20,
+        "echouees": 9,
+        "erreurs": {
+          "RemoteDisconnected": 9
+        }
+      }
+    ],
+    "total": 60,
+    "echecs": 27
+  },
+  "3": {
+    "series": [
+      {
+        "envoyees": 21,
+        "echouees": 15,
+        "erreurs": {
+          "RemoteDisconnected": 4,
+          "SSLEOFError": 11
+        }
+      },
+      {
+        "envoyees": 21,
+        "echouees": 13,
+        "erreurs": {
+          "SSLEOFError": 9,
+          "RemoteDisconnected": 4
+        }
+      },
+      {
+        "envoyees": 21,
+        "echouees": 14,
+        "erreurs": {
+          "RemoteDisconnected": 5,
+          "SSLEOFError": 9
+        }
+      }
+    ],
+    "total": 63,
+    "echecs": 42
+  }
+}

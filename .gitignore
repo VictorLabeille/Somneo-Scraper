@@ -16,3 +16,8 @@ radxa-flash/*.log
 # Images systeme
 *.img
 *.img.xz
+
+# Captures longues : numero de serie, adresse MAC et conditions de la chambre en continu.
+# Leur place est la base du collecteur, pas git.
+probes/captures/
+probes/results/*.jsonl

@@ -115,9 +115,11 @@ Enregistrer coûte peu et se rattrape jamais ; exposer crée une surface.
 
 - **Ouverture d'une session** par le geste « je me couche » de l'application, relayé en
   écriture dans le réveil, qui reste le dépositaire de l'heure.
-- **Clôture** par le geste « je me lève », et à défaut par ce que le réveil expose dans
-  `tendb`. Le collecteur retient **laquelle des deux origines** a produit chaque heure : c'est
-  ce qui distingue « confirmé » d'« estimé », et l'app ne fait que restituer l'étiquette.
+- **Clôture** par le geste « je me lève », et à défaut par **l'extinction de l'alarme**,
+  observée dans `wusts`. **Révisé le 2026-09-06 au soir** : le repli initial sur `tendb` est
+  abandonné, la mesure ayant montré que ce champ ne mesure rien (voir §5). Le collecteur
+  retient **laquelle des deux origines** a produit chaque heure : c'est ce qui distingue
+  « confirmé » d'« estimé », et l'app ne fait que restituer l'étiquette.
 - **Figer une session terminée avant qu'une suivante ne commence.** `wungt` ne décrit que la
   session en cours : un second coucher dans la même nuit écrase le premier. Sans ce figement,
   le cas « coucher, lever, recoucher » du cadrage de l'app est irréalisable — non par choix
@@ -429,6 +431,26 @@ exposer crée une surface qu'il faudra ensuite justifier, tenir et peut-être re
 Même raisonnement pour l'**instantané des réglages** : historisé côté collecteur, il permet de
 restaurer un réveil réinitialisé sans dépendre d'une synchronisation récente du téléphone.
 
+### Ce qui clôt une nuit : l'arrêt de l'alarme, pas `tendb` — révisé le 2026-09-06
+
+**Décision initiale du matin** : clôture par le geste « je me lève », à défaut par `tendb`, le
+champ que le réveil expose comme heure de sortie du lit. La détection par l'extinction de
+l'alarme avait été proposée puis écartée, au motif qu'elle « déduisait » une heure au lieu de
+la mesurer.
+
+**Ce qui a changé** — deux choses, le soir même :
+
+1. **`tendb` ne mesure rien.** Relevé sur l'appareil : `tg2bd` = 01:20:04, `tendb` = 13:20:04.
+   Douze heures d'écart à la seconde près, alors que le lever réel était vers 09:40. La valeur
+   est calculée, pas observée. S'y replier aurait produit une heure de lever fausse de
+   plusieurs heures, systématiquement — pire qu'une absence d'heure.
+2. **SleepMapper clôt déjà la nuit à la sonnerie**, ou quand l'utilisateur coupe le réveil. La
+   détection par l'alarme n'est donc pas une inférence inventée ici : c'est la **parité avec le
+   comportement de l'application qu'on remplace**, ce que la règle cardinale demande.
+
+**Décision retenue** : le geste d'abord, l'extinction de l'alarme ensuite, `tendb` jamais. Une
+heure issue du geste reste « confirmée » ; une heure issue de l'alarme est « estimée ».
+
 ### Aucune interface web, même une page d'état
 
 **Décision initiale envisagée** : une page d'état minimale, pour voir que la collecte tourne
@@ -478,7 +500,11 @@ une PR fusionnée mais bâclée vaut moins que pas de PR du tout.
 
 ## 6. Questions ouvertes / à trancher
 
-- [ ] **D'où vient une heure « estimée » ?** Sûr : une heure issue du geste est confirmée.
+- [x] **D'où vient une heure « estimée » ?** ~~Ouvert.~~ **Tranché le 2026-09-06 au soir** :
+      `tg2bd` provient bien du geste (vérifié), `tendb` est calculé et inutilisable, et la fin
+      de nuit se prend sur l'extinction de l'alarme — voir §5. Reste à confirmer sur une
+      seconde nuit que `tendb` vaut systématiquement `tg2bd + 12 h`.
+- [ ] ~~Ancienne formulation :~~ Sûr : une heure issue du geste est confirmée.
       Ouvert : le réveil **déduit-il** lui-même une mise au lit de ses capteurs et remplit-il
       `tg2bd` / `tendb` seul, ou l'inférence vivait-elle dans le cloud Philips ? À **observer**
       en instrumentant `wungt` sur plusieurs nuits sans jamais écrire. Le collecteur est le

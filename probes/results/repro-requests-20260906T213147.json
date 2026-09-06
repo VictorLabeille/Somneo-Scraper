@@ -1,0 +1,44 @@
+[
+  {
+    "concurrence": 1,
+    "session_partagee": true,
+    "envoyees": 21,
+    "echouees": 0,
+    "erreurs": {},
+    "ms_median": 36.0,
+    "ms_max": 576.0,
+    "duree_s": 1.3
+  },
+  {
+    "concurrence": 1,
+    "session_partagee": false,
+    "envoyees": 21,
+    "echouees": 0,
+    "erreurs": {},
+    "ms_median": 36.0,
+    "ms_max": 588.8,
+    "duree_s": 1.3
+  },
+  {
+    "concurrence": 3,
+    "session_partagee": true,
+    "envoyees": 21,
+    "echouees": 1,
+    "erreurs": {
+      "SSLError": 1
+    },
+    "ms_median": 1015.3,
+    "ms_max": 15018.2,
+    "duree_s": 16.8
+  },
+  {
+    "concurrence": 3,
+    "session_partagee": false,
+    "envoyees": 21,
+    "echouees": 0,
+    "erreurs": {},
+    "ms_median": 1031.9,
+    "ms_max": 15573.7,
+    "duree_s": 15.8
+  }
+]

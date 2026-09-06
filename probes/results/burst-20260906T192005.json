@@ -1,0 +1,421 @@
+{
+  "paliers": [
+    {
+      "rafale": 1,
+      "reussies": 1,
+      "echouees": 0,
+      "latence_ms": [
+        495.7
+      ],
+      "erreurs": [],
+      "heap_avant": 33024,
+      "heap_apres": 32216,
+      "heap_size": 87200,
+      "records": [
+        {
+          "ts": 1788715098.3808303,
+          "product": 1,
+          "port": "wusrd",
+          "ok": true,
+          "status": 200,
+          "ms": 495.7
+        }
+      ]
+    },
+    {
+      "rafale": 3,
+      "reussies": 3,
+      "echouees": 0,
+      "latence_ms": [
+        515.7,
+        531.9,
+        524.0
+      ],
+      "erreurs": [],
+      "heap_avant": 32064,
+      "heap_apres": 31456,
+      "heap_size": 87200,
+      "records": [
+        {
+          "ts": 1788715116.3571138,
+          "product": 1,
+          "port": "wusrd",
+          "ok": true,
+          "status": 200,
+          "ms": 515.7
+        },
+        {
+          "ts": 1788715116.872897,
+          "product": 1,
+          "port": "wusrd",
+          "ok": true,
+          "status": 200,
+          "ms": 531.9
+        },
+        {
+          "ts": 1788715117.4048522,
+          "product": 1,
+          "port": "wusrd",
+          "ok": true,
+          "status": 200,
+          "ms": 524.0
+        }
+      ]
+    },
+    {
+      "rafale": 5,
+      "reussies": 5,
+      "echouees": 0,
+      "latence_ms": [
+        519.8,
+        519.8,
+        500.0,
+        515.9,
+        515.9
+      ],
+      "erreurs": [],
+      "heap_avant": 31304,
+      "heap_apres": 30368,
+      "heap_size": 87200,
+      "records": [
+        {
+          "ts": 1788715135.4330697,
+          "product": 1,
+          "port": "wusrd",
+          "ok": true,
+          "status": 200,
+          "ms": 519.8
+        },
+        {
+          "ts": 1788715135.9529197,
+          "product": 1,
+          "port": "wusrd",
+          "ok": true,
+          "status": 200,
+          "ms": 519.8
+        },
+        {
+          "ts": 1788715136.4728324,
+          "product": 1,
+          "port": "wusrd",
+          "ok": true,
+          "status": 200,
+          "ms": 500.0
+        },
+        {
+          "ts": 1788715136.9729037,
+          "product": 1,
+          "port": "wusrd",
+          "ok": true,
+          "status": 200,
+          "ms": 515.9
+        },
+        {
+          "ts": 1788715137.4888375,
+          "product": 1,
+          "port": "wusrd",
+          "ok": true,
+          "status": 200,
+          "ms": 515.9
+        }
+      ]
+    },
+    {
+      "rafale": 10,
+      "reussies": 10,
+      "echouees": 0,
+      "latence_ms": [
+        507.7,
+        519.9,
+        519.9,
+        532.0,
+        511.8,
+        504.0,
+        515.9,
+        515.9,
+        516.0,
+        560.0
+      ],
+      "erreurs": [],
+      "heap_avant": 30216,
+      "heap_apres": 28480,
+      "heap_size": 87200,
+      "records": [
+        {
+          "ts": 1788715155.5290668,
+          "product": 1,
+          "port": "wusrd",
+          "ok": true,
+          "status": 200,
+          "ms": 507.7
+        },
+        {
+          "ts": 1788715156.036874,
+          "product": 1,
+          "port": "wusrd",
+          "ok": true,
+          "status": 200,
+          "ms": 519.9
+        },
+        {
+          "ts": 1788715156.55683,
+          "product": 1,
+          "port": "wusrd",
+          "ok": true,
+          "status": 200,
+          "ms": 519.9
+        },
+        {
+          "ts": 1788715157.0768182,
+          "product": 1,
+          "port": "wusrd",
+          "ok": true,
+          "status": 200,
+          "ms": 532.0
+        },
+        {
+          "ts": 1788715157.6089134,
+          "product": 1,
+          "port": "wusrd",
+          "ok": true,
+          "status": 200,
+          "ms": 511.8
+        },
+        {
+          "ts": 1788715158.120817,
+          "product": 1,
+          "port": "wusrd",
+          "ok": true,
+          "status": 200,
+          "ms": 504.0
+        },
+        {
+          "ts": 1788715158.6248462,
+          "product": 1,
+          "port": "wusrd",
+          "ok": true,
+          "status": 200,
+          "ms": 515.9
+        },
+        {
+          "ts": 1788715159.1408222,
+          "product": 1,
+          "port": "wusrd",
+          "ok": true,
+          "status": 200,
+          "ms": 515.9
+        },
+        {
+          "ts": 1788715159.656833,
+          "product": 1,
+          "port": "wusrd",
+          "ok": true,
+          "status": 200,
+          "ms": 516.0
+        },
+        {
+          "ts": 1788715160.1728837,
+          "product": 1,
+          "port": "wusrd",
+          "ok": true,
+          "status": 200,
+          "ms": 560.0
+        }
+      ]
+    },
+    {
+      "rafale": 20,
+      "reussies": 20,
+      "echouees": 0,
+      "latence_ms": [
+        519.8,
+        516.0,
+        527.9,
+        519.9,
+        616.0,
+        511.9,
+        496.0,
+        515.9,
+        531.9,
+        527.9,
+        503.9,
+        527.9,
+        527.9,
+        800.0,
+        523.8,
+        503.9,
+        523.9,
+        531.9,
+        519.9,
+        499.9
+      ],
+      "erreurs": [],
+      "heap_avant": 28328,
+      "heap_apres": 24976,
+      "heap_size": 87200,
+      "records": [
+        {
+          "ts": 1788715178.252937,
+          "product": 1,
+          "port": "wusrd",
+          "ok": true,
+          "status": 200,
+          "ms": 519.8
+        },
+        {
+          "ts": 1788715178.772832,
+          "product": 1,
+          "port": "wusrd",
+          "ok": true,
+          "status": 200,
+          "ms": 516.0
+        },
+        {
+          "ts": 1788715179.2889006,
+          "product": 1,
+          "port": "wusrd",
+          "ok": true,
+          "status": 200,
+          "ms": 527.9
+        },
+        {
+          "ts": 1788715179.8168244,
+          "product": 1,
+          "port": "wusrd",
+          "ok": true,
+          "status": 200,
+          "ms": 519.9
+        },
+        {
+          "ts": 1788715180.3368165,
+          "product": 1,
+          "port": "wusrd",
+          "ok": true,
+          "status": 200,
+          "ms": 616.0
+        },
+        {
+          "ts": 1788715180.9529026,
+          "product": 1,
+          "port": "wusrd",
+          "ok": true,
+          "status": 200,
+          "ms": 511.9
+        },
+        {
+          "ts": 1788715181.464848,
+          "product": 1,
+          "port": "wusrd",
+          "ok": true,
+          "status": 200,
+          "ms": 496.0
+        },
+        {
+          "ts": 1788715181.9608867,
+          "product": 1,
+          "port": "wusrd",
+          "ok": true,
+          "status": 200,
+          "ms": 515.9
+        },
+        {
+          "ts": 1788715182.4768622,
+          "product": 1,
+          "port": "wusrd",
+          "ok": true,
+          "status": 200,
+          "ms": 531.9
+        },
+        {
+          "ts": 1788715183.0088353,
+          "product": 1,
+          "port": "wusrd",
+          "ok": true,
+          "status": 200,
+          "ms": 527.9
+        },
+        {
+          "ts": 1788715183.536835,
+          "product": 1,
+          "port": "wusrd",
+          "ok": true,
+          "status": 200,
+          "ms": 503.9
+        },
+        {
+          "ts": 1788715184.0408165,
+          "product": 1,
+          "port": "wusrd",
+          "ok": true,
+          "status": 200,
+          "ms": 527.9
+        },
+        {
+          "ts": 1788715184.568832,
+          "product": 1,
+          "port": "wusrd",
+          "ok": true,
+          "status": 200,
+          "ms": 527.9
+        },
+        {
+          "ts": 1788715185.0968347,
+          "product": 1,
+          "port": "wusrd",
+          "ok": true,
+          "status": 200,
+          "ms": 800.0
+        },
+        {
+          "ts": 1788715185.8969216,
+          "product": 1,
+          "port": "wusrd",
+          "ok": true,
+          "status": 200,
+          "ms": 523.8
+        },
+        {
+          "ts": 1788715186.4208264,
+          "product": 1,
+          "port": "wusrd",
+          "ok": true,
+          "status": 200,
+          "ms": 503.9
+        },
+        {
+          "ts": 1788715186.9248261,
+          "product": 1,
+          "port": "wusrd",
+          "ok": true,
+          "status": 200,
+          "ms": 523.9
+        },
+        {
+          "ts": 1788715187.4488354,
+          "product": 1,
+          "port": "wusrd",
+          "ok": true,
+          "status": 200,
+          "ms": 531.9
+        },
+        {
+          "ts": 1788715187.9808202,
+          "product": 1,
+          "port": "wusrd",
+          "ok": true,
+          "status": 200,
+          "ms": 519.9
+        },
+        {
+          "ts": 1788715188.5008235,
+          "product": 1,
+          "port": "wusrd",
+          "ok": true,
+          "status": 200,
+          "ms": 499.9
+        }
+      ]
+    }
+  ],
+  "heap_size": 87200
+}
