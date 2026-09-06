@@ -123,6 +123,26 @@ ci-dessous vient donc de l'APK (`com.philips.cdp2.brighteyes.ports.*`), chaque e
 | `dataupload` | `DataUploadPort` | **Téléversement cloud** — voir §5 | ❌ |
 | `wifiui` | `DeviceConnectionPort` | État WiFi, **RSSI** | ❌ |
 | `fac` | — | Réinitialisation usine (`{"wifi":0,"reset":0}`) | ❌ |
+| `wutim` | **aucune** | **Horloge locale de l'appareil** — découvert le 2026-09-06 | ❌ |
+
+### `wutim` — un port que l'application n'utilise pas
+
+Trouvé le 6 septembre 2026 par balayage de noms (`probes/exploration.py`), et **absent de
+partout** : ni dans l'APK décompilé, ni dans l'issue #16, ni dans `pysomneo`, ni dans les
+relevés du 31 août. C'est le seul port inconnu qu'un balayage ciblé de 54 noms ait fait
+apparaître — les 53 autres ont répondu `422`.
+
+```json
+GET wutim → {"yrltm":2026,"moltm":9,"dtltm":6,"hrltm":22,"miltm":25,"scltm":30,"daynm":6}
+```
+
+Suffixe `ltm` = *local time* : année, mois, jour, heure, minute, seconde, et `daynm` le jour de
+la semaine. C'est l'horloge telle que l'appareil la voit, en composants décomposés — là où
+`/di/v1/products/0/time` la donne en ISO 8601.
+
+Intérêt direct pour le collecteur : c'est une seconde source pour mesurer la dérive après
+l'isolement, et elle ne dépend pas du même chemin de code que le port `time`. À ne pas
+confondre avec le **champ** `wutim` du port `wusts`, qui compte des minutes restantes.
 
 Deux ports de l'APK **n'existent pas** sur le HF3671 (`422`) — ils visent d'autres modèles :
 `wuwdw` (`WindDownDuskPort`) et `wusds/prfds/01` (`ScheduleSunsetPort`).
@@ -401,6 +421,44 @@ déclenchée, snooze, début de nuit dans `wungt`). Les capteurs, eux, restent �
 - **`pysomneo` couvre 11 des 21 ports** et ignore notamment `wungt`, donc tout le suivi de
   sommeil. Il faudra des appels directs en complément — voir la colonne du §4, et le §8 pour
   ce qui mérite de remonter en amont.
+
+### Sémantique des erreurs — mesurée le 2026-09-06
+
+| Requête | Réponse |
+| --- | --- |
+| Port inexistant (`wusrd` → `zzzzz`) | `422 {"error":"No such Port"}` |
+| Produit inexistant (`products/9`) | `404 {"error":"Unknown product"}` |
+| Sous-ressource inexistante (`wusrd/zzz`) | `422 {"error":"No such Port"}` |
+| Port connu avec barre oblique finale (`wualm/`) | **`200`** — renvoie l'arbre complet du port |
+| Casse différente (`WUSRD`) | `422` — les noms sont sensibles à la casse |
+| Nom de 64 caractères | **expire**, aucune réponse |
+
+Deux points à retenir. `wualm/` renvoie `200` avec l'ensemble `snztm` / `aenvs` / `alctr` /
+`aalms` / `prfnr` : une barre oblique finale n'est pas une erreur, c'est un raccourci. Et un
+**nom de port très long fait expirer l'appareil** au lieu de produire un `422` — sur un
+appareil sans aucun contrôle d'accès sur le LAN, c'est une raison de plus de l'isoler.
+
+### Coût d'un `422`, et ce qu'il rend possible
+
+Un port inconnu est refusé en **16 ms de médiane** — trente fois moins qu'une lecture réussie
+sur connexion neuve. Balayer l'espace entier des noms `wu` + trois lettres (17 576
+combinaisons) prend donc **environ 36 minutes**, sérialisé. L'exhaustivité, que le relevé du
+31 août jugeait hors d'atteinte, est en fait accessible : elle reste à faire.
+
+### L'index du produit 1, chiffré
+
+Trois tentatives, trois `500`, à **5,5 secondes** chacune — parfaitement reproductible.
+L'index du produit 0, lui, répond en 571 ms. Ce n'est pas un aléa : c'est le seul échec
+systématique de l'appareil.
+
+### Une connexion inactive survit — hypothèse écartée
+
+Le rapporteur de l'issue #8 décrivait un second symptôme : « if I leave the `Somneo` object to
+sit around for a minute or so, the thing hangs ». Testé le 2026-09-06 sur connexion réutilisée,
+trois répétitions par palier de repos : **12/12 réussites à 10 s, 30 s, 60 s et 90 s**, avec des
+latences de 28 à 132 ms. Le phénomène n'est **pas reproduit** sur ce firmware. À ne pas
+présenter comme réfuté chez lui pour autant — son appareil et son firmware de 2022 sont
+inconnus.
 
 ## 8. Contribuer à `pysomneo` — ce qui est réellement nouveau
 

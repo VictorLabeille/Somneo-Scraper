@@ -51,6 +51,10 @@ décider par la session qui l'écrira ; une fois arrêtée, la reporter ici et d
 
 - **Toujours passer par la découverte SSDP**, jamais par une IP en dur : l'adresse du Somneo
   change en DHCP. Même règle pour la carte.
+- **Ne jamais suspendre une sonde par `SIGSTOP` pour en lancer une autre.** Le processus est
+  figé **au milieu d'une requête** et laisse une connexion à moitié ouverte sur un appareil qui
+  n'en sert qu'une seule — on fabrique soi-même la panne qu'on mesure. Arrêter proprement
+  (`SIGTERM`, les sondes le gèrent) puis relancer : le journal est en ajout, rien n'est perdu.
 - **Toujours sérialiser les appels au réveil** et les espacer d'environ 200 ms. Il tombe en
   `500 Timeout` sous une rafale — ~25 ko de tas libre. C'est le matériel, pas un bug.
 - **`pysomneo` pour tout dialogue avec le réveil** — ne pas réimplémenter le protocole. Il ne
