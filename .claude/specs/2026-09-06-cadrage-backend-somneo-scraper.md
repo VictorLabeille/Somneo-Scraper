@@ -292,8 +292,8 @@ soleil, geste de coucher et de lever.
 | Appui « je me couche » alors que le réveil ne répond pas | Réveil débranché, carte qui redémarre, adresse changée | **L'heure de l'appui est conservée et posée dans le réveil dès qu'il répond.** Le geste n'est jamais perdu. L'app affiche « en attente du réveil », **jamais** « suivi en cours » : ce qui n'est pas encore vrai ne s'affiche pas comme vrai. Voir §5. |
 | Double appui | Deux pressions rapprochées | Une seule session. La seconde ne crée rien et ne déplace pas l'heure. |
 | Appui après-coup | Appui à 2 h pour un coucher à 23 h | L'heure enregistrée est celle de l'appui, marquée **confirmée**, et corrigeable ensuite. |
-| Geste de lever absent | On ne marque pas le lever | La session se clôt sur `tendb` si le réveil le fournit, et l'heure est alors marquée **estimée**. Sinon elle reste ouverte. |
-| Nuit jamais close | Ni geste, ni `tendb`, et le temps passe | La session **reste ouverte et visiblement anormale**. Aucune clôture automatique silencieuse. |
+| Geste de lever absent | On ne marque pas le lever | La session se clôt sur **l'extinction de l'alarme**, observée dans `wusts`, et l'heure est alors marquée **estimée**. Sinon elle reste ouverte. **Jamais sur `tendb`** — voir §5. |
+| Nuit jamais close | Ni geste, ni alarme éteinte, et le temps passe | La session **reste ouverte et visiblement anormale**. Aucune clôture automatique silencieuse. |
 | Nouveau coucher alors qu'une session est ouverte | Coucher, lever non marqué, recoucher | La session précédente est **figée avant** que la nouvelle ne commence, marquée close par nécessité et signalée comme anormale. Deux sessions distinctes existent, aucune n'écrase l'autre. |
 | Sieste, nuit très courte | Session d'une heure | Enregistrée telle quelle. Le collecteur ne décide pas de ce qui est une « vraie » nuit. |
 | Nuit à cheval sur minuit | Cas normal | Rattachée au jour de l'heure de coucher. Une nuit ne se scinde jamais. |
@@ -450,6 +450,13 @@ la mesurer.
 
 **Décision retenue** : le geste d'abord, l'extinction de l'alarme ensuite, `tendb` jamais. Une
 heure issue du geste reste « confirmée » ; une heure issue de l'alarme est « estimée ».
+
+> **Alignement du 2026-09-07, pas une révision.** Deux lignes du tableau §2.C portaient encore
+> le repli sur `tendb`, oublié lors de la révision du soir : elles contredisaient cette
+> décision-ci dans le même document. Elles sont alignées sur elle. Aucune décision n'a changé —
+> et la mesure de la nuit du 6 au 7 a depuis confirmé le motif sur un second point, puis sur un
+> troisième relevé public (issue #16), qui en fait une constante du modèle. Voir
+> `docs/somneo-api.md`.
 
 ### Aucune interface web, même une page d'état
 
