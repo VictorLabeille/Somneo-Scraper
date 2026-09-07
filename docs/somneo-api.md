@@ -50,6 +50,32 @@ Confirmé par `LanRequest.createURL()` dans l'APK :
   `404 {"error":"Unknown product"}`, `400 {"error":"Not understood"}`,
   `500 {"error":"Timeout"}` (l'appareil sature — voir §6), `501 {"error":"Not implemented"}`.
 
+**Ce que la couche TLS accepte — mesuré le 2026-09-07** (`probes/tls.py`) :
+
+| | |
+| --- | --- |
+| Versions acceptées | **TLS 1.2 uniquement.** TLS 1.0, 1.1 et **1.3** sont refusés |
+| Suite négociée | `ECDHE-RSA-AES128-GCM-SHA256`, 128 bits |
+| Certificat | 1 146 octets (DER) |
+
+Le refus de **TLS 1.3** est le point qui compte : une distribution récente dont la politique
+`openssl` exigerait TLS 1.3, ou un client qui le forcerait, ne parlerait tout simplement pas à
+l'appareil. À garder en tête si le collecteur change un jour d'hôte ou d'image de base.
+
+**Méthodes HTTP.** Seuls `GET` et `PUT` existent. `POST` et `PATCH` sont **refusés au niveau
+TCP** (`connection refused`) ; `HEAD`, `OPTIONS` et `DELETE` ne répondent pas du tout et
+**expirent**. Sonder l'appareil avec un client qui tente un `HEAD` préalable, c'est donc
+attendre le timeout pour rien.
+
+**Corps mal formé sur un `PUT`** — la distinction est nette et utile pour diagnostiquer :
+
+| Corps envoyé | Réponse |
+| --- | --- |
+| JSON tronqué, non-JSON, tableau au lieu d'objet, corps vide | `400 {"error":"Not understood"}` |
+| JSON valide, **clé inconnue** | `422 {"error":"No such Property"}` |
+
+Autrement dit `400` = « je n'ai pas su lire », `422` = « j'ai lu, ce champ n'existe pas ».
+
 ### Authentification — il n'y en a pas
 
 L'app implémente un schéma de défi/réponse (`PhilipsCondorScheme`) : sur `401`, l'appareil
@@ -92,13 +118,23 @@ jusqu'à 60 s, appareil au repos) : il n'a pas assez de tas pour sérialiser l'i
 ci-dessous vient donc de l'APK (`com.philips.cdp2.brighteyes.ports.*`), chaque entrée ayant
 été vérifiée en direct.
 
-> **Limite d'exhaustivité, à assumer.** Le produit 0 est exhaustif : il s'auto-décrit. Le
-> produit 1 **ne l'est pas**. Cette liste couvre ce que *l'application* utilise ; un port que
-> le firmware exposerait sans que SleepMapper y touche n'y figurerait pas. Une vingtaine de
-> noms plausibles ont été testés en complément (`wuvol`, `wudsp`, `wuwiz`, `wuevt`…), tous en
-> `422` — mais l'espace des noms de cinq lettres ne peut pas être balayé sur un appareil qui
-> tombe en timeout. **Considérer cette liste comme un minorant vérifié, pas comme une preuve
-> de complétude.**
+> **Exhaustivité — mesurée le 2026-09-07, et c'est un résultat, pas une estimation.** Le
+> produit 0 s'auto-décrit ; le produit 1 non, son index expire (voir §7). La liste ci-dessous
+> venait donc de l'APK, avec la mise en garde qu'un port exposé par le firmware mais ignoré
+> de SleepMapper n'y figurerait pas. **Deux balayages exhaustifs ont levé le doute, chacun
+> sur son domaine** (`probes/balayage.py`, 17 576 noms chacun, ~150 min) :
+>
+> | Domaine balayé | Résultat |
+> | --- | --- |
+> | `wu` + 3 lettres (les 17 576 combinaisons) | **13 ports, tous connus.** Aucun inconnu |
+> | 3 lettres, sans préfixe (les 17 576 combinaisons) | **`dsi` et `fac`**, tous deux nouveaux |
+>
+> Conséquence : **pour les noms en `wu` de cinq lettres, la liste est complète — c'est prouvé,
+> plus un minorant.** Les 13 sont `wualm`, `wudsk`, `wufmp`, `wufmr`, `wulgt`, `wungt`,
+> `wuply`, `wurlx`, `wusrd`, `wusts`, `wutim`, `wutmr`, `wutms`. Hors de ce domaine la liste
+> reste un minorant : les noms de 4 lettres (456 976 combinaisons, ~66 jours au rythme mesuré)
+> et ceux de 5 lettres sans préfixe `wu` n'ont pas été balayés, et ne le seront pas — le coût
+> est sans commune mesure avec l'espérance de gain.
 
 | Port | Classe SleepMapper | Rôle | `pysomneo` |
 | --- | --- | --- | --- |
@@ -121,9 +157,11 @@ ci-dessous vient donc de l'APK (`com.philips.cdp2.brighteyes.ports.*`), chaque e
 | `wutms` | `TimeSettingsPort` | Format horaire, fuseau, source de temps | ❌ |
 | `device` | `BEDevicePort` | Identité, versions, `allowuploads` | ❌ |
 | `dataupload` | `DataUploadPort` | **Téléversement cloud** — voir §5 | ❌ |
+| `dataupload/event.1` | — | Dernier **type** d'événement, sans date — voir §5 | ❌ |
 | `wifiui` | `DeviceConnectionPort` | État WiFi, **RSSI** | ❌ |
 | `fac` | — | Réinitialisation usine (`{"wifi":0,"reset":0}`) | ❌ |
 | `wutim` | **aucune** | **Horloge locale de l'appareil** — découvert le 2026-09-06 | ❌ |
+| `dsi` | **aucune** | `{"keypress":"","screenid":"NA"}` — découvert le 2026-09-07 | ❌ |
 
 ### `wutim` — un port que l'application n'utilise pas
 
@@ -142,7 +180,8 @@ la semaine. C'est l'horloge telle que l'appareil la voit, en composants décompo
 
 Intérêt direct pour le collecteur : c'est une seconde source pour mesurer la dérive après
 l'isolement, et elle ne dépend pas du même chemin de code que le port `time`. À ne pas
-confondre avec le **champ** `wutim` du port `wusts`, qui compte des minutes restantes.
+confondre avec le **champ** `wutim` du port `wusts`, qui chronomètre la séquence de réveil en
+cours (voir §4, sémantique de `wusts`).
 
 Deux ports de l'APK **n'existent pas** sur le HF3671 (`422`) — ils visent d'autres modèles :
 `wuwdw` (`WindDownDuskPort`) et `wusds/prfds/01` (`ScheduleSunsetPort`).
@@ -172,15 +211,48 @@ l'obfuscation.
 | `ntstr` `ntend` `ntlen` | Début, fin et durée de nuit (vides hors session) |
 | `night` | Session de nuit active — **seul champ écrit par l'app** (`getKeyMapForNight`) |
 
-> **`tendb` est calculé, pas mesuré — observation du 2026-09-06, à confirmer.** Relevé sur
-> l'appareil : `tg2bd` = `2026-09-06T01:20:04`, `tendb` = `2026-09-06T13:20:04`. Exactement
-> douze heures d'écart, à la seconde. Or le propriétaire s'est couché vers 01 h 20 en appuyant
-> sur le bouton de SleepMapper, et **levé vers 09 h 40** : `tendb` ne correspond à aucun
-> événement réel. La valeur ressemble à un `tg2bd + 12 h` posé par défaut.
+> **`wungt` ne mesure rien — confirmé par une nuit entière, le 2026-09-07.** Le port ne se
+> remplit **que** sur le geste de l'utilisateur dans l'application. Sans ce geste, il ne se
+> passe rien : ni détection, ni horodatage, ni remise à zéro.
 >
-> Conséquence si cela se confirme : **le réveil ne détecte pas la fin de nuit.** Un collecteur
-> qui clôturerait une session sur `tendb` inventerait une heure de lever. Une seule observation
-> à ce jour ; un second point est attendu de la capture de la nuit du 6 au 7 septembre 2026.
+> **L'expérience.** Nuit du 6 au 7 septembre 2026 : le propriétaire se couche **sans** appuyer
+> sur « je me couche ». La capture interroge `wungt` toutes les 60 s, du 6 à 19 h 36 au 7 à
+> 17 h 51 — **949 relevés**. Résultat : *une seule* valeur sur les 949, identique du premier
+> au dernier.
+>
+> ```json
+> {"tg2bd":"2026-09-06T01:20:04+02:00", "tendb":"2026-09-06T13:20:04+02:00",
+>  "ntstr":"", "ntend":"", "ntlen":"", "night":false, "gdngt":false, "gdday":false}
+> ```
+>
+> `tg2bd` est resté sur l'appui de la **nuit précédente**, avec 22 h de retard, alors que le
+> coucher réel a eu lieu à **23 h 09** — heure lue sur la chute de `mslux`, à la minute (voir
+> ci-dessous). Aucun champ n'a bougé : le réveil n'a **pas** vu la nuit passer.
+>
+> Deux faits en découlent, tous deux dirimants pour le collecteur :
+>
+> 1. **`tg2bd` est un champ périmable, jamais vide.** Il ne dit pas « la dernière nuit », il dit
+>    « le dernier appui, quand qu'il ait eu lieu ». Le lire sans le dater contre autre chose,
+>    c'est attribuer à cette nuit le coucher d'une nuit quelconque. Un collecteur doit le
+>    traiter comme suspect tant qu'il ne l'a pas vu *changer*.
+> 2. **`tendb` est calculé, pas mesuré — confirmé sur un second point.** Il vaut `tg2bd + 12 h`
+>    à la seconde près, et il n'a pas bougé alors que le lever réel a eu lieu vers 06 h 50.
+>    Deux observations, deux nuits, le même écart de douze heures exactes. **Le réveil ne
+>    détecte pas la fin de nuit.** Un collecteur qui clôturerait une session sur `tendb`
+>    inventerait une heure de lever.
+>
+> **Ce qui reste pour dater une nuit, alors : la lumière.** Elle est mesurée, elle, et elle est
+> nette. Le plafonnier s'éteint entre deux relevés consécutifs de `wusrd` :
+>
+> ```
+> 23:08:25  mslux = 110.6      ← plafonnier allumé
+> 23:09:26  mslux =   0        ← éteint
+> ```
+>
+> Une minute d'incertitude, sans aucun geste demandé à l'utilisateur — là où `tg2bd` exige un
+> appui et se tait s'il n'a pas lieu. Attention en revanche à ne pas confondre avec `avlux`,
+> qui est une moyenne **retardée** : elle n'a répercuté l'extinction qu'à 23 h 13, soit quatre
+> minutes plus tard.
 
 **`wualm/prfwu` — profil d'alarme.** `prfnr` (n° 1-16), `pname`, `prfen` (activé),
 `prfvs` (visible), `almhr`/`almmn`, `daynm` (masque de jours), `ayear`/`amnth`/`alday`
@@ -230,6 +302,33 @@ C'est la démonstration du défaut, en trois secondes et sans outillage : **deux
 ordinaires du réveil produisent une valeur que la table de huit entrées ne couvre pas**, et
 `STATUS.get(...)` renvoie alors `unknown`.
 
+**Une alarme complète, observée sans y toucher — 2026-09-07.** Les états ci-dessus étaient
+provoqués à la main. Celui-ci a été relevé au fil d'un vrai réveil, `wusts` interrogé toutes
+les 30 s, sans intervention :
+
+| Heure | `wusts` | Bits | Ce qui se passait | `pysomneo` |
+| --- | --- | --- | --- | --- |
+| 06:15:10 | **2309** | 0, 2, 8, 11 | Aube simulée, la lampe monte | `wake-up` |
+| 06:50:21 | **2817** | 0, 8, 9, 11 | **La sonnerie part**, 35 min après l'aube | `on` |
+| 06:50:51 | **2** | 1 | Alarme coupée, l'afficheur s'allume | **`sunset`** ← faux |
+| 06:51:22 | 1 | 0 | Retour au repos | `off` |
+
+Trois choses en sortent :
+
+- **Le bit 9 = son : confirmé.** C'était une déduction ; la sonnerie le lève (2309 → 2817) et
+  la table amont le corrobore (776 et 777, coucher de soleil *avec* son, le portent).
+- **Le bit 2 retombe quand le son démarre.** L'aube porte le bit 2, la sonnerie non — les deux
+  phases d'une même alarme n'ont aucun bit en commun hormis le bit maître. C'est pourquoi
+  `isAlarmActive()` teste `bit2 == 1 || bit11 == 1` : le `|| bit11` rattrape la phase sonore.
+- **`2` n'est pas un coucher de soleil**, et c'est un défaut plus grave que `unknown`. La table
+  amont mappe `2: "sunset"`. Or la valeur 2 apparaît ici à l'**arrêt de l'alarme**, quand
+  l'afficheur s'allume — et le vrai coucher de soleil, mesuré la veille, vaut **264**. Les deux
+  mesures se recoupent : `2` est le bit 1 seul (menu/afficheur), le coucher de soleil est le
+  bit 3. **La bibliothèque ne renvoie donc pas seulement `unknown` sur des états qu'elle ignore ;
+  elle renvoie une étiquette fausse sur un état qu'elle croit connaître.** Un appelant qui
+  déclenche une action sur `somneo_status == "sunset"` la déclenche chaque fois qu'un bouton
+  est pressé.
+
 Deux corrections à apporter aux hypothèses du 31 août :
 
 - **bit 3 = coucher de soleil : confirmé** par la mesure (264 = bits 3 et 8). Ce n'était qu'une
@@ -241,7 +340,16 @@ Deux corrections à apporter aux hypothèses du 31 août :
   portent tous les trois.
 
 Les autres champs du port se lisent tels quels : `snztm`, `nrcur`, `pwrsz`, `fmrna`,
-`wutim`/`dutim`/`sntim` (minutes restantes ; **`65535` = inactif**), `rpair`, `hmlay`.
+`wutim`/`dutim`/`sntim` (**`65535` = inactif**), `rpair`, `hmlay`.
+
+> **`wutim` compte des secondes écoulées, pas des minutes restantes.** Relevé pendant l'alarme
+> du 2026-09-07 : le champ passe de `6` à `2051` en trente-cinq minutes, par pas d'environ 30
+> — soit exactement le pas d'interrogation. Il **croît** depuis le début de la séquence, il ne
+> décompte pas, et il retombe à `65535` dès l'arrêt. La lecture « minutes restantes », héritée
+> du nom du champ, était fausse ; c'est un chronomètre de la séquence en cours, en secondes.
+> (L'horloge interne est légèrement lente : 2 045 s comptées pour 2 111 s réelles, soit 3 %.)
+>
+> À ne pas confondre avec le **port** `wutim`, l'horloge de l'appareil, qui n'a rien à voir.
 
 **Réglages d'afficheur** — `brght` et `dspon` sont sur ce même port et sont **écrivables** :
 
@@ -318,11 +426,34 @@ snd.1/data  → {"svper":898,"avsnd":39,"losnd":26,"hisnd":70,
 lux.1/data  → {"svper":898,"avlux":8.4,"lolux":0.0,"hilux":114.8,"ablux":[…],"rllux":[…]}
 ```
 
-- `svper` : secondes écoulées dans la fenêtre courante (plafond 900 s).
+- `svper` : **constante, toujours 898.** Ce n'est *pas* un compteur de progression — voir
+  ci-dessous, c'est le piège de cette section.
 - `av*` / `lo*` / `hi*` : **moyenne, minimum, maximum** sur la fenêtre.
 - `ab*` / `rl*` (bruit et lumière seulement) : **histogrammes**, `[n, [borne_basse, borne_haute,
   compte] × n]` — `ab*` sur les valeurs absolues, `rl*` sur les variations. Le relevé ci-dessus
   se lit : 11 484 échantillons entre 0 et 30 dB, 35 970 entre 30 et 40, 42 256 au-dessus de 40.
+
+> **`svper` ne dit pas où on en est dans la fenêtre — mesuré le 2026-09-07.** La lecture
+> « secondes écoulées, plafond 900 » était une inférence de nom, et elle est fausse : sur
+> **391 relevés couvrant 22 heures**, `svper` a valu **898, sans exception et sans jamais
+> varier**. C'est la durée nominale de la fenêtre (900 s moins deux), une constante de
+> configuration — pas un compteur.
+>
+> Il n'existe donc **aucun champ qui annonce une bascule de fenêtre**. Ce que montre la mesure :
+> le triplet `(av, lo, hi)` reste figé une quinzaine de minutes, puis est remplacé d'un bloc.
+> La bascule ne se déduit que d'une comparaison avec le relevé précédent — et **cette
+> comparaison échoue quand deux fenêtres consécutives portent les mêmes valeurs**, ce qui
+> arrive toutes les nuits : `lolux = hilux = avlux = 0.0` de 23 h 32 à 06 h 28, soit 28 fenêtres
+> indiscernables les unes des autres.
+>
+> Deux conséquences pour le collecteur :
+>
+> 1. **Interroger à pas fixe et horodater soi-même**, sans chercher à reconstituer les
+>    frontières de fenêtre depuis l'appareil : il ne les donne pas.
+> 2. **L'agrégat publié est en retard d'une fenêtre.** L'extinction du plafonnier de 23 h 09
+>    n'apparaît dans `lolux`/`hilux` qu'au relevé de 23 h 17 : c'est la fenêtre *close* qui est
+>    servie, pas celle en cours. Un extremum peut donc avoir jusqu'à 15 min de retard sur
+>    l'événement qui l'a produit — à ne jamais horodater à l'heure de lecture.
 
 **C'est directement exploitable par le scraper**, et supérieur à un simple `wusrd` échantillonné :
 un pic de bruit à 70 dB survenu entre deux interrogations est perdu par `wusrd`, mais reste
@@ -337,6 +468,26 @@ interroger l'appareil à haute fréquence, ce que son tas ne supporterait pas.
    (`dataupload/*/data`) et à la nuit en cours (`wungt`). Rien n'est conservé au-delà : toutes
    les variantes d'historique testées (`wuhis`, `wusrd/history`, `wungt/history`, `wudta`,
    `wulog`…) répondent `422`. Dès que la fenêtre bascule, ce qui n'a pas été relevé est perdu.
+
+   > **`dataupload/event.1/data` ne fait pas exception — vérifié le 2026-09-07.** Découvert le
+   > jour même, c'est le seul port qui ait renvoyé quelque chose ressemblant à un événement
+   > daté, et il valait la peine d'y regarder : un journal d'événements aurait permis de dater
+   > une alarme sans interroger `wusts` en continu.
+   >
+   > ```
+   > 17:59:15  {"event":"endalarm", "stime":"2026-09-07T17:59:12+02:00", "pname":""}
+   > 18:00:18  {"event":"endalarm", "stime":"2026-09-07T18:00:15+02:00", "pname":""}
+   > 18:02:22  {"event":"endalarm", "stime":"2026-09-07T18:02:19+02:00", "pname":""}
+   > ```
+   >
+   > **`stime` est l'heure de la requête, pas celle de l'événement** — il suit l'horloge à
+   > trois secondes près à chaque lecture, et l'alarme en question s'était terminée onze heures
+   > plus tôt. Le port ne retient que le **type** du dernier événement, sans date, dans le même
+   > moule que les capteurs (`tzhrs`, `tzmin`, `shdst`). `event.2` et `event/data` répondent
+   > `422` : il n'y a qu'un seul canal, et il n'a pas de profondeur.
+   >
+   > Le collecteur ne peut donc dater une alarme qu'en observant `wusts` — c'est la troisième
+   > variante d'historique local testée, et le troisième verdict identique.
 2. **Couper internet supprime donc l'intégralité de l'historique de SleepMapper.** Ce n'est
    pas un effet de bord : c'est la fonction principale de l'app qui disparaît.
 3. `Somneo-Scraper` n'est donc pas un simple cache d'accélération — il est la **seule**
@@ -378,8 +529,38 @@ déclenchée, snooze, début de nuit dans `wungt`). Les capteurs, eux, restent �
 > Le port `sub` du produit 0 liste pourtant des abonnements bien réels — pour `firmware` et
 > pour `1/wifiui` — avec un `ttl` de 9 223 371 272, c'est-à-dire une valeur qui n'expire pas.
 > Aucun n'a été créé par nous. Conclusion prudente : **le mécanisme existe, notre requête n'est
-> pas la bonne.** D'autres formes restent à essayer (sans l'en-tête, sans `changeudp`, sur le
-> produit 0) — mises en file pour le 7 septembre.
+> pas la bonne.**
+
+> **Trois autres formes essayées le 2026-09-07 — toutes en échec, et le mécanisme reste fermé.**
+> Après chaque tentative, `GET products/0/sub` a été relu pour voir si l'abonnement avait pris :
+>
+> | Forme (`POST`) | Réponse | Abonnement créé ? |
+> | --- | --- | --- |
+> | `wusrd` + `changeudp`, sans en-tête Condor | `connection refused` (TCP) | non |
+> | `wusrd` + `changeudp`, avec en-tête Condor | `connection refused` (TCP) | non |
+> | `wusrd` **sans** `changeudp` | `200` — corps du port | **non** |
+> | `products/0/sub` + `changeudp` | `200` — liste des abonnements | **non** |
+>
+> **Aucune des quatre formes n'a créé quoi que ce soit** : `sub` n'a jamais mentionné le
+> `subscriber` déclaré. Le `200` de la troisième forme est trompeur — l'appareil renvoie le
+> corps du port, exactement comme un `GET`, sans rien enregistrer.
+>
+> **Ce qui reste non tranché, et qu'il faut noter comme tel.** Les deux formes portant
+> `changeudp` sont tombées au niveau TCP, les deux sans en ont réchappé — ce qui ferait
+> soupçonner ce champ. Mais le volet des méthodes HTTP montre que `POST` et `PATCH` sont
+> *déjà* refusés en TCP sur ce même port, sans aucun corps. La corrélation est donc réelle,
+> la causalité non établie : il n'y a pas eu de contre-épreuve isolant le champ. **Ne pas
+> écrire que `changeudp` fait tomber la connexion** — c'est une hypothèse, pas une mesure.
+>
+> Un fait annexe, en revanche, est acquis : la liste des abonnements comporte désormais une
+> **troisième** entrée, sur le port `fac`, absente du relevé du 6 septembre. Ces abonnements
+> apparaissent et disparaissent sans que nous y soyons pour rien — ils sont le fait du firmware.
+
+**État de la question, au 2026-09-07 : l'abonnement UDP n'est pas exploitable.** Sept formes
+essayées sur deux jours, aucune n'a créé d'abonnement. La collecte repose donc entièrement sur
+l'interrogation — ce qui est sans conséquence pratique depuis que la cadence de 5 s est mesurée
+comme tenable (§7). L'intérêt de l'abonnement était d'épargner l'appareil ; cette économie
+n'est plus nécessaire.
 
 ## 7. Pièges relevés
 
@@ -440,10 +621,44 @@ déclenchée, snooze, début de nuit dans `wungt`). Les capteurs, eux, restent �
   et non par la seule discipline d'appel.
 - **L'espacement de 200 ms reste une prudence raisonnable**, mais ce n'est pas lui qui évite
   les échecs : c'est le fait de n'avoir qu'une requête en vol.
+- **La fréquence n'est pas une contrainte — jusqu'à une lecture toutes les 5 secondes.**
+  Mesuré le 2026-09-07, quatre paliers de 45 min chacun, sérialisés
+  (`probes/cadence.py`) :
+
+  | Période | Requêtes | Échecs | Médiane | Max | Tas libre (début → fin) |
+  | --- | --- | --- | --- | --- | --- |
+  | 60 s | 90 | **0** | 528 ms | 1 618 ms | 24 960 → 24 960 |
+  | 30 s | 180 | **0** | 532 ms | 1 032 ms | 24 960 → 24 960 |
+  | 15 s | 360 | **0** | 528 ms | 1 208 ms | 24 960 → 24 960 |
+  | **5 s** | **1 080** | **0** | 528 ms | 1 219 ms | 24 960 → 24 960 |
+
+  Trois heures, 1 710 requêtes, **pas un seul échec**, et un tas qui ne bouge pas d'un octet
+  entre le premier et le dernier palier. La latence est plate : douze fois plus de requêtes ne
+  coûtent pas une milliseconde de plus. Rien n'indique que 5 s soit une limite — c'est le
+  palier le plus rapide essayé, pas celui où quelque chose a cédé.
+
+- **La contre-épreuve est venue toute seule, le même jour.** Sur les deux journées de capture,
+  **88 échecs** — et leur répartition tranche : les 2 221 relevés de la nuit, de 23 h 09 à
+  06 h 15 sans concurrence, en comptent **zéro**, tandis que 79 des 88 tombent dans les
+  23 minutes où deux clients ont interrogé l'appareil en même temps (un superviseur ayant
+  relancé la capture par-dessus une sonde). L'erreur y est toujours la même :
+  `SSL: UNEXPECTED_EOF_WHILE_READING`.
+
+  Sept heures d'affilée sans une erreur, puis un taux d'échec massif dès qu'un second client
+  arrive : **la seule variable qui compte est le nombre de connexions, jamais la cadence.**
 - **L'index `/di/v1/products/1/` expire toujours en `500`** — lui seul, de façon reproductible.
   C'est le seul échec constaté à ce jour.
 - **`/di/v1/products/0/` fonctionne, pas celui du produit 1.** Utiliser la liste de ce
   document pour le produit 1 plutôt que de compter sur l'auto-description.
+- **Il n'existe que deux produits.** Vérifié le 2026-09-07 : `products/2` à `products/8`
+  répondent tous `404 {"error":"Unknown product"}`. La surface de l'appareil est donc bornée à
+  `0` (plateforme) et `1` (fonctions du réveil) — inutile d'en chercher d'autres.
+- **Les sous-ressources se découvrent, elles ne se devinent pas.** Douze existent en plus des
+  ports racines, et aucune n'apparaît dans un index : `dataupload/{temp,hum,snd,lux,event}.1`
+  (et leur `/data`), `wualm/{aenvs,aalms,alctr,prfwu}`, et **`files/{lightthemes,
+  dusklightthemes,wakeup,winddowndusk}`** — ces dernières donnent les *noms* des thèmes
+  lumineux et sonores (« Sunny day », « Forest Birds », « Soft Rain »…), ce qu'il faut pour
+  présenter un choix intelligible dans l'application plutôt qu'un numéro.
 - **Le port `security` livre la clé sans authentification** ; le port `fac` (reset usine)
   est également exposé. Le réveil n'a aucun contrôle d'accès sur le LAN : raison
   supplémentaire de l'isoler.
@@ -473,9 +688,21 @@ appareil sans aucun contrôle d'accès sur le LAN, c'est une raison de plus de l
 ### Coût d'un `422`, et ce qu'il rend possible
 
 Un port inconnu est refusé en **16 ms de médiane** — trente fois moins qu'une lecture réussie
-sur connexion neuve. Balayer l'espace entier des noms `wu` + trois lettres (17 576
-combinaisons) prend donc **environ 36 minutes**, sérialisé. L'exhaustivité, que le relevé du
-31 août jugeait hors d'atteinte, est en fait accessible : elle reste à faire.
+sur connexion neuve. L'exhaustivité, que le relevé du 31 août jugeait hors d'atteinte, était
+donc accessible. **Elle a été faite le 2026-09-07** (voir §4) : les deux balayages de 17 576
+noms ont livré `dsi` et `fac`, et prouvé que la liste des ports en `wu` est complète.
+
+> **L'estimation de durée était fausse d'un facteur quatre, et la cause vaut d'être notée.**
+> 16 ms par `422` donnaient « environ 36 minutes » ; chaque balayage en a pris **152**, soit
+> 520 ms par nom. L'écart n'est pas dans l'appareil mais dans le client : la sonde ouvre une
+> connexion neuve à chaque nom, et l'établissement TCP + poignée de main TLS coûte ~480 ms —
+> exactement l'écart mesuré au §7 entre connexion neuve et connexion réutilisée. Les 16 ms
+> étaient le coût du `422` *sur une connexion déjà ouverte*.
+>
+> Un balayage en keep-alive tiendrait donc bien dans la demi-heure annoncée. Cela ne change
+> rien à la conclusion — les deux domaines utiles sont balayés — mais c'est ce qui rendrait
+> l'espace des 4 lettres (456 976 noms) envisageable : ~66 jours en connexion neuve, contre
+> **~2 jours** en keep-alive.
 
 ### L'index du produit 1, chiffré
 
