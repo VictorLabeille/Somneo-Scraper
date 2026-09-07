@@ -208,7 +208,7 @@ l'obfuscation.
 | --- | --- |
 | `tg2bd` | Horodatage de mise au lit (`go to bed`) — **provient du geste**, vérifié le 2026-09-06 |
 | `tendb` | Horodatage de sortie du lit (`end bed`) — **ne provient pas d'une mesure**, voir ci-dessous |
-| `ntstr` `ntend` `ntlen` | Début, fin et durée de nuit (vides hors session) |
+| `ntstr` `ntend` `ntlen` | Début, fin et durée de nuit. **Vides sur cet appareil, pas sur tous** |
 | `night` | Session de nuit active — **seul champ écrit par l'app** (`getKeyMapForNight`) |
 
 > **`wungt` ne mesure rien — confirmé par une nuit entière, le 2026-09-07.** Le port ne se
@@ -235,11 +235,23 @@ l'obfuscation.
 >    « le dernier appui, quand qu'il ait eu lieu ». Le lire sans le dater contre autre chose,
 >    c'est attribuer à cette nuit le coucher d'une nuit quelconque. Un collecteur doit le
 >    traiter comme suspect tant qu'il ne l'a pas vu *changer*.
-> 2. **`tendb` est calculé, pas mesuré — confirmé sur un second point.** Il vaut `tg2bd + 12 h`
->    à la seconde près, et il n'a pas bougé alors que le lever réel a eu lieu vers 06 h 50.
->    Deux observations, deux nuits, le même écart de douze heures exactes. **Le réveil ne
->    détecte pas la fin de nuit.** Un collecteur qui clôturerait une session sur `tendb`
->    inventerait une heure de lever.
+> 2. **`tendb` est calculé, pas mesuré — et ce n'est pas propre à cet appareil.** Il vaut
+>    `tg2bd + 12 h` à la seconde près, et il n'a pas bougé alors que le lever réel a eu lieu
+>    vers 06 h 50. **Le réveil ne détecte pas la fin de nuit.** Un collecteur qui clôturerait
+>    une session sur `tendb` inventerait une heure de lever.
+>
+>    Trois observations le portent, dont une qui ne vient pas de nous :
+>
+>    | Source | `tg2bd` | `tendb` | Écart |
+>    | --- | --- | --- | --- |
+>    | Ce HF3671/01, nuit du 5 au 6 sept. 2026 | `2026-09-06T01:20:04` | `2026-09-06T13:20:04` | **+12 h 00 min 00 s** |
+>    | Le même, nuit du 6 au 7 (champ non réécrit) | inchangé | inchangé | **+12 h 00 min 00 s** |
+>    | **Frank071, issue #16, 16 févr. 2024** — autre appareil | `2024-02-15T11:07:50` | `2024-02-15T23:07:50` | **+12 h 00 min 00 s** |
+>
+>    Le relevé de Frank071 est décisif : autre appareil, autre firmware, deux ans plus tôt, et
+>    un `tg2bd` à **11 h du matin** — personne ne se couche à 11 h 07 pour se lever à 23 h 07.
+>    C'est bien une constante posée par le firmware, pas une mesure. La propriété est celle du
+>    modèle, pas de notre exemplaire.
 >
 > **Ce qui reste pour dater une nuit, alors : la lumière.** Elle est mesurée, elle, et elle est
 > nette. Le plafonnier s'éteint entre deux relevés consécutifs de `wusrd` :
@@ -253,6 +265,13 @@ l'obfuscation.
 > appui et se tait s'il n'a pas lieu. Attention en revanche à ne pas confondre avec `avlux`,
 > qui est une moyenne **retardée** : elle n'a répercuté l'extinction qu'à 23 h 13, soit quatre
 > minutes plus tard.
+>
+> **`ntstr` / `ntend` / `ntlen` ne sont pas vides partout.** Sur le HF3671/01 étudié ici, les
+> trois sont restés vides en permanence. Mais le relevé de Frank071 dans l'issue #16
+> (16 février 2024, autre appareil) donne `"ntend":"07:00"` et `"ntlen":"07:00"` alors que
+> `night` vaut `false` — donc renseignés hors session, et au format `HH:MM`, pas en ISO 8601
+> comme `tg2bd`/`tendb`. **Ne pas coder « ces champs sont toujours vides »** : c'est vrai de cet
+> appareil, pas du modèle. Un client doit accepter les deux cas.
 
 **`wualm/prfwu` — profil d'alarme.** `prfnr` (n° 1-16), `pname`, `prfen` (activé),
 `prfvs` (visible), `almhr`/`almmn`, `daynm` (masque de jours), `ayear`/`amnth`/`alday`
@@ -370,6 +389,38 @@ essai et restauration de la valeur initiale :
 | 0 | **`422`** | inchangée |
 | 7 | **`422`** | inchangée |
 | 128 | **`422`** | inchangée |
+
+**Le bug rapporté sur cette même issue #13, reproduit puis daté — 2026-09-07.** Nezz signalait
+le 18 juin 2024 que régler la luminosité puis l'affichage-toujours-allumé depuis une même
+automation Home Assistant fait perdre le premier réglage, et qu'un délai de deux secondes
+corrige. L'explication naturelle serait la concurrence de l'issue #8. **Elle est fausse** : la
+cause est un cache client, et elle se lit dans le code de l'époque.
+
+`set_display` envoie **toujours les deux champs** — celui qu'on lui passe, et l'autre repris de
+`self.data`. Or en juin 2024, `self.data` n'était pas rafraîchi après le `PUT` :
+
+```python
+payload['dspon'] = state if state != None else self.data['display_always_on']
+payload['brght'] = brightness if brightness else self.data['display_brightness']
+self.alarm_status = self._put('wusts', payload = payload)   # self.data jamais mis à jour
+```
+
+Le second appel réinjecte donc la valeur d'**avant** le premier, et l'annule. Vérifié sur
+l'appareil (`probes/repro_nezz.py`), état initial `dspon=False, brght=1`, cible `brght=4` :
+
+| Séquence | `PUT` envoyé | État relu |
+| --- | --- | --- |
+| `set_display(brightness=4)` | `{"dspon": false, "brght": 4}` | `brght=4` ✅ |
+| `set_display(state=True)` | `{"dspon": true, "brght": **1**}` | `brght=1` ❌ **perdu** |
+
+Le délai de deux secondes marchait parce que le coordinator de Home Assistant avait le temps de
+rafraîchir le cache entre les deux appels — pas parce qu'il désengorgeait quoi que ce soit.
+
+**C'est corrigé depuis le commit `6b99ce4` (22 septembre 2025)**, qui ajoute un
+`_fetch_alarm_status()` après le `PUT`. Rejouée contre `pysomneo` 5.0.6, la séquence de Nezz
+tient : `brght` reste à 4. Le correctif est venu d'un commit de refactorisation
+(« Solved some more linter issues ») — personne n'a fait le lien avec l'issue, qui est restée
+ouverte.
 
 C'est la réponse à l'issue #13 de `pysomneo`, ouverte depuis mai 2023 : la bibliothèque
 implémente déjà `set_display()`, mais sa docstring annonce `brightness: 0-255` et rien ne
@@ -646,6 +697,37 @@ n'est plus nécessaire.
 
   Sept heures d'affilée sans une erreur, puis un taux d'échec massif dès qu'un second client
   arrive : **la seule variable qui compte est le nombre de connexions, jamais la cadence.**
+- **Le pool de connexions de `pysomneo` est la cause qui reste — mesuré le 2026-09-07.**
+  La branche master monte son adaptateur avec `pool_connections=5`, `pool_maxsize=5` et
+  `pool_block=False` : jusqu'à cinq connexions simultanées vers un appareil qui n'en sert
+  qu'**une**, et rien ne borne le parallélisme quand le pool est saturé. Le correctif de mai
+  2026 (« Improve timeout resilience and connection pooling ») a ajouté réessais, backoff et
+  réinitialisation du pool — il traite le symptôme, la configuration laisse la cause en place.
+
+  Trois fils lisant sept ports chacun, trois séries par condition (`probes/pool_serialise.py`) :
+
+  | Condition | Réussite | Durées des 3 séries | Pire requête |
+  | --- | --- | --- | --- |
+  | `pool=5, block=False` (l'existant) | 63/63 | 16,0 · 16,1 · 17,8 s | **17 552 ms** |
+  | `pool=1, block=True` | 63/63 | 1,4 · 3,3 · 3,6 s | 2 645 ms |
+  | `pool=1, block=True`, sans réessai | 63/63 | 1,4 · 1,6 · 1,9 s | 936 ms |
+
+  **Le taux de réussite ne bouge pas — c'est le temps qui explose**, d'un facteur dix, de façon
+  reproductible au dixième de seconde. Les réessais rattrapent les connexions éjectées, si bien
+  que rien n'apparaît dans un compte d'erreurs ; ce que l'appelant voit, lui, c'est une lecture
+  qui dure. **Et la pire requête atteint 17,5 s pour un `timeout` par défaut de 20 s** : c'est
+  exactement le `ReadTimeout: read timeout=20` de l'issue #8, à 2,5 s près. Un fil de plus, ou
+  un réseau un peu plus lent, et la limite est franchie.
+
+  Borner le pool à une connexion **bloquante** laisse urllib3 sérialiser de lui-même : la
+  seconde requête attend la libération au lieu d'ouvrir une connexion que l'appareil éjectera.
+  La latence médiane retombe de 1 032 ms à 116 ms — la réutilisation TLS redevient effective.
+  C'est aussi ce qui explique le « voodoo magic » du rapporteur en mars 2024 : activer la
+  réutilisation TLS supprimait la seconde connexion.
+
+  L'écart entre les deux dernières lignes se lit aussi : **les réessais coûtent encore 1,7 s
+  alors qu'aucune erreur n'est signalée** — ils se déclenchent donc sur des échecs transitoires
+  que le bilan ne montre pas.
 - **L'index `/di/v1/products/1/` expire toujours en `500`** — lui seul, de façon reproductible.
   C'est le seul échec constaté à ce jour.
 - **`/di/v1/products/0/` fonctionne, pas celui du produit 1.** Utiliser la liste de ce
