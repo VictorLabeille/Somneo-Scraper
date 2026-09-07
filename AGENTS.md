@@ -54,6 +54,14 @@ décider par la session qui l'écrira ; une fois arrêtée, la reporter ici et d
 - **Ne jamais lancer `pkill -f <motif>` depuis SSH si le motif figure dans la commande
   envoyée.** `pkill` matche sa propre ligne de commande et **coupe la session** — erreur faite
   deux fois le 2026-09-06. Déposer un script sur la carte et l'appeler par son nom.
+- **Même piège avec `pgrep`, et il est plus sournois : il ne coupe rien, il ment.** Une boucle
+  d'attente comme `ssh radxa 'while pgrep -f sonde.py; do sleep 10; done'` **ne se termine
+  jamais** — elle se voit elle-même dans sa propre ligne de commande. Si le `ssh` expire, le
+  processus distant survit et tourne indéfiniment. Deux orphelins de ce genre ont fait croire
+  au superviseur qu'une sonde travaillait et **bloqué la capture pendant 1 h 45** le
+  2026-09-07, sans le moindre message d'erreur. Attendre la fin d'une sonde par un
+  **fichier de résultat** (`ls releve-*.json`) ou depuis le poste de dev, jamais par un `pgrep`
+  distant portant le nom de ce qu'on attend. Et tuer un processus distant **par son PID**.
 - **Comparer les heures en secondes depuis l'époque, jamais en texte.** `[ "$(date +%H%M)" \< "0730" ]`
   est **faux** à 22 h 40 : `"2240" < "0730"` en comparaison de chaînes. Une minuterie écrite
   ainsi se déclenche immédiatement — c'est ce qui a coupé la capture d'une nuit.

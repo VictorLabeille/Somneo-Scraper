@@ -665,11 +665,39 @@ n'est plus nécessaire.
   lecture retombe à **36 ms**. C'est ce qui explique que le rapporteur ait vu ses timeouts
   disparaître en **activant** la réutilisation TLS, en mars 2024, sans comprendre pourquoi :
   elle supprime la seconde connexion.
-- **Conséquence attendue d'une réécriture asynchrone — inférence, pas encore vérifiée contre
-  l'appareil** : deux coroutines qui interrogent simultanément amènent le client à ouvrir une
-  seconde connexion, ce qui est exactement la condition d'échec mesurée. La sérialisation
-  devrait donc être garantie par construction — un verrou, ou une limite de connexions à 1 —
-  et non par la seule discipline d'appel.
+- **La réécriture asynchrone, mesurée contre l'appareil le 2026-09-07** — ce n'est plus une
+  inférence. La branche `ai-improvements` (6.0.0b0) monte `aiohttp.TCPConnector(ssl=False)`
+  **sans `limit`** ; les défauts d'aiohttp étant `limit=100` et `limit_per_host=0`, elle
+  autorise **cent** connexions simultanées là où `master` en autorise cinq. La protection
+  accidentelle qu'offrait l'API synchrone — un fil, un appel à la fois — disparaît avec
+  `asyncio.gather`, qui est la façon normale d'écrire de l'async.
+
+  N appels à `fetch_data(force_slow_refresh=True)` en `gather` sur une instance partagée,
+  trois séries par palier (`probes/async_pool.py`) :
+
+  | Connecteur | 2 tâches | 3 tâches | 6 tâches |
+  | --- | --- | --- | --- |
+  | `TCPConnector(ssl=False)` — l'existant | 6/6, 9,8 s | 9/9, 17,1 s | **16/18**, 22,1 s |
+  | `+ limit=1` | 6/6, **0,9 s** | 9/9, **1,4 s** | **18/18, 2,8 s** |
+  | `+ limit=1, force_close=True` | **5/6**, 14,2 s | 9/9, 24,5 s | **9/18**, 24,4 s |
+
+  Deux enseignements, et le second était inattendu :
+
+  1. **`limit=1` suffit, et l'écart est massif** : facteur onze sur le temps à 2 et 3 tâches,
+     et surtout **plus aucune perte** à 6 tâches là où la branche en perd deux.
+  2. **Ne pas y ajouter `force_close=True`.** Fermer la connexion après chaque requête détruit
+     la réutilisation TLS — celle qui fait passer une lecture de 516 ms à 36 ms — et fait
+     perdre **la moitié** des appels à 6 tâches. C'est le correctif qu'on serait tenté
+     d'écrire « pour être sûr » ; il est deux fois pire que le mal.
+
+  Le correctif est donc `TCPConnector(ssl=False, limit=1)` : sérialiser sans jamais refermer.
+
+> **Piège de mesure, pour qui voudrait rejouer ceci.** Substituer l'attribut `_session` de
+> `SomneoSession` ne suffit pas : sur une erreur de connexion, la branche appelle
+> `_reset_session()`, et `_get_session()` recrée alors une session avec **son** connecteur.
+> La contrainte testée disparaîtrait dès la première erreur — c'est-à-dire exactement quand
+> elle compte, et sans que rien ne le signale. C'est la **méthode** `_get_session` qu'il faut
+> remplacer.
 - **L'espacement de 200 ms reste une prudence raisonnable**, mais ce n'est pas lui qui évite
   les échecs : c'est le fait de n'avoir qu'une requête en vol.
 - **La fréquence n'est pas une contrainte — jusqu'à une lecture toutes les 5 secondes.**

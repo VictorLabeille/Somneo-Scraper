@@ -1,0 +1,116 @@
+[
+  {
+    "condition": "A. TCPConnector(ssl=False) — l'existant de la branche",
+    "taches": 2,
+    "ok": 6,
+    "total": 6,
+    "durees": [
+      9.7,
+      9.8,
+      10.4
+    ],
+    "types": {}
+  },
+  {
+    "condition": "A. TCPConnector(ssl=False) — l'existant de la branche",
+    "taches": 3,
+    "ok": 9,
+    "total": 9,
+    "durees": [
+      17.0,
+      17.1,
+      17.3
+    ],
+    "types": {}
+  },
+  {
+    "condition": "A. TCPConnector(ssl=False) — l'existant de la branche",
+    "taches": 6,
+    "ok": 16,
+    "total": 18,
+    "durees": [
+      11.2,
+      22.1,
+      25.6
+    ],
+    "types": {
+      "SomneoConnectionError": 2
+    }
+  },
+  {
+    "condition": "B. TCPConnector(ssl=False, limit=1) — le correctif",
+    "taches": 2,
+    "ok": 6,
+    "total": 6,
+    "durees": [
+      0.9,
+      0.9,
+      0.9
+    ],
+    "types": {}
+  },
+  {
+    "condition": "B. TCPConnector(ssl=False, limit=1) — le correctif",
+    "taches": 3,
+    "ok": 9,
+    "total": 9,
+    "durees": [
+      1.4,
+      1.4,
+      1.5
+    ],
+    "types": {}
+  },
+  {
+    "condition": "B. TCPConnector(ssl=False, limit=1) — le correctif",
+    "taches": 6,
+    "ok": 18,
+    "total": 18,
+    "durees": [
+      2.7,
+      2.8,
+      2.9
+    ],
+    "types": {}
+  },
+  {
+    "condition": "C. limit=1 + force_close=True",
+    "taches": 2,
+    "ok": 5,
+    "total": 6,
+    "durees": [
+      14.0,
+      14.2,
+      42.2
+    ],
+    "types": {
+      "SomneoConnectionError": 1
+    }
+  },
+  {
+    "condition": "C. limit=1 + force_close=True",
+    "taches": 3,
+    "ok": 9,
+    "total": 9,
+    "durees": [
+      24.3,
+      24.5,
+      24.7
+    ],
+    "types": {}
+  },
+  {
+    "condition": "C. limit=1 + force_close=True",
+    "taches": 6,
+    "ok": 9,
+    "total": 18,
+    "durees": [
+      24.1,
+      24.4,
+      24.5
+    ],
+    "types": {
+      "SomneoConnectionError": 9
+    }
+  }
+]
