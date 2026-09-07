@@ -108,8 +108,18 @@ est une œuvre dérivée.
 **Ne jamais versionner un relevé brut sans en avoir retiré les corps de réponse.** Les ports
 `device` et `wifiui` livrent le numéro de série et l'adresse MAC, et `wusrd` livre les
 conditions de la chambre. `probes/results/` ne contient que des relevés nettoyés ; les captures
-longues ne sont pas versionnées du tout. Les journaux de **balayage** (`balayage-*.jsonl`),
-eux, ne portent que des noms de ports et des codes HTTP : ils se versionnent tels quels.
+longues ne sont pas versionnées du tout.
+
+**Les journaux de balayage ne font pas exception** — contrairement à ce qui était écrit ici
+jusqu'au 2026-09-07. Ils sont presque entièrement faits de noms de ports et de codes `422`,
+mais ils enregistrent **le corps des ports qui répondent** : sur 17 576 lignes, les 13 du
+balayage `wu` portaient un relevé complet de `wusrd`, soit les conditions de la chambre.
+Retirer les corps avant de verser dans `probes/results/`, et ne se fier ni à la taille du
+fichier ni à son extension pour juger de ce qu'il contient.
+
+Le `sans_secrets()` des sondes **ne suffit pas** : il masque `serial`, `macaddress`, `ssid` et
+les clés, mais **laisse passer les capteurs** (`mslux`, `mstmp`…), qui décrivent la chambre.
+Relire le relevé avant de le verser, ne pas se reposer sur la fonction.
 
 Ne jamais versionner ce qui est propre à l'appareil ou au réseau : clé du port `security`,
 numéro de série, adresses MAC, SSID, mots de passe. `docs/somneo-api.md` est rédigé sous

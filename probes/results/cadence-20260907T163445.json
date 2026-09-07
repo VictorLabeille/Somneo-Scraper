@@ -1,0 +1,42 @@
+[
+  {
+    "periode_s": 60,
+    "requetes": 90,
+    "echecs": 0,
+    "erreurs": {},
+    "ms_median": 528.0,
+    "ms_max": 1618.3,
+    "heap_debut": 24960,
+    "heap_fin": 24960
+  },
+  {
+    "periode_s": 30,
+    "requetes": 180,
+    "echecs": 0,
+    "erreurs": {},
+    "ms_median": 531.9,
+    "ms_max": 1032.0,
+    "heap_debut": 24960,
+    "heap_fin": 24960
+  },
+  {
+    "periode_s": 15,
+    "requetes": 360,
+    "echecs": 0,
+    "erreurs": {},
+    "ms_median": 527.9,
+    "ms_max": 1207.9,
+    "heap_debut": 24960,
+    "heap_fin": 24960
+  },
+  {
+    "periode_s": 5,
+    "requetes": 1080,
+    "echecs": 0,
+    "erreurs": {},
+    "ms_median": 527.9,
+    "ms_max": 1218.9,
+    "heap_debut": 24960,
+    "heap_fin": 24960
+  }
+]

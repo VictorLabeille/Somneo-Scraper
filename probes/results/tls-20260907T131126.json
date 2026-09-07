@@ -1,0 +1,45 @@
+{
+  "tls": {
+    "version": "TLSv1.2",
+    "suite": [
+      "ECDHE-RSA-AES128-GCM-SHA256",
+      "TLSv1.2",
+      128
+    ],
+    "compression": null,
+    "taille_cert_der": 1146
+  },
+  "versions": {
+    "TLSv1": false,
+    "TLSv1.1": false,
+    "TLSv1.2": true,
+    "TLSv1.3": false
+  },
+  "corps": [
+    {
+      "cas": "JSON tronque",
+      "status": 400,
+      "reponse": "{ \"error\": \"Not understood\" }"
+    },
+    {
+      "cas": "pas du JSON",
+      "status": 400,
+      "reponse": "{ \"error\": \"Not understood\" }"
+    },
+    {
+      "cas": "tableau au lieu d objet",
+      "status": 400,
+      "reponse": "{ \"error\": \"Not understood\" }"
+    },
+    {
+      "cas": "corps vide",
+      "status": 400,
+      "reponse": "{ \"error\": \"Not understood\" }"
+    },
+    {
+      "cas": "cle inconnue",
+      "status": 422,
+      "reponse": "{\"error\":\"No such Property\"}"
+    }
+  ]
+}

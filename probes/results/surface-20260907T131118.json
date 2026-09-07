@@ -1,0 +1,241 @@
+{
+  "produits": [
+    {
+      "produit": 0,
+      "status": 200,
+      "ok": true,
+      "error": null
+    },
+    {
+      "produit": 1,
+      "status": 500,
+      "ok": false,
+      "error": "HTTP 500"
+    },
+    {
+      "produit": 2,
+      "status": 404,
+      "ok": false,
+      "error": "HTTP 404"
+    },
+    {
+      "produit": 3,
+      "status": 404,
+      "ok": false,
+      "error": "HTTP 404"
+    },
+    {
+      "produit": 4,
+      "status": 404,
+      "ok": false,
+      "error": "HTTP 404"
+    },
+    {
+      "produit": 5,
+      "status": 404,
+      "ok": false,
+      "error": "HTTP 404"
+    },
+    {
+      "produit": 6,
+      "status": 404,
+      "ok": false,
+      "error": "HTTP 404"
+    },
+    {
+      "produit": 7,
+      "status": 404,
+      "ok": false,
+      "error": "HTTP 404"
+    },
+    {
+      "produit": 8,
+      "status": 404,
+      "ok": false,
+      "error": "HTTP 404"
+    }
+  ],
+  "sous_ressources": [
+    {
+      "port": "dataupload/temp.1/data",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "port": "dataupload/hum.1/data",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "port": "dataupload/snd.1/data",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "port": "dataupload/lux.1/data",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "port": "dataupload/event.1/data",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "port": "dataupload/temp.2/data",
+      "status": 422,
+      "ok": false
+    },
+    {
+      "port": "dataupload/temp.1",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "port": "dataupload/event.1",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "port": "dataupload/data",
+      "status": 422,
+      "ok": false
+    },
+    {
+      "port": "wualm/aenvs",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "port": "wualm/aalms",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "port": "wualm/alctr",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "port": "wualm/prfwu",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "port": "wualm/prfnr",
+      "status": 422,
+      "ok": false
+    },
+    {
+      "port": "wualm/snztm",
+      "status": 422,
+      "ok": false
+    },
+    {
+      "port": "files/lightthemes",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "port": "files/dusklightthemes",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "port": "files/wakeup",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "port": "files/winddowndusk",
+      "status": 200,
+      "ok": true
+    },
+    {
+      "port": "files/sounds",
+      "status": 422,
+      "ok": false
+    },
+    {
+      "port": "files/themes",
+      "status": 422,
+      "ok": false
+    },
+    {
+      "port": "files/list",
+      "status": 422,
+      "ok": false
+    }
+  ],
+  "methodes": [
+    {
+      "methode": "HEAD",
+      "chemin": "/di/v1/products/1/wusrd",
+      "ok": false,
+      "error": "TimeoutError: The read operation timed out"
+    },
+    {
+      "methode": "OPTIONS",
+      "chemin": "/di/v1/products/1/wusrd",
+      "ok": false,
+      "error": "URLError: <urlopen error timed out>"
+    },
+    {
+      "methode": "DELETE",
+      "chemin": "/di/v1/products/1/wusrd",
+      "ok": false,
+      "error": "URLError: <urlopen error timed out>"
+    },
+    {
+      "methode": "PATCH",
+      "chemin": "/di/v1/products/1/wusrd",
+      "ok": false,
+      "error": "URLError: <urlopen error [Errno 111] Connection refused>"
+    },
+    {
+      "methode": "POST",
+      "chemin": "/di/v1/products/1/wusrd",
+      "ok": false,
+      "error": "URLError: <urlopen error [Errno 111] Connection refused>"
+    }
+  ],
+  "abonnements": [
+    {
+      "forme": "sans en-tete Condor",
+      "methode": "POST",
+      "chemin": "/di/v1/products/1/wusrd",
+      "ok": false,
+      "error": "URLError: <urlopen error [Errno 111] Connection refused>"
+    },
+    {
+      "forme": "avec en-tete Condor",
+      "methode": "POST",
+      "chemin": "/di/v1/products/1/wusrd",
+      "ok": false,
+      "error": "URLError: <urlopen error [Errno 111] Connection refused>"
+    },
+    {
+      "forme": "sans changeudp",
+      "methode": "POST",
+      "chemin": "/di/v1/products/1/wusrd",
+      "ok": true,
+      "status": 200,
+      "corps": "<corps de capteurs retire — conditions de la chambre>"
+    },
+    {
+      "forme": "sur le produit 0",
+      "methode": "POST",
+      "chemin": "/di/v1/products/0/sub",
+      "ok": true,
+      "status": 200,
+      "corps": "{ \"subscriptions\":[ { \"product\":\"firmware\", \"port\":\"\", \"remote\":false, \"subscriber\":\"\", \"ttl\":9223371995 }, { \"product\":\"1\", \"port\":\"wifiui\", \"remote\":false, \"subscriber\":\"\", \"ttl\":9223371995 }, { \"product\":\"1\", \"port\":\"fac\", \"remote\":false, \"subscri"
+    }
+  ],
+  "dictionnaire": {
+    "essayes": 113,
+    "trouves": [
+      "device",
+      "time"
+    ]
+  }
+}
