@@ -132,9 +132,10 @@ ci-dessous vient donc de l'APK (`com.philips.cdp2.brighteyes.ports.*`), chaque e
 > Conséquence : **pour les noms en `wu` de cinq lettres, la liste est complète — c'est prouvé,
 > plus un minorant.** Les 13 sont `wualm`, `wudsk`, `wufmp`, `wufmr`, `wulgt`, `wungt`,
 > `wuply`, `wurlx`, `wusrd`, `wusts`, `wutim`, `wutmr`, `wutms`. Hors de ce domaine la liste
-> reste un minorant : les noms de 4 lettres (456 976 combinaisons, ~66 jours au rythme mesuré)
-> et ceux de 5 lettres sans préfixe `wu` n'ont pas été balayés, et ne le seront pas — le coût
-> est sans commune mesure avec l'espérance de gain.
+> reste un minorant : les noms de 4 lettres (456 976 combinaisons) et ceux de 5 lettres sans
+> préfixe `wu` n'ont pas été balayés. **Ce n'est pas hors de portée** — voir §7, « Coût d'un
+> `422` » : ~66 h au rythme des sondes actuelles, mais **environ 2 h** en réutilisant la
+> connexion. C'est un choix de priorité, pas une impossibilité.
 
 | Port | Classe SleepMapper | Rôle | `pysomneo` |
 | --- | --- | --- | --- |
@@ -325,28 +326,44 @@ ordinaires du réveil produisent une valeur que la table de huit entrées ne cou
 provoqués à la main. Celui-ci a été relevé au fil d'un vrai réveil, `wusts` interrogé toutes
 les 30 s, sans intervention :
 
-| Heure | `wusts` | Bits | Ce qui se passait | `pysomneo` |
+| Heure | `wusts` | Bits | Ce qui est **mesuré** en même temps | `pysomneo` |
 | --- | --- | --- | --- | --- |
-| 06:15:10 | **2309** | 0, 2, 8, 11 | Aube simulée, la lampe monte | `wake-up` |
-| 06:50:21 | **2817** | 0, 8, 9, 11 | **La sonnerie part**, 35 min après l'aube | `on` |
-| 06:50:51 | **2** | 1 | Alarme coupée, l'afficheur s'allume | **`sunset`** ← faux |
-| 06:51:22 | 1 | 0 | Retour au repos | `off` |
+| 06:15:10 | **2309** | 0, 2, 8, 11 | `wutim` démarre à 6 s ; `mslux` monte | `wake-up` |
+| 06:50:21 | **2817** | 0, 8, 9, 11 | `wutim` = 2 051 s ; `mslux` = 2 798 (lampe à fond) | `on` |
+| 06:50:51 | **2** | 1 | `wutim` retombe à **65 535** : la séquence est finie | **`sunset`** |
+| 06:51:22 | 1 | 0 | `mslux` = 117 : la lampe est éteinte | `off` |
 
 Trois choses en sortent :
 
-- **Le bit 9 = son : confirmé.** C'était une déduction ; la sonnerie le lève (2309 → 2817) et
-  la table amont le corrobore (776 et 777, coucher de soleil *avec* son, le portent).
-- **Le bit 2 retombe quand le son démarre.** L'aube porte le bit 2, la sonnerie non — les deux
-  phases d'une même alarme n'ont aucun bit en commun hormis le bit maître. C'est pourquoi
-  `isAlarmActive()` teste `bit2 == 1 || bit11 == 1` : le `|| bit11` rattrape la phase sonore.
-- **`2` n'est pas un coucher de soleil**, et c'est un défaut plus grave que `unknown`. La table
-  amont mappe `2: "sunset"`. Or la valeur 2 apparaît ici à l'**arrêt de l'alarme**, quand
-  l'afficheur s'allume — et le vrai coucher de soleil, mesuré la veille, vaut **264**. Les deux
-  mesures se recoupent : `2` est le bit 1 seul (menu/afficheur), le coucher de soleil est le
-  bit 3. **La bibliothèque ne renvoie donc pas seulement `unknown` sur des états qu'elle ignore ;
-  elle renvoie une étiquette fausse sur un état qu'elle croit connaître.** Un appelant qui
-  déclenche une action sur `somneo_status == "sunset"` la déclenche chaque fois qu'un bouton
-  est pressé.
+- **Le bit 9 accompagne la phase sonore** — appuyé, pas prouvé. La sonnerie le lève
+  (2309 → 2817) et la table amont le corrobore (776 et 777, coucher de soleil *avec* son, le
+  portent). Mais **personne n'a entendu l'alarme** : que 2817 corresponde au démarrage du son
+  est déduit de l'horaire (35 min après l'aube) et du bit, pas d'une observation directe.
+- **Le bit 2 retombe quand le son démarre** — observé sur **une seule** transition. L'aube
+  porte le bit 2, la valeur suivante non. C'est cohérent avec `isAlarmActive()`, qui teste
+  `bit2 == 1 || bit11 == 1` : le `|| bit11` rattraperait la phase sonore. Une alarme suffit à
+  le montrer, pas à en faire une règle — et le **rappel** (snooze, `2321` dans la table amont)
+  n'a jamais été observé en conditions réelles, l'alarme ayant été coupée d'emblée.
+- **`2` est étiqueté `sunset` par la table amont, alors qu'il apparaît ici à l'arrêt d'une
+  alarme.** C'est un défaut d'une autre nature que `unknown` : une étiquette *fausse* plutôt
+  qu'absente. Le coucher de soleil provoqué et mesuré la veille vaut **264**, pas 2.
+
+  > **Ce qu'on sait, et ce qu'on ne sait pas — à tenir séparé.** `2` n'a été vu qu'**une fois**,
+  > sur un seul relevé, dans les trente secondes entre la fin de la séquence (`wutim` = 65 535)
+  > et le retour au repos. C'est donc un **état transitoire d'extinction**, c'est tout ce que la
+  > mesure établit.
+  >
+  > **Ne pas écrire que `2` est « l'afficheur allumé »** — affirmé ici par erreur le
+  > 2026-09-07, avant relecture du relevé complet : `dspon` vaut `False` sur ce relevé même, ce
+  > qui contredit plutôt cette lecture. Personne n'était devant l'appareil, l'état physique
+  > n'est pas connu. `wulgt` n'était pas interrogé dans cette fenêtre (phase lente), donc la
+  > veilleuse — l'autre porteuse connue du bit 1, mesurée à 258 le 6 — n'est ni établie ni
+  > exclue.
+  >
+  > L'argument à porter en amont est donc le plus étroit : **le coucher de soleil de cet
+  > appareil vaut 264, et 2 s'observe à l'arrêt d'une alarme.** Cela suffit à montrer que la
+  > table associe `sunset` à une valeur qui n'est pas celle du coucher de soleil ici, sans
+  > prétendre savoir ce que `2` désigne.
 
 Deux corrections à apporter aux hypothèses du 31 août :
 
@@ -416,11 +433,25 @@ l'appareil (`probes/repro_nezz.py`), état initial `dspon=False, brght=1`, cible
 Le délai de deux secondes marchait parce que le coordinator de Home Assistant avait le temps de
 rafraîchir le cache entre les deux appels — pas parce qu'il désengorgeait quoi que ce soit.
 
-**C'est corrigé depuis le commit `6b99ce4` (22 septembre 2025)**, qui ajoute un
-`_fetch_alarm_status()` après le `PUT`. Rejouée contre `pysomneo` 5.0.6, la séquence de Nezz
-tient : `brght` reste à 4. Le correctif est venu d'un commit de refactorisation
-(« Solved some more linter issues ») — personne n'a fait le lien avec l'issue, qui est restée
-ouverte.
+**C'est corrigé depuis le commit `3fc2c33` (20 septembre 2025)** — « Put commands don't return
+the full internal state, therefore we need another api get request to update the internal
+state ». Il remplace `self._update_alarm_status()` par `self._fetch_alarm_status()` : au lieu de
+recharger le cache depuis la réponse du `PUT`, on relit l'appareil. Rejouée contre `pysomneo`
+5.0.6, la séquence de Nezz tient : `brght` reste à 4.
+
+> **Ne pas citer `6b99ce4` comme le correctif** — erreur commise ici le 2026-09-07 avant
+> vérification. Ce commit du 22 septembre 2025 déplace `pysomneo/__init__.py` vers
+> `pysomneo/somneo.py` : le `_fetch_alarm_status()` y apparaît en `+` parce que **le fichier
+> entier est nouveau**, pas parce que le comportement change. Un `git log -S` restreint au
+> fichier d'arrivée ne voit que ce déplacement ; il faut interroger les deux chemins.
+
+Le cache a connu **trois** états successifs, et les deux premiers pouvaient produire le symptôme :
+
+| Période | Après le `PUT` | Le cache est-il juste ? |
+| --- | --- | --- |
+| Jusqu'à ~2025 | rien | **Non** — jamais rafraîchi, c'est le code que voyait Nezz en juin 2024 |
+| Jusqu'au 2025-09-20 | `_update_alarm_status()` | **Non** — rechargé depuis la réponse du `PUT`, que le mainteneur décrit lui-même comme incomplète |
+| Depuis `3fc2c33` | `_fetch_alarm_status()` | Oui — l'appareil est relu |
 
 C'est la réponse à l'issue #13 de `pysomneo`, ouverte depuis mai 2023 : la bibliothèque
 implémente déjà `set_display()`, mais sa docstring annonce `brightness: 0-255` et rien ne
@@ -811,8 +842,12 @@ noms ont livré `dsi` et `fac`, et prouvé que la liste des ports en `wu` est co
 >
 > Un balayage en keep-alive tiendrait donc bien dans la demi-heure annoncée. Cela ne change
 > rien à la conclusion — les deux domaines utiles sont balayés — mais c'est ce qui rendrait
-> l'espace des 4 lettres (456 976 noms) envisageable : ~66 jours en connexion neuve, contre
-> **~2 jours** en keep-alive.
+> l'espace des 4 lettres (456 976 noms) tout à fait abordable : **~66 heures** en connexion
+> neuve (456 976 × 519 ms), contre **~2 heures** en keep-alive (456 976 × 16 ms).
+>
+> **Chiffres corrigés le 2026-09-07** : « 66 jours » et « 2 jours » avaient été écrits plus tôt
+> le même jour, par confusion entre heures et jours. L'erreur changeait la conclusion — elle
+> faisait passer pour irréalisable un balayage qui tient dans une soirée.
 
 ### L'index du produit 1, chiffré
 
