@@ -1,0 +1,3964 @@
+[
+  {
+    "ts": 1788812006.9847975,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 507.1,
+    "wusts": null
+  },
+  {
+    "ts": 1788812007.9684908,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 583.4,
+    "wusts": null
+  },
+  {
+    "ts": 1788812008.948854,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 580.2,
+    "wusts": null
+  },
+  {
+    "ts": 1788812009.920806,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 571.7,
+    "wusts": null
+  },
+  {
+    "ts": 1788812010.9328485,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 611.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812011.91684,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 583.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812012.9368513,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 619.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812013.9085164,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 571.5,
+    "wusts": null
+  },
+  {
+    "ts": 1788812014.8884668,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 579.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812016.8810816,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 568.3,
+    "wusts": null
+  },
+  {
+    "ts": 1788812017.8889651,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 607.7,
+    "wusts": null
+  },
+  {
+    "ts": 1788812018.8529322,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 563.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812019.8289387,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 575.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812020.8929439,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 663.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812021.8929236,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 599.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812022.8729742,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 579.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812023.824927,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 551.7,
+    "wusts": null
+  },
+  {
+    "ts": 1788812024.808952,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 583.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812025.7689233,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 559.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812027.7771292,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 567.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812028.7569497,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 579.6,
+    "wusts": null
+  },
+  {
+    "ts": 1788812029.7410042,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 583.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812030.7411046,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 599.9,
+    "wusts": null
+  },
+  {
+    "ts": 1788812031.7249448,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 583.6,
+    "wusts": null
+  },
+  {
+    "ts": 1788812032.8011017,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 675.9,
+    "wusts": null
+  },
+  {
+    "ts": 1788812033.7653272,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 564.0,
+    "wusts": null
+  },
+  {
+    "ts": 1788812034.67231,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 506.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812035.5963764,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 523.9,
+    "wusts": null
+  },
+  {
+    "ts": 1788812036.5444577,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 547.9,
+    "wusts": null
+  },
+  {
+    "ts": 1788812038.0285177,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 507.6,
+    "wusts": null
+  },
+  {
+    "ts": 1788812038.9408782,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 512.2,
+    "wusts": null
+  },
+  {
+    "ts": 1788812039.8488667,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 507.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812040.761239,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 512.2,
+    "wusts": null
+  },
+  {
+    "ts": 1788812041.68089,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 519.5,
+    "wusts": null
+  },
+  {
+    "ts": 1788812042.6008446,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 519.7,
+    "wusts": null
+  },
+  {
+    "ts": 1788812043.5044756,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 503.4,
+    "wusts": null
+  },
+  {
+    "ts": 1788812044.4204016,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 515.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812045.3328729,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 512.3,
+    "wusts": null
+  },
+  {
+    "ts": 1788812046.236854,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 503.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812047.6770165,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 507.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812048.688861,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 611.7,
+    "wusts": null
+  },
+  {
+    "ts": 1788812049.5968583,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 507.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812050.528852,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 531.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812051.5049334,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 575.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812052.4289393,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 523.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812053.3408585,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 511.7,
+    "wusts": null
+  },
+  {
+    "ts": 1788812054.2488632,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 507.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812055.1688526,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 519.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812056.10486,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 535.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812057.548998,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\u0001\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e4101227d",
+      "json_invalide": "Invalid control character at: line 1 column 30 (char 29)"
+    },
+    "ms": 511.9,
+    "wusts": null
+  },
+  {
+    "ts": 1788812058.4647405,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 515.2,
+    "wusts": null
+  },
+  {
+    "ts": 1788812059.3687606,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 503.6,
+    "wusts": null
+  },
+  {
+    "ts": 1788812060.2688227,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 499.9,
+    "wusts": null
+  },
+  {
+    "ts": 1788812061.192763,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 523.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812062.1008599,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 507.9,
+    "wusts": null
+  },
+  {
+    "ts": 1788812063.0169005,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 515.9,
+    "wusts": null
+  },
+  {
+    "ts": 1788812063.9249089,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 507.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812064.8327613,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 507.7,
+    "wusts": null
+  },
+  {
+    "ts": 1788812065.7567918,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 523.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812067.1964142,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 511.3,
+    "wusts": null
+  },
+  {
+    "ts": 1788812068.1123679,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 515.7,
+    "wusts": null
+  },
+  {
+    "ts": 1788812069.0167754,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 504.2,
+    "wusts": null
+  },
+  {
+    "ts": 1788812069.9527457,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 535.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812070.8693452,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 516.4,
+    "wusts": null
+  },
+  {
+    "ts": 1788812071.780769,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 511.2,
+    "wusts": null
+  },
+  {
+    "ts": 1788812072.6887677,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 507.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812073.5927796,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 503.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812074.5287492,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 535.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812075.5330725,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 604.1,
+    "wusts": null
+  },
+  {
+    "ts": 1788812076.9649446,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 499.5,
+    "wusts": null
+  },
+  {
+    "ts": 1788812077.8807616,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 515.6,
+    "wusts": null
+  },
+  {
+    "ts": 1788812078.7847884,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 503.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812079.6767507,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 491.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812080.616969,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 540.0,
+    "wusts": null
+  },
+  {
+    "ts": 1788812081.5167642,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 499.6,
+    "wusts": null
+  },
+  {
+    "ts": 1788812082.428745,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 511.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812083.3367503,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 507.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812084.2448146,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 507.9,
+    "wusts": null
+  },
+  {
+    "ts": 1788812085.1487417,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 503.7,
+    "wusts": null
+  },
+  {
+    "ts": 1788812086.6528857,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 575.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812087.560747,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 507.7,
+    "wusts": null
+  },
+  {
+    "ts": 1788812088.464765,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 503.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812089.388753,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 523.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812090.3127503,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 523.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812091.236728,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 523.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812092.1527686,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 515.9,
+    "wusts": null
+  },
+  {
+    "ts": 1788812093.0808046,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 527.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812094.0007355,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 519.7,
+    "wusts": null
+  },
+  {
+    "ts": 1788812094.9247715,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 523.9,
+    "wusts": null
+  },
+  {
+    "ts": 1788812096.3968441,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 535.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812097.5929716,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 795.9,
+    "wusts": null
+  },
+  {
+    "ts": 1788812098.5008578,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 507.5,
+    "wusts": null
+  },
+  {
+    "ts": 1788812099.4048562,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 503.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812100.3248453,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 519.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812101.2447038,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 519.7,
+    "wusts": null
+  },
+  {
+    "ts": 1788812102.156921,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 512.0,
+    "wusts": null
+  },
+  {
+    "ts": 1788812103.073448,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 516.3,
+    "wusts": null
+  },
+  {
+    "ts": 1788812104.0168476,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 543.2,
+    "wusts": null
+  },
+  {
+    "ts": 1788812104.9329004,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 515.9,
+    "wusts": null
+  },
+  {
+    "ts": 1788812106.360997,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 503.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812107.2688556,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 507.7,
+    "wusts": null
+  },
+  {
+    "ts": 1788812108.1648655,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 495.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812109.0688572,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 503.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812109.9768546,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 507.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812110.901021,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 524.0,
+    "wusts": null
+  },
+  {
+    "ts": 1788812111.813052,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 511.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812112.7168686,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 503.6,
+    "wusts": null
+  },
+  {
+    "ts": 1788812113.6248784,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 507.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812114.5329223,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 507.9,
+    "wusts": null
+  },
+  {
+    "ts": 1788812116.081052,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 507.7,
+    "wusts": null
+  },
+  {
+    "ts": 1788812117.0570776,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 575.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812117.976884,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 519.6,
+    "wusts": null
+  },
+  {
+    "ts": 1788812118.8968678,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 519.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812119.808872,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 511.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812120.716922,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 507.9,
+    "wusts": null
+  },
+  {
+    "ts": 1788812121.672901,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 555.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812122.580849,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 507.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812123.4848516,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 503.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812124.3889182,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 503.9,
+    "wusts": null
+  },
+  {
+    "ts": 1788812125.8410103,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 503.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812126.9563887,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 715.1,
+    "wusts": null
+  },
+  {
+    "ts": 1788812127.8923192,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 535.7,
+    "wusts": null
+  },
+  {
+    "ts": 1788812128.8007677,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 508.3,
+    "wusts": null
+  },
+  {
+    "ts": 1788812129.7048082,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 503.9,
+    "wusts": null
+  },
+  {
+    "ts": 1788812130.6127613,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 507.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812131.5327773,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 519.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812132.4687488,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 535.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812133.40058,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 531.7,
+    "wusts": null
+  },
+  {
+    "ts": 1788812134.3087585,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 508.0,
+    "wusts": null
+  },
+  {
+    "ts": 1788812135.7488935,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 503.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812136.6607537,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 511.7,
+    "wusts": null
+  },
+  {
+    "ts": 1788812137.5848114,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 523.9,
+    "wusts": null
+  },
+  {
+    "ts": 1788812138.4967573,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 511.7,
+    "wusts": null
+  },
+  {
+    "ts": 1788812139.4367745,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 539.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812140.3367572,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 499.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812141.253251,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 516.3,
+    "wusts": null
+  },
+  {
+    "ts": 1788812142.1647549,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 511.3,
+    "wusts": null
+  },
+  {
+    "ts": 1788812143.0647526,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 499.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812143.97675,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 511.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812145.4089365,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 499.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812146.3207572,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 511.6,
+    "wusts": null
+  },
+  {
+    "ts": 1788812147.2327368,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 511.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812148.1407678,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 507.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812149.0407639,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 499.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812149.952788,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 511.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812150.9167547,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 563.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812151.8247619,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 507.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812152.7367454,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 511.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812153.6607466,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 523.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812155.1048827,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 511.9,
+    "wusts": null
+  },
+  {
+    "ts": 1788812156.0207431,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 515.7,
+    "wusts": null
+  },
+  {
+    "ts": 1788812156.924319,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 503.4,
+    "wusts": null
+  },
+  {
+    "ts": 1788812157.8523097,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 527.7,
+    "wusts": null
+  },
+  {
+    "ts": 1788812158.7567542,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 504.3,
+    "wusts": null
+  },
+  {
+    "ts": 1788812159.6607645,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 503.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812160.5928152,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 531.9,
+    "wusts": null
+  },
+  {
+    "ts": 1788812161.5006309,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 507.6,
+    "wusts": null
+  },
+  {
+    "ts": 1788812162.4207659,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 519.9,
+    "wusts": null
+  },
+  {
+    "ts": 1788812163.3133023,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 492.4,
+    "wusts": null
+  },
+  {
+    "ts": 1788812164.7369335,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 511.3,
+    "wusts": null
+  },
+  {
+    "ts": 1788812165.6447473,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 507.6,
+    "wusts": null
+  },
+  {
+    "ts": 1788812166.5527465,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 507.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812167.4767573,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 523.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812168.3967657,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 519.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812169.3087533,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 511.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812170.2127523,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 503.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812171.116764,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 503.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812172.0247598,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 507.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812172.9367425,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 511.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812174.5530062,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 687.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812175.4607632,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 507.6,
+    "wusts": null
+  },
+  {
+    "ts": 1788812176.3567555,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 495.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812177.2687805,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 511.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812178.2087462,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 539.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812179.1127684,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 503.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812180.02477,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 511.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812180.9527662,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 527.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812181.8609076,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 508.0,
+    "wusts": null
+  },
+  {
+    "ts": 1788812182.7768626,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 515.7,
+    "wusts": null
+  },
+  {
+    "ts": 1788812184.2050526,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 511.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812185.112855,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 507.6,
+    "wusts": null
+  },
+  {
+    "ts": 1788812186.0090213,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 496.0,
+    "wusts": null
+  },
+  {
+    "ts": 1788812186.9168735,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 507.6,
+    "wusts": null
+  },
+  {
+    "ts": 1788812187.9008508,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 583.6,
+    "wusts": null
+  },
+  {
+    "ts": 1788812188.8089044,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 507.9,
+    "wusts": null
+  },
+  {
+    "ts": 1788812189.7527628,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 543.7,
+    "wusts": null
+  },
+  {
+    "ts": 1788812190.6647658,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 511.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812191.7527533,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 687.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812192.6527548,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 499.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812194.1204836,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 535.4,
+    "wusts": null
+  },
+  {
+    "ts": 1788812195.076385,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 555.7,
+    "wusts": null
+  },
+  {
+    "ts": 1788812196.0007832,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 524.2,
+    "wusts": null
+  },
+  {
+    "ts": 1788812196.9127748,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 511.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812197.9968643,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 683.9,
+    "wusts": null
+  },
+  {
+    "ts": 1788812199.0168433,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 619.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812199.9247515,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 507.7,
+    "wusts": null
+  },
+  {
+    "ts": 1788812200.8487866,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 523.9,
+    "wusts": null
+  },
+  {
+    "ts": 1788812201.9648592,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 715.9,
+    "wusts": null
+  },
+  {
+    "ts": 1788812203.0328608,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 667.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812204.4809425,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 519.7,
+    "wusts": null
+  },
+  {
+    "ts": 1788812205.5969536,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 715.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812206.504757,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 507.6,
+    "wusts": null
+  },
+  {
+    "ts": 1788812207.568874,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 663.9,
+    "wusts": null
+  },
+  {
+    "ts": 1788812208.556976,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 587.9,
+    "wusts": null
+  },
+  {
+    "ts": 1788812209.468744,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 511.6,
+    "wusts": null
+  },
+  {
+    "ts": 1788812210.368741,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 499.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812211.4208715,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 651.9,
+    "wusts": null
+  },
+  {
+    "ts": 1788812212.3287542,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 507.7,
+    "wusts": null
+  },
+  {
+    "ts": 1788812213.280879,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 551.9,
+    "wusts": null
+  },
+  {
+    "ts": 1788812214.8049057,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 535.7,
+    "wusts": null
+  },
+  {
+    "ts": 1788812215.8729243,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 667.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812216.9404113,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 667.3,
+    "wusts": null
+  },
+  {
+    "ts": 1788812217.8883245,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 547.6,
+    "wusts": null
+  },
+  {
+    "ts": 1788812218.8127575,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 524.3,
+    "wusts": null
+  },
+  {
+    "ts": 1788812219.7167397,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 503.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812220.6287663,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 511.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812221.625061,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 596.1,
+    "wusts": null
+  },
+  {
+    "ts": 1788812222.532745,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 507.5,
+    "wusts": null
+  },
+  {
+    "ts": 1788812223.4328668,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 499.9,
+    "wusts": null
+  },
+  {
+    "ts": 1788812224.8528996,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 491.7,
+    "wusts": null
+  },
+  {
+    "ts": 1788812225.7608051,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 507.7,
+    "wusts": null
+  },
+  {
+    "ts": 1788812226.6687498,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 507.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812227.5808039,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 511.9,
+    "wusts": null
+  },
+  {
+    "ts": 1788812228.4767468,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 495.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812229.396733,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 519.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812230.2847726,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 487.9,
+    "wusts": null
+  },
+  {
+    "ts": 1788812231.1927667,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 507.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812232.0848203,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 491.9,
+    "wusts": null
+  },
+  {
+    "ts": 1788812233.0047512,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 519.7,
+    "wusts": null
+  },
+  {
+    "ts": 1788812234.4688747,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 527.9,
+    "wusts": null
+  },
+  {
+    "ts": 1788812235.3927703,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 523.7,
+    "wusts": null
+  },
+  {
+    "ts": 1788812236.2967632,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 503.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812237.2087455,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 511.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812238.1368086,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 527.9,
+    "wusts": null
+  },
+  {
+    "ts": 1788812239.052785,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 515.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812239.964752,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 511.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812240.892756,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 527.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812241.7852514,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 492.3,
+    "wusts": null
+  },
+  {
+    "ts": 1788812242.6849535,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 499.5,
+    "wusts": null
+  },
+  {
+    "ts": 1788812244.1050959,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 503.6,
+    "wusts": null
+  },
+  {
+    "ts": 1788812245.012328,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 507.0,
+    "wusts": null
+  },
+  {
+    "ts": 1788812245.9367633,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 524.2,
+    "wusts": null
+  },
+  {
+    "ts": 1788812246.8447628,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 507.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812247.7727797,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 527.7,
+    "wusts": null
+  },
+  {
+    "ts": 1788812248.6850893,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 512.1,
+    "wusts": null
+  },
+  {
+    "ts": 1788812249.672823,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 587.5,
+    "wusts": null
+  },
+  {
+    "ts": 1788812250.5687504,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 495.7,
+    "wusts": null
+  },
+  {
+    "ts": 1788812251.4807608,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 511.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812252.4208322,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 539.9,
+    "wusts": null
+  },
+  {
+    "ts": 1788812253.856711,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 503.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812254.7687669,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 511.9,
+    "wusts": null
+  },
+  {
+    "ts": 1788812255.6727648,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 503.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812256.564996,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 492.0,
+    "wusts": null
+  },
+  {
+    "ts": 1788812257.472378,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 507.2,
+    "wusts": null
+  },
+  {
+    "ts": 1788812258.3966715,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 524.1,
+    "wusts": null
+  },
+  {
+    "ts": 1788812259.3127804,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 515.9,
+    "wusts": null
+  },
+  {
+    "ts": 1788812260.2287602,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 515.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812261.1367483,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 507.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812262.0327666,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 495.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812263.4449494,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 499.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812264.3567555,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 511.6,
+    "wusts": null
+  },
+  {
+    "ts": 1788812265.260763,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 503.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812266.1727703,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 511.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812267.076761,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 503.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812267.9807982,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 503.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812268.8845842,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 503.6,
+    "wusts": null
+  },
+  {
+    "ts": 1788812269.7967556,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 512.0,
+    "wusts": null
+  },
+  {
+    "ts": 1788812270.7047417,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 507.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812271.6127398,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 507.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812273.076882,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 531.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812274.0407493,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 563.7,
+    "wusts": null
+  },
+  {
+    "ts": 1788812275.0568192,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 615.9,
+    "wusts": null
+  },
+  {
+    "ts": 1788812275.9607918,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 503.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812276.8727622,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 511.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812277.7927847,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 519.7,
+    "wusts": null
+  },
+  {
+    "ts": 1788812278.7168982,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 523.9,
+    "wusts": null
+  },
+  {
+    "ts": 1788812279.6847591,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 567.7,
+    "wusts": null
+  },
+  {
+    "ts": 1788812280.600896,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 516.0,
+    "wusts": null
+  },
+  {
+    "ts": 1788812281.5328069,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 531.7,
+    "wusts": null
+  },
+  {
+    "ts": 1788812282.9928882,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 531.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812283.9047542,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 511.7,
+    "wusts": null
+  },
+  {
+    "ts": 1788812284.796747,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 491.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812285.7127638,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 515.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812286.624746,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 511.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812287.532732,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 507.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812288.4487464,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 515.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812289.352803,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 503.9,
+    "wusts": null
+  },
+  {
+    "ts": 1788812290.2528412,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 499.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812291.1647506,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 511.7,
+    "wusts": null
+  },
+  {
+    "ts": 1788812292.6049962,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 516.0,
+    "wusts": null
+  },
+  {
+    "ts": 1788812293.5613499,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 556.2,
+    "wusts": null
+  },
+  {
+    "ts": 1788812294.4405904,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 479.0,
+    "wusts": null
+  },
+  {
+    "ts": 1788812295.3324392,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 491.7,
+    "wusts": null
+  },
+  {
+    "ts": 1788812296.2288768,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 496.2,
+    "wusts": null
+  },
+  {
+    "ts": 1788812297.1688573,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 539.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812298.0848572,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 515.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812299.0008087,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 515.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812299.904815,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 503.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812300.8167593,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 511.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812302.2647867,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 523.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812303.1807694,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 515.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812304.0927978,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 511.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812305.0127525,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 519.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812305.916767,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 503.8,
+    "wusts": null
+  },
+  {
+    "ts": 1788812306.8243248,
+    "dsi": {
+      "brut": "{\"keypress\":\"\",\"screenid\":\"NA\"}",
+      "hex": "7b226b65797072657373223a22222c2273637265656e6964223a224e41227d",
+      "json": {
+        "keypress": "",
+        "screenid": "NA"
+      }
+    },
+    "ms": 507.4,
+    "wusts": null
+  }
+]

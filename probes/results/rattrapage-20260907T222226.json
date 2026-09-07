@@ -1,0 +1,362 @@
+{
+  "noms": [
+    "ddu",
+    "ddv",
+    "ddw",
+    "ddx",
+    "ddy",
+    "ddz",
+    "dea",
+    "deb",
+    "dec",
+    "ded",
+    "dee",
+    "def",
+    "deg",
+    "deh",
+    "dei",
+    "dej",
+    "dek",
+    "del",
+    "dem",
+    "den",
+    "deo",
+    "dep",
+    "deq",
+    "der",
+    "des",
+    "det",
+    "deu",
+    "dev",
+    "dew",
+    "dex",
+    "dey",
+    "dez",
+    "dfa",
+    "dfb",
+    "dfc",
+    "dfd",
+    "dfe",
+    "dff",
+    "dfg",
+    "dfh",
+    "dfi",
+    "dfj",
+    "dfk",
+    "dfl",
+    "dfm",
+    "dfn",
+    "dfo",
+    "dfp",
+    "dfq",
+    "dfr",
+    "dfs",
+    "dft",
+    "dfu",
+    "dfv",
+    "dfw",
+    "dfx",
+    "dfy",
+    "dfz",
+    "dga",
+    "dgb",
+    "dgc",
+    "dgd",
+    "dge",
+    "dgf",
+    "dgg",
+    "dgh",
+    "dgi",
+    "dgj",
+    "dgk",
+    "dgl",
+    "dgm"
+  ],
+  "resultats": [
+    {
+      "port": "ddu",
+      "status": 422
+    },
+    {
+      "port": "ddv",
+      "status": 422
+    },
+    {
+      "port": "ddw",
+      "status": 422
+    },
+    {
+      "port": "ddx",
+      "status": 422
+    },
+    {
+      "port": "ddy",
+      "status": 422
+    },
+    {
+      "port": "ddz",
+      "status": 422
+    },
+    {
+      "port": "dea",
+      "status": 422
+    },
+    {
+      "port": "deb",
+      "status": 422
+    },
+    {
+      "port": "dec",
+      "status": 422
+    },
+    {
+      "port": "ded",
+      "status": 422
+    },
+    {
+      "port": "dee",
+      "status": 422
+    },
+    {
+      "port": "def",
+      "status": 422
+    },
+    {
+      "port": "deg",
+      "status": 422
+    },
+    {
+      "port": "deh",
+      "status": 422
+    },
+    {
+      "port": "dei",
+      "status": 422
+    },
+    {
+      "port": "dej",
+      "status": 422
+    },
+    {
+      "port": "dek",
+      "status": 422
+    },
+    {
+      "port": "del",
+      "status": 422
+    },
+    {
+      "port": "dem",
+      "status": 422
+    },
+    {
+      "port": "den",
+      "status": 422
+    },
+    {
+      "port": "deo",
+      "status": 422
+    },
+    {
+      "port": "dep",
+      "status": 422
+    },
+    {
+      "port": "deq",
+      "status": 422
+    },
+    {
+      "port": "der",
+      "status": 422
+    },
+    {
+      "port": "des",
+      "status": 422
+    },
+    {
+      "port": "det",
+      "status": 422
+    },
+    {
+      "port": "deu",
+      "status": 422
+    },
+    {
+      "port": "dev",
+      "status": 422
+    },
+    {
+      "port": "dew",
+      "status": 422
+    },
+    {
+      "port": "dex",
+      "status": 422
+    },
+    {
+      "port": "dey",
+      "status": 422
+    },
+    {
+      "port": "dez",
+      "status": 422
+    },
+    {
+      "port": "dfa",
+      "status": 422
+    },
+    {
+      "port": "dfb",
+      "status": 422
+    },
+    {
+      "port": "dfc",
+      "status": 422
+    },
+    {
+      "port": "dfd",
+      "status": 422
+    },
+    {
+      "port": "dfe",
+      "status": 422
+    },
+    {
+      "port": "dff",
+      "status": 422
+    },
+    {
+      "port": "dfg",
+      "status": 422
+    },
+    {
+      "port": "dfh",
+      "status": 422
+    },
+    {
+      "port": "dfi",
+      "status": 422
+    },
+    {
+      "port": "dfj",
+      "status": 422
+    },
+    {
+      "port": "dfk",
+      "status": 422
+    },
+    {
+      "port": "dfl",
+      "status": 422
+    },
+    {
+      "port": "dfm",
+      "status": 422
+    },
+    {
+      "port": "dfn",
+      "status": 422
+    },
+    {
+      "port": "dfo",
+      "status": 422
+    },
+    {
+      "port": "dfp",
+      "status": 422
+    },
+    {
+      "port": "dfq",
+      "status": 422
+    },
+    {
+      "port": "dfr",
+      "status": 422
+    },
+    {
+      "port": "dfs",
+      "status": 422
+    },
+    {
+      "port": "dft",
+      "status": 422
+    },
+    {
+      "port": "dfu",
+      "status": 422
+    },
+    {
+      "port": "dfv",
+      "status": 422
+    },
+    {
+      "port": "dfw",
+      "status": 422
+    },
+    {
+      "port": "dfx",
+      "status": 422
+    },
+    {
+      "port": "dfy",
+      "status": 422
+    },
+    {
+      "port": "dfz",
+      "status": 422
+    },
+    {
+      "port": "dga",
+      "status": 422
+    },
+    {
+      "port": "dgb",
+      "status": 422
+    },
+    {
+      "port": "dgc",
+      "status": 422
+    },
+    {
+      "port": "dgd",
+      "status": 422
+    },
+    {
+      "port": "dge",
+      "status": 422
+    },
+    {
+      "port": "dgf",
+      "status": 422
+    },
+    {
+      "port": "dgg",
+      "status": 422
+    },
+    {
+      "port": "dgh",
+      "status": 422
+    },
+    {
+      "port": "dgi",
+      "status": 422
+    },
+    {
+      "port": "dgj",
+      "status": 422
+    },
+    {
+      "port": "dgk",
+      "status": 422
+    },
+    {
+      "port": "dgl",
+      "status": 422
+    },
+    {
+      "port": "dgm",
+      "status": 422
+    }
+  ],
+  "restants": []
+}

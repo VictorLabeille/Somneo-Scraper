@@ -124,10 +124,17 @@ ci-dessous vient donc de l'APK (`com.philips.cdp2.brighteyes.ports.*`), chaque e
 > de SleepMapper n'y figurerait pas. **Deux balayages exhaustifs ont levé le doute, chacun
 > sur son domaine** (`probes/balayage.py`, 17 576 noms chacun, ~150 min) :
 >
-> | Domaine balayé | Résultat |
-> | --- | --- |
-> | `wu` + 3 lettres (les 17 576 combinaisons) | **13 ports, tous connus.** Aucun inconnu |
-> | 3 lettres, sans préfixe (les 17 576 combinaisons) | **`dsi` et `fac`**, tous deux nouveaux |
+> | Domaine balayé | Réponses obtenues | Résultat |
+> | --- | --- | --- |
+> | `wu` + 3 lettres | **17 576 / 17 576** — aucun trou | **13 ports, tous connus.** Aucun inconnu |
+> | 3 lettres, sans préfixe | 17 505 au premier passage, **71 rejoués** ensuite | **`dsi` et `fac`**, tous deux nouveaux |
+>
+> **Le second balayage n'était pas complet au premier passage** : 71 noms consécutifs
+> (`ddu` → `dgm`) n'ont rendu ni `422` ni réponse — 67 « connection refused », 3 timeouts, une
+> erreur TLS. L'appareil avait décroché sur un bloc puis s'était remis ; ces 71-là n'étaient
+> donc pas testés, seulement manqués. Rejoués le soir même (`probes/rattrapage_balayage.py`),
+> **ils répondent tous `422`**. C'est seulement à partir de là que le mot « exhaustif »
+> s'applique — un balayage se juge au nombre de **réponses**, pas au nombre de requêtes.
 >
 > Conséquence : **pour les noms en `wu` de cinq lettres, la liste est complète — c'est prouvé,
 > plus un minorant.** Les 13 sont `wualm`, `wudsk`, `wufmp`, `wufmr`, `wulgt`, `wungt`,
@@ -241,13 +248,17 @@ l'obfuscation.
 >    vers 06 h 50. **Le réveil ne détecte pas la fin de nuit.** Un collecteur qui clôturerait
 >    une session sur `tendb` inventerait une heure de lever.
 >
->    Trois observations le portent, dont une qui ne vient pas de nous :
+>    **Deux** observations le portent — pas trois, et la nuance compte :
 >
 >    | Source | `tg2bd` | `tendb` | Écart |
 >    | --- | --- | --- | --- |
->    | Ce HF3671/01, nuit du 5 au 6 sept. 2026 | `2026-09-06T01:20:04` | `2026-09-06T13:20:04` | **+12 h 00 min 00 s** |
->    | Le même, nuit du 6 au 7 (champ non réécrit) | inchangé | inchangé | **+12 h 00 min 00 s** |
+>    | Ce HF3671/01, appui du 6 sept. 2026 à 01 h 20 | `2026-09-06T01:20:04` | `2026-09-06T13:20:04` | **+12 h 00 min 00 s** |
 >    | **Frank071, issue #16, 16 févr. 2024** — autre appareil | `2024-02-15T11:07:50` | `2024-02-15T23:07:50` | **+12 h 00 min 00 s** |
+>
+>    Le couple relevé sur cet appareil n'a été **écrit qu'une fois**. Les 949 relevés de la nuit
+>    suivante le retrouvent identique, mais c'est la *même* valeur figée : les relire ne fait pas
+>    une seconde mesure. Compter deux nuits ici serait compter deux fois le même fait — erreur
+>    commise le 2026-09-07 avant vérification.
 >
 >    Le relevé de Frank071 est décisif : autre appareil, autre firmware, deux ans plus tôt, et
 >    un `tg2bd` à **11 h du matin** — personne ne se couche à 11 h 07 pour se lever à 23 h 07.
@@ -267,12 +278,27 @@ l'obfuscation.
 > qui est une moyenne **retardée** : elle n'a répercuté l'extinction qu'à 23 h 13, soit quatre
 > minutes plus tard.
 >
-> **`ntstr` / `ntend` / `ntlen` ne sont pas vides partout.** Sur le HF3671/01 étudié ici, les
-> trois sont restés vides en permanence. Mais le relevé de Frank071 dans l'issue #16
-> (16 février 2024, autre appareil) donne `"ntend":"07:00"` et `"ntlen":"07:00"` alors que
-> `night` vaut `false` — donc renseignés hors session, et au format `HH:MM`, pas en ISO 8601
-> comme `tg2bd`/`tendb`. **Ne pas coder « ces champs sont toujours vides »** : c'est vrai de cet
-> appareil, pas du modèle. Un client doit accepter les deux cas.
+> **`ntstr` / `ntend` / `ntlen` ne sont pas vides partout — et notre observation est étroite.**
+> Le relevé de Frank071 dans l'issue #16 (16 février 2024, autre appareil) donne
+> `"ntend":"07:00"` et `"ntlen":"07:00"` alors que `night` vaut `false` : renseignés **hors
+> session**, et au format `HH:MM`, pas en ISO 8601 comme `tg2bd`/`tendb`. **Ne pas coder « ces
+> champs sont toujours vides »** : un client doit accepter les deux cas.
+>
+> **Portée exacte de ce qu'on a mesuré, à ne pas dépasser** — la mention « vides hors session »
+> venait du 31 août et n'était alors qu'une lecture de l'APK (`getKeyMapForNight`), pas une
+> mesure. Ce qui est observé se réduit à ceci :
+>
+> | Situation | Observée ? |
+> | --- | --- |
+> | Nuit **sans** appui (6→7 sept.), 949 relevés | oui — les trois champs vides |
+> | État résiduel après une nuit **avec** appui (5→6 sept.), 22 h durant | oui — les trois champs vides, `tg2bd` figé sur l'appui |
+> | **Session active (`night: true`)** | **jamais** |
+>
+> Une seule nuit a donc été capturée, et **le cas le plus instructif manque** : personne n'a
+> observé ce port pendant qu'une session était ouverte. On ne peut pas dire si ces champs se
+> remplissent à l'ouverture puis se vident, ni ce que le geste écrit exactement — seulement
+> qu'ils sont vides quand aucune session ne court. L'appareil de Frank071 les gardant remplis
+> `night: false`, l'écart entre les deux exemplaires **n'est pas expliqué**.
 
 **`wualm/prfwu` — profil d'alarme.** `prfnr` (n° 1-16), `pname`, `prfen` (activé),
 `prfvs` (visible), `almhr`/`almmn`, `daynm` (masque de jours), `ayear`/`amnth`/`alday`
