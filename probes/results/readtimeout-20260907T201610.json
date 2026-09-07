@@ -1,0 +1,46 @@
+[
+  {
+    "fils": 2,
+    "ok": 6,
+    "total": 6,
+    "duree_s": 24.6,
+    "ms_median": 8203.3,
+    "ms_max": 10592.6,
+    "types": {},
+    "readtimeout": 0,
+    "trace": null
+  },
+  {
+    "fils": 3,
+    "ok": 9,
+    "total": 9,
+    "duree_s": 37.1,
+    "ms_median": 10480.6,
+    "ms_max": 29030.4,
+    "types": {},
+    "readtimeout": 0,
+    "trace": null
+  },
+  {
+    "fils": 4,
+    "ok": 12,
+    "total": 12,
+    "duree_s": 40.3,
+    "ms_median": 10331.3,
+    "ms_max": 39473.8,
+    "types": {},
+    "readtimeout": 0,
+    "trace": null
+  },
+  {
+    "fils": 6,
+    "ok": 18,
+    "total": 18,
+    "duree_s": 121.7,
+    "ms_median": 18946.4,
+    "ms_max": 93621.9,
+    "types": {},
+    "readtimeout": 0,
+    "trace": null
+  }
+]
