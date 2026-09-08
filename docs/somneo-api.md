@@ -324,11 +324,13 @@ l'obfuscation.
 >    lèvent. Leur rôle reste inconnu.
 > 4. **`wusts` ne trahit rien.** Il vaut `1` du coucher au lever : la session de nuit n'existe
 >    que dans `wungt`, aucun autre port interrogé cette nuit-là ne la laisse voir.
-> 5. **La session se ferme sur l'alarme, et `tendb` prend l'heure *programmée* de celle-ci** —
->    06 h 50 min 00 s, et non l'instant où elle a été arrêtée, 06 h 50 min 51 s, lu sur `wusts`.
->    Réserve honnête : la capture ne distingue pas une clôture par l'alarme d'un geste « je me
->    lève » fait dans la même minute. L'horodatage rond, exactement à la seconde de l'alarme
->    programmée, plaide pour l'alarme — un geste aurait laissé une seconde quelconque.
+> 5. **La session se ferme sur l'alarme elle-même, et non sur l'utilisateur.** `tendb` prend
+>    l'heure **programmée** de l'alarme, 06 h 50 min 00 s, et la bascule tombe entre les relevés
+>    de 06 h 49 min 41 s et 06 h 50 min 42 s. Or le bouton d'arrêt n'a été pressé qu'**après** :
+>    `wusts` passe de 2817 (sonnerie) à 258 à 06 h 51 min 06 s. La session était déjà close.
+>    Le propriétaire l'a confirmé le 2026-09-08 : au lever, **aucun geste dans l'application**,
+>    seulement le bouton du réveil. C'est donc le firmware qui clôt la nuit, à l'heure prévue de
+>    l'alarme — ni le geste de l'utilisateur, ni l'instant réel de l'arrêt de la sonnerie.
 >
 > **L'ancrage par la lumière tient une seconde fois, et le geste le confirme.** Le plafonnier
 > s'éteint, l'appui suit deux à trois minutes plus tard :
@@ -424,7 +426,7 @@ intervention. Elle rejoue la première et la sépare de ce qui n'en était pas :
 | 06:15:32 | **2309** | 0, 2, 8, 11 | l'aube démarre, `wutim` à 28 s |
 | 06:50:05 | **2817** | 0, 8, 9, 11 | phase sonore, `wutim` = 2 051 s |
 | 06:51:06 | **258** | 1, 8 | veilleuse |
-| 06:51:36 | **257** | 0, 8 | lumière allumée, `mslux` = 398 — la lampe reste allumée 14 min |
+| 06:51:36 | **257** | 0, 8 | lumière allumée, `mslux` = 398 — elle le reste 14 min |
 | 07:05:21 | **2** | 1 | `mslux` retombe à 116 |
 | 07:05:52 | 1 | 0 | repos |
 
@@ -440,7 +442,10 @@ Deux points s'en trouvent renforcés, un troisième corrigé :
 - **La sortie d'alarme n'a pas de forme unique.** Le 7 : 2817 → 2 → 1 en une minute. Le 8 :
   2817 → 258 → 257 → 2 → 1 en quinze. Un client qui attendrait une séquence fixe pour détecter
   la fin d'un réveil se tromperait un matin sur deux — ce qui suit l'alarme, c'est ce que
-  l'utilisateur fait, pas ce que l'appareil décide.
+  l'utilisateur fait, pas ce que l'appareil décide. Les quatorze minutes de lumière du 8 le
+  disent bien : le propriétaire l'a allumée **par inadvertance** en arrêtant la sonnerie, puis
+  éteinte (confirmé le 2026-09-08). Rien dans ces bits ne distingue une intention d'un geste
+  de travers.
 
   > **Ce qu'on sait, et ce qu'on ne sait pas — à tenir séparé.** `2` n'a été vu qu'**une fois**,
   > sur un seul relevé, dans les trente secondes entre la fin de la séquence (`wutim` = 65 535)
