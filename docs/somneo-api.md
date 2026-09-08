@@ -215,7 +215,7 @@ l'obfuscation.
 | Clé | Sens |
 | --- | --- |
 | `tg2bd` | Horodatage de mise au lit (`go to bed`) — **provient du geste**, vérifié le 2026-09-06 |
-| `tendb` | Horodatage de sortie du lit (`end bed`) — **ne provient pas d'une mesure**, voir ci-dessous |
+| `tendb` | Horodatage de sortie du lit (`end bed`) — **écrit à la clôture de la session**, jamais au geste, voir ci-dessous |
 | `ntstr` `ntend` `ntlen` | Début, fin et durée de nuit. **Vides sur cet appareil, pas sur tous** |
 | `night` | Session de nuit active — **seul champ écrit par l'app** (`getKeyMapForNight`) |
 
@@ -243,27 +243,34 @@ l'obfuscation.
 >    « le dernier appui, quand qu'il ait eu lieu ». Le lire sans le dater contre autre chose,
 >    c'est attribuer à cette nuit le coucher d'une nuit quelconque. Un collecteur doit le
 >    traiter comme suspect tant qu'il ne l'a pas vu *changer*.
-> 2. **`tendb` est calculé, pas mesuré — et ce n'est pas propre à cet appareil.** Il vaut
->    `tg2bd + 12 h` à la seconde près, et il n'a pas bougé alors que le lever réel a eu lieu
->    vers 06 h 50. **Le réveil ne détecte pas la fin de nuit.** Un collecteur qui clôturerait
->    une session sur `tendb` inventerait une heure de lever.
+> 2. **`tendb` n'est pas posé au geste : il est écrit à la clôture de la session.** Et une
+>    session que rien ne clôt se ferme d'elle-même **au bout de 12 h**. C'est la nuit du 7 au 8
+>    (plus bas) qui le dit, et elle **corrige la lecture du 2026-09-07** : le `tg2bd + 12 h`
+>    n'était pas une formule d'écriture, c'était une expiration.
 >
->    **Deux** observations le portent — pas trois, et la nuance compte :
+>    Les deux relevés à +12 h à la seconde près sont, dans cette lecture, deux sessions **restées
+>    ouvertes** :
 >
 >    | Source | `tg2bd` | `tendb` | Écart |
 >    | --- | --- | --- | --- |
 >    | Ce HF3671/01, appui du 6 sept. 2026 à 01 h 20 | `2026-09-06T01:20:04` | `2026-09-06T13:20:04` | **+12 h 00 min 00 s** |
 >    | **Frank071, issue #16, 16 févr. 2024** — autre appareil | `2024-02-15T11:07:50` | `2024-02-15T23:07:50` | **+12 h 00 min 00 s** |
+>    | **Ce HF3671/01, nuit du 7 au 8 sept. 2026** | `2026-09-07T23:28:54` | `2026-09-08T06:50:00` | **+7 h 21 min 06 s** — clôture sur l'alarme |
 >
->    Le couple relevé sur cet appareil n'a été **écrit qu'une fois**. Les 949 relevés de la nuit
->    suivante le retrouvent identique, mais c'est la *même* valeur figée : les relire ne fait pas
->    une seconde mesure. Compter deux nuits ici serait compter deux fois le même fait — erreur
+>    Le couple du 6 septembre n'a été **écrit qu'une fois**. Les 949 relevés de la nuit suivante
+>    le retrouvent identique, mais c'est la *même* valeur figée : les relire ne fait pas une
+>    seconde mesure. Compter deux nuits ici serait compter deux fois le même fait — erreur
 >    commise le 2026-09-07 avant vérification.
 >
->    Le relevé de Frank071 est décisif : autre appareil, autre firmware, deux ans plus tôt, et
->    un `tg2bd` à **11 h du matin** — personne ne se couche à 11 h 07 pour se lever à 23 h 07.
->    C'est bien une constante posée par le firmware, pas une mesure. La propriété est celle du
->    modèle, pas de notre exemplaire.
+>    Le relevé de Frank071 reste décisif pour la portée : autre appareil, autre firmware, deux
+>    ans plus tôt, et un `tg2bd` à **11 h du matin** — personne ne se couche à 11 h 07 pour se
+>    lever à 23 h 07. Le délai de 12 h est posé par le firmware du modèle, pas par notre
+>    exemplaire.
+>
+>    **Ce qui reste vrai pour le collecteur, et c'est l'essentiel : `tendb` ne date jamais un
+>    lever.** Session close par l'alarme, il vaut l'heure **programmée** de l'alarme ; session
+>    expirée, il vaut le coucher + 12 h. Dans les deux cas c'est une heure prévue ou calculée,
+>    et dans aucun une heure observée.
 >
 > **Ce qui reste pour dater une nuit, alors : la lumière.** Elle est mesurée, elle, et elle est
 > nette. Le plafonnier s'éteint entre deux relevés consécutifs de `wusrd` :
@@ -284,21 +291,56 @@ l'obfuscation.
 > session**, et au format `HH:MM`, pas en ISO 8601 comme `tg2bd`/`tendb`. **Ne pas coder « ces
 > champs sont toujours vides »** : un client doit accepter les deux cas.
 >
-> **Portée exacte de ce qu'on a mesuré, à ne pas dépasser** — la mention « vides hors session »
-> venait du 31 août et n'était alors qu'une lecture de l'APK (`getKeyMapForNight`), pas une
-> mesure. Ce qui est observé se réduit à ceci :
+> **Portée de ce qui a été mesuré.** La mention « vides hors session » venait du 31 août et
+> n'était alors qu'une lecture de l'APK (`getKeyMapForNight`), pas une mesure. Les trois
+> situations sont désormais observées, la dernière depuis la nuit du 7 au 8 septembre :
 >
 > | Situation | Observée ? |
 > | --- | --- |
 > | Nuit **sans** appui (6→7 sept.), 949 relevés | oui — les trois champs vides |
 > | État résiduel après une nuit **avec** appui (5→6 sept.), 22 h durant | oui — les trois champs vides, `tg2bd` figé sur l'appui |
-> | **Session active (`night: true`)** | **jamais** |
+> | **Session active (`night: true`)** (7→8 sept.), 435 relevés | **oui — voir ci-dessous** |
 >
-> Une seule nuit a donc été capturée, et **le cas le plus instructif manque** : personne n'a
-> observé ce port pendant qu'une session était ouverte. On ne peut pas dire si ces champs se
-> remplissent à l'ouverture puis se vident, ni ce que le geste écrit exactement — seulement
-> qu'ils sont vides quand aucune session ne court. L'appareil de Frank071 les gardant remplis
-> `night: false`, l'écart entre les deux exemplaires **n'est pas expliqué**.
+> **Ce que fait une session ouverte — nuit du 7 au 8 septembre 2026.** Le cas qui manquait a été
+> capturé : le propriétaire a appuyé sur « je me couche » dans SleepMapper. `wungt` interrogé
+> toutes les 60 s, **435 relevés avec `night: true`**, de 23 h 29 min 24 s à 06 h 49 min 41 s —
+> 7 h 20 de session.
+>
+> | Instant | Ce qui change dans `wungt` |
+> | --- | --- |
+> | 23 h 28 min 54 s — l'appui | `night` → `true`, `tg2bd` → `2026-09-07T23:28:54+02:00` |
+> | pendant les 7 h 20 de session | **rien.** 435 relevés strictement identiques |
+> | 06 h 50 — l'alarme | `night` → `false`, `tendb` → `2026-09-08T06:50:00+02:00` |
+>
+> Cinq réponses, dont quatre négatives :
+>
+> 1. **`ntstr` / `ntend` / `ntlen` restent vides pendant toute la session.** Ils ne sont donc pas
+>    « remplis à l'ouverture puis vidés » : sur cet appareil ils ne se remplissent **jamais**.
+>    L'écart avec l'appareil de Frank071 n'est toujours pas expliqué — mais il ne s'explique
+>    **pas** par l'état de la session, et cette piste-là est close.
+> 2. **`tendb` ne bouge pas au geste.** Pendant les 7 h 20, il garde la valeur périmée du
+>    6 septembre : un client qui lirait `tendb` en cours de session lirait l'avant-veille.
+> 3. **`gdngt` et `gdday` restent `false`** de bout en bout — ni l'appui, ni l'alarme ne les
+>    lèvent. Leur rôle reste inconnu.
+> 4. **`wusts` ne trahit rien.** Il vaut `1` du coucher au lever : la session de nuit n'existe
+>    que dans `wungt`, aucun autre port interrogé cette nuit-là ne la laisse voir.
+> 5. **La session se ferme sur l'alarme, et `tendb` prend l'heure *programmée* de celle-ci** —
+>    06 h 50 min 00 s, et non l'instant où elle a été arrêtée, 06 h 50 min 51 s, lu sur `wusts`.
+>    Réserve honnête : la capture ne distingue pas une clôture par l'alarme d'un geste « je me
+>    lève » fait dans la même minute. L'horodatage rond, exactement à la seconde de l'alarme
+>    programmée, plaide pour l'alarme — un geste aurait laissé une seconde quelconque.
+>
+> **L'ancrage par la lumière tient une seconde fois, et le geste le confirme.** Le plafonnier
+> s'éteint, l'appui suit deux à trois minutes plus tard :
+>
+> ```
+> 23:26:23  mslux = 5.9    ← le plafonnier s'éteint
+> 23:28:54  ← « je me couche » (tg2bd)
+> 23:29:23  mslux = 0
+> ```
+>
+> C'est la deuxième nuit où `mslux` donne le coucher à la minute. Là où le geste manque — et il
+> a manqué la nuit précédente — elle reste la seule source.
 
 **`wualm/prfwu` — profil d'alarme.** `prfnr` (n° 1-16), `pname`, `prfen` (activé),
 `prfvs` (visible), `almhr`/`almmn`, `daynm` (masque de jours), `ayear`/`amnth`/`alday`
@@ -373,6 +415,32 @@ Trois choses en sortent :
 - **`2` est étiqueté `sunset` par la table amont, alors qu'il apparaît ici à l'arrêt d'une
   alarme.** C'est un défaut d'une autre nature que `unknown` : une étiquette *fausse* plutôt
   qu'absente. Le coucher de soleil provoqué et mesuré la veille vaut **264**, pas 2.
+
+**Une deuxième alarme, le 2026-09-08** — même réveil, même heure, `wusts` toutes les 30 s, sans
+intervention. Elle rejoue la première et la sépare de ce qui n'en était pas :
+
+| Heure | `wusts` | Bits | Ce qui se passe |
+| --- | --- | --- | --- |
+| 06:15:32 | **2309** | 0, 2, 8, 11 | l'aube démarre, `wutim` à 28 s |
+| 06:50:05 | **2817** | 0, 8, 9, 11 | phase sonore, `wutim` = 2 051 s |
+| 06:51:06 | **258** | 1, 8 | veilleuse |
+| 06:51:36 | **257** | 0, 8 | lumière allumée, `mslux` = 398 — la lampe reste allumée 14 min |
+| 07:05:21 | **2** | 1 | `mslux` retombe à 116 |
+| 07:05:52 | 1 | 0 | repos |
+
+Deux points s'en trouvent renforcés, un troisième corrigé :
+
+- **Le bit 2 retombe quand le son démarre** : deuxième observation de la transition
+  2309 → 2817, dans les mêmes termes. Ce n'est plus un cas isolé.
+- **`2` n'est pas un « coucher de soleil ».** Le 7, il suivait l'arrêt de l'alarme ; le 8, il
+  suit l'extinction de la lampe de chevet, quatorze minutes plus tard et sans aucun rapport avec
+  une alarme. Le point commun des deux relevés est ailleurs : **`2` précède `1` d'un seul
+  échantillon**, à chaque fois. C'est un état de passage vers le repos, pas un mode ; l'étiquette
+  `sunset` de la table amont est fausse dans les deux cas.
+- **La sortie d'alarme n'a pas de forme unique.** Le 7 : 2817 → 2 → 1 en une minute. Le 8 :
+  2817 → 258 → 257 → 2 → 1 en quinze. Un client qui attendrait une séquence fixe pour détecter
+  la fin d'un réveil se tromperait un matin sur deux — ce qui suit l'alarme, c'est ce que
+  l'utilisateur fait, pas ce que l'appareil décide.
 
   > **Ce qu'on sait, et ce qu'on ne sait pas — à tenir séparé.** `2` n'a été vu qu'**une fois**,
   > sur un seul relevé, dans les trente secondes entre la fin de la séquence (`wutim` = 65 535)
