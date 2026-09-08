@@ -133,6 +133,15 @@ Ne jamais versionner ce qui est propre à l'appareil ou au réseau : clé du por
 numéro de série, adresses MAC, SSID, mots de passe. `docs/somneo-api.md` est rédigé sous
 cette contrainte — la tenir en le complétant.
 
+**Ni les heures murales du propriétaire.** Un coucher, un lever, une heure d'alarme, une
+extinction de lumière : mis bout à bout, c'est un rythme de sommeil publié sous un nom réel,
+dans un dépôt qui parle de propriété des données de santé. Les instants se donnent **en écart
+par rapport à un repère nommé** — `C` l'appui « je me couche », `A` l'heure programmée de
+l'alarme, `E` une extinction. **Les écarts restent exacts** : ce sont eux qui portent les
+démonstrations. Convention posée le 2026-09-08 et appliquée à `docs/somneo-api.md` ; elle vaut
+aussi pour ce qui part en amont (issues, PR). Les horodatages de sonde en pleine journée n'en
+relèvent pas — c'est le rythme de sommeil qui est protégé, pas l'agenda de travail.
+
 ## Structure
 
 ```

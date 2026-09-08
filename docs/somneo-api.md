@@ -212,6 +212,12 @@ l'obfuscation.
 
 **`wungt` — suivi de nuit.** C'est la source des heures de coucher de SleepMapper.
 
+> **Convention d'horodatage de ce document.** Les heures murales du propriétaire ne sont pas
+> publiées : ce dépôt est public, et le rythme de sommeil de quelqu'un n'a pas à y figurer. Les
+> instants sont donnés **en écart par rapport à un repère nommé** — `C` l'appui « je me couche »,
+> `A` l'heure programmée de l'alarme. **Les écarts, eux, sont exacts** : ce sont eux qui portent
+> les démonstrations, et ils se rejouent tels quels. Les captures de nuit ne sont pas versionnées.
+
 | Clé | Sens |
 | --- | --- |
 | `tg2bd` | Horodatage de mise au lit (`go to bed`) — **provient du geste**, vérifié le 2026-09-06 |
@@ -224,18 +230,19 @@ l'obfuscation.
 > passe rien : ni détection, ni horodatage, ni remise à zéro.
 >
 > **L'expérience.** Nuit du 6 au 7 septembre 2026 : le propriétaire se couche **sans** appuyer
-> sur « je me couche ». La capture interroge `wungt` toutes les 60 s, du 6 à 19 h 36 au 7 à
-> 17 h 51 — **949 relevés**. Résultat : *une seule* valeur sur les 949, identique du premier
-> au dernier.
+> sur « je me couche ». La capture interroge `wungt` toutes les 60 s pendant **22 h 15
+> consécutives** — **949 relevés**. Résultat : *une seule* valeur sur les 949, identique du
+> premier au dernier.
 >
 > ```json
-> {"tg2bd":"2026-09-06T01:20:04+02:00", "tendb":"2026-09-06T13:20:04+02:00",
+> {"tg2bd":"<ISO 8601 avec décalage>", "tendb":"<tg2bd + 12 h 00 min 00 s>",
 >  "ntstr":"", "ntend":"", "ntlen":"", "night":false, "gdngt":false, "gdday":false}
 > ```
 >
-> `tg2bd` est resté sur l'appui de la **nuit précédente**, avec 22 h de retard, alors que le
-> coucher réel a eu lieu à **23 h 09** — heure lue sur la chute de `mslux`, à la minute (voir
-> ci-dessous). Aucun champ n'a bougé : le réveil n'a **pas** vu la nuit passer.
+> `tg2bd` est resté sur l'appui de la **nuit précédente**, avec **22 h de retard** ; le coucher
+> réel, lu à la minute sur la chute de `mslux` (voir ci-dessous), est tombé près de 22 h **après**
+> l'horodatage que le champ affichait. Aucun champ n'a bougé : le réveil n'a **pas** vu la nuit
+> passer.
 >
 > Deux faits en découlent, tous deux dirimants pour le collecteur :
 >
@@ -251,11 +258,11 @@ l'obfuscation.
 >    Les deux relevés à +12 h à la seconde près sont, dans cette lecture, deux sessions **restées
 >    ouvertes** :
 >
->    | Source | `tg2bd` | `tendb` | Écart |
->    | --- | --- | --- | --- |
->    | Ce HF3671/01, appui du 6 sept. 2026 à 01 h 20 | `2026-09-06T01:20:04` | `2026-09-06T13:20:04` | **+12 h 00 min 00 s** |
->    | **Frank071, issue #16, 16 févr. 2024** — autre appareil | `2024-02-15T11:07:50` | `2024-02-15T23:07:50` | **+12 h 00 min 00 s** |
->    | **Ce HF3671/01, nuit du 7 au 8 sept. 2026** | `2026-09-07T23:28:54` | `2026-09-08T06:50:00` | **+7 h 21 min 06 s** — clôture sur l'alarme |
+>    | Source | Écart `tendb` − `tg2bd` | Ce qui a fermé la session |
+>    | --- | --- | --- |
+>    | Ce HF3671/01, appui du 6 sept. 2026 | **+12 h 00 min 00 s** | rien — expiration |
+>    | **Frank071, issue #16, 16 févr. 2024** — autre appareil, valeurs publiées par lui | **+12 h 00 min 00 s** | rien — expiration |
+>    | **Ce HF3671/01, nuit du 7 au 8 sept. 2026** | **+7 h 21 min 06 s** | l'alarme |
 >
 >    Le couple du 6 septembre n'a été **écrit qu'une fois**. Les 949 relevés de la nuit suivante
 >    le retrouvent identique, mais c'est la *même* valeur figée : les relire ne fait pas une
@@ -276,14 +283,15 @@ l'obfuscation.
 > nette. Le plafonnier s'éteint entre deux relevés consécutifs de `wusrd` :
 >
 > ```
-> 23:08:25  mslux = 110.6      ← plafonnier allumé
-> 23:09:26  mslux =   0        ← éteint
+> E − 61 s   mslux = 110.6      ← plafonnier allumé
+> E          mslux =   0        ← éteint
 > ```
+>
+> (`E` = le relevé où l'extinction est constatée, cadence 60 s.)
 >
 > Une minute d'incertitude, sans aucun geste demandé à l'utilisateur — là où `tg2bd` exige un
 > appui et se tait s'il n'a pas lieu. Attention en revanche à ne pas confondre avec `avlux`,
-> qui est une moyenne **retardée** : elle n'a répercuté l'extinction qu'à 23 h 13, soit quatre
-> minutes plus tard.
+> qui est une moyenne **retardée** : elle n'a répercuté l'extinction qu'à `E + 4 min`.
 >
 > **`ntstr` / `ntend` / `ntlen` ne sont pas vides partout — et notre observation est étroite.**
 > Le relevé de Frank071 dans l'issue #16 (16 février 2024, autre appareil) donne
@@ -308,9 +316,9 @@ l'obfuscation.
 >
 > | Instant | Ce qui change dans `wungt` |
 > | --- | --- |
-> | 23 h 28 min 54 s — l'appui | `night` → `true`, `tg2bd` → `2026-09-07T23:28:54+02:00` |
-> | pendant les 7 h 20 de session | **rien.** 435 relevés strictement identiques |
-> | 06 h 50 — l'alarme | `night` → `false`, `tendb` → `2026-09-08T06:50:00+02:00` |
+> | `C` — l'appui | `night` → `true`, `tg2bd` → **l'horodatage de l'appui, à la seconde** |
+> | `C` → `C + 7 h 20 min 47 s` | **rien.** 435 relevés strictement identiques |
+> | `C + 7 h 21 min 06 s` = `A` — l'alarme | `night` → `false`, `tendb` → **l'heure programmée `A`** |
 >
 > Cinq réponses, dont quatre négatives :
 >
@@ -325,9 +333,10 @@ l'obfuscation.
 > 4. **`wusts` ne trahit rien.** Il vaut `1` du coucher au lever : la session de nuit n'existe
 >    que dans `wungt`, aucun autre port interrogé cette nuit-là ne la laisse voir.
 > 5. **La session se ferme sur l'alarme elle-même, et non sur l'utilisateur.** `tendb` prend
->    l'heure **programmée** de l'alarme, 06 h 50 min 00 s, et la bascule tombe entre les relevés
->    de 06 h 49 min 41 s et 06 h 50 min 42 s. Or le bouton d'arrêt n'a été pressé qu'**après** :
->    `wusts` passe de 2817 (sonnerie) à 258 à 06 h 51 min 06 s. La session était déjà close.
+>    l'heure **programmée** `A`, à la seconde, et la bascule tombe entre les relevés
+>    `C + 7 h 20 min 47 s` et `C + 7 h 21 min 48 s` — soit de part et d'autre de `A`. Or le bouton
+>    d'arrêt n'a été pressé qu'**après** : `wusts` passe de 2817 (sonnerie) à 258 à `A + 66 s`.
+>    La session était déjà close.
 >    Le propriétaire l'a confirmé le 2026-09-08 : au lever, **aucun geste dans l'application**,
 >    seulement le bouton du réveil. C'est donc le firmware qui clôt la nuit, à l'heure prévue de
 >    l'alarme — ni le geste de l'utilisateur, ni l'instant réel de l'arrêt de la sonnerie.
@@ -336,9 +345,9 @@ l'obfuscation.
 > s'éteint, l'appui suit deux à trois minutes plus tard :
 >
 > ```
-> 23:26:23  mslux = 5.9    ← le plafonnier s'éteint
-> 23:28:54  ← « je me couche » (tg2bd)
-> 23:29:23  mslux = 0
+> C − 2 min 31 s   mslux = 5.9    ← le plafonnier s'éteint
+> C                ← « je me couche » (tg2bd)
+> C + 29 s         mslux = 0
 > ```
 >
 > C'est la deuxième nuit où `mslux` donne le coucher à la minute. Là où le geste manque — et il
@@ -396,12 +405,12 @@ ordinaires du réveil produisent une valeur que la table de huit entrées ne cou
 provoqués à la main. Celui-ci a été relevé au fil d'un vrai réveil, `wusts` interrogé toutes
 les 30 s, sans intervention :
 
-| Heure | `wusts` | Bits | Ce qui est **mesuré** en même temps | `pysomneo` |
+| Instant | `wusts` | Bits | Ce qui est **mesuré** en même temps | `pysomneo` |
 | --- | --- | --- | --- | --- |
-| 06:15:10 | **2309** | 0, 2, 8, 11 | `wutim` démarre à 6 s ; `mslux` monte | `wake-up` |
-| 06:50:21 | **2817** | 0, 8, 9, 11 | `wutim` = 2 051 s ; `mslux` = 2 798 (lampe à fond) | `on` |
-| 06:50:51 | **2** | 1 | `wutim` retombe à **65 535** : la séquence est finie | **`sunset`** |
-| 06:51:22 | 1 | 0 | `mslux` = 117 : la lampe est éteinte | `off` |
+| `A − 34 min 50 s` | **2309** | 0, 2, 8, 11 | `wutim` démarre à 6 s ; `mslux` monte | `wake-up` |
+| `A + 21 s` | **2817** | 0, 8, 9, 11 | `wutim` = 2 051 s ; `mslux` = 2 798 (lampe à fond) | `on` |
+| `A + 51 s` | **2** | 1 | `wutim` retombe à **65 535** : la séquence est finie | **`sunset`** |
+| `A + 1 min 22 s` | 1 | 0 | `mslux` = 117 : la lampe est éteinte | `off` |
 
 Trois choses en sortent :
 
@@ -421,14 +430,14 @@ Trois choses en sortent :
 **Une deuxième alarme, le 2026-09-08** — même réveil, même heure, `wusts` toutes les 30 s, sans
 intervention. Elle rejoue la première et la sépare de ce qui n'en était pas :
 
-| Heure | `wusts` | Bits | Ce qui se passe |
+| Instant | `wusts` | Bits | Ce qui se passe |
 | --- | --- | --- | --- |
-| 06:15:32 | **2309** | 0, 2, 8, 11 | l'aube démarre, `wutim` à 28 s |
-| 06:50:05 | **2817** | 0, 8, 9, 11 | phase sonore, `wutim` = 2 051 s |
-| 06:51:06 | **258** | 1, 8 | veilleuse |
-| 06:51:36 | **257** | 0, 8 | lumière allumée, `mslux` = 398 — elle le reste 14 min |
-| 07:05:21 | **2** | 1 | `mslux` retombe à 116 |
-| 07:05:52 | 1 | 0 | repos |
+| `A − 34 min 28 s` | **2309** | 0, 2, 8, 11 | l'aube démarre, `wutim` à 28 s |
+| `A + 5 s` | **2817** | 0, 8, 9, 11 | phase sonore, `wutim` = 2 051 s |
+| `A + 1 min 06 s` | **258** | 1, 8 | veilleuse — c'est l'appui sur le bouton d'arrêt |
+| `A + 1 min 36 s` | **257** | 0, 8 | lumière allumée, `mslux` = 398 — elle le reste 14 min |
+| `A + 15 min 21 s` | **2** | 1 | `mslux` retombe à 116 |
+| `A + 15 min 52 s` | 1 | 0 | repos |
 
 Deux points s'en trouvent renforcés, un troisième corrigé :
 
