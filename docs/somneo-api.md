@@ -397,7 +397,8 @@ s'explique d'elle-même :
 | `2` | 1 | transitoire d'extinction | mesuré |
 | `257` | 0, 8 | lumière, depuis le repos | mesuré |
 | **`258`** | **1, 8** | **lumière, allumée pendant le transitoire — absent de la table** | mesuré |
-| **`264`** | **3, 8** | **coucher de soleil sans son — absent de la table** | mesuré |
+| **`264`** | **3, 8** | **coucher de soleil sans son, en soirée — absent de la table** | mesuré |
+| **`265`** | **0, 3, 8** | **le même, trois heures plus tard — absent aussi** | mesuré |
 | **`320`** | **6, 8** | **RelaxBreathing — absent de la table** | mesuré |
 | **`513`** | **0, 9** | **lecteur audio (aux ou FM) — absent de la table** | mesuré |
 | **`769`** | **0, 8, 9** | **lecteur audio + lampe — absent de la table** | mesuré |
@@ -434,6 +435,24 @@ ajouter : lampe allumée (`257`) puis RelaxBreathing donne `320`, pas une combin
 audio seul vaut `513` (bits 0 et 9) ; en allumant la lampe par-dessus, on obtient `769` — soit
 `513 + 256`, le bit 8 venant s'ajouter sans rien déplacer. Deux actions indépendantes, deux
 bits indépendants : `wusts` n'est pas une énumération d'états, c'est un champ de bits.
+
+**⚠ Le coucher de soleil ne vaut pas une valeur stable : `264` à 19 h, `265` à 22 h.** Mesuré
+six fois à chaque heure, dans les deux cas depuis un départ à `1`. Les deux voies d'écriture ont
+été comparées dans la même minute — `PUT wudsk {"onoff": true}` en direct et `toggle_sunset()`
+de `pysomneo` — et donnent **le même résultat** : ce n'est pas la bibliothèque, c'est l'état de
+l'appareil. Ce qui fait apparaître le bit 0 entre ces deux heures **n'est pas identifié** ; la
+veille prolongée est une piste, la luminosité ambiante une autre, aucune n'est testée.
+
+**Conséquence directe, et elle est lourde** : compléter la table de `pysomneo` en y ajoutant
+`264` ne suffit pas, puisque le même geste produit `265` quelques heures plus tard. C'est la
+démonstration la plus forte que le champ ne se lit pas par une table de valeurs — et elle
+s'applique d'abord au correctif qu'on s'apprêtait à proposer. Relevé : `comparer-voies-*.json`,
+sonde `probes/comparer_voies.py`.
+
+**Ce que `pysomneo` en fait, mesuré le 2026-09-09 sur la branche `ai-improvements`** : avec la
+table d'origine comme avec la table corrigée, `somneo_status` vaut `unknown` pour un coucher de
+soleil réel. Le correctif envisagé n'aurait donc rien changé ce soir-là. C'est la seule mesure
+qui ait exercé la bibliothèque elle-même plutôt que l'appareil — `probes/valide_fix.py`.
 
 **Ce que le bit 9 signifie, vérifié à l'oreille le 2026-09-09.** Il marque une **source audio
 engagée** — il se lève sur `snddv: "aux"` alors que rien n'est branché, donc sans qu'aucune

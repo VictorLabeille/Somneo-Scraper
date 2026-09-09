@@ -1,0 +1,31 @@
+{
+  "debut": 1788983951.096735,
+  "initial": {
+    "durat": 30,
+    "onoff": false,
+    "curve": 20,
+    "ctype": 0,
+    "sndtp": 1,
+    "snddv": "off",
+    "sndch": "",
+    "sndlv": 12,
+    "sndss": 200
+  },
+  "essais": [
+    {
+      "voie": "direct",
+      "tour": 1,
+      "depart": 1,
+      "wusts": 265,
+      "bits": [
+        0,
+        3,
+        8
+      ],
+      "onoff": true
+    }
+  ],
+  "restauration": {
+    "wusts": 1
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "debut": 1788983741.720094,
+  "avant": {
+    "sunset": {
+      "wusts": 265,
+      "somneo_status": "unknown"
+    },
+    "transitoire": {
+      "wusts": 265,
+      "somneo_status": "unknown"
+    }
+  },
+  "apres": {
+    "sunset": {
+      "wusts": 265,
+      "somneo_status": "unknown"
+    },
+    "transitoire": {
+      "wusts": 265,
+      "somneo_status": "unknown"
+    }
+  }
+}
