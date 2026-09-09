@@ -459,10 +459,31 @@ de 19 h **allumait la lampe avant chaque essai** pour fabriquer son contexte de 
 | 4 | lampe | 264 |
 | 5 | rien | 264 |
 
-**L'effet persiste** : une seule sollicitation lumineuse suffit, et les couchers de soleil
-suivants restent à `264` sans qu'il faille rallumer. Cohérent avec « bit 0 = composante veille » :
-l'appareil sort d'une veille profonde à la première lumière. La **durée** de cette persistance
-est en cours de mesure (`persistance_bit0.py`, paliers de 2 à 20 min sans lumière).
+**L'effet persiste**, mais brièvement : une sollicitation lumineuse éteint le bit 0, et il
+revient **entre 15 et 30 secondes** après l'extinction de la lampe.
+
+| Délai après la lampe | 15 s | 30 s | 60 s | 90 s | 120 s | 5 min |
+| --- | --- | --- | --- | --- | --- | --- |
+| `wusts` du coucher de soleil | **264** | 265 | 265 | 265 | 265 | 265 |
+
+**Conséquence pour tout consommateur de `wusts` : les deux valeurs se croisent en usage
+ordinaire.** Trente secondes séparent l'une de l'autre — un utilisateur qui éteint sa lampe puis
+lance un coucher de soleil obtient `264` s'il enchaîne, `265` s'il attend. Une table de valeurs
+doit donc porter les deux, ou aucune. Sondes : `prealable_bit0.py`, `veille_bit0.py`,
+`persistance_bit0.py`, `valide_correctif.py`.
+
+**Le correctif a été vérifié dans `pysomneo`, pas seulement sur l'appareil.** La branche
+`ai-improvements` a été exécutée avec l'ancienne table puis la nouvelle, sur le même coucher de
+soleil réel :
+
+| Table | `wusts` lu | `somneo_status` publié |
+| --- | --- | --- |
+| d'origine | 265 | **`unknown`** |
+| corrigée (`2` renommé, `264` et `265` ajoutés) | 265 | **`sunset`** |
+
+C'est la seule mesure qui exerce la bibliothèque plutôt que l'appareil, et elle a d'abord servi à
+**invalider** une première version du correctif qui n'ajoutait que `264` : elle laissait
+`somneo_status` à `unknown`. Ne rien proposer en amont sans l'avoir passée.
 
 **Conséquence directe, et elle est lourde** : compléter la table de `pysomneo` en y ajoutant
 `264` ne suffit pas, puisque le même geste produit `265` quelques heures plus tard. C'est la

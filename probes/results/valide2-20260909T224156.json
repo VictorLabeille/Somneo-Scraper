@@ -1,0 +1,72 @@
+{
+  "debut": 1788985824.8568144,
+  "volet1_origine": {
+    "sunset": {
+      "wusts": 265,
+      "somneo_status": "unknown"
+    },
+    "transitoire": {
+      "wusts": 1,
+      "somneo_status": "off"
+    }
+  },
+  "volet1_corrige": {
+    "sunset": {
+      "wusts": 265,
+      "somneo_status": "sunset"
+    },
+    "transitoire": {
+      "wusts": 1,
+      "somneo_status": "off"
+    }
+  },
+  "volet2": [
+    {
+      "apres_lampe_s": 15,
+      "wusts": 264,
+      "bits": [
+        3,
+        8
+      ]
+    },
+    {
+      "apres_lampe_s": 30,
+      "wusts": 265,
+      "bits": [
+        0,
+        3,
+        8
+      ]
+    },
+    {
+      "apres_lampe_s": 60,
+      "wusts": 265,
+      "bits": [
+        0,
+        3,
+        8
+      ]
+    },
+    {
+      "apres_lampe_s": 90,
+      "wusts": 265,
+      "bits": [
+        0,
+        3,
+        8
+      ]
+    },
+    {
+      "apres_lampe_s": 120,
+      "wusts": 265,
+      "bits": [
+        0,
+        3,
+        8
+      ]
+    }
+  ],
+  "restauration": {
+    "wusts": 1
+  }
+}

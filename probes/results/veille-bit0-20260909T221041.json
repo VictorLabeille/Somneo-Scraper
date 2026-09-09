@@ -1,0 +1,53 @@
+{
+  "note": "Releve reconstitue depuis le journal : la sonde a ete arretee par SIGTERM avant son bloc de sauvegarde. Les paliers 180 s et 300 s n'ont pas ete atteints, la reponse etant acquise des 10 s et 60 s.",
+  "essais": [
+    {
+      "repos_s": 10,
+      "tour": 1,
+      "depart": 1,
+      "wusts": 265,
+      "bits": [
+        0,
+        3,
+        8
+      ],
+      "lux_classe": "clair"
+    },
+    {
+      "repos_s": 10,
+      "tour": 2,
+      "depart": 1,
+      "wusts": 265,
+      "bits": [
+        0,
+        3,
+        8
+      ],
+      "lux_classe": "clair"
+    },
+    {
+      "repos_s": 60,
+      "tour": 1,
+      "depart": 1,
+      "wusts": 265,
+      "bits": [
+        0,
+        3,
+        8
+      ],
+      "lux_classe": "clair"
+    },
+    {
+      "repos_s": 60,
+      "tour": 2,
+      "depart": 1,
+      "wusts": 265,
+      "bits": [
+        0,
+        3,
+        8
+      ],
+      "lux_classe": "clair"
+    }
+  ]
+}
