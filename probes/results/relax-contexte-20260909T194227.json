@@ -1,0 +1,117 @@
+{
+  "initial": {
+    "wurlx": {
+      "durat": 10,
+      "onoff": false,
+      "maxpr": 7,
+      "progr": 1,
+      "rtype": 0,
+      "intny": 20,
+      "sndlv": 12,
+      "sndss": 200,
+      "rlbpm": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "pause": [
+        20,
+        20,
+        20,
+        20,
+        10,
+        10,
+        10
+      ]
+    },
+    "wulgt": {
+      "ltlvl": 15,
+      "ltlch": 0,
+      "onoff": false,
+      "ctype": 0,
+      "tempy": true,
+      "ngtlt": false,
+      "wucrv": [],
+      "ltset": [],
+      "pwmon": false,
+      "pwmvs": [],
+      "diman": 0
+    }
+  },
+  "essais": [
+    {
+      "contexte": "depuis le repos",
+      "depart": 1,
+      "wusts": 320,
+      "bits": [
+        6,
+        8
+      ]
+    },
+    {
+      "contexte": "depuis le repos",
+      "depart": 1,
+      "wusts": 320,
+      "bits": [
+        6,
+        8
+      ]
+    },
+    {
+      "contexte": "depuis le repos",
+      "depart": 1,
+      "wusts": 320,
+      "bits": [
+        6,
+        8
+      ]
+    },
+    {
+      "contexte": "dans le transitoire",
+      "depart": 2,
+      "wusts": 320,
+      "bits": [
+        6,
+        8
+      ]
+    },
+    {
+      "contexte": "dans le transitoire",
+      "depart": 2,
+      "wusts": 320,
+      "bits": [
+        6,
+        8
+      ]
+    },
+    {
+      "contexte": "dans le transitoire",
+      "depart": 2,
+      "wusts": 320,
+      "bits": [
+        6,
+        8
+      ]
+    }
+  ],
+  "restauration": {
+    "wusts": 1,
+    "wulgt": {
+      "ltlvl": 15,
+      "ltlch": 0,
+      "onoff": false,
+      "ctype": 0,
+      "tempy": true,
+      "ngtlt": false,
+      "wucrv": [],
+      "ltset": [],
+      "pwmon": false,
+      "pwmvs": [],
+      "diman": 0
+    }
+  }
+}

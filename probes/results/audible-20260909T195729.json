@@ -1,0 +1,120 @@
+{
+  "initial": {
+    "wuply": {
+      "onoff": false,
+      "sdvol": 8,
+      "sdvch": 0,
+      "tempy": false,
+      "sndss": 0,
+      "snddv": "rlx",
+      "sndch": "1"
+    },
+    "wulgt": {
+      "ltlvl": 15,
+      "ltlch": 0,
+      "onoff": false,
+      "ctype": 0,
+      "tempy": true,
+      "ngtlt": false,
+      "wucrv": [],
+      "ltset": [],
+      "pwmon": false,
+      "pwmvs": [],
+      "diman": 0
+    },
+    "wudsk": {
+      "durat": 30,
+      "onoff": false,
+      "curve": 20,
+      "ctype": 0,
+      "sndtp": 1,
+      "snddv": "off",
+      "sndch": "",
+      "sndlv": 12,
+      "sndss": 200
+    },
+    "wusts": {
+      "wusts": 1,
+      "rpair": false,
+      "prvmd": false,
+      "sdemo": false,
+      "pwrsz": false,
+      "nrcur": 4,
+      "snztm": 8,
+      "wizrd": 99,
+      "brght": 1,
+      "dspon": false,
+      "canup": false,
+      "fmrna": false,
+      "wutim": 65535,
+      "dutim": 65535,
+      "sntim": 65535,
+      "updtm": 65280,
+      "updln": 65310
+    }
+  },
+  "essais": [
+    {
+      "quoi": "FM volume 10",
+      "wusts": 513,
+      "bits": [
+        0,
+        9
+      ]
+    },
+    {
+      "quoi": "sunset sonore volume 10",
+      "wusts": 776,
+      "bits": [
+        3,
+        8,
+        9
+      ]
+    },
+    {
+      "quoi": "veilleuse+lecteur",
+      "veilleuse": 257,
+      "bits_v": [
+        0,
+        8
+      ],
+      "combine": 769,
+      "bits_c": [
+        0,
+        8,
+        9
+      ]
+    },
+    {
+      "quoi": "dspon+lampe",
+      "dspon": 1,
+      "bits_d": [
+        0
+      ],
+      "combine": 257,
+      "bits_c": [
+        0,
+        8
+      ]
+    },
+    {
+      "quoi": "sunset+lecteur",
+      "sunset": 777,
+      "bits_s": [
+        0,
+        3,
+        8,
+        9
+      ],
+      "combine": 513,
+      "bits_c": [
+        0,
+        9
+      ]
+    }
+  ],
+  "restauration": {
+    "wusts": 513,
+    "ecarts": "{}"
+  }
+}

@@ -1,0 +1,183 @@
+{
+  "initial": {
+    "wuply": {
+      "onoff": false,
+      "sdvol": 8,
+      "sdvch": 0,
+      "tempy": false,
+      "sndss": 0,
+      "snddv": "rlx",
+      "sndch": "1"
+    },
+    "wulgt": {
+      "ltlvl": 15,
+      "ltlch": 0,
+      "onoff": false,
+      "ctype": 0,
+      "tempy": true,
+      "ngtlt": false,
+      "wucrv": [],
+      "ltset": [],
+      "pwmon": false,
+      "pwmvs": [],
+      "diman": 0
+    }
+  },
+  "essais": [
+    {
+      "quoi": "lecteur",
+      "contexte": "depuis le repos",
+      "depart": 1,
+      "wusts": 320,
+      "bits": [
+        6,
+        8
+      ],
+      "onoff_relu": false
+    },
+    {
+      "quoi": "lecteur",
+      "contexte": "depuis le repos",
+      "depart": 1,
+      "wusts": 320,
+      "bits": [
+        6,
+        8
+      ],
+      "onoff_relu": false
+    },
+    {
+      "quoi": "lecteur",
+      "contexte": "depuis le repos",
+      "depart": 1,
+      "wusts": 320,
+      "bits": [
+        6,
+        8
+      ],
+      "onoff_relu": false
+    },
+    {
+      "quoi": "lecteur",
+      "contexte": "dans le transitoire",
+      "depart": 2,
+      "wusts": 320,
+      "bits": [
+        6,
+        8
+      ],
+      "onoff_relu": false
+    },
+    {
+      "quoi": "lecteur",
+      "contexte": "dans le transitoire",
+      "depart": 2,
+      "wusts": 320,
+      "bits": [
+        6,
+        8
+      ],
+      "onoff_relu": false
+    },
+    {
+      "quoi": "lecteur",
+      "contexte": "dans le transitoire",
+      "depart": 2,
+      "wusts": 320,
+      "bits": [
+        6,
+        8
+      ],
+      "onoff_relu": false
+    },
+    {
+      "quoi": "lampe+lecteur",
+      "lampe_seule": 257,
+      "bits_lampe": [
+        0,
+        8
+      ],
+      "combine": 320,
+      "bits_combine": [
+        6,
+        8
+      ]
+    },
+    {
+      "quoi": "lampe+lecteur",
+      "lampe_seule": 257,
+      "bits_lampe": [
+        0,
+        8
+      ],
+      "combine": 320,
+      "bits_combine": [
+        6,
+        8
+      ]
+    },
+    {
+      "quoi": "extinction lecteur",
+      "trace": [
+        {
+          "t": 0.74,
+          "wusts": 2
+        },
+        {
+          "t": 1.97,
+          "wusts": 2
+        },
+        {
+          "t": 3.22,
+          "wusts": 2
+        },
+        {
+          "t": 4.46,
+          "wusts": 2
+        },
+        {
+          "t": 5.68,
+          "wusts": 2
+        },
+        {
+          "t": 6.92,
+          "wusts": 2
+        },
+        {
+          "t": 8.16,
+          "wusts": 2
+        },
+        {
+          "t": 9.4,
+          "wusts": 1
+        }
+      ]
+    }
+  ],
+  "restauration": {
+    "wusts": 1,
+    "wuply": {
+      "onoff": false,
+      "sdvol": 8,
+      "sdvch": 0,
+      "tempy": false,
+      "sndss": 0,
+      "snddv": "rlx",
+      "sndch": "1"
+    },
+    "wulgt": {
+      "ltlvl": 15,
+      "ltlch": 0,
+      "onoff": false,
+      "ctype": 0,
+      "tempy": true,
+      "ngtlt": false,
+      "wucrv": [],
+      "ltset": [],
+      "pwmon": false,
+      "pwmvs": [],
+      "diman": 0
+    },
+    "ecarts": "{}"
+  }
+}

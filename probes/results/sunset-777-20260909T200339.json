@@ -1,0 +1,123 @@
+{
+  "initial": {
+    "wuply": {
+      "onoff": false,
+      "sdvol": 8,
+      "sdvch": 0,
+      "tempy": false,
+      "sndss": 0,
+      "snddv": "rlx",
+      "sndch": "1"
+    },
+    "wulgt": {
+      "ltlvl": 15,
+      "ltlch": 0,
+      "onoff": false,
+      "ctype": 0,
+      "tempy": true,
+      "ngtlt": false,
+      "wucrv": [],
+      "ltset": [],
+      "pwmon": false,
+      "pwmvs": [],
+      "diman": 0
+    },
+    "wudsk": {
+      "durat": 30,
+      "onoff": false,
+      "curve": 20,
+      "ctype": 0,
+      "sndtp": 1,
+      "snddv": "off",
+      "sndch": "",
+      "sndlv": 12,
+      "sndss": 200
+    }
+  },
+  "volet1": [
+    {
+      "cas": "source dans le PUT",
+      "wusts": 777,
+      "bits": [
+        0,
+        3,
+        8,
+        9
+      ]
+    },
+    {
+      "cas": "source dans le PUT",
+      "wusts": 777,
+      "bits": [
+        0,
+        3,
+        8,
+        9
+      ]
+    },
+    {
+      "cas": "source dans le PUT",
+      "wusts": 777,
+      "bits": [
+        0,
+        3,
+        8,
+        9
+      ]
+    },
+    {
+      "cas": "source deja en place",
+      "wusts": 777,
+      "bits": [
+        0,
+        3,
+        8,
+        9
+      ]
+    },
+    {
+      "cas": "source deja en place",
+      "wusts": 777,
+      "bits": [
+        0,
+        3,
+        8,
+        9
+      ]
+    },
+    {
+      "cas": "source deja en place",
+      "wusts": 777,
+      "bits": [
+        0,
+        3,
+        8,
+        9
+      ]
+    }
+  ],
+  "volet2": [
+    {
+      "quoi": "FM",
+      "wusts": 513,
+      "bits": [
+        0,
+        9
+      ]
+    },
+    {
+      "quoi": "sunset sonore",
+      "wusts": 777,
+      "bits": [
+        0,
+        3,
+        8,
+        9
+      ]
+    }
+  ],
+  "restauration": {
+    "wusts": 1,
+    "ecarts": "{}"
+  }
+}

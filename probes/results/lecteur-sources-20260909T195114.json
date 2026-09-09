@@ -1,0 +1,144 @@
+{
+  "initial": {
+    "wuply": {
+      "onoff": false,
+      "sdvol": 8,
+      "sdvch": 0,
+      "tempy": false,
+      "sndss": 0,
+      "snddv": "rlx",
+      "sndch": "1"
+    },
+    "wulgt": {
+      "ltlvl": 15,
+      "ltlch": 0,
+      "onoff": false,
+      "ctype": 0,
+      "tempy": true,
+      "ngtlt": false,
+      "wucrv": [],
+      "ltset": [],
+      "pwmon": false,
+      "pwmvs": [],
+      "diman": 0
+    }
+  },
+  "essais": [
+    {
+      "source": "aux",
+      "tour": 1,
+      "depart": 1,
+      "wusts": 513,
+      "bits": [
+        0,
+        9
+      ],
+      "onoff_relu": true,
+      "snddv_relu": "aux"
+    },
+    {
+      "source": "aux+lampe",
+      "wusts": 769,
+      "bits": [
+        0,
+        8,
+        9
+      ]
+    },
+    {
+      "source": "aux",
+      "tour": 2,
+      "depart": 1,
+      "wusts": 513,
+      "bits": [
+        0,
+        9
+      ],
+      "onoff_relu": true,
+      "snddv_relu": "aux"
+    },
+    {
+      "source": "aux",
+      "tour": 3,
+      "depart": 1,
+      "wusts": 513,
+      "bits": [
+        0,
+        9
+      ],
+      "onoff_relu": true,
+      "snddv_relu": "aux"
+    },
+    {
+      "source": "fmr",
+      "tour": 1,
+      "depart": 1,
+      "wusts": 513,
+      "bits": [
+        0,
+        9
+      ],
+      "onoff_relu": true,
+      "snddv_relu": "fmr"
+    },
+    {
+      "source": "fmr+lampe",
+      "wusts": 769,
+      "bits": [
+        0,
+        8,
+        9
+      ]
+    },
+    {
+      "source": "fmr",
+      "tour": 2,
+      "depart": 1,
+      "wusts": 513,
+      "bits": [
+        0,
+        9
+      ],
+      "onoff_relu": true,
+      "snddv_relu": "fmr"
+    },
+    {
+      "source": "fmr",
+      "tour": 3,
+      "depart": 1,
+      "wusts": 513,
+      "bits": [
+        0,
+        9
+      ],
+      "onoff_relu": true,
+      "snddv_relu": "fmr"
+    }
+  ],
+  "restauration": {
+    "wusts": 1,
+    "wuply": {
+      "onoff": false,
+      "sdvol": 8,
+      "sdvch": 0,
+      "tempy": false,
+      "sndss": 0,
+      "snddv": "rlx",
+      "sndch": "1"
+    },
+    "wulgt": {
+      "ltlvl": 15,
+      "ltlch": 0,
+      "onoff": false,
+      "ctype": 0,
+      "tempy": true,
+      "ngtlt": false,
+      "wucrv": [],
+      "ltset": [],
+      "pwmon": false,
+      "pwmvs": [],
+      "diman": 0
+    },
+    "ecarts": "{}"
+  }
+}

@@ -399,11 +399,13 @@ s'explique d'elle-même :
 | **`258`** | **1, 8** | **lumière, allumée pendant le transitoire — absent de la table** | mesuré |
 | **`264`** | **3, 8** | **coucher de soleil sans son — absent de la table** | mesuré |
 | **`320`** | **6, 8** | **RelaxBreathing — absent de la table** | mesuré |
+| **`513`** | **0, 9** | **lecteur audio (aux ou FM) — absent de la table** | mesuré |
+| **`769`** | **0, 8, 9** | **lecteur audio + lampe — absent de la table** | mesuré |
 | `776` | 3, 8, 9 | coucher de soleil **avec** son | mesuré |
-| `777` | 0, 3, 8, 9 | idem + bit 0 — **jamais reproduit ici** | table amont |
+| `777` | 0, 3, 8, 9 | idem + bit 0 — **l'écart avec `776` reste inexpliqué** | mesuré |
 | `2309` | 0, 2, 8, 11 | aube de l'alarme | mesuré |
 | `2817` | 0, 8, 9, 11 | phase sonore | mesuré |
-| `2321` | 0, 4, 8, 11 | rappel | table amont |
+| `2321` | 0, 4, 8, 11 | rappel — jamais reproduit ici | table amont |
 
 **`776` est exactement `264` plus le bit 9, et c'est mesuré, pas déduit.** Le coucher de soleil
 de cet appareil est réglé sans son (`wudsk.snddv` = `"off"`) et vaut `264` ; le même, relancé
@@ -412,13 +414,39 @@ la table de `pysomneo`. La valeur absente n'est donc **pas une particularité de
 exemplaire** : c'est le même état à un réglage près. Cela répond à la question « et si cela
 changeait d'un Somneo à l'autre » — ce qui change n'est pas le modèle, c'est le son.
 
-**Ce qui reste inexpliqué, et qu'il ne faut pas prétendre expliquer** : `777` (bits 0, 3, 8, 9)
-et `2321` viennent de la table amont et n'ont jamais été reproduits ici. Le coucher de soleil
-**efface** le bit de contexte sur cet appareil — `776` dans les deux contextes testés — donc
-rien n'explique d'où sort le bit 0 de `777`.
+**`777` a fini par être reproduit — mais l'écart avec `776` reste inexpliqué.** Le coucher de
+soleil sonore a d'abord donné `776` (six fois, deux contextes), puis `777` (neuf fois) plus tard
+dans la même soirée. L'hypothèse testée — la source configurée dans le PUT de démarrage contre
+une source déjà en place — est **fausse** : les deux formes donnent `777`, trois fois chacune.
+Ce qui fait apparaître ou disparaître le bit 0 sur un coucher de soleil sonore n'est donc pas
+identifié. **Ne rien affirmer là-dessus.** Ce qui compte pour l'usage : les deux valeurs
+existent sur le même appareil, et la table amont les porte toutes les deux.
 
-**Le bit 6 est inédit** : RelaxBreathing vaut `320` (bits 6 et 8), deux fois sur deux. Le bit
-n'apparaît ni dans `StatusProperties`, ni dans la table de `pysomneo`, ni dans l'issue #16.
+**`2321` (rappel) reste le seul état de la table jamais reproduit ici** — il demande une vraie
+alarme suivie d'un appui sur le rappel, donc une observation du matin, pas une écriture.
+
+**Le bit 6 est inédit** : RelaxBreathing vaut `320` (bits 6 et 8), huit fois sur huit et dans
+les deux contextes. Le bit n'apparaît ni dans `StatusProperties`, ni dans la table de
+`pysomneo`, ni dans l'issue #16. RelaxBreathing **écrase** l'état lumineux au lieu de s'y
+ajouter : lampe allumée (`257`) puis RelaxBreathing donne `320`, pas une combinaison.
+
+**Le modèle se vérifie par composition, et c'est la démonstration la plus forte.** Le lecteur
+audio seul vaut `513` (bits 0 et 9) ; en allumant la lampe par-dessus, on obtient `769` — soit
+`513 + 256`, le bit 8 venant s'ajouter sans rien déplacer. Deux actions indépendantes, deux
+bits indépendants : `wusts` n'est pas une énumération d'états, c'est un champ de bits.
+
+**Ce que le bit 9 signifie, vérifié à l'oreille le 2026-09-09.** Il marque une **source audio
+engagée** — il se lève sur `snddv: "aux"` alors que rien n'est branché, donc sans qu'aucune
+émission ne soit possible. Mais quand la source produit du son et que le volume suffit, le son
+sort bel et bien : à `sdvol`/`sndlv` = 1 le propriétaire, présent dans la pièce, n'entendait
+rien ; à 12, il a décrit sans voir le journal « trois bruits blancs » (les trois salves de radio
+FM) puis « un bruit de pluie » (le thème *Soft Rain* du coucher de soleil). Les deux lectures
+sont donc vraies à la fois, et il ne faut pas confondre le bit avec l'audibilité.
+
+**Le modèle a été validé de l'extérieur** au même moment : le propriétaire a rapporté « la
+lumière s'est allumée six fois, sans son », puis les quatre sons. Le bit 8 s'était levé six
+fois et le bit 9 quatre fois. Un observateur qui ne voyait pas les relevés a décrit exactement
+la séquence que les bits prédisaient.
 
 **Les états relevés sur l'appareil, le 2026-09-06 — puis rejoués le 2026-09-09, et l'un des
 trois ne s'est pas reproduit.** La première campagne (`probes/etats_et_udp.py`) enchaînait les
@@ -435,7 +463,9 @@ d'arbitrage (`probes/veilleuse.py`) corrigent les deux défauts.
 | **Lampe ou veilleuse, allumée pendant le transitoire** | **258** | 1, 8 | **6/6** | **non → `unknown`** |
 | **Coucher de soleil, sans son** | **264** | 3, 8 | **6/6**, deux contextes | **non → `unknown`** |
 | Coucher de soleil, **avec** son | 776 | 3, 8, 9 | 6/6, deux contextes | oui → `sunset` |
-| **RelaxBreathing** | **320** | 6, 8 | **2/2** | **non → `unknown`** |
+| **RelaxBreathing** | **320** | 6, 8 | **8/8**, deux contextes | **non → `unknown`** |
+| **Lecteur audio** (aux ou FM) | **513** | 0, 9 | **6/6** | **non → `unknown`** |
+| **Lecteur audio + lampe** | **769** | 0, 8, 9 | **2/2** | **non → `unknown`** |
 | ~~Veilleuse = 258~~ | ~~258~~ | — | **infirmé** — voir ci-dessous | — |
 
 **Le niveau de la lampe n'entre pas dans `wusts`** : `ltlvl` à 1, 3, 12 et 25 donne `257` à
