@@ -387,19 +387,110 @@ non confirmée par le code** : bit 3 = coucher de soleil, bit 8 = lumière allum
 bit 9 = son actif. (`2321` = bits 0,4,8,11 → snooze ✓ ; `2309` = bits 0,2,8,11 → réveil ✓ ;
 `257` = bits 0,8 → lumière seule ✓.)
 
-**Les états relevés sur l'appareil, le 2026-09-06.** Chaque état a été provoqué puis restauré,
-avec vérification du retour à l'état initial :
+**Le modèle en bits explique la table de `pysomneo` en entier, y compris ce qui lui manque.**
+Décomposées, ses huit entrées sont toutes des combinaisons cohérentes — et l'une des absences
+s'explique d'elle-même :
 
-| État provoqué | `wusts` | Bits | Dans la table de `pysomneo` ? |
+| Valeur | Bits | Lecture | Statut |
 | --- | --- | --- | --- |
-| Repos, afficheur éteint | 1 | 0 | oui → `off` |
-| Lumière allumée (niveau 3) | 257 | 0, 8 | oui → `light-on` |
-| **Veilleuse allumée** | **258** | 1, 8 | **non → `unknown`** |
-| **Coucher de soleil lancé** | **264** | 3, 8 | **non → `unknown`** |
+| `1` | 0 | veille | mesuré |
+| `2` | 1 | transitoire d'extinction | mesuré |
+| `257` | 0, 8 | lumière, depuis le repos | mesuré |
+| **`258`** | **1, 8** | **lumière, allumée pendant le transitoire — absent de la table** | mesuré |
+| **`264`** | **3, 8** | **coucher de soleil sans son — absent de la table** | mesuré |
+| **`320`** | **6, 8** | **RelaxBreathing — absent de la table** | mesuré |
+| `776` | 3, 8, 9 | coucher de soleil **avec** son | mesuré |
+| `777` | 0, 3, 8, 9 | idem + bit 0 — **jamais reproduit ici** | table amont |
+| `2309` | 0, 2, 8, 11 | aube de l'alarme | mesuré |
+| `2817` | 0, 8, 9, 11 | phase sonore | mesuré |
+| `2321` | 0, 4, 8, 11 | rappel | table amont |
 
-C'est la démonstration du défaut, en trois secondes et sans outillage : **deux usages
-ordinaires du réveil produisent une valeur que la table de huit entrées ne couvre pas**, et
-`STATUS.get(...)` renvoie alors `unknown`.
+**`776` est exactement `264` plus le bit 9, et c'est mesuré, pas déduit.** Le coucher de soleil
+de cet appareil est réglé sans son (`wudsk.snddv` = `"off"`) et vaut `264` ; le même, relancé
+avec `snddv: "dus"` au volume 1, vaut **`776` — six fois sur six**, la valeur exacte que porte
+la table de `pysomneo`. La valeur absente n'est donc **pas une particularité de cet
+exemplaire** : c'est le même état à un réglage près. Cela répond à la question « et si cela
+changeait d'un Somneo à l'autre » — ce qui change n'est pas le modèle, c'est le son.
+
+**Ce qui reste inexpliqué, et qu'il ne faut pas prétendre expliquer** : `777` (bits 0, 3, 8, 9)
+et `2321` viennent de la table amont et n'ont jamais été reproduits ici. Le coucher de soleil
+**efface** le bit de contexte sur cet appareil — `776` dans les deux contextes testés — donc
+rien n'explique d'où sort le bit 0 de `777`.
+
+**Le bit 6 est inédit** : RelaxBreathing vaut `320` (bits 6 et 8), deux fois sur deux. Le bit
+n'apparaît ni dans `StatusProperties`, ni dans la table de `pysomneo`, ni dans l'issue #16.
+
+**Les états relevés sur l'appareil, le 2026-09-06 — puis rejoués le 2026-09-09, et l'un des
+trois ne s'est pas reproduit.** La première campagne (`probes/etats_et_udp.py`) enchaînait les
+trois états **sans restaurer entre eux**, et ne relisait pas `wulgt` après écriture : elle ne
+pouvait pas voir qu'un de ses relevés dépendait du contexte. La seconde
+(`probes/etats_wusts.py`, trois répétitions avec retour au repos vérifié) et la sonde
+d'arbitrage (`probes/veilleuse.py`) corrigent les deux défauts.
+
+| État provoqué | `wusts` | Bits | Reproduit le 09 | Dans la table de `pysomneo` ? |
+| --- | --- | --- | --- | --- |
+| Repos | 1 | 0 | — | oui → `off` |
+| Lampe allumée, **depuis le repos** | 257 | 0, 8 | 3/3 + 4/4 en niveau | oui → `light-on` |
+| Veilleuse seule, **depuis le repos** | 257 | 0, 8 | 3/3 | oui → `light-on` |
+| **Lampe ou veilleuse, allumée pendant le transitoire** | **258** | 1, 8 | **6/6** | **non → `unknown`** |
+| **Coucher de soleil, sans son** | **264** | 3, 8 | **6/6**, deux contextes | **non → `unknown`** |
+| Coucher de soleil, **avec** son | 776 | 3, 8, 9 | 6/6, deux contextes | oui → `sunset` |
+| **RelaxBreathing** | **320** | 6, 8 | **2/2** | **non → `unknown`** |
+| ~~Veilleuse = 258~~ | ~~258~~ | — | **infirmé** — voir ci-dessous | — |
+
+**Le niveau de la lampe n'entre pas dans `wusts`** : `ltlvl` à 1, 3, 12 et 25 donne `257` à
+chaque fois. Et **l'afficheur non plus** : `wusts {"dspon": true}` puis `false` laissent
+`wusts` à `1`. L'annotation « bit 1 = menu utilisateur affiché », tirée du code de
+l'application, n'est donc **pas** l'afficheur permanent — question ouverte depuis le 31 août,
+close par la mesure du 2026-09-09.
+
+**La veilleuse ne vaut pas 258 : elle vaut 257, comme la lampe.** Provoquée seule
+(`wulgt {"ngtlt": true}`, lampe éteinte), elle donne `257` trois fois sur trois le 2026-09-09.
+**`wusts` ne distingue pas la veilleuse de la lampe** — seul `wulgt.ngtlt` le fait. Le `258` du
+06 venait de ce que la lampe était restée allumée, et la sonde ne le relisait pas.
+
+**Et le bit 0/1 ne décrit pas la lumière du tout.** `veilleuse.py` a écrit **deux fois la même
+chose** à deux secondes d'intervalle et obtenu deux valeurs :
+
+| Séquence | Écriture | `wulgt` relu | `wusts` |
+| --- | --- | --- | --- |
+| A | `{"ngtlt": true}` | `onoff=False ngtlt=True` | **257** (bits 0, 8) |
+| B | `{"onoff": true, "ltlvl": 3}` | `onoff=True ngtlt=False` | **257** (bits 0, 8) |
+| C | `{"onoff": true, "ltlvl": 3}` — identique à B | `onoff=True ngtlt=False` | **258** (bits 1, 8) |
+
+Ce qui distingue C de B n'est pas l'état lumineux, qui est le même : c'est que C écrit pendant
+que l'appareil est encore dans l'état transitoire `2` laissé par l'extinction précédente. **Le
+bit 0 et le bit 1 portent un contexte d'interface, pas l'éclairage.**
+
+**La règle est déterministe, et se provoque à volonté** (`contexte_wusts.py`, puis
+`wusts_exhaustif.py`) : `wusts` **hérite du bit de contexte de l'état dans lequel se trouve
+l'appareil au moment de l'écriture**.
+
+| Action | Écrite depuis le repos (`1`) | Écrite pendant le transitoire (`2`) |
+| --- | --- | --- |
+| Lampe | **257** — 3/3 | **258** — 3/3 |
+| Veilleuse | **257** — 3/3 | **258** — 3/3 |
+| Coucher de soleil (sans son) | **264** — 3/3 | **264** — 3/3 |
+| Coucher de soleil (avec son) | **776** — 3/3 | **776** — 3/3 |
+
+Les deux formes de lumière héritent ; le coucher de soleil **efface** le bit de contexte. Un
+délai de 2 s contre 15 s après extinction suffit à basculer d'une colonne à l'autre — c'est
+donc reproductible par n'importe qui, sans outillage.
+
+**Conséquence pour qui lit `wusts` : une table de valeurs entières ne peut pas être complète.**
+Le même état physique produit plusieurs valeurs selon ce qui précède. C'est l'argument de fond
+contre la table de `pysomneo`, et il ne dépend d'aucune valeur particulière.
+
+Ce qui reste démontré, et suffit : **un usage ordinaire du réveil — le coucher de soleil —
+produit une valeur que la table de huit entrées ne couvre pas**, et `STATUS.get(...)` renvoie
+alors `unknown`.
+
+**`2` est un état transitoire d'extinction, et sa durée est déterministe.** Échantillonné à
+0,5 s par `wusts_exhaustif.py`, il tient **7,46 s — trois fois de suite, à 10 ms près** (vu de
+t+0,7 s à t+8,2 s après l'extinction). Il apparaît après extinction de la lampe et du coucher
+de soleil, **pas** après celle de la veilleuse. C'est pourquoi les captures échantillonnées à 30 s le manquaient
+une fois sur deux. Ce qu'il *désigne* reste inconnu — la mesure dit quand il apparaît et
+combien il dure, pas ce qu'affiche l'appareil.
 
 **Une alarme complète, observée sans y toucher — 2026-09-07.** Les états ci-dessus étaient
 provoqués à la main. Celui-ci a été relevé au fil d'un vrai réveil, `wusts` interrogé toutes
@@ -434,7 +525,7 @@ intervention. Elle rejoue la première et la sépare de ce qui n'en était pas :
 | --- | --- | --- | --- |
 | `A − 34 min 28 s` | **2309** | 0, 2, 8, 11 | l'aube démarre, `wutim` à 28 s |
 | `A + 5 s` | **2817** | 0, 8, 9, 11 | phase sonore, `wutim` = 2 051 s |
-| `A + 1 min 06 s` | **258** | 1, 8 | veilleuse — c'est l'appui sur le bouton d'arrêt |
+| `A + 1 min 06 s` | **258** | 1, 8 | lumière, bit 1 — c'est l'appui sur le bouton d'arrêt |
 | `A + 1 min 36 s` | **257** | 0, 8 | lumière allumée, `mslux` = 398 — elle le reste 14 min |
 | `A + 15 min 21 s` | **2** | 1 | `mslux` retombe à 116 |
 | `A + 15 min 52 s` | 1 | 0 | repos |
@@ -449,27 +540,26 @@ Deux points s'en trouvent renforcés, un troisième corrigé :
   échantillon**, à chaque fois. C'est un état de passage vers le repos, pas un mode ; l'étiquette
   `sunset` de la table amont est fausse dans les deux cas.
 - **La sortie d'alarme n'a pas de forme unique.** Le 7 : 2817 → 2 → 1 en une minute. Le 8 :
-  2817 → 258 → 257 → 2 → 1 en quinze. Un client qui attendrait une séquence fixe pour détecter
+  2817 → 258 → 257 → 2 → 1 en quinze — et le `258` s'y lit désormais comme « lumière allumée
+  avec le bit de contexte levé », non comme la veilleuse. Un client qui attendrait une séquence fixe pour détecter
   la fin d'un réveil se tromperait un matin sur deux — ce qui suit l'alarme, c'est ce que
   l'utilisateur fait, pas ce que l'appareil décide. Les quatorze minutes de lumière du 8 le
   disent bien : le propriétaire l'a allumée **par inadvertance** en arrêtant la sonnerie, puis
   éteinte (confirmé le 2026-09-08). Rien dans ces bits ne distingue une intention d'un geste
   de travers.
 
-  > **Ce qu'on sait, et ce qu'on ne sait pas — à tenir séparé.** `2` n'a été vu qu'**une fois**,
-  > sur un seul relevé, dans les trente secondes entre la fin de la séquence (`wutim` = 65 535)
-  > et le retour au repos. C'est donc un **état transitoire d'extinction**, c'est tout ce que la
-  > mesure établit.
+  > **Ce qu'on sait, et ce qu'on ne sait pas — à tenir séparé.** `2` est un **état transitoire
+  > d'extinction de 7,46 s**, mesuré le 2026-09-09 (§ modèle en bits) sur douze extinctions,
+  > dont trois échantillonnées à 0,5 s. Il ne suit pas l'extinction de la veilleuse. S'y
+  > ajoutent quatre observations fortuites, toujours juste avant le retour à `1` : la
+  > restauration du 06, les alarmes des 07 et 09, l'extinction de lampe du 08.
   >
   > **Ne pas écrire que `2` est « l'afficheur allumé »** — affirmé ici par erreur le
-  > 2026-09-07, avant relecture du relevé complet : `dspon` vaut `False` sur ce relevé même, ce
-  > qui contredit plutôt cette lecture. Personne n'était devant l'appareil, l'état physique
-  > n'est pas connu. `wulgt` n'était pas interrogé dans cette fenêtre (phase lente), donc la
-  > veilleuse — l'autre porteuse connue du bit 1, mesurée à 258 le 6 — n'est ni établie ni
-  > exclue.
+  > 2026-09-07 : `dspon` vaut `False` sur le relevé même. Ce qu'il *désigne* reste inconnu ;
+  > la mesure dit quand il apparaît et combien il dure, rien de plus.
   >
   > L'argument à porter en amont est donc le plus étroit : **le coucher de soleil de cet
-  > appareil vaut 264, et 2 s'observe à l'arrêt d'une alarme.** Cela suffit à montrer que la
+  > appareil vaut 264, et `2` est un transitoire d'extinction.** Cela suffit à montrer que la
   > table associe `sunset` à une valeur qui n'est pas celle du coucher de soleil ici, sans
   > prétendre savoir ce que `2` désigne.
 
@@ -477,9 +567,11 @@ Deux corrections à apporter aux hypothèses du 31 août :
 
 - **bit 3 = coucher de soleil : confirmé** par la mesure (264 = bits 3 et 8). Ce n'était qu'une
   déduction depuis la table de `pysomneo`.
-- **bit 1 n'est pas « menu utilisateur affiché »** — ou pas seulement : il apparaît avec la
-  **veilleuse**, sans qu'aucun menu ne soit ouvert. L'annotation tirée du code de l'application
-  est donc incomplète. Ne pas la reprendre telle quelle.
+- **bit 1 : l'annotation « menu utilisateur affiché » n'est ni confirmée ni infirmée.** Elle
+  avait été mise en doute ici le 2026-09-07 au motif qu'il « apparaît avec la veilleuse » —
+  **c'était faux**, et la mesure du 2026-09-09 l'a corrigé : la veilleuse seule vaut `257`,
+  bit 0. Ce qui est établi, c'est que les bits 0 et 1 s'échangent selon le contexte antérieur
+  et non selon l'éclairage. Ne rien affirmer de plus.
 - **bit 8 accompagne toute émission de lumière** — lampe, veilleuse et coucher de soleil le
   portent tous les trois.
 

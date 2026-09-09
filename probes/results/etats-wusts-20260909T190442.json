@@ -1,0 +1,424 @@
+{
+  "debut": 1788973339.6006987,
+  "initial": {
+    "wusts": 1,
+    "wulgt": {
+      "ltlvl": 15,
+      "ltlch": 0,
+      "onoff": false,
+      "ctype": 0,
+      "tempy": false,
+      "ngtlt": false,
+      "wucrv": [],
+      "ltset": [],
+      "pwmon": false,
+      "pwmvs": [],
+      "diman": 0
+    },
+    "wudsk": {
+      "durat": 30,
+      "onoff": false,
+      "curve": 20,
+      "ctype": 0,
+      "sndtp": 1,
+      "snddv": "off",
+      "sndch": "",
+      "sndlv": 12,
+      "sndss": 200
+    }
+  },
+  "repetitions": 3,
+  "etats": [
+    {
+      "tour": 1,
+      "libelle": "lumiere allumee (niveau 3)",
+      "wusts": 257,
+      "bits": [
+        0,
+        8
+      ],
+      "releves": [
+        257,
+        257,
+        257
+      ],
+      "stable": true
+    },
+    {
+      "tour": 1,
+      "libelle": "veilleuse allumee",
+      "wusts": 257,
+      "bits": [
+        0,
+        8
+      ],
+      "releves": [
+        257,
+        257,
+        257
+      ],
+      "stable": true
+    },
+    {
+      "tour": 1,
+      "libelle": "coucher de soleil lance",
+      "wusts": 264,
+      "bits": [
+        3,
+        8
+      ],
+      "releves": [
+        264,
+        264,
+        264
+      ],
+      "stable": true
+    },
+    {
+      "tour": 2,
+      "libelle": "lumiere allumee (niveau 3)",
+      "wusts": 257,
+      "bits": [
+        0,
+        8
+      ],
+      "releves": [
+        257,
+        null,
+        257
+      ],
+      "stable": false
+    },
+    {
+      "tour": 2,
+      "libelle": "veilleuse allumee",
+      "wusts": 257,
+      "bits": [
+        0,
+        8
+      ],
+      "releves": [
+        257,
+        257,
+        257
+      ],
+      "stable": true
+    },
+    {
+      "tour": 2,
+      "libelle": "coucher de soleil lance",
+      "wusts": 264,
+      "bits": [
+        3,
+        8
+      ],
+      "releves": [
+        264,
+        264,
+        264
+      ],
+      "stable": true
+    },
+    {
+      "tour": 3,
+      "libelle": "lumiere allumee (niveau 3)",
+      "wusts": 257,
+      "bits": [
+        0,
+        8
+      ],
+      "releves": [
+        257,
+        257,
+        257
+      ],
+      "stable": true
+    },
+    {
+      "tour": 3,
+      "libelle": "veilleuse allumee",
+      "wusts": 257,
+      "bits": [
+        0,
+        8
+      ],
+      "releves": [
+        257,
+        257,
+        257
+      ],
+      "stable": true
+    },
+    {
+      "tour": 3,
+      "libelle": "coucher de soleil lance",
+      "wusts": 264,
+      "bits": [
+        3,
+        8
+      ],
+      "releves": [
+        264,
+        264,
+        264
+      ],
+      "stable": true
+    }
+  ],
+  "extinctions": [
+    {
+      "tour": 1,
+      "apres": "lumiere allumee (niveau 3)",
+      "trace": [
+        {
+          "t": 0.73,
+          "wusts": 2,
+          "wutim": 65535
+        },
+        {
+          "t": 2.97,
+          "wusts": 2,
+          "wutim": 65535
+        },
+        {
+          "t": 5.2,
+          "wusts": 2,
+          "wutim": 65535
+        },
+        {
+          "t": 7.46,
+          "wusts": 2,
+          "wutim": 65535
+        },
+        {
+          "t": 9.7,
+          "wusts": 1,
+          "wutim": 65535
+        }
+      ],
+      "vu_2": true,
+      "duree_2_s": 6.0
+    },
+    {
+      "tour": 1,
+      "apres": "veilleuse allumee",
+      "trace": [
+        {
+          "t": 0.73,
+          "wusts": 1,
+          "wutim": 65535
+        }
+      ],
+      "vu_2": false,
+      "duree_2_s": 0
+    },
+    {
+      "tour": 1,
+      "apres": "coucher de soleil lance",
+      "trace": [
+        {
+          "t": 0.74,
+          "wusts": 2,
+          "wutim": 65535
+        },
+        {
+          "t": 2.96,
+          "wusts": 2,
+          "wutim": 65535
+        },
+        {
+          "t": 5.2,
+          "wusts": 2,
+          "wutim": 65535
+        },
+        {
+          "t": 7.46,
+          "wusts": 2,
+          "wutim": 65535
+        },
+        {
+          "t": 9.7,
+          "wusts": 1,
+          "wutim": 65535
+        }
+      ],
+      "vu_2": true,
+      "duree_2_s": 6.0
+    },
+    {
+      "tour": 2,
+      "apres": "lumiere allumee (niveau 3)",
+      "trace": [
+        {
+          "t": 0.73,
+          "wusts": 2,
+          "wutim": 65535
+        },
+        {
+          "t": 2.95,
+          "wusts": 2,
+          "wutim": 65535
+        },
+        {
+          "t": 5.19,
+          "wusts": 2,
+          "wutim": 65535
+        },
+        {
+          "t": 7.42,
+          "wusts": 2,
+          "wutim": 65535
+        },
+        {
+          "t": 9.65,
+          "wusts": 1,
+          "wutim": 65535
+        }
+      ],
+      "vu_2": true,
+      "duree_2_s": 6.0
+    },
+    {
+      "tour": 2,
+      "apres": "veilleuse allumee",
+      "trace": [
+        {
+          "t": 0.73,
+          "wusts": 1,
+          "wutim": 65535
+        }
+      ],
+      "vu_2": false,
+      "duree_2_s": 0
+    },
+    {
+      "tour": 2,
+      "apres": "coucher de soleil lance",
+      "trace": [
+        {
+          "t": 0.73,
+          "wusts": 2,
+          "wutim": 65535
+        },
+        {
+          "t": 2.96,
+          "wusts": 2,
+          "wutim": 65535
+        },
+        {
+          "t": 5.2,
+          "wusts": 2,
+          "wutim": 65535
+        },
+        {
+          "t": 7.44,
+          "wusts": 2,
+          "wutim": 65535
+        },
+        {
+          "t": 9.68,
+          "wusts": 1,
+          "wutim": 65535
+        }
+      ],
+      "vu_2": true,
+      "duree_2_s": 6.0
+    },
+    {
+      "tour": 3,
+      "apres": "lumiere allumee (niveau 3)",
+      "trace": [
+        {
+          "t": 0.73,
+          "wusts": 2,
+          "wutim": 65535
+        },
+        {
+          "t": 2.97,
+          "wusts": 2,
+          "wutim": 65535
+        },
+        {
+          "t": 5.21,
+          "wusts": 2,
+          "wutim": 65535
+        },
+        {
+          "t": 7.46,
+          "wusts": 2,
+          "wutim": 65535
+        },
+        {
+          "t": 9.72,
+          "wusts": 1,
+          "wutim": 65535
+        }
+      ],
+      "vu_2": true,
+      "duree_2_s": 6.0
+    },
+    {
+      "tour": 3,
+      "apres": "veilleuse allumee",
+      "trace": [
+        {
+          "t": 0.74,
+          "wusts": 1,
+          "wutim": 65535
+        }
+      ],
+      "vu_2": false,
+      "duree_2_s": 0
+    },
+    {
+      "tour": 3,
+      "apres": "coucher de soleil lance",
+      "trace": [
+        {
+          "t": 0.73,
+          "wusts": 2,
+          "wutim": 65535
+        },
+        {
+          "t": 2.98,
+          "wusts": 2,
+          "wutim": 65535
+        },
+        {
+          "t": 5.22,
+          "wusts": 2,
+          "wutim": 65535
+        },
+        {
+          "t": 7.46,
+          "wusts": 2,
+          "wutim": 65535
+        },
+        {
+          "t": 9.7,
+          "wusts": 1,
+          "wutim": 65535
+        }
+      ],
+      "vu_2": true,
+      "duree_2_s": 6.0
+    }
+  ],
+  "restauration": {
+    "wusts": 1,
+    "wulgt": {
+      "ltlvl": 15,
+      "ltlch": 0,
+      "onoff": false,
+      "ctype": 0,
+      "tempy": true,
+      "ngtlt": false,
+      "wucrv": [],
+      "ltset": [],
+      "pwmon": false,
+      "pwmvs": [],
+      "diman": 0
+    },
+    "conforme": true
+  }
+}

@@ -1,0 +1,412 @@
+{
+  "debut": 1788974727.4567409,
+  "initial": {
+    "wusts": 1,
+    "wulgt": {
+      "ltlvl": 15,
+      "ltlch": 0,
+      "onoff": false,
+      "ctype": 0,
+      "tempy": true,
+      "ngtlt": false,
+      "wucrv": [],
+      "ltset": [],
+      "pwmon": false,
+      "pwmvs": [],
+      "diman": 0
+    },
+    "wudsk": {
+      "durat": 30,
+      "onoff": false,
+      "curve": 20,
+      "ctype": 0,
+      "sndtp": 1,
+      "snddv": "off",
+      "sndch": "",
+      "sndlv": 12,
+      "sndss": 200
+    },
+    "wusts_champs": {
+      "wusts": 1,
+      "rpair": false,
+      "prvmd": false,
+      "sdemo": false,
+      "pwrsz": false,
+      "nrcur": 4,
+      "snztm": 8,
+      "wizrd": 99,
+      "brght": 1,
+      "dspon": false,
+      "canup": false,
+      "fmrna": false,
+      "wutim": 65535,
+      "dutim": 65535,
+      "sntim": 65535,
+      "updtm": 65280,
+      "updln": 65310
+    },
+    "wurlx": {
+      "durat": 10,
+      "onoff": false,
+      "maxpr": 7,
+      "progr": 1,
+      "rtype": 0,
+      "intny": 20,
+      "sndlv": 12,
+      "sndss": 200,
+      "rlbpm": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "pause": [
+        20,
+        20,
+        20,
+        20,
+        10,
+        10,
+        10
+      ]
+    }
+  },
+  "volets": {
+    "1_niveau": [
+      {
+        "ltlvl": 1,
+        "wusts": 257,
+        "bits": [
+          0,
+          8
+        ],
+        "ltlvl_relu": 1
+      },
+      {
+        "ltlvl": 3,
+        "wusts": 257,
+        "bits": [
+          0,
+          8
+        ],
+        "ltlvl_relu": 3
+      },
+      {
+        "ltlvl": 12,
+        "wusts": 257,
+        "bits": [
+          0,
+          8
+        ],
+        "ltlvl_relu": 12
+      },
+      {
+        "ltlvl": 25,
+        "wusts": 257,
+        "bits": [
+          0,
+          8
+        ],
+        "ltlvl_relu": 25
+      }
+    ],
+    "2_transitoire": [
+      {
+        "tour": 1,
+        "trace": [
+          {
+            "t": 0.72,
+            "wusts": 2
+          },
+          {
+            "t": 1.95,
+            "wusts": 2
+          },
+          {
+            "t": 3.18,
+            "wusts": 2
+          },
+          {
+            "t": 4.42,
+            "wusts": 2
+          },
+          {
+            "t": 5.67,
+            "wusts": 2
+          },
+          {
+            "t": 6.95,
+            "wusts": 2
+          },
+          {
+            "t": 8.18,
+            "wusts": 2
+          },
+          {
+            "t": 9.42,
+            "wusts": 1
+          }
+        ],
+        "duree_2_s": 7.46
+      },
+      {
+        "tour": 2,
+        "trace": [
+          {
+            "t": 0.73,
+            "wusts": 2
+          },
+          {
+            "t": 1.96,
+            "wusts": 2
+          },
+          {
+            "t": 3.19,
+            "wusts": 2
+          },
+          {
+            "t": 4.43,
+            "wusts": 2
+          },
+          {
+            "t": 5.7,
+            "wusts": 2
+          },
+          {
+            "t": 6.94,
+            "wusts": 2
+          },
+          {
+            "t": 8.18,
+            "wusts": 2
+          },
+          {
+            "t": 9.44,
+            "wusts": 1
+          }
+        ],
+        "duree_2_s": 7.45
+      },
+      {
+        "tour": 3,
+        "trace": [
+          {
+            "t": 0.74,
+            "wusts": 2
+          },
+          {
+            "t": 1.98,
+            "wusts": 2
+          },
+          {
+            "t": 3.23,
+            "wusts": 2
+          },
+          {
+            "t": 4.48,
+            "wusts": 2
+          },
+          {
+            "t": 5.73,
+            "wusts": 2
+          },
+          {
+            "t": 6.97,
+            "wusts": 2
+          },
+          {
+            "t": 8.2,
+            "wusts": 2
+          },
+          {
+            "t": 9.44,
+            "wusts": 1
+          }
+        ],
+        "duree_2_s": 7.46
+      }
+    ],
+    "3_veilleuse": [
+      {
+        "contexte": "depuis le repos",
+        "depart": 1,
+        "wusts": 257,
+        "bits": [
+          0,
+          8
+        ],
+        "ngtlt_relu": true
+      },
+      {
+        "contexte": "depuis le repos",
+        "depart": 1,
+        "wusts": 257,
+        "bits": [
+          0,
+          8
+        ],
+        "ngtlt_relu": true
+      },
+      {
+        "contexte": "depuis le repos",
+        "depart": 1,
+        "wusts": 257,
+        "bits": [
+          0,
+          8
+        ],
+        "ngtlt_relu": true
+      },
+      {
+        "contexte": "dans le transitoire",
+        "depart": 2,
+        "wusts": 258,
+        "bits": [
+          1,
+          8
+        ],
+        "ngtlt_relu": true
+      },
+      {
+        "contexte": "dans le transitoire",
+        "depart": 2,
+        "wusts": 258,
+        "bits": [
+          1,
+          8
+        ],
+        "ngtlt_relu": true
+      },
+      {
+        "contexte": "dans le transitoire",
+        "depart": 2,
+        "wusts": 258,
+        "bits": [
+          1,
+          8
+        ],
+        "ngtlt_relu": true
+      }
+    ],
+    "4_afficheur": [
+      {
+        "dspon": true,
+        "wusts": 1,
+        "bits": [
+          0
+        ],
+        "dspon_relu": true
+      },
+      {
+        "dspon": false,
+        "wusts": 1,
+        "bits": [
+          0
+        ],
+        "dspon_relu": false
+      }
+    ],
+    "5_sunset_son": [
+      {
+        "contexte": "depuis le repos",
+        "depart": 1,
+        "wusts": 776,
+        "bits": [
+          3,
+          8,
+          9
+        ],
+        "snddv_relu": "dus",
+        "sndlv_relu": 1
+      },
+      {
+        "contexte": "depuis le repos",
+        "depart": 1,
+        "wusts": 776,
+        "bits": [
+          3,
+          8,
+          9
+        ],
+        "snddv_relu": "dus",
+        "sndlv_relu": 1
+      },
+      {
+        "contexte": "depuis le repos",
+        "depart": 1,
+        "wusts": 776,
+        "bits": [
+          3,
+          8,
+          9
+        ],
+        "snddv_relu": "dus",
+        "sndlv_relu": 1
+      },
+      {
+        "contexte": "dans le transitoire",
+        "depart": 2,
+        "wusts": 776,
+        "bits": [
+          3,
+          8,
+          9
+        ],
+        "snddv_relu": "dus",
+        "sndlv_relu": 1
+      },
+      {
+        "contexte": "dans le transitoire",
+        "depart": 2,
+        "wusts": 776,
+        "bits": [
+          3,
+          8,
+          9
+        ],
+        "snddv_relu": "dus",
+        "sndlv_relu": 1
+      },
+      {
+        "contexte": "dans le transitoire",
+        "depart": 2,
+        "wusts": 776,
+        "bits": [
+          3,
+          8,
+          9
+        ],
+        "snddv_relu": "dus",
+        "sndlv_relu": 1
+      }
+    ],
+    "7_relaxbreathing": [
+      {
+        "tour": 1,
+        "wusts": 320,
+        "bits": [
+          6,
+          8
+        ],
+        "onoff_relu": true
+      },
+      {
+        "tour": 2,
+        "wusts": 320,
+        "bits": [
+          6,
+          8
+        ],
+        "onoff_relu": true
+      }
+    ]
+  },
+  "restauration": {
+    "wusts": 1,
+    "ecarts": {},
+    "conforme": true
+  }
+}

@@ -1,0 +1,218 @@
+{
+  "debut": 1788974144.577298,
+  "initial": {
+    "wusts": 1,
+    "wulgt": {
+      "ltlvl": 15,
+      "ltlch": 0,
+      "onoff": false,
+      "ctype": 0,
+      "tempy": true,
+      "ngtlt": false,
+      "wucrv": [],
+      "ltset": [],
+      "pwmon": false,
+      "pwmvs": [],
+      "diman": 0
+    }
+  },
+  "essais": [
+    {
+      "delai_s": 15,
+      "depart": 1,
+      "bits_depart": [
+        0
+      ],
+      "wusts": 257,
+      "bits": [
+        0,
+        8
+      ],
+      "action": "lampe",
+      "contexte": "depuis le repos",
+      "tour": 1
+    },
+    {
+      "delai_s": 15,
+      "depart": 1,
+      "bits_depart": [
+        0
+      ],
+      "wusts": 257,
+      "bits": [
+        0,
+        8
+      ],
+      "action": "lampe",
+      "contexte": "depuis le repos",
+      "tour": 2
+    },
+    {
+      "delai_s": 15,
+      "depart": 1,
+      "bits_depart": [
+        0
+      ],
+      "wusts": 257,
+      "bits": [
+        0,
+        8
+      ],
+      "action": "lampe",
+      "contexte": "depuis le repos",
+      "tour": 3
+    },
+    {
+      "delai_s": 2,
+      "depart": 2,
+      "bits_depart": [
+        1
+      ],
+      "wusts": 258,
+      "bits": [
+        1,
+        8
+      ],
+      "action": "lampe",
+      "contexte": "dans le transitoire",
+      "tour": 1
+    },
+    {
+      "delai_s": 2,
+      "depart": 2,
+      "bits_depart": [
+        1
+      ],
+      "wusts": 258,
+      "bits": [
+        1,
+        8
+      ],
+      "action": "lampe",
+      "contexte": "dans le transitoire",
+      "tour": 2
+    },
+    {
+      "delai_s": 2,
+      "depart": 2,
+      "bits_depart": [
+        1
+      ],
+      "wusts": 258,
+      "bits": [
+        1,
+        8
+      ],
+      "action": "lampe",
+      "contexte": "dans le transitoire",
+      "tour": 3
+    },
+    {
+      "delai_s": 15,
+      "depart": 1,
+      "bits_depart": [
+        0
+      ],
+      "wusts": 264,
+      "bits": [
+        3,
+        8
+      ],
+      "action": "coucher de soleil",
+      "contexte": "depuis le repos",
+      "tour": 1
+    },
+    {
+      "delai_s": 15,
+      "depart": 1,
+      "bits_depart": [
+        0
+      ],
+      "wusts": 264,
+      "bits": [
+        3,
+        8
+      ],
+      "action": "coucher de soleil",
+      "contexte": "depuis le repos",
+      "tour": 2
+    },
+    {
+      "delai_s": 15,
+      "depart": 1,
+      "bits_depart": [
+        0
+      ],
+      "wusts": 264,
+      "bits": [
+        3,
+        8
+      ],
+      "action": "coucher de soleil",
+      "contexte": "depuis le repos",
+      "tour": 3
+    },
+    {
+      "delai_s": 2,
+      "depart": 2,
+      "bits_depart": [
+        1
+      ],
+      "wusts": 264,
+      "bits": [
+        3,
+        8
+      ],
+      "action": "coucher de soleil",
+      "contexte": "dans le transitoire",
+      "tour": 1
+    },
+    {
+      "delai_s": 2,
+      "depart": 2,
+      "bits_depart": [
+        1
+      ],
+      "wusts": 264,
+      "bits": [
+        3,
+        8
+      ],
+      "action": "coucher de soleil",
+      "contexte": "dans le transitoire",
+      "tour": 2
+    },
+    {
+      "delai_s": 2,
+      "depart": 2,
+      "bits_depart": [
+        1
+      ],
+      "wusts": 264,
+      "bits": [
+        3,
+        8
+      ],
+      "action": "coucher de soleil",
+      "contexte": "dans le transitoire",
+      "tour": 3
+    }
+  ],
+  "restauration": {
+    "wusts": 2,
+    "wulgt": {
+      "ltlvl": 15,
+      "ltlch": 0,
+      "onoff": false,
+      "ctype": 0,
+      "tempy": true,
+      "ngtlt": false,
+      "wucrv": [],
+      "ltset": [],
+      "pwmon": false,
+      "pwmvs": [],
+      "diman": 0
+    },
+    "conforme": true
+  }
+}

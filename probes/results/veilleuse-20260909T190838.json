@@ -1,0 +1,157 @@
+{
+  "debut": 1788973667.9688852,
+  "initial": {
+    "wusts": 1,
+    "bits": [
+      0
+    ],
+    "onoff": false,
+    "ngtlt": false,
+    "ltlvl": 15,
+    "tempy": true
+  },
+  "sequences": [
+    {
+      "titre": "A. veilleuse seule",
+      "trace": [
+        {
+          "wusts": 257,
+          "bits": [
+            0,
+            8
+          ],
+          "onoff": false,
+          "ngtlt": true,
+          "ltlvl": 15,
+          "tempy": true,
+          "ecriture": "ngtlt=True",
+          "ecriture_ok": true
+        },
+        {
+          "wusts": 1,
+          "bits": [
+            0
+          ],
+          "onoff": false,
+          "ngtlt": false,
+          "ltlvl": 15,
+          "tempy": true,
+          "ecriture": "extinction"
+        }
+      ]
+    },
+    {
+      "titre": "B. lampe seule (niveau 3)",
+      "trace": [
+        {
+          "wusts": 257,
+          "bits": [
+            0,
+            8
+          ],
+          "onoff": true,
+          "ngtlt": false,
+          "ltlvl": 3,
+          "tempy": true,
+          "ecriture": "onoff=True ltlvl=3",
+          "ecriture_ok": true
+        },
+        {
+          "wusts": 2,
+          "bits": [
+            1
+          ],
+          "onoff": false,
+          "ngtlt": false,
+          "ltlvl": 15,
+          "tempy": true,
+          "ecriture": "extinction"
+        }
+      ]
+    },
+    {
+      "titre": "C. veilleuse PAR-DESSUS la lampe — le contexte du 2026-09-06",
+      "trace": [
+        {
+          "wusts": 258,
+          "bits": [
+            1,
+            8
+          ],
+          "onoff": true,
+          "ngtlt": false,
+          "ltlvl": 3,
+          "tempy": true,
+          "ecriture": "onoff=True ltlvl=3",
+          "ecriture_ok": true
+        },
+        {
+          "wusts": 258,
+          "bits": [
+            1,
+            8
+          ],
+          "onoff": false,
+          "ngtlt": true,
+          "ltlvl": 3,
+          "tempy": true,
+          "ecriture": "ngtlt=True",
+          "ecriture_ok": true
+        },
+        {
+          "wusts": 2,
+          "bits": [
+            1
+          ],
+          "onoff": false,
+          "ngtlt": false,
+          "ltlvl": 15,
+          "tempy": true,
+          "ecriture": "extinction"
+        }
+      ]
+    },
+    {
+      "titre": "D. veilleuse avec onoff explicite",
+      "trace": [
+        {
+          "wusts": 257,
+          "bits": [
+            0,
+            8
+          ],
+          "onoff": true,
+          "ngtlt": false,
+          "ltlvl": 15,
+          "tempy": true,
+          "ecriture": "onoff=True ngtlt=True",
+          "ecriture_ok": true
+        },
+        {
+          "wusts": 2,
+          "bits": [
+            1
+          ],
+          "onoff": false,
+          "ngtlt": false,
+          "ltlvl": 15,
+          "tempy": true,
+          "ecriture": "extinction"
+        }
+      ]
+    }
+  ],
+  "restauration": {
+    "etat": {
+      "wusts": 1,
+      "bits": [
+        0
+      ],
+      "onoff": false,
+      "ngtlt": false,
+      "ltlvl": 15,
+      "tempy": true
+    },
+    "conforme": true
+  }
+}
