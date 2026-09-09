@@ -362,6 +362,10 @@ en douceur), `pwrsz`/`pszhr`/`pszmn` (PowerWake), `snztm` (snooze), `lgtds`.
 Masque `daynm` : bit 1 = lundi … bit 7 = dimanche. `62` = jours ouvrés, `192` = week-end,
 `254` = tous les jours, `0` = demain uniquement.
 
+> **Extrait figé en anglais pour l'amont** : [`wusts-bitfield.en.md`](wusts-bitfield.en.md),
+> daté du 2026-09-09, écrit pour `pysomneo` et son intégration Home Assistant. **Ce fichier-ci
+> reste la source** ; l'extrait ne sera pas mis à jour et ne fait pas autorité.
+
 **`wusts` — état, et son décodage binaire.** `pysomneo` traite le champ `wusts` comme une
 table de 8 valeurs magiques (`1: off`, `2: sunset`, `257: light-on`, `2321: snooze`…), ce qui
 échoue dès qu'une combinaison non listée se présente. C'est en réalité un **champ de bits**,
