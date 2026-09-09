@@ -436,12 +436,33 @@ audio seul vaut `513` (bits 0 et 9) ; en allumant la lampe par-dessus, on obtien
 `513 + 256`, le bit 8 venant s'ajouter sans rien déplacer. Deux actions indépendantes, deux
 bits indépendants : `wusts` n'est pas une énumération d'états, c'est un champ de bits.
 
-**⚠ Le coucher de soleil ne vaut pas une valeur stable : `264` à 19 h, `265` à 22 h.** Mesuré
-six fois à chaque heure, dans les deux cas depuis un départ à `1`. Les deux voies d'écriture ont
-été comparées dans la même minute — `PUT wudsk {"onoff": true}` en direct et `toggle_sunset()`
-de `pysomneo` — et donnent **le même résultat** : ce n'est pas la bibliothèque, c'est l'état de
-l'appareil. Ce qui fait apparaître le bit 0 entre ces deux heures **n'est pas identifié** ; la
-veille prolongée est une piste, la luminosité ambiante une autre, aucune n'est testée.
+**⚠ Le coucher de soleil ne vaut pas une valeur stable : `264` ou `265` selon l'état de
+l'appareil.** Mesuré six fois à 19 h (`264`) et six fois à 22 h (`265`), toujours depuis un
+départ à `1`. Les deux voies d'écriture ont été comparées dans la même minute — `PUT wudsk
+{"onoff": true}` en direct et `toggle_sunset()` de `pysomneo` — et donnent **le même
+résultat** : ce n'est pas la bibliothèque.
+
+**Ce qui lève le bit 0 : l'absence prolongée de sollicitation lumineuse.** Trois hypothèses ont
+été écartées par la mesure avant d'arriver là — la voie d'écriture, la durée de repos immédiat
+(`265` à 10 s comme à 60 s) et la luminosité ambiante (classée « clair » dans les deux
+campagnes). La quatrième tient, et elle est venue d'une relecture des protocoles : la campagne
+de 19 h **allumait la lampe avant chaque essai** pour fabriquer son contexte de départ, celle de
+22 h non.
+
+`prealable_bit0.py` le montre en cinq essais alternés :
+
+| Essai | Ce qui précède | `wusts` |
+| --- | --- | --- |
+| 1 | rien depuis ~1 h 30 | **265** |
+| 2 | lampe allumée puis éteinte | 264 |
+| 3 | rien — mais la lampe a servi à l'essai 2 | **264** |
+| 4 | lampe | 264 |
+| 5 | rien | 264 |
+
+**L'effet persiste** : une seule sollicitation lumineuse suffit, et les couchers de soleil
+suivants restent à `264` sans qu'il faille rallumer. Cohérent avec « bit 0 = composante veille » :
+l'appareil sort d'une veille profonde à la première lumière. La **durée** de cette persistance
+est en cours de mesure (`persistance_bit0.py`, paliers de 2 à 20 min sans lumière).
 
 **Conséquence directe, et elle est lourde** : compléter la table de `pysomneo` en y ajoutant
 `264` ne suffit pas, puisque le même geste produit `265` quelques heures plus tard. C'est la

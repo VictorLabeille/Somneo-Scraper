@@ -1,0 +1,69 @@
+{
+  "debut": 1788985014.3328612,
+  "essais": [
+    {
+      "cas": "sunset seul",
+      "tour": 1,
+      "depart": 1,
+      "wusts": 265,
+      "bits": [
+        0,
+        3,
+        8
+      ]
+    },
+    {
+      "cas": "lampe avant",
+      "tour": 1,
+      "depart": 1,
+      "wusts": 264,
+      "bits": [
+        3,
+        8
+      ]
+    },
+    {
+      "cas": "sunset seul",
+      "tour": 2,
+      "depart": 1,
+      "wusts": 264,
+      "bits": [
+        3,
+        8
+      ]
+    },
+    {
+      "cas": "lampe avant",
+      "tour": 2,
+      "depart": 1,
+      "wusts": 264,
+      "bits": [
+        3,
+        8
+      ]
+    },
+    {
+      "cas": "sunset seul",
+      "tour": 3,
+      "depart": 1,
+      "wusts": 264,
+      "bits": [
+        3,
+        8
+      ]
+    },
+    {
+      "cas": "lampe avant",
+      "tour": 3,
+      "depart": 1,
+      "wusts": 264,
+      "bits": [
+        3,
+        8
+      ]
+    }
+  ],
+  "restauration": {
+    "wusts": 1
+  }
+}
