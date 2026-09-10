@@ -41,7 +41,7 @@ Two independent actions, two independent bits.
 | State | `wusts` | Bits | Trials | In `STATUS` |
 | --- | --- | --- | --- | --- |
 | Idle | 1 | 0 | — | `off` |
-| Transient after any light is switched off | **2** | 1 | 12 | **`sunset` — wrong** |
+| Transient after the reading lamp or a sunset is switched off | **2** | 1 | 12 | **`sunset` — wrong** |
 | Reading lamp or night light, device idle | 257 | 0, 8 | 21 | `light-on` |
 | Reading lamp switched on within 30 s of the last one | **258** | 1, 8 | 8 | **missing → `unknown`** |
 | Sunset, sound off, device woken by a light | **264** | 3, 8 | 16 | **missing → `unknown`** |
@@ -76,7 +76,8 @@ report `unknown` today.
 
 Sampled every 0.5 s, `2` is held for **at least 7.46 s** — three consecutive runs agreed to
 within 10 ms — and then gives way to `1`. It follows the reading lamp and the sunset alike, and
-does **not** follow the night light. What it actually represents is unknown — these measurements say when it appears and how
+**never** the night light: 0 of 18 switch-offs on 2026-09-10 — four variants of network write
+and the device's own button — against 5 of 5 for the lamp in the same session. What it actually represents is unknown — these measurements say when it appears and how
 long it lasts, nothing more.
 
 It reached the table one day after `776`, which is what someone sees who starts a sunset, stops
@@ -110,6 +111,7 @@ safe; the ones that write restore the device afterwards and never touch alarms.
 | --- | --- |
 | [`etats_wusts.py`](../probes/etats_wusts.py) | the values of ordinary states, repeated |
 | [`veilleuse.py`](../probes/veilleuse.py) | night light against reading lamp |
+| [`extinction_veilleuse.py`](../probes/extinction_veilleuse.py) | whether `2` follows the night light |
 | [`contexte_wusts.py`](../probes/contexte_wusts.py) | bit 0 against the starting state |
 | [`wusts_exhaustif.py`](../probes/wusts_exhaustif.py) | light levels, display, sound, RelaxBreathing |
 | [`lecteur_sources.py`](../probes/lecteur_sources.py) | audio player, and composition with the lamp |

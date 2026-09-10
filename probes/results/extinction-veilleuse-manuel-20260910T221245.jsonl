@@ -1,0 +1,1369 @@
+{"type": "debut", "capture_arretee": [201846], "capture_vivante": [], "mode": "manuel", "ts": 1789071166.0944357}
+{"type": "initial", "wusts": 1, "onoff": false, "ngtlt": false, "ltlvl": 15, "ts": 1789071167.9207447}
+{"type": "manuel", "t": 0.53, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071168.4608927}
+{"type": "manuel", "t": 1.29, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071169.2209773}
+{"type": "manuel", "t": 2.02, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071169.9488559}
+{"type": "manuel", "t": 2.77, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071170.6929822}
+{"type": "manuel", "t": 3.49, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071171.4208248}
+{"type": "manuel", "t": 4.25, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071172.1768997}
+{"type": "manuel", "t": 4.96, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071172.8888412}
+{"type": "manuel", "t": 5.72, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071173.6489046}
+{"type": "manuel", "t": 6.45, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071174.3768485}
+{"type": "manuel", "t": 7.19, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071175.1129568}
+{"type": "manuel", "t": 8.03, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071175.9528904}
+{"type": "manuel", "t": 8.77, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071176.6929145}
+{"type": "manuel", "t": 9.49, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071177.412887}
+{"type": "manuel", "t": 10.27, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071178.2009115}
+{"type": "manuel", "t": 10.99, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071178.920816}
+{"type": "manuel", "t": 11.73, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071179.6569302}
+{"type": "manuel", "t": 12.47, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071180.4008894}
+{"type": "manuel", "t": 13.22, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071181.1449504}
+{"type": "manuel", "t": 13.95, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071181.8728216}
+{"type": "manuel", "t": 14.69, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071182.61696}
+{"type": "manuel", "t": 15.41, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071183.3328354}
+{"type": "manuel", "t": 16.21, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071184.1329195}
+{"type": "manuel", "t": 16.99, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071184.9128451}
+{"type": "manuel", "t": 17.75, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071185.6728928}
+{"type": "manuel", "t": 18.48, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071186.4048605}
+{"type": "manuel", "t": 19.21, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071187.1369035}
+{"type": "manuel", "t": 19.95, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071187.8728266}
+{"type": "manuel", "t": 20.69, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071188.6209188}
+{"type": "manuel", "t": 21.44, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071189.3689022}
+{"type": "manuel", "t": 22.19, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071190.1128836}
+{"type": "manuel", "t": 22.91, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071190.8368285}
+{"type": "manuel", "t": 23.64, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071191.564907}
+{"type": "manuel", "t": 24.37, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071192.2928505}
+{"type": "manuel", "t": 25.11, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071193.032918}
+{"type": "manuel", "t": 25.83, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071193.7608342}
+{"type": "manuel", "t": 26.57, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071194.4931097}
+{"type": "manuel", "t": 27.29, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071195.2208326}
+{"type": "manuel", "t": 28.04, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071195.9689689}
+{"type": "manuel", "t": 28.81, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071196.7368188}
+{"type": "manuel", "t": 29.56, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071197.4851308}
+{"type": "manuel", "t": 30.28, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071198.2088296}
+{"type": "manuel", "t": 31.02, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071198.9449615}
+{"type": "manuel", "t": 31.77, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071199.6968184}
+{"type": "manuel", "t": 32.53, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071200.456953}
+{"type": "manuel", "t": 33.26, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071201.184828}
+{"type": "manuel", "t": 33.99, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071201.9209101}
+{"type": "manuel", "t": 34.75, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071202.6728282}
+{"type": "manuel", "t": 35.49, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071203.4168904}
+{"type": "manuel", "t": 36.21, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071204.1408856}
+{"type": "manuel", "t": 36.97, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071204.8928878}
+{"type": "manuel", "t": 37.69, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071205.620885}
+{"type": "manuel", "t": 38.44, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071206.368897}
+{"type": "manuel", "t": 39.16, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071207.0888267}
+{"type": "manuel", "t": 39.94, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071207.8653178}
+{"type": "manuel", "t": 40.67, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071208.5963764}
+{"type": "manuel", "t": 41.78, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071209.708681}
+{"type": "manuel", "t": 42.61, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071210.5330215}
+{"type": "manuel", "t": 43.37, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071211.3009067}
+{"type": "manuel", "t": 44.1, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071212.0288267}
+{"type": "manuel", "t": 44.85, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071212.772935}
+{"type": "manuel", "t": 45.58, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071213.504882}
+{"type": "manuel", "t": 46.32, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071214.2489104}
+{"type": "manuel", "t": 47.04, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071214.9648988}
+{"type": "manuel", "t": 47.78, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071215.7089338}
+{"type": "manuel", "t": 48.55, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071216.4768345}
+{"type": "manuel", "t": 49.28, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071217.2049081}
+{"type": "manuel", "t": 50.01, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071217.932835}
+{"type": "manuel", "t": 50.77, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071218.6929502}
+{"type": "manuel", "t": 51.48, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071219.4088247}
+{"type": "manuel", "t": 52.21, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071220.1369596}
+{"type": "manuel", "t": 52.98, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071220.905772}
+{"type": "manuel", "t": 53.73, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071221.6609197}
+{"type": "manuel", "t": 54.52, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071222.448888}
+{"type": "manuel", "t": 55.27, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071223.1928973}
+{"type": "manuel", "t": 56.0, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071223.9288552}
+{"type": "manuel", "t": 56.74, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071224.668855}
+{"type": "manuel", "t": 57.5, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071225.428833}
+{"type": "manuel", "t": 58.25, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071226.1768997}
+{"type": "manuel", "t": 58.97, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071226.8968594}
+{"type": "manuel", "t": 59.7, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071227.6289086}
+{"type": "manuel", "t": 60.45, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071228.3728325}
+{"type": "manuel", "t": 61.19, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071229.1128855}
+{"type": "manuel", "t": 61.94, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071229.8648875}
+{"type": "manuel", "t": 62.68, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071230.6049116}
+{"type": "manuel", "t": 63.41, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071231.3328378}
+{"type": "manuel", "t": 64.15, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071232.0809164}
+{"type": "manuel", "t": 64.88, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071232.8088548}
+{"type": "manuel", "t": 65.63, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071233.5529215}
+{"type": "manuel", "t": 66.4, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071234.3288827}
+{"type": "manuel", "t": 67.14, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071235.0689025}
+{"type": "manuel", "t": 67.87, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071235.796837}
+{"type": "manuel", "t": 68.62, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071236.5450535}
+{"type": "manuel", "t": 69.35, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071237.2768397}
+{"type": "manuel", "t": 70.13, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071238.056443}
+{"type": "manuel", "t": 70.85, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071238.7763813}
+{"type": "manuel", "t": 71.59, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071239.5206215}
+{"type": "manuel", "t": 72.41, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071240.336841}
+{"type": "manuel", "t": 73.15, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071241.0729198}
+{"type": "manuel", "t": 73.88, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071241.8088424}
+{"type": "manuel", "t": 74.63, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071242.5609157}
+{"type": "manuel", "t": 75.36, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071243.2888217}
+{"type": "manuel", "t": 76.12, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071244.044915}
+{"type": "manuel", "t": 76.85, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071244.7768307}
+{"type": "manuel", "t": 77.59, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071245.521189}
+{"type": "manuel", "t": 78.45, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071246.372921}
+{"type": "manuel", "t": 79.19, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071247.1129155}
+{"type": "manuel", "t": 79.93, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071247.856844}
+{"type": "manuel", "t": 80.68, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071248.6049123}
+{"type": "manuel", "t": 81.4, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071249.3248308}
+{"type": "manuel", "t": 82.14, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071250.0649042}
+{"type": "manuel", "t": 82.87, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071250.796834}
+{"type": "manuel", "t": 83.61, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071251.5411284}
+{"type": "manuel", "t": 84.35, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071252.2808466}
+{"type": "manuel", "t": 85.09, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071253.020887}
+{"type": "manuel", "t": 85.85, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071253.7728562}
+{"type": "manuel", "t": 86.59, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071254.521173}
+{"type": "manuel", "t": 87.33, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071255.2608466}
+{"type": "manuel", "t": 88.07, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071255.9969194}
+{"type": "manuel", "t": 88.78, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071256.708852}
+{"type": "manuel", "t": 89.53, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071257.4529157}
+{"type": "manuel", "t": 90.25, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071258.180889}
+{"type": "manuel", "t": 90.99, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071258.9129422}
+{"type": "manuel", "t": 91.73, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071259.6569042}
+{"type": "manuel", "t": 92.48, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071260.408863}
+{"type": "manuel", "t": 93.21, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071261.1328506}
+{"type": "manuel", "t": 93.95, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071261.8769295}
+{"type": "manuel", "t": 94.67, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071262.5968504}
+{"type": "manuel", "t": 95.41, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071263.3409467}
+{"type": "manuel", "t": 96.14, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071264.0648386}
+{"type": "manuel", "t": 96.88, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071264.8089242}
+{"type": "manuel", "t": 97.61, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071265.5368395}
+{"type": "manuel", "t": 98.34, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071266.2689145}
+{"type": "manuel", "t": 99.09, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071267.0129313}
+{"type": "manuel", "t": 99.82, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071267.7448957}
+{"type": "manuel", "t": 100.52, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071268.452397}
+{"type": "manuel", "t": 101.27, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071269.1964192}
+{"type": "manuel", "t": 102.03, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071269.956398}
+{"type": "manuel", "t": 102.78, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071270.7048857}
+{"type": "manuel", "t": 103.75, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071271.6769598}
+{"type": "manuel", "t": 104.49, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071272.420896}
+{"type": "manuel", "t": 105.21, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071273.1368558}
+{"type": "manuel", "t": 105.95, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071273.8808932}
+{"type": "manuel", "t": 106.69, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071274.612834}
+{"type": "manuel", "t": 107.43, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071275.3609197}
+{"type": "manuel", "t": 108.15, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071276.0730884}
+{"type": "manuel", "t": 108.88, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071276.8047202}
+{"type": "manuel", "t": 109.6, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071277.5283844}
+{"type": "manuel", "t": 110.35, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071278.2729151}
+{"type": "manuel", "t": 111.07, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071278.996859}
+{"type": "manuel", "t": 111.83, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071279.752905}
+{"type": "manuel", "t": 112.55, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071280.4808524}
+{"type": "manuel", "t": 113.31, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071281.2369204}
+{"type": "manuel", "t": 114.02, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071281.9448898}
+{"type": "manuel", "t": 114.75, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071282.6729193}
+{"type": "manuel", "t": 115.47, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071283.3968346}
+{"type": "manuel", "t": 116.21, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071284.1409264}
+{"type": "manuel", "t": 116.94, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071284.8648524}
+{"type": "manuel", "t": 117.69, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071285.612897}
+{"type": "manuel", "t": 118.41, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071286.340842}
+{"type": "manuel", "t": 119.15, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071287.0729}
+{"type": "manuel", "t": 119.86, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071287.7888508}
+{"type": "manuel", "t": 120.61, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071288.536927}
+{"type": "manuel", "t": 121.33, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071289.2608514}
+{"type": "manuel", "t": 122.08, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071290.0049112}
+{"type": "manuel", "t": 122.81, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071290.7328637}
+{"type": "manuel", "t": 123.57, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071291.4929209}
+{"type": "manuel", "t": 124.29, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071292.2208602}
+{"type": "manuel", "t": 125.04, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071292.9649074}
+{"type": "manuel", "t": 125.77, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071293.6968489}
+{"type": "manuel", "t": 126.5, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071294.4288988}
+{"type": "manuel", "t": 127.25, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071295.1808376}
+{"type": "manuel", "t": 128.0, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071295.9249115}
+{"type": "manuel", "t": 128.75, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071296.6808546}
+{"type": "manuel", "t": 129.5, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071297.4289224}
+{"type": "manuel", "t": 130.25, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071298.1768978}
+{"type": "manuel", "t": 130.99, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071298.9164424}
+{"type": "manuel", "t": 131.71, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071299.6407423}
+{"type": "manuel", "t": 132.47, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071300.3978417}
+{"type": "manuel", "t": 133.27, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071301.196828}
+{"type": "manuel", "t": 134.01, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071301.9415188}
+{"type": "manuel", "t": 134.76, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071302.6848927}
+{"type": "manuel", "t": 135.5, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071303.4289057}
+{"type": "manuel", "t": 136.23, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071304.1568394}
+{"type": "manuel", "t": 136.97, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071304.8969223}
+{"type": "manuel", "t": 137.71, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071305.6408532}
+{"type": "manuel", "t": 138.45, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071306.3808672}
+{"type": "manuel", "t": 139.19, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071307.1168437}
+{"type": "manuel", "t": 139.93, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071307.8529303}
+{"type": "manuel", "t": 140.65, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071308.5808463}
+{"type": "manuel", "t": 141.4, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071309.3289387}
+{"type": "manuel", "t": 142.13, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071310.0528498}
+{"type": "manuel", "t": 142.87, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071310.7969065}
+{"type": "manuel", "t": 143.6, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071311.524835}
+{"type": "manuel", "t": 144.34, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071312.268907}
+{"type": "manuel", "t": 145.1, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071313.0248394}
+{"type": "manuel", "t": 145.83, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071313.7608554}
+{"type": "manuel", "t": 146.56, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071314.4888299}
+{"type": "manuel", "t": 147.35, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071315.27292}
+{"type": "manuel", "t": 148.06, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071315.9888625}
+{"type": "manuel", "t": 148.81, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071316.7369149}
+{"type": "manuel", "t": 149.59, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071317.520835}
+{"type": "manuel", "t": 150.34, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071318.264948}
+{"type": "manuel", "t": 151.06, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071318.9848459}
+{"type": "manuel", "t": 151.81, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071319.7369084}
+{"type": "manuel", "t": 152.54, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071320.4688451}
+{"type": "manuel", "t": 153.27, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071321.2009125}
+{"type": "manuel", "t": 154.0, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071321.9288409}
+{"type": "manuel", "t": 154.75, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071322.672903}
+{"type": "manuel", "t": 155.47, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071323.4008462}
+{"type": "manuel", "t": 156.23, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071324.1609068}
+{"type": "manuel", "t": 156.96, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071324.8888469}
+{"type": "manuel", "t": 157.71, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071325.6328993}
+{"type": "manuel", "t": 158.43, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071326.3608346}
+{"type": "manuel", "t": 159.19, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071327.1129127}
+{"type": "manuel", "t": 159.91, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071327.8408532}
+{"type": "manuel", "t": 160.67, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071328.5969346}
+{"type": "manuel", "t": 161.4, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071329.3248353}
+{"type": "manuel", "t": 162.14, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071330.0689359}
+{"type": "manuel", "t": 162.86, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071330.7888403}
+{"type": "manuel", "t": 163.61, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071331.5329044}
+{"type": "manuel", "t": 164.33, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071332.2608323}
+{"type": "manuel", "t": 165.76, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071333.6889937}
+{"type": "manuel", "t": 166.7, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071334.6323755}
+{"type": "manuel", "t": 167.66, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071335.5886397}
+{"type": "manuel", "t": 168.61, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071336.5408385}
+{"type": "manuel", "t": 169.35, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071337.2728987}
+{"type": "manuel", "t": 170.07, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071337.9928312}
+{"type": "manuel", "t": 170.83, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071338.752922}
+{"type": "manuel", "t": 171.56, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071339.48485}
+{"type": "manuel", "t": 172.29, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071340.2208996}
+{"type": "manuel", "t": 173.06, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071340.984834}
+{"type": "manuel", "t": 173.79, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071341.7209237}
+{"type": "manuel", "t": 174.52, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071342.4488523}
+{"type": "manuel", "t": 175.26, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071343.188904}
+{"type": "manuel", "t": 175.99, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071343.9168303}
+{"type": "manuel", "t": 176.71, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071344.6409485}
+{"type": "manuel", "t": 177.43, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071345.35685}
+{"type": "manuel", "t": 178.18, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071346.1049168}
+{"type": "manuel", "t": 178.96, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071346.8888905}
+{"type": "manuel", "t": 179.71, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071347.6329255}
+{"type": "manuel", "t": 180.43, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071348.3568327}
+{"type": "manuel", "t": 181.17, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071349.0968971}
+{"type": "manuel", "t": 181.89, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071349.812836}
+{"type": "manuel", "t": 182.76, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071350.684952}
+{"type": "manuel", "t": 183.5, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071351.428843}
+{"type": "manuel", "t": 184.28, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071352.204924}
+{"type": "manuel", "t": 185.0, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071352.9288557}
+{"type": "manuel", "t": 185.75, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071353.6769283}
+{"type": "manuel", "t": 186.49, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071354.4168582}
+{"type": "manuel", "t": 187.24, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071355.1649137}
+{"type": "manuel", "t": 187.97, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071355.8928547}
+{"type": "manuel", "t": 188.75, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071356.6809576}
+{"type": "manuel", "t": 189.47, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071357.40085}
+{"type": "manuel", "t": 190.24, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071358.1654522}
+{"type": "manuel", "t": 190.98, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071358.904383}
+{"type": "manuel", "t": 191.7, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071359.6324568}
+{"type": "manuel", "t": 192.48, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071360.4088995}
+{"type": "manuel", "t": 193.22, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071361.1489348}
+{"type": "manuel", "t": 193.97, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071361.9008543}
+{"type": "manuel", "t": 194.71, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071362.636934}
+{"type": "manuel", "t": 195.44, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071363.3648443}
+{"type": "manuel", "t": 196.18, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071364.108923}
+{"type": "manuel", "t": 196.93, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071364.8528538}
+{"type": "manuel", "t": 197.67, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071365.5971577}
+{"type": "manuel", "t": 198.39, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071366.3168468}
+{"type": "manuel", "t": 199.13, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071367.0529354}
+{"type": "manuel", "t": 199.85, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071367.7728608}
+{"type": "manuel", "t": 200.59, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071368.5209227}
+{"type": "manuel", "t": 201.32, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071369.248873}
+{"type": "manuel", "t": 202.09, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071370.0129294}
+{"type": "manuel", "t": 202.8, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071370.7288387}
+{"type": "manuel", "t": 203.55, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071371.47291}
+{"type": "manuel", "t": 204.33, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071372.2569065}
+{"type": "manuel", "t": 205.07, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071372.9969301}
+{"type": "manuel", "t": 205.8, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071373.724865}
+{"type": "manuel", "t": 206.55, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071374.473017}
+{"type": "manuel", "t": 207.27, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071375.2008502}
+{"type": "manuel", "t": 208.02, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071375.9449506}
+{"type": "manuel", "t": 208.75, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071376.6768396}
+{"type": "manuel", "t": 209.51, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071377.4369187}
+{"type": "manuel", "t": 210.24, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071378.164855}
+{"type": "manuel", "t": 210.98, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071378.9089098}
+{"type": "manuel", "t": 211.7, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071379.6288424}
+{"type": "manuel", "t": 212.47, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071380.4009218}
+{"type": "manuel", "t": 213.22, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071381.1489012}
+{"type": "manuel", "t": 213.97, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071381.8929222}
+{"type": "manuel", "t": 214.7, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071382.624846}
+{"type": "manuel", "t": 215.44, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071383.3689234}
+{"type": "manuel", "t": 216.17, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071384.0968406}
+{"type": "manuel", "t": 216.9, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071384.8249185}
+{"type": "manuel", "t": 217.63, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071385.5528312}
+{"type": "manuel", "t": 218.37, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071386.2970176}
+{"type": "manuel", "t": 219.17, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071387.096955}
+{"type": "manuel", "t": 219.91, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071387.8410308}
+{"type": "manuel", "t": 220.63, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071388.5564814}
+{"type": "manuel", "t": 221.37, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071389.296533}
+{"type": "manuel", "t": 222.09, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071390.0204737}
+{"type": "manuel", "t": 222.84, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071390.769025}
+{"type": "manuel", "t": 223.57, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071391.4969645}
+{"type": "manuel", "t": 224.29, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071392.22097}
+{"type": "manuel", "t": 225.03, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071392.9529824}
+{"type": "manuel", "t": 225.77, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071393.6970103}
+{"type": "manuel", "t": 226.5, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071394.4290092}
+{"type": "manuel", "t": 227.76, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071395.6892645}
+{"type": "manuel", "t": 228.7, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071396.6284628}
+{"type": "manuel", "t": 229.89, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071397.8165107}
+{"type": "manuel", "t": 230.81, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071398.7404702}
+{"type": "manuel", "t": 231.55, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071399.4805229}
+{"type": "manuel", "t": 232.3, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071400.2250159}
+{"type": "manuel", "t": 233.03, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071400.9530208}
+{"type": "manuel", "t": 233.75, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071401.680969}
+{"type": "manuel", "t": 234.5, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071402.4251034}
+{"type": "manuel", "t": 235.23, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071403.156964}
+{"type": "manuel", "t": 235.97, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071403.901024}
+{"type": "manuel", "t": 236.71, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071404.63305}
+{"type": "manuel", "t": 237.46, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071405.3890522}
+{"type": "manuel", "t": 238.21, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071406.1329417}
+{"type": "manuel", "t": 238.95, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071406.8810258}
+{"type": "manuel", "t": 239.69, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071407.6171625}
+{"type": "manuel", "t": 240.43, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071408.3610215}
+{"type": "manuel", "t": 241.14, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071409.068965}
+{"type": "manuel", "t": 241.89, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071409.813007}
+{"type": "manuel", "t": 242.62, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071410.5449357}
+{"type": "manuel", "t": 243.36, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071411.2890263}
+{"type": "manuel", "t": 244.09, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071412.017003}
+{"type": "manuel", "t": 244.84, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071412.7650242}
+{"type": "manuel", "t": 245.57, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071413.4929688}
+{"type": "manuel", "t": 246.3, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071414.2290154}
+{"type": "manuel", "t": 247.03, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071414.9529777}
+{"type": "manuel", "t": 247.77, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071415.697015}
+{"type": "manuel", "t": 248.5, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071416.4249551}
+{"type": "manuel", "t": 249.25, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071417.1730204}
+{"type": "manuel", "t": 249.98, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071417.904961}
+{"type": "manuel", "t": 250.72, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071418.644534}
+{"type": "manuel", "t": 251.44, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071419.372462}
+{"type": "manuel", "t": 252.2, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071420.124485}
+{"type": "manuel", "t": 252.91, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071420.8369381}
+{"type": "manuel", "t": 253.65, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071421.5810037}
+{"type": "manuel", "t": 254.38, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071422.308961}
+{"type": "manuel", "t": 255.11, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071423.0410168}
+{"type": "manuel", "t": 255.84, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071423.7689474}
+{"type": "manuel", "t": 256.57, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071424.5009544}
+{"type": "manuel", "t": 257.32, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071425.244918}
+{"type": "manuel", "t": 258.05, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071425.9809473}
+{"type": "manuel", "t": 258.79, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071426.7168522}
+{"type": "manuel", "t": 259.53, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071427.460941}
+{"type": "manuel", "t": 260.26, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071428.1888654}
+{"type": "manuel", "t": 261.02, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071428.9449434}
+{"type": "manuel", "t": 261.75, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071429.680838}
+{"type": "manuel", "t": 262.52, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071430.444936}
+{"type": "manuel", "t": 263.25, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071431.1808524}
+{"type": "manuel", "t": 264.0, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071431.9249542}
+{"type": "manuel", "t": 264.73, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071432.6608489}
+{"type": "manuel", "t": 265.46, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071433.388932}
+{"type": "manuel", "t": 266.19, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071434.1168554}
+{"type": "manuel", "t": 266.94, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071434.8649216}
+{"type": "manuel", "t": 267.66, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071435.5848727}
+{"type": "manuel", "t": 268.41, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071436.3369296}
+{"type": "manuel", "t": 269.13, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071437.0608404}
+{"type": "manuel", "t": 269.92, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071437.8449602}
+{"type": "manuel", "t": 270.65, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071438.5768585}
+{"type": "manuel", "t": 271.39, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071439.3129072}
+{"type": "manuel", "t": 272.11, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071440.040844}
+{"type": "manuel", "t": 272.86, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071440.7849364}
+{"type": "manuel", "t": 273.59, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071441.5128582}
+{"type": "manuel", "t": 274.32, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071442.244915}
+{"type": "manuel", "t": 275.04, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071442.964838}
+{"type": "manuel", "t": 275.81, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071443.7329488}
+{"type": "manuel", "t": 276.59, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071444.5169072}
+{"type": "manuel", "t": 277.33, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071445.26092}
+{"type": "manuel", "t": 278.06, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071445.9888601}
+{"type": "manuel", "t": 278.87, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071446.7929575}
+{"type": "manuel", "t": 279.58, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071447.5048788}
+{"type": "manuel", "t": 280.32, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071448.2489355}
+{"type": "manuel", "t": 281.04, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071448.972382}
+{"type": "manuel", "t": 281.79, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071449.7205095}
+{"type": "manuel", "t": 282.53, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071450.4529192}
+{"type": "manuel", "t": 283.26, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071451.1849208}
+{"type": "manuel", "t": 283.99, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071451.9208589}
+{"type": "manuel", "t": 284.75, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071452.6730738}
+{"type": "manuel", "t": 285.47, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071453.4008498}
+{"type": "manuel", "t": 286.21, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071454.1409187}
+{"type": "manuel", "t": 286.93, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071454.8528392}
+{"type": "manuel", "t": 287.67, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071455.5969322}
+{"type": "manuel", "t": 288.45, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071456.3728492}
+{"type": "manuel", "t": 289.76, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071457.6889944}
+{"type": "manuel", "t": 290.52, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071458.4448435}
+{"type": "manuel", "t": 291.26, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071459.1849308}
+{"type": "manuel", "t": 292.02, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071459.944843}
+{"type": "manuel", "t": 292.75, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071460.680932}
+{"type": "manuel", "t": 293.47, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071461.4008443}
+{"type": "manuel", "t": 294.21, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071462.1368747}
+{"type": "manuel", "t": 294.96, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071462.8848488}
+{"type": "manuel", "t": 295.73, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071463.6529267}
+{"type": "manuel", "t": 296.44, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071464.3688514}
+{"type": "manuel", "t": 297.22, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071465.148917}
+{"type": "manuel", "t": 297.96, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071465.8888438}
+{"type": "manuel", "t": 298.69, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071466.616908}
+{"type": "manuel", "t": 299.43, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071467.3608427}
+{"type": "manuel", "t": 300.18, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071468.104918}
+{"type": "manuel", "t": 300.91, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071468.8368626}
+{"type": "manuel", "t": 301.65, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071469.5809019}
+{"type": "manuel", "t": 302.38, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071470.308844}
+{"type": "manuel", "t": 303.15, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071471.0729437}
+{"type": "manuel", "t": 303.87, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071471.8008528}
+{"type": "manuel", "t": 304.63, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071472.5529234}
+{"type": "manuel", "t": 305.35, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071473.2808652}
+{"type": "manuel", "t": 306.11, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071474.0369298}
+{"type": "manuel", "t": 306.82, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071474.7488592}
+{"type": "manuel", "t": 307.55, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071475.4809296}
+{"type": "manuel", "t": 308.28, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071476.2088442}
+{"type": "manuel", "t": 309.06, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071476.984901}
+{"type": "manuel", "t": 309.84, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071477.7688951}
+{"type": "manuel", "t": 310.58, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071478.5090177}
+{"type": "manuel", "t": 311.31, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071479.2364218}
+{"type": "manuel", "t": 312.12, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071480.0444515}
+{"type": "manuel", "t": 312.85, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071480.7728922}
+{"type": "manuel", "t": 313.58, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071481.5049322}
+{"type": "manuel", "t": 314.31, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071482.2328553}
+{"type": "manuel", "t": 315.04, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071482.964922}
+{"type": "manuel", "t": 315.77, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071483.692848}
+{"type": "manuel", "t": 316.51, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071484.4369054}
+{"type": "manuel", "t": 317.23, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071485.1608448}
+{"type": "manuel", "t": 318.0, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071485.9289687}
+{"type": "manuel", "t": 318.73, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071486.6568384}
+{"type": "manuel", "t": 319.47, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071487.4009254}
+{"type": "manuel", "t": 320.2, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071488.1288433}
+{"type": "manuel", "t": 320.97, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071488.8929474}
+{"type": "manuel", "t": 321.69, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071489.6208487}
+{"type": "manuel", "t": 322.46, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071490.3888674}
+{"type": "manuel", "t": 323.18, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071491.104847}
+{"type": "manuel", "t": 323.92, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071491.8489554}
+{"type": "manuel", "t": 324.63, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071492.560844}
+{"type": "manuel", "t": 325.38, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071493.304929}
+{"type": "manuel", "t": 326.11, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071494.0328548}
+{"type": "manuel", "t": 326.85, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071494.772941}
+{"type": "manuel", "t": 327.59, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071495.5168483}
+{"type": "manuel", "t": 328.33, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071496.260906}
+{"type": "manuel", "t": 329.06, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071496.9848664}
+{"type": "manuel", "t": 329.8, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071497.7289162}
+{"type": "manuel", "t": 330.53, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071498.4608657}
+{"type": "manuel", "t": 331.32, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071499.244939}
+{"type": "manuel", "t": 332.08, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071500.0048454}
+{"type": "manuel", "t": 332.83, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071500.7609253}
+{"type": "manuel", "t": 333.55, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071501.4768627}
+{"type": "manuel", "t": 334.3, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071502.2249293}
+{"type": "manuel", "t": 335.02, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071502.9488614}
+{"type": "manuel", "t": 335.77, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071503.6931503}
+{"type": "manuel", "t": 336.49, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071504.4208455}
+{"type": "manuel", "t": 337.24, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071505.1689367}
+{"type": "manuel", "t": 337.97, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071505.896839}
+{"type": "manuel", "t": 338.71, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071506.6408987}
+{"type": "manuel", "t": 339.44, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071507.3648665}
+{"type": "manuel", "t": 340.18, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071508.1089027}
+{"type": "manuel", "t": 340.89, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071508.8203924}
+{"type": "manuel", "t": 341.62, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071509.5524435}
+{"type": "manuel", "t": 342.38, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071510.3124204}
+{"type": "manuel", "t": 343.12, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071511.0449057}
+{"type": "manuel", "t": 343.85, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071511.7728343}
+{"type": "manuel", "t": 344.58, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071512.5049317}
+{"type": "manuel", "t": 345.37, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071513.296865}
+{"type": "manuel", "t": 346.11, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071514.0409126}
+{"type": "manuel", "t": 346.84, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071514.768847}
+{"type": "manuel", "t": 347.59, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071515.51292}
+{"type": "manuel", "t": 348.3, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071516.2288399}
+{"type": "manuel", "t": 349.04, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071516.968906}
+{"type": "manuel", "t": 349.79, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071517.7168531}
+{"type": "manuel", "t": 350.53, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071518.4530084}
+{"type": "manuel", "t": 351.75, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071519.6809855}
+{"type": "manuel", "t": 352.52, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071520.4449155}
+{"type": "manuel", "t": 353.25, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071521.1808343}
+{"type": "manuel", "t": 354.02, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071521.9489188}
+{"type": "manuel", "t": 354.74, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071522.6648726}
+{"type": "manuel", "t": 355.51, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071523.4329221}
+{"type": "manuel", "t": 356.23, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071524.156858}
+{"type": "manuel", "t": 356.97, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071524.892922}
+{"type": "manuel", "t": 357.69, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071525.620905}
+{"type": "manuel", "t": 358.44, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071526.364921}
+{"type": "manuel", "t": 359.16, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071527.0848577}
+{"type": "manuel", "t": 359.91, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071527.8369431}
+{"type": "manuel", "t": 360.63, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071528.5608318}
+{"type": "manuel", "t": 361.37, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071529.3008614}
+{"type": "manuel", "t": 362.1, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071530.0248322}
+{"type": "manuel", "t": 362.85, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071530.7769387}
+{"type": "manuel", "t": 363.59, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071531.5128517}
+{"type": "manuel", "t": 364.33, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071532.2569125}
+{"type": "manuel", "t": 365.05, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071532.9728453}
+{"type": "manuel", "t": 365.81, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071533.733097}
+{"type": "manuel", "t": 366.64, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071534.5689392}
+{"type": "manuel", "t": 367.44, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071535.3649297}
+{"type": "manuel", "t": 368.17, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071536.092843}
+{"type": "manuel", "t": 368.91, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071536.8329315}
+{"type": "manuel", "t": 369.62, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071537.5488513}
+{"type": "manuel", "t": 370.36, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071538.284912}
+{"type": "manuel", "t": 371.08, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071539.0124218}
+{"type": "manuel", "t": 371.82, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071539.7444487}
+{"type": "manuel", "t": 372.55, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071540.476467}
+{"type": "manuel", "t": 373.29, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071541.220908}
+{"type": "manuel", "t": 374.02, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071541.9488494}
+{"type": "manuel", "t": 374.74, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071542.6689148}
+{"type": "manuel", "t": 375.46, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071543.3848758}
+{"type": "manuel", "t": 376.19, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071544.1209073}
+{"type": "manuel", "t": 376.92, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071544.8448288}
+{"type": "manuel", "t": 377.68, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071545.6049209}
+{"type": "manuel", "t": 378.41, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071546.3368523}
+{"type": "manuel", "t": 379.17, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071547.0929255}
+{"type": "manuel", "t": 379.9, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071547.828864}
+{"type": "manuel", "t": 380.65, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071548.5809164}
+{"type": "manuel", "t": 381.38, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071549.3088484}
+{"type": "manuel", "t": 382.14, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071550.0649257}
+{"type": "manuel", "t": 382.87, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071550.7928436}
+{"type": "manuel", "t": 383.61, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071551.5369117}
+{"type": "manuel", "t": 384.35, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071552.2809079}
+{"type": "manuel", "t": 385.16, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071553.0849068}
+{"type": "manuel", "t": 385.89, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071553.81285}
+{"type": "manuel", "t": 386.63, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071554.5569394}
+{"type": "manuel", "t": 387.35, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071555.2728548}
+{"type": "manuel", "t": 388.1, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071556.028939}
+{"type": "manuel", "t": 388.81, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071556.7408612}
+{"type": "manuel", "t": 389.58, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071557.50892}
+{"type": "manuel", "t": 390.31, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071558.2368805}
+{"type": "manuel", "t": 391.07, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071558.9929419}
+{"type": "manuel", "t": 391.79, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071559.7208788}
+{"type": "manuel", "t": 392.54, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071560.4649372}
+{"type": "manuel", "t": 393.26, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071561.184862}
+{"type": "manuel", "t": 394.0, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071561.9289467}
+{"type": "manuel", "t": 394.73, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071562.6568828}
+{"type": "manuel", "t": 395.49, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071563.4169571}
+{"type": "manuel", "t": 396.25, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071564.1768456}
+{"type": "manuel", "t": 396.99, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071564.9169183}
+{"type": "manuel", "t": 397.72, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071565.6448445}
+{"type": "manuel", "t": 398.45, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071566.3769307}
+{"type": "manuel", "t": 399.18, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071567.1048584}
+{"type": "manuel", "t": 399.93, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071567.852933}
+{"type": "manuel", "t": 400.66, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071568.584844}
+{"type": "manuel", "t": 401.4, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071569.328904}
+{"type": "manuel", "t": 402.12, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071570.0488567}
+{"type": "manuel", "t": 402.88, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071570.8089042}
+{"type": "manuel", "t": 403.61, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071571.5328453}
+{"type": "manuel", "t": 404.35, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071572.2729254}
+{"type": "manuel", "t": 405.06, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071572.9888458}
+{"type": "manuel", "t": 405.8, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071573.7249274}
+{"type": "manuel", "t": 406.52, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071574.4448357}
+{"type": "manuel", "t": 407.27, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071575.2009172}
+{"type": "manuel", "t": 408.0, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071575.9248831}
+{"type": "manuel", "t": 408.76, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071576.6889045}
+{"type": "manuel", "t": 409.49, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071577.4208546}
+{"type": "manuel", "t": 410.24, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071578.1649024}
+{"type": "manuel", "t": 410.95, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071578.8768618}
+{"type": "manuel", "t": 411.71, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071579.6369095}
+{"type": "manuel", "t": 412.45, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071580.3769236}
+{"type": "manuel", "t": 413.76, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071581.685011}
+{"type": "manuel", "t": 414.49, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071582.4208555}
+{"type": "manuel", "t": 415.23, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071583.1529088}
+{"type": "manuel", "t": 416.02, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071583.9448564}
+{"type": "manuel", "t": 416.75, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071584.6809216}
+{"type": "manuel", "t": 417.47, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071585.4008393}
+{"type": "manuel", "t": 418.21, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071586.1329265}
+{"type": "manuel", "t": 418.92, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071586.8448496}
+{"type": "manuel", "t": 419.67, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071587.5969067}
+{"type": "manuel", "t": 420.39, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071588.3128548}
+{"type": "manuel", "t": 421.15, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071589.0769136}
+{"type": "manuel", "t": 421.96, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071589.8849015}
+{"type": "manuel", "t": 422.69, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071590.6169274}
+{"type": "manuel", "t": 423.43, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071591.3528373}
+{"type": "manuel", "t": 424.17, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071592.0969212}
+{"type": "manuel", "t": 424.89, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071592.820848}
+{"type": "manuel", "t": 425.66, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071593.5889142}
+{"type": "manuel", "t": 426.39, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071594.3168466}
+{"type": "manuel", "t": 427.13, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071595.0609143}
+{"type": "manuel", "t": 427.85, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071595.7768538}
+{"type": "manuel", "t": 428.6, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071596.5249085}
+{"type": "manuel", "t": 429.32, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071597.2448425}
+{"type": "manuel", "t": 430.07, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071597.9969108}
+{"type": "manuel", "t": 430.79, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071598.721534}
+{"type": "manuel", "t": 431.54, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071599.4684536}
+{"type": "manuel", "t": 432.3, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071600.228404}
+{"type": "manuel", "t": 433.03, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071600.9609141}
+{"type": "manuel", "t": 433.8, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071601.7289052}
+{"type": "manuel", "t": 434.63, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071602.5569165}
+{"type": "manuel", "t": 435.36, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071603.2848556}
+{"type": "manuel", "t": 436.1, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071604.0289474}
+{"type": "manuel", "t": 436.88, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071604.804838}
+{"type": "manuel", "t": 437.61, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071605.5408425}
+{"type": "manuel", "t": 438.38, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071606.3049057}
+{"type": "manuel", "t": 439.17, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071607.0929062}
+{"type": "manuel", "t": 439.9, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071607.8248491}
+{"type": "manuel", "t": 440.64, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071608.5649102}
+{"type": "manuel", "t": 441.38, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071609.3088448}
+{"type": "manuel", "t": 442.13, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071610.0609672}
+{"type": "manuel", "t": 442.86, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071610.7888348}
+{"type": "manuel", "t": 443.6, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071611.5289247}
+{"type": "manuel", "t": 444.33, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071612.2608461}
+{"type": "manuel", "t": 445.07, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071612.9969022}
+{"type": "manuel", "t": 445.79, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071613.7168417}
+{"type": "manuel", "t": 446.54, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071614.4689066}
+{"type": "manuel", "t": 447.27, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071615.1928568}
+{"type": "manuel", "t": 448.01, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071615.9369102}
+{"type": "manuel", "t": 448.74, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071616.6648426}
+{"type": "manuel", "t": 449.55, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071617.4728894}
+{"type": "manuel", "t": 450.27, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071618.2008526}
+{"type": "manuel", "t": 451.01, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071618.93292}
+{"type": "manuel", "t": 451.73, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071619.660861}
+{"type": "manuel", "t": 452.49, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071620.420925}
+{"type": "manuel", "t": 453.23, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071621.1528578}
+{"type": "manuel", "t": 453.97, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071621.89693}
+{"type": "manuel", "t": 454.71, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071622.636908}
+{"type": "manuel", "t": 455.44, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071623.364918}
+{"type": "manuel", "t": 456.17, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071624.0928464}
+{"type": "manuel", "t": 456.91, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071624.8369195}
+{"type": "manuel", "t": 457.65, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071625.5728443}
+{"type": "manuel", "t": 458.39, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071626.3169181}
+{"type": "manuel", "t": 459.09, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071627.0208645}
+{"type": "manuel", "t": 459.84, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071627.764901}
+{"type": "manuel", "t": 460.58, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071628.5048335}
+{"type": "manuel", "t": 461.34, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071629.2644675}
+{"type": "manuel", "t": 462.05, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071629.9763877}
+{"type": "manuel", "t": 462.78, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071630.7044306}
+{"type": "manuel", "t": 463.51, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071631.4328618}
+{"type": "manuel", "t": 464.25, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071632.1769164}
+{"type": "manuel", "t": 464.96, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071632.8888493}
+{"type": "manuel", "t": 465.71, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071633.6329086}
+{"type": "manuel", "t": 466.47, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071634.392907}
+{"type": "manuel", "t": 467.2, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071635.1248932}
+{"type": "manuel", "t": 467.93, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071635.8528562}
+{"type": "manuel", "t": 468.66, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071636.588908}
+{"type": "manuel", "t": 469.41, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071637.3328505}
+{"type": "manuel", "t": 470.15, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071638.0769076}
+{"type": "manuel", "t": 470.9, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071638.8248637}
+{"type": "manuel", "t": 471.63, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071639.5569172}
+{"type": "manuel", "t": 472.37, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071640.2969117}
+{"type": "manuel", "t": 473.11, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071641.040913}
+{"type": "manuel", "t": 473.85, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071641.7729685}
+{"type": "manuel", "t": 474.58, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071642.5089424}
+{"type": "manuel", "t": 475.74, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071643.6690032}
+{"type": "manuel", "t": 476.65, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071644.5764337}
+{"type": "manuel", "t": 477.58, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071645.5044005}
+{"type": "manuel", "t": 478.52, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071646.448872}
+{"type": "manuel", "t": 479.45, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071647.3803759}
+{"type": "manuel", "t": 480.32, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071648.244441}
+{"type": "manuel", "t": 481.03, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071648.960851}
+{"type": "manuel", "t": 481.79, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071649.7129095}
+{"type": "manuel", "t": 482.51, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071650.4328501}
+{"type": "manuel", "t": 483.25, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071651.17691}
+{"type": "manuel", "t": 483.98, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071651.9088662}
+{"type": "manuel", "t": 484.72, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071652.6449025}
+{"type": "manuel", "t": 485.45, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071653.380841}
+{"type": "manuel", "t": 486.19, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071654.1169212}
+{"type": "manuel", "t": 486.93, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071654.8568404}
+{"type": "manuel", "t": 487.65, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071655.5808744}
+{"type": "manuel", "t": 488.38, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071656.3088608}
+{"type": "manuel", "t": 489.1, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071657.0249238}
+{"type": "manuel", "t": 489.84, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071657.7688627}
+{"type": "manuel", "t": 490.57, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071658.5009086}
+{"type": "manuel", "t": 491.3, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071659.2249022}
+{"type": "manuel", "t": 492.06, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071659.9849262}
+{"type": "manuel", "t": 492.78, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071660.7088459}
+{"type": "manuel", "t": 493.54, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071661.4688985}
+{"type": "manuel", "t": 494.28, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071662.2048967}
+{"type": "manuel", "t": 495.01, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071662.9369488}
+{"type": "manuel", "t": 495.74, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071663.6648457}
+{"type": "manuel", "t": 496.49, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071664.4209294}
+{"type": "manuel", "t": 497.21, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071665.1368663}
+{"type": "manuel", "t": 497.97, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071665.8929513}
+{"type": "manuel", "t": 498.7, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071666.6248527}
+{"type": "manuel", "t": 499.43, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071667.3609269}
+{"type": "manuel", "t": 500.21, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071668.1369395}
+{"type": "manuel", "t": 500.98, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071668.9049323}
+{"type": "manuel", "t": 501.75, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071669.6808517}
+{"type": "manuel", "t": 502.5, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071670.4288645}
+{"type": "manuel", "t": 503.23, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071671.1568563}
+{"type": "manuel", "t": 503.97, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071671.9009676}
+{"type": "manuel", "t": 504.86, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071672.784869}
+{"type": "manuel", "t": 505.6, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071673.528952}
+{"type": "manuel", "t": 506.36, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071674.288927}
+{"type": "manuel", "t": 507.16, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071675.0889058}
+{"type": "manuel", "t": 507.91, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071675.836842}
+{"type": "manuel", "t": 508.66, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071676.5849361}
+{"type": "manuel", "t": 509.43, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071677.3608556}
+{"type": "manuel", "t": 510.19, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071678.1129324}
+{"type": "manuel", "t": 510.9, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071678.8248696}
+{"type": "manuel", "t": 511.66, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071679.5889175}
+{"type": "manuel", "t": 512.42, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071680.344929}
+{"type": "manuel", "t": 513.18, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071681.104961}
+{"type": "manuel", "t": 513.9, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071681.8288412}
+{"type": "manuel", "t": 514.66, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071682.5849319}
+{"type": "manuel", "t": 515.39, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071683.3208742}
+{"type": "manuel", "t": 516.17, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071684.096941}
+{"type": "manuel", "t": 516.89, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071684.8208568}
+{"type": "manuel", "t": 517.63, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071685.552865}
+{"type": "manuel", "t": 518.35, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071686.2728698}
+{"type": "manuel", "t": 519.08, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071687.0089474}
+{"type": "manuel", "t": 519.8, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071687.7248528}
+{"type": "manuel", "t": 520.56, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071688.484915}
+{"type": "manuel", "t": 521.31, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071689.2364612}
+{"type": "manuel", "t": 522.08, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071690.012439}
+{"type": "manuel", "t": 522.81, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071690.7403889}
+{"type": "manuel", "t": 523.55, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071691.472921}
+{"type": "manuel", "t": 524.26, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071692.1888525}
+{"type": "manuel", "t": 524.99, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071692.9169214}
+{"type": "manuel", "t": 525.72, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071693.6448317}
+{"type": "manuel", "t": 526.46, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071694.3889086}
+{"type": "manuel", "t": 527.19, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071695.120847}
+{"type": "manuel", "t": 527.94, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071695.8689032}
+{"type": "manuel", "t": 528.67, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071696.5968668}
+{"type": "manuel", "t": 529.42, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071697.3449135}
+{"type": "manuel", "t": 530.12, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071698.0488427}
+{"type": "manuel", "t": 530.87, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071698.8010998}
+{"type": "manuel", "t": 531.59, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071699.520834}
+{"type": "manuel", "t": 532.33, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071700.252913}
+{"type": "manuel", "t": 533.06, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071700.9848516}
+{"type": "manuel", "t": 533.81, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071701.7329347}
+{"type": "manuel", "t": 534.53, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071702.4609213}
+{"type": "manuel", "t": 535.27, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071703.1969051}
+{"type": "manuel", "t": 535.99, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071703.91288}
+{"type": "manuel", "t": 536.72, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071704.6489463}
+{"type": "manuel", "t": 537.76, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071705.6889806}
+{"type": "manuel", "t": 538.51, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071706.4329042}
+{"type": "manuel", "t": 539.23, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071707.156848}
+{"type": "manuel", "t": 539.96, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071707.8889217}
+{"type": "manuel", "t": 540.69, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071708.6169038}
+{"type": "manuel", "t": 541.44, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071709.3689065}
+{"type": "manuel", "t": 542.17, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071710.0968416}
+{"type": "manuel", "t": 542.91, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071710.840951}
+{"type": "manuel", "t": 543.65, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071711.5728226}
+{"type": "manuel", "t": 544.39, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071712.320931}
+{"type": "manuel", "t": 545.11, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071713.0328465}
+{"type": "manuel", "t": 545.84, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071713.7688456}
+{"type": "manuel", "t": 546.57, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071714.5008612}
+{"type": "manuel", "t": 547.32, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071715.2449343}
+{"type": "manuel", "t": 548.03, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071715.9608428}
+{"type": "manuel", "t": 548.77, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071716.70092}
+{"type": "manuel", "t": 549.5, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071717.4248636}
+{"type": "manuel", "t": 550.27, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071718.2009394}
+{"type": "manuel", "t": 551.02, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071718.9496548}
+{"type": "manuel", "t": 551.78, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071719.7049332}
+{"type": "manuel", "t": 552.5, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071720.4248414}
+{"type": "manuel", "t": 553.22, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071721.1489272}
+{"type": "manuel", "t": 553.94, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071721.8648393}
+{"type": "manuel", "t": 554.67, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071722.5969324}
+{"type": "manuel", "t": 555.39, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071723.312841}
+{"type": "manuel", "t": 556.19, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071724.1129386}
+{"type": "manuel", "t": 556.95, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071724.8768494}
+{"type": "manuel", "t": 557.7, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071725.6289065}
+{"type": "manuel", "t": 558.43, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071726.3568509}
+{"type": "manuel", "t": 559.16, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071727.088901}
+{"type": "manuel", "t": 559.89, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071727.8169127}
+{"type": "manuel", "t": 560.64, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071728.564909}
+{"type": "manuel", "t": 561.37, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071729.2928722}
+{"type": "manuel", "t": 562.11, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071730.0369122}
+{"type": "manuel", "t": 562.84, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071730.768839}
+{"type": "manuel", "t": 563.6, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071731.5289228}
+{"type": "manuel", "t": 564.34, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071732.2651114}
+{"type": "manuel", "t": 565.1, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071733.0249228}
+{"type": "manuel", "t": 565.84, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071733.7648604}
+{"type": "manuel", "t": 566.59, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071734.5129223}
+{"type": "manuel", "t": 567.33, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071735.2568746}
+{"type": "manuel", "t": 568.08, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071736.0089612}
+{"type": "manuel", "t": 568.79, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071736.720844}
+{"type": "manuel", "t": 569.56, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071737.4849222}
+{"type": "manuel", "t": 570.3, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071738.2248983}
+{"type": "manuel", "t": 571.03, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071738.9609187}
+{"type": "manuel", "t": 571.75, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071739.6808486}
+{"type": "manuel", "t": 572.5, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071740.4249182}
+{"type": "manuel", "t": 573.21, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071741.1408734}
+{"type": "manuel", "t": 573.97, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071741.900927}
+{"type": "manuel", "t": 574.7, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071742.624848}
+{"type": "manuel", "t": 575.44, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071743.368921}
+{"type": "manuel", "t": 576.17, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071744.0968707}
+{"type": "manuel", "t": 576.91, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071744.836916}
+{"type": "manuel", "t": 577.64, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071745.5688689}
+{"type": "manuel", "t": 578.39, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071746.3129196}
+{"type": "manuel", "t": 579.09, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071747.0128953}
+{"type": "manuel", "t": 579.83, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071747.7569246}
+{"type": "manuel", "t": 580.61, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071748.5368507}
+{"type": "manuel", "t": 581.35, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071749.2767863}
+{"type": "manuel", "t": 582.08, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071750.008853}
+{"type": "manuel", "t": 582.83, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071750.752899}
+{"type": "manuel", "t": 583.55, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071751.4808524}
+{"type": "manuel", "t": 584.29, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071752.2169156}
+{"type": "manuel", "t": 585.01, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071752.9368584}
+{"type": "manuel", "t": 585.75, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071753.6809003}
+{"type": "manuel", "t": 586.48, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071754.408845}
+{"type": "manuel", "t": 587.23, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071755.1569483}
+{"type": "manuel", "t": 587.96, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071755.8848581}
+{"type": "manuel", "t": 588.69, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071756.6208699}
+{"type": "manuel", "t": 589.43, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071757.3568468}
+{"type": "manuel", "t": 590.17, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071758.092864}
+{"type": "manuel", "t": 590.89, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071758.821094}
+{"type": "manuel", "t": 591.63, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071759.552897}
+{"type": "manuel", "t": 592.41, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071760.3368893}
+{"type": "manuel", "t": 593.14, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071761.0689225}
+{"type": "manuel", "t": 593.86, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071761.7888405}
+{"type": "manuel", "t": 594.63, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071762.5528991}
+{"type": "manuel", "t": 595.35, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071763.2808528}
+{"type": "manuel", "t": 596.1, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071764.0249014}
+{"type": "manuel", "t": 596.83, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071764.756858}
+{"type": "manuel", "t": 597.57, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071765.5009067}
+{"type": "manuel", "t": 598.31, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071766.2368445}
+{"type": "manuel", "t": 599.76, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071767.6890247}
+{"type": "manuel", "t": 600.51, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071768.4328673}
+{"type": "manuel", "t": 601.27, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071769.192905}
+{"type": "manuel", "t": 601.99, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071769.9128435}
+{"type": "manuel", "t": 602.73, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071770.660928}
+{"type": "manuel", "t": 603.46, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071771.388855}
+{"type": "manuel", "t": 604.21, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071772.1409297}
+{"type": "manuel", "t": 604.93, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071772.8608549}
+{"type": "manuel", "t": 605.67, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071773.5928962}
+{"type": "manuel", "t": 606.43, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071774.3608656}
+{"type": "manuel", "t": 607.17, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071775.0928912}
+{"type": "manuel", "t": 607.89, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071775.8208327}
+{"type": "manuel", "t": 608.64, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071776.5689054}
+{"type": "manuel", "t": 609.36, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071777.2888658}
+{"type": "manuel", "t": 610.09, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071778.0208766}
+{"type": "manuel", "t": 610.82, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071778.7448318}
+{"type": "manuel", "t": 611.54, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071779.472456}
+{"type": "manuel", "t": 612.26, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071780.1923769}
+{"type": "manuel", "t": 613.0, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071780.9244306}
+{"type": "manuel", "t": 613.73, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071781.6528387}
+{"type": "manuel", "t": 614.47, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071782.396914}
+{"type": "manuel", "t": 615.19, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071783.1129098}
+{"type": "manuel", "t": 615.93, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071783.8569093}
+{"type": "manuel", "t": 616.65, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071784.580847}
+{"type": "manuel", "t": 617.41, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071785.340907}
+{"type": "manuel", "t": 618.2, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071786.1248727}
+{"type": "manuel", "t": 618.93, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071786.8529055}
+{"type": "manuel", "t": 619.65, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071787.5808277}
+{"type": "manuel", "t": 620.4, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071788.3249042}
+{"type": "manuel", "t": 621.13, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071789.0568686}
+{"type": "manuel", "t": 621.87, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071789.7928944}
+{"type": "manuel", "t": 622.59, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071790.5128317}
+{"type": "manuel", "t": 623.32, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071791.2489328}
+{"type": "manuel", "t": 624.08, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071792.0089316}
+{"type": "manuel", "t": 624.84, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071792.7649133}
+{"type": "manuel", "t": 625.58, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071793.504847}
+{"type": "manuel", "t": 626.32, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071794.2489767}
+{"type": "manuel", "t": 627.05, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071794.972878}
+{"type": "manuel", "t": 627.79, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071795.7169163}
+{"type": "manuel", "t": 628.52, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071796.4488287}
+{"type": "manuel", "t": 629.26, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071797.1849065}
+{"type": "manuel", "t": 630.01, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071797.9408493}
+{"type": "manuel", "t": 630.76, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071798.6889079}
+{"type": "manuel", "t": 631.5, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071799.4248285}
+{"type": "manuel", "t": 632.23, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071800.1569219}
+{"type": "manuel", "t": 632.96, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071800.8888838}
+{"type": "manuel", "t": 633.71, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071801.6329072}
+{"type": "manuel", "t": 634.43, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071802.3608415}
+{"type": "manuel", "t": 635.17, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071803.0929284}
+{"type": "manuel", "t": 635.93, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071803.8531559}
+{"type": "manuel", "t": 636.7, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071804.6289175}
+{"type": "manuel", "t": 637.44, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071805.3648703}
+{"type": "manuel", "t": 638.18, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071806.1088986}
+{"type": "manuel", "t": 638.89, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071806.8208535}
+{"type": "manuel", "t": 639.63, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071807.556923}
+{"type": "manuel", "t": 640.35, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071808.2808459}
+{"type": "manuel", "t": 641.1, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071809.0249202}
+{"type": "manuel", "t": 641.87, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071809.800439}
+{"type": "manuel", "t": 642.62, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071810.5444334}
+{"type": "manuel", "t": 643.34, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071811.268872}
+{"type": "manuel", "t": 644.09, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071812.0129}
+{"type": "manuel", "t": 644.81, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071812.7368476}
+{"type": "manuel", "t": 645.55, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071813.4809406}
+{"type": "manuel", "t": 646.28, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071814.208851}
+{"type": "manuel", "t": 647.05, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071814.972926}
+{"type": "manuel", "t": 647.81, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071815.7330458}
+{"type": "manuel", "t": 648.55, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071816.4729295}
+{"type": "manuel", "t": 649.27, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071817.2008648}
+{"type": "manuel", "t": 650.02, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071817.9449139}
+{"type": "manuel", "t": 650.81, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071818.732834}
+{"type": "manuel", "t": 651.55, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071819.476928}
+{"type": "manuel", "t": 652.28, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071820.2048795}
+{"type": "manuel", "t": 653.02, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071820.9488525}
+{"type": "manuel", "t": 653.75, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071821.6728613}
+{"type": "manuel", "t": 654.49, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071822.416912}
+{"type": "manuel", "t": 655.24, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071823.1648526}
+{"type": "manuel", "t": 655.98, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071823.9089217}
+{"type": "manuel", "t": 656.69, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071824.6208427}
+{"type": "manuel", "t": 657.44, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071825.3649306}
+{"type": "manuel", "t": 658.15, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071826.0728374}
+{"type": "manuel", "t": 658.89, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071826.8129284}
+{"type": "manuel", "t": 659.65, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071827.572948}
+{"type": "manuel", "t": 660.39, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071828.3169072}
+{"type": "manuel", "t": 661.75, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071829.6769772}
+{"type": "manuel", "t": 662.49, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071830.4209259}
+{"type": "manuel", "t": 663.21, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071831.136863}
+{"type": "manuel", "t": 663.95, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071831.8809202}
+{"type": "manuel", "t": 664.68, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071832.6088557}
+{"type": "manuel", "t": 665.41, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071833.3408859}
+{"type": "manuel", "t": 666.16, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071834.0888586}
+{"type": "manuel", "t": 666.91, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071834.8409061}
+{"type": "manuel", "t": 667.64, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071835.5688622}
+{"type": "manuel", "t": 668.38, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071836.3089209}
+{"type": "manuel", "t": 669.1, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071837.024857}
+{"type": "manuel", "t": 669.86, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071837.7849221}
+{"type": "manuel", "t": 670.57, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071838.5008507}
+{"type": "manuel", "t": 671.33, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071839.2614856}
+{"type": "manuel", "t": 672.08, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071840.004873}
+{"type": "manuel", "t": 672.82, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071840.7449284}
+{"type": "manuel", "t": 673.55, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071841.4728608}
+{"type": "manuel", "t": 674.29, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071842.2209432}
+{"type": "manuel", "t": 675.03, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071842.9568603}
+{"type": "manuel", "t": 675.77, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071843.700904}
+{"type": "manuel", "t": 676.5, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071844.4288404}
+{"type": "manuel", "t": 677.25, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071845.1729178}
+{"type": "manuel", "t": 677.96, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071845.8851418}
+{"type": "manuel", "t": 678.7, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071846.624932}
+{"type": "manuel", "t": 679.45, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071847.376861}
+{"type": "manuel", "t": 680.18, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071848.1089182}
+{"type": "manuel", "t": 680.93, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071848.8609293}
+{"type": "manuel", "t": 681.7, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071849.6249208}
+{"type": "manuel", "t": 682.47, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071850.400904}
+{"type": "manuel", "t": 683.21, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071851.1329195}
+{"type": "manuel", "t": 683.93, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071851.8608396}
+{"type": "manuel", "t": 684.68, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071852.6049035}
+{"type": "manuel", "t": 685.41, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071853.332862}
+{"type": "manuel", "t": 686.2, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071854.1249213}
+{"type": "manuel", "t": 686.95, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071854.872848}
+{"type": "manuel", "t": 687.69, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071855.6169026}
+{"type": "manuel", "t": 688.4, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071856.3288553}
+{"type": "manuel", "t": 689.13, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071857.0609066}
+{"type": "manuel", "t": 689.87, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071857.792843}
+{"type": "manuel", "t": 690.6, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071858.5289237}
+{"type": "manuel", "t": 691.33, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071859.2568645}
+{"type": "manuel", "t": 692.09, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071860.0209093}
+{"type": "manuel", "t": 692.83, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071860.752844}
+{"type": "manuel", "t": 693.57, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071861.4969687}
+{"type": "manuel", "t": 694.3, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071862.2248511}
+{"type": "manuel", "t": 695.03, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071862.9569046}
+{"type": "manuel", "t": 695.77, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071863.6928508}
+{"type": "manuel", "t": 696.53, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071864.4569852}
+{"type": "manuel", "t": 697.25, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071865.1808558}
+{"type": "manuel", "t": 698.0, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071865.9249244}
+{"type": "manuel", "t": 698.77, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071866.7008371}
+{"type": "manuel", "t": 699.59, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071867.5208502}
+{"type": "manuel", "t": 700.33, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071868.2608361}
+{"type": "manuel", "t": 701.15, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071869.0729423}
+{"type": "manuel", "t": 701.88, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071869.8084333}
+{"type": "manuel", "t": 702.63, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071870.5564609}
+{"type": "manuel", "t": 703.36, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071871.2844265}
+{"type": "manuel", "t": 704.09, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071872.0129197}
+{"type": "manuel", "t": 704.85, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071872.776913}
+{"type": "manuel", "t": 705.59, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071873.5169382}
+{"type": "manuel", "t": 706.35, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071874.2769551}
+{"type": "manuel", "t": 707.11, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071875.0368567}
+{"type": "manuel", "t": 707.84, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071875.7649162}
+{"type": "manuel", "t": 708.57, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071876.496925}
+{"type": "manuel", "t": 709.3, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071877.224882}
+{"type": "manuel", "t": 710.04, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071877.968905}
+{"type": "manuel", "t": 710.75, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071878.6808488}
+{"type": "manuel", "t": 711.51, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071879.4329288}
+{"type": "manuel", "t": 712.25, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071880.1808343}
+{"type": "manuel", "t": 713.03, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071880.956921}
+{"type": "manuel", "t": 713.77, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071881.7008603}
+{"type": "manuel", "t": 714.52, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071882.4489353}
+{"type": "manuel", "t": 715.25, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071883.1768482}
+{"type": "manuel", "t": 715.99, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071883.9209542}
+{"type": "manuel", "t": 716.72, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071884.6488435}
+{"type": "manuel", "t": 717.49, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071885.4129186}
+{"type": "manuel", "t": 718.21, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071886.132835}
+{"type": "manuel", "t": 718.95, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071886.8769093}
+{"type": "manuel", "t": 719.7, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071887.6288924}
+{"type": "manuel", "t": 720.45, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071888.3729246}
+{"type": "manuel", "t": 721.17, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071889.093025}
+{"type": "manuel", "t": 721.93, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071889.8529115}
+{"type": "manuel", "t": 722.65, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071890.572843}
+{"type": "manuel", "t": 723.76, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071891.688993}
+{"type": "manuel", "t": 724.48, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071892.4048388}
+{"type": "manuel", "t": 725.21, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071893.1408796}
+{"type": "manuel", "t": 725.95, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071893.8728411}
+{"type": "manuel", "t": 726.69, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071894.6169121}
+{"type": "manuel", "t": 727.43, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071895.3568635}
+{"type": "manuel", "t": 728.18, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071896.1048975}
+{"type": "manuel", "t": 728.9, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071896.8288405}
+{"type": "manuel", "t": 729.66, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071897.584898}
+{"type": "manuel", "t": 730.39, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071898.3168488}
+{"type": "manuel", "t": 731.15, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071899.080915}
+{"type": "manuel", "t": 731.9, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071899.8244336}
+{"type": "manuel", "t": 732.63, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071900.5564404}
+{"type": "manuel", "t": 733.35, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071901.276423}
+{"type": "manuel", "t": 734.08, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071902.0089328}
+{"type": "manuel", "t": 734.81, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071902.7328544}
+{"type": "manuel", "t": 735.55, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071903.47692}
+{"type": "manuel", "t": 736.28, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071904.2090635}
+{"type": "manuel", "t": 737.02, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071904.9451592}
+{"type": "manuel", "t": 737.74, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071905.664402}
+{"type": "manuel", "t": 738.47, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071906.4009435}
+{"type": "manuel", "t": 739.19, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071907.1168482}
+{"type": "manuel", "t": 739.93, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071907.8608935}
+{"type": "manuel", "t": 740.66, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071908.584902}
+{"type": "manuel", "t": 741.39, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071909.316916}
+{"type": "manuel", "t": 742.12, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071910.044864}
+{"type": "manuel", "t": 742.87, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071910.7929153}
+{"type": "manuel", "t": 743.59, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071911.5208457}
+{"type": "manuel", "t": 744.35, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071912.2809293}
+{"type": "manuel", "t": 745.07, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071913.000838}
+{"type": "manuel", "t": 745.82, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071913.7449255}
+{"type": "manuel", "t": 746.53, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071914.4608366}
+{"type": "manuel", "t": 747.29, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071915.2129247}
+{"type": "manuel", "t": 748.01, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071915.940849}
+{"type": "manuel", "t": 748.76, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071916.684908}
+{"type": "manuel", "t": 749.49, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071917.412857}
+{"type": "manuel", "t": 750.23, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071918.1569111}
+{"type": "manuel", "t": 750.96, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071918.8888645}
+{"type": "manuel", "t": 751.71, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071919.6329162}
+{"type": "manuel", "t": 752.47, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071920.3929265}
+{"type": "manuel", "t": 753.2, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071921.124898}
+{"type": "manuel", "t": 753.93, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071921.8528392}
+{"type": "manuel", "t": 754.67, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071922.6009047}
+{"type": "manuel", "t": 755.4, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071923.3288653}
+{"type": "manuel", "t": 756.15, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071924.072956}
+{"type": "manuel", "t": 756.88, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071924.8048515}
+{"type": "manuel", "t": 757.62, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071925.5489457}
+{"type": "manuel", "t": 758.35, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071926.2768345}
+{"type": "manuel", "t": 759.07, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071927.0009418}
+{"type": "manuel", "t": 759.82, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071927.7448547}
+{"type": "manuel", "t": 760.58, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071928.5049047}
+{"type": "manuel", "t": 761.31, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071929.232861}
+{"type": "manuel", "t": 762.07, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071929.9964442}
+{"type": "manuel", "t": 762.8, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071930.7243896}
+{"type": "manuel", "t": 763.52, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071931.45251}
+{"type": "manuel", "t": 764.27, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071932.1968477}
+{"type": "manuel", "t": 765.01, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071932.9332926}
+{"type": "manuel", "t": 765.72, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071933.648959}
+{"type": "manuel", "t": 766.49, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071934.4130094}
+{"type": "manuel", "t": 767.2, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071935.1289625}
+{"type": "manuel", "t": 767.95, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071935.8730135}
+{"type": "manuel", "t": 768.67, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071936.6009636}
+{"type": "manuel", "t": 769.41, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071937.3370335}
+{"type": "manuel", "t": 770.13, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071938.052958}
+{"type": "manuel", "t": 770.87, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071938.801045}
+{"type": "manuel", "t": 771.61, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071939.5329447}
+{"type": "manuel", "t": 772.43, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071940.3570256}
+{"type": "manuel", "t": 773.15, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071941.0769591}
+{"type": "manuel", "t": 773.87, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071941.800963}
+{"type": "manuel", "t": 774.59, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071942.5169628}
+{"type": "manuel", "t": 775.32, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071943.2490373}
+{"type": "manuel", "t": 776.05, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071943.9769742}
+{"type": "manuel", "t": 776.79, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071944.71302}
+{"type": "manuel", "t": 777.51, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071945.4409943}
+{"type": "manuel", "t": 778.25, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071946.1810553}
+{"type": "manuel", "t": 778.98, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071946.9089556}
+{"type": "manuel", "t": 779.71, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071947.641021}
+{"type": "manuel", "t": 780.46, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071948.388981}
+{"type": "manuel", "t": 781.2, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071949.1290236}
+{"type": "manuel", "t": 781.94, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071949.8650184}
+{"type": "manuel", "t": 782.68, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071950.6050255}
+{"type": "manuel", "t": 783.41, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071951.332959}
+{"type": "manuel", "t": 784.13, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071952.0610268}
+{"type": "manuel", "t": 784.85, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071952.772979}
+{"type": "manuel", "t": 785.75, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071953.681071}
+{"type": "manuel", "t": 786.47, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071954.3969643}
+{"type": "manuel", "t": 787.22, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071955.1450684}
+{"type": "manuel", "t": 787.93, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071955.8609529}
+{"type": "manuel", "t": 788.67, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071956.593061}
+{"type": "manuel", "t": 789.39, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071957.316973}
+{"type": "manuel", "t": 790.19, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071958.1130264}
+{"type": "manuel", "t": 790.91, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071958.8409688}
+{"type": "manuel", "t": 791.65, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071959.5813262}
+{"type": "manuel", "t": 792.4, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071960.3245127}
+{"type": "manuel", "t": 793.13, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071961.0605066}
+{"type": "manuel", "t": 793.89, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071961.821009}
+{"type": "manuel", "t": 794.64, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071962.5650246}
+{"type": "manuel", "t": 795.35, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071963.2729821}
+{"type": "manuel", "t": 796.11, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071964.0330362}
+{"type": "manuel", "t": 796.82, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071964.7449923}
+{"type": "manuel", "t": 797.58, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071965.5090265}
+{"type": "manuel", "t": 798.31, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071966.232961}
+{"type": "manuel", "t": 799.05, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071966.9770336}
+{"type": "manuel", "t": 799.77, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071967.700943}
+{"type": "manuel", "t": 800.51, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071968.433027}
+{"type": "manuel", "t": 801.26, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071969.1849594}
+{"type": "manuel", "t": 802.03, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071969.9610233}
+{"type": "manuel", "t": 802.75, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071970.672959}
+{"type": "manuel", "t": 803.49, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071971.4170253}
+{"type": "manuel", "t": 804.22, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071972.1449559}
+{"type": "manuel", "t": 804.96, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071972.8850281}
+{"type": "manuel", "t": 805.69, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071973.6169493}
+{"type": "manuel", "t": 806.44, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071974.365023}
+{"type": "manuel", "t": 807.17, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071975.096978}
+{"type": "manuel", "t": 807.96, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071975.8890212}
+{"type": "manuel", "t": 808.71, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071976.6329587}
+{"type": "manuel", "t": 809.44, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071977.369027}
+{"type": "manuel", "t": 810.17, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071978.0969574}
+{"type": "manuel", "t": 810.92, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071978.845027}
+{"type": "manuel", "t": 811.65, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071979.5729766}
+{"type": "manuel", "t": 812.39, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071980.321033}
+{"type": "manuel", "t": 813.11, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071981.0409749}
+{"type": "manuel", "t": 813.88, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071981.805039}
+{"type": "manuel", "t": 814.63, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071982.553014}
+{"type": "manuel", "t": 815.37, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071983.2970452}
+{"type": "manuel", "t": 816.1, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071984.024972}
+{"type": "manuel", "t": 816.81, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071984.7410305}
+{"type": "manuel", "t": 817.54, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071985.4689553}
+{"type": "manuel", "t": 818.29, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071986.2170408}
+{"type": "manuel", "t": 819.03, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071986.9529414}
+{"type": "manuel", "t": 819.82, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071987.7450223}
+{"type": "manuel", "t": 820.55, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071988.4769666}
+{"type": "manuel", "t": 821.47, "port": "wusts", "ok": true, "valeur": {"wusts": 257}, "ts": 1789071989.4010692}
+{"type": "manuel", "t": 822.21, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": true}, "ts": 1789071990.1330183}
+{"type": "manuel", "t": 822.93, "port": "wusts", "ok": true, "valeur": {"wusts": 257}, "ts": 1789071990.8610392}
+{"type": "manuel", "t": 823.65, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": true}, "ts": 1789071991.5769615}
+{"type": "manuel", "t": 824.39, "port": "wusts", "ok": true, "valeur": {"wusts": 257}, "ts": 1789071992.3130558}
+{"type": "manuel", "t": 825.11, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": true}, "ts": 1789071993.0409858}
+{"type": "manuel", "t": 825.85, "port": "wusts", "ok": true, "valeur": {"wusts": 257}, "ts": 1789071993.7730136}
+{"type": "manuel", "t": 826.59, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": true}, "ts": 1789071994.5129764}
+{"type": "manuel", "t": 827.32, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071995.2490232}
+{"type": "manuel", "t": 828.06, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071995.989244}
+{"type": "manuel", "t": 828.79, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071996.721027}
+{"type": "manuel", "t": 829.52, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071997.448956}
+{"type": "manuel", "t": 830.25, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071998.1810348}
+{"type": "manuel", "t": 830.98, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789071998.9089582}
+{"type": "manuel", "t": 831.73, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789071999.6530416}
+{"type": "manuel", "t": 832.45, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072000.3809445}
+{"type": "manuel", "t": 833.19, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072001.117026}
+{"type": "manuel", "t": 833.9, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072001.8249543}
+{"type": "manuel", "t": 834.63, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072002.5610292}
+{"type": "manuel", "t": 835.36, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072003.288979}
+{"type": "manuel", "t": 836.11, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072004.033033}
+{"type": "manuel", "t": 836.83, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072004.7609732}
+{"type": "manuel", "t": 837.59, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072005.5210636}
+{"type": "manuel", "t": 838.32, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072006.24896}
+{"type": "manuel", "t": 839.07, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072006.9970372}
+{"type": "manuel", "t": 839.79, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072007.712944}
+{"type": "manuel", "t": 840.53, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072008.4569938}
+{"type": "manuel", "t": 841.27, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072009.2010043}
+{"type": "manuel", "t": 842.02, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072009.9450126}
+{"type": "manuel", "t": 842.75, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072010.6769438}
+{"type": "manuel", "t": 843.53, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072011.4530334}
+{"type": "manuel", "t": 844.25, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072012.180952}
+{"type": "manuel", "t": 844.99, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072012.917032}
+{"type": "manuel", "t": 845.72, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072013.6489701}
+{"type": "manuel", "t": 846.46, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072014.3850315}
+{"type": "manuel", "t": 847.74, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072015.669076}
+{"type": "manuel", "t": 848.7, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072016.628514}
+{"type": "manuel", "t": 849.64, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072017.5684662}
+{"type": "manuel", "t": 850.6, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072018.525037}
+{"type": "manuel", "t": 851.43, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072019.3604743}
+{"type": "manuel", "t": 852.16, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072020.0845325}
+{"type": "manuel", "t": 852.86, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072020.7889664}
+{"type": "manuel", "t": 853.63, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072021.557029}
+{"type": "manuel", "t": 854.36, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072022.2849557}
+{"type": "manuel", "t": 855.11, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072023.0330536}
+{"type": "manuel", "t": 855.84, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072023.7649617}
+{"type": "manuel", "t": 856.59, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072024.51301}
+{"type": "manuel", "t": 857.32, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072025.2449565}
+{"type": "manuel", "t": 858.06, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072025.9893079}
+{"type": "manuel", "t": 858.77, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072026.700954}
+{"type": "manuel", "t": 859.54, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072027.4690523}
+{"type": "manuel", "t": 860.25, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072028.1729486}
+{"type": "manuel", "t": 860.99, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072028.9210346}
+{"type": "manuel", "t": 861.73, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072029.656971}
+{"type": "manuel", "t": 862.47, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072030.397023}
+{"type": "manuel", "t": 863.21, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072031.1369538}
+{"type": "manuel", "t": 863.95, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072031.8729725}
+{"type": "manuel", "t": 864.69, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072032.621021}
+{"type": "manuel", "t": 865.47, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072033.4010434}
+{"type": "manuel", "t": 866.21, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072034.1370044}
+{"type": "manuel", "t": 866.94, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072034.8650036}
+{"type": "manuel", "t": 867.67, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072035.5969496}
+{"type": "manuel", "t": 868.43, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072036.357048}
+{"type": "manuel", "t": 869.17, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072037.0929532}
+{"type": "manuel", "t": 869.89, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072037.8210173}
+{"type": "manuel", "t": 870.63, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072038.5529575}
+{"type": "manuel", "t": 871.39, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072039.3170247}
+{"type": "manuel", "t": 872.12, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072040.044962}
+{"type": "manuel", "t": 872.87, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072040.7930043}
+{"type": "manuel", "t": 873.6, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072041.5249577}
+{"type": "manuel", "t": 874.34, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072042.2690625}
+{"type": "manuel", "t": 875.07, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072042.9929612}
+{"type": "manuel", "t": 875.81, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072043.737041}
+{"type": "manuel", "t": 876.54, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072044.4689534}
+{"type": "manuel", "t": 877.33, "port": "wusts", "ok": true, "valeur": {"wusts": 257}, "ts": 1789072045.261082}
+{"type": "manuel", "t": 878.09, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": true}, "ts": 1789072046.0210006}
+{"type": "manuel", "t": 878.83, "port": "wusts", "ok": true, "valeur": {"wusts": 257}, "ts": 1789072046.7530398}
+{"type": "manuel", "t": 879.55, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": true}, "ts": 1789072047.4729462}
+{"type": "manuel", "t": 880.27, "port": "wusts", "ok": true, "valeur": {"wusts": 257}, "ts": 1789072048.1930363}
+{"type": "manuel", "t": 880.99, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": true}, "ts": 1789072048.9169452}
+{"type": "manuel", "t": 881.74, "port": "wusts", "ok": true, "valeur": {"wusts": 257}, "ts": 1789072049.669906}
+{"type": "manuel", "t": 882.49, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": true}, "ts": 1789072050.420459}
+{"type": "manuel", "t": 883.23, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072051.1604457}
+{"type": "manuel", "t": 883.96, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072051.8889222}
+{"type": "manuel", "t": 884.71, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072052.6369457}
+{"type": "manuel", "t": 885.44, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072053.3688662}
+{"type": "manuel", "t": 886.18, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072054.1049464}
+{"type": "manuel", "t": 886.89, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072054.81685}
+{"type": "manuel", "t": 887.63, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072055.560939}
+{"type": "manuel", "t": 888.36, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072056.288873}
+{"type": "manuel", "t": 889.17, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072057.0969312}
+{"type": "manuel", "t": 889.89, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072057.8208525}
+{"type": "manuel", "t": 890.63, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072058.5569215}
+{"type": "manuel", "t": 891.35, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072059.276847}
+{"type": "manuel", "t": 892.09, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072060.016992}
+{"type": "manuel", "t": 892.82, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072060.7488573}
+{"type": "manuel", "t": 893.62, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072061.5449362}
+{"type": "manuel", "t": 894.37, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072062.300854}
+{"type": "manuel", "t": 895.1, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072063.0249271}
+{"type": "manuel", "t": 895.83, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072063.7608602}
+{"type": "manuel", "t": 896.61, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072064.5369298}
+{"type": "manuel", "t": 897.33, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072065.2569132}
+{"type": "manuel", "t": 898.07, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072066.0009086}
+{"type": "manuel", "t": 898.8, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072066.7288294}
+{"type": "manuel", "t": 899.55, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072067.47293}
+{"type": "manuel", "t": 900.27, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072068.2008588}
+{"type": "manuel", "t": 901.01, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072068.9369423}
+{"type": "manuel", "t": 901.73, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072069.656861}
+{"type": "manuel", "t": 902.51, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072070.4329169}
+{"type": "manuel", "t": 903.23, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072071.160844}
+{"type": "manuel", "t": 903.99, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072071.920973}
+{"type": "manuel", "t": 904.71, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072072.6408386}
+{"type": "manuel", "t": 905.46, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072073.384918}
+{"type": "manuel", "t": 906.17, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072074.1008568}
+{"type": "manuel", "t": 906.92, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072074.8449142}
+{"type": "manuel", "t": 907.65, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072075.5728438}
+{"type": "manuel", "t": 908.39, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072076.3209152}
+{"type": "manuel", "t": 909.75, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072077.6811202}
+{"type": "manuel", "t": 910.5, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072078.4249253}
+{"type": "manuel", "t": 911.24, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072079.1688914}
+{"type": "manuel", "t": 912.0, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072079.9285138}
+{"type": "manuel", "t": 912.71, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072080.6404111}
+{"type": "manuel", "t": 913.45, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072081.3804367}
+{"type": "manuel", "t": 914.18, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072082.1088707}
+{"type": "manuel", "t": 914.95, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072082.8809218}
+{"type": "manuel", "t": 915.69, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072083.6128466}
+{"type": "manuel", "t": 916.43, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072084.3569205}
+{"type": "manuel", "t": 917.15, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072085.0808568}
+{"type": "manuel", "t": 917.9, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072085.8248987}
+{"type": "manuel", "t": 918.61, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072086.540833}
+{"type": "manuel", "t": 919.36, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072087.2849083}
+{"type": "manuel", "t": 920.1, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072088.0288503}
+{"type": "manuel", "t": 920.85, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072088.7729132}
+{"type": "manuel", "t": 921.57, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072089.5008574}
+{"type": "manuel", "t": 922.31, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072090.23294}
+{"type": "manuel", "t": 923.03, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072090.9528472}
+{"type": "manuel", "t": 923.77, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072091.6969047}
+{"type": "manuel", "t": 924.5, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072092.428847}
+{"type": "manuel", "t": 925.25, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072093.176922}
+{"type": "manuel", "t": 925.97, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072093.9008768}
+{"type": "manuel", "t": 926.7, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072094.6289048}
+{"type": "manuel", "t": 927.43, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072095.3568609}
+{"type": "manuel", "t": 928.17, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072096.1009154}
+{"type": "manuel", "t": 928.9, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072096.8288443}
+{"type": "manuel", "t": 929.65, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072097.5729313}
+{"type": "manuel", "t": 930.37, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": true}, "ts": 1789072098.2928498}
+{"type": "manuel", "t": 931.11, "port": "wusts", "ok": true, "valeur": {"wusts": 257}, "ts": 1789072099.0409746}
+{"type": "manuel", "t": 931.85, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": true}, "ts": 1789072099.776897}
+{"type": "manuel", "t": 932.59, "port": "wusts", "ok": true, "valeur": {"wusts": 257}, "ts": 1789072100.5169003}
+{"type": "manuel", "t": 933.32, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": true}, "ts": 1789072101.2448878}
+{"type": "manuel", "t": 934.06, "port": "wusts", "ok": true, "valeur": {"wusts": 257}, "ts": 1789072101.9889235}
+{"type": "manuel", "t": 934.77, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": true}, "ts": 1789072102.7008488}
+{"type": "manuel", "t": 935.52, "port": "wusts", "ok": true, "valeur": {"wusts": 257}, "ts": 1789072103.4449165}
+{"type": "manuel", "t": 936.25, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": true}, "ts": 1789072104.1770318}
+{"type": "manuel", "t": 936.99, "port": "wusts", "ok": true, "valeur": {"wusts": 257}, "ts": 1789072104.921041}
+{"type": "manuel", "t": 937.76, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": true}, "ts": 1789072105.6889734}
+{"type": "manuel", "t": 938.51, "port": "wusts", "ok": true, "valeur": {"wusts": 257}, "ts": 1789072106.437095}
+{"type": "manuel", "t": 939.24, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": true}, "ts": 1789072107.1689703}
+{"type": "manuel", "t": 939.97, "port": "wusts", "ok": true, "valeur": {"wusts": 257}, "ts": 1789072107.9010193}
+{"type": "manuel", "t": 940.71, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": true}, "ts": 1789072108.632947}
+{"type": "manuel", "t": 941.45, "port": "wusts", "ok": true, "valeur": {"wusts": 257}, "ts": 1789072109.3770022}
+{"type": "manuel", "t": 942.16, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": true}, "ts": 1789072110.0884867}
+{"type": "manuel", "t": 942.9, "port": "wusts", "ok": true, "valeur": {"wusts": 257}, "ts": 1789072110.8325498}
+{"type": "manuel", "t": 943.63, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": true}, "ts": 1789072111.5604677}
+{"type": "manuel", "t": 944.37, "port": "wusts", "ok": true, "valeur": {"wusts": 257}, "ts": 1789072112.2930384}
+{"type": "manuel", "t": 945.09, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": true}, "ts": 1789072113.0209568}
+{"type": "manuel", "t": 945.83, "port": "wusts", "ok": true, "valeur": {"wusts": 257}, "ts": 1789072113.7530074}
+{"type": "manuel", "t": 946.57, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": true}, "ts": 1789072114.4929633}
+{"type": "manuel", "t": 947.3, "port": "wusts", "ok": true, "valeur": {"wusts": 257}, "ts": 1789072115.2290132}
+{"type": "manuel", "t": 948.02, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": true}, "ts": 1789072115.9449668}
+{"type": "manuel", "t": 948.76, "port": "wusts", "ok": true, "valeur": {"wusts": 257}, "ts": 1789072116.689019}
+{"type": "manuel", "t": 949.49, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": true}, "ts": 1789072117.4209635}
+{"type": "manuel", "t": 950.24, "port": "wusts", "ok": true, "valeur": {"wusts": 257}, "ts": 1789072118.165033}
+{"type": "manuel", "t": 950.98, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": true}, "ts": 1789072118.905}
+{"type": "manuel", "t": 951.71, "port": "wusts", "ok": true, "valeur": {"wusts": 257}, "ts": 1789072119.6410255}
+{"type": "manuel", "t": 952.45, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": true}, "ts": 1789072120.3769562}
+{"type": "manuel", "t": 953.18, "port": "wusts", "ok": true, "valeur": {"wusts": 257}, "ts": 1789072121.109026}
+{"type": "manuel", "t": 953.91, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": true}, "ts": 1789072121.836958}
+{"type": "manuel", "t": 954.66, "port": "wusts", "ok": true, "valeur": {"wusts": 257}, "ts": 1789072122.585007}
+{"type": "manuel", "t": 955.39, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": true}, "ts": 1789072123.3169556}
+{"type": "manuel", "t": 956.11, "port": "wusts", "ok": true, "valeur": {"wusts": 257}, "ts": 1789072124.0370045}
+{"type": "manuel", "t": 956.83, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": true}, "ts": 1789072124.7569463}
+{"type": "manuel", "t": 957.57, "port": "wusts", "ok": true, "valeur": {"wusts": 257}, "ts": 1789072125.5010161}
+{"type": "manuel", "t": 958.32, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": true}, "ts": 1789072126.2449381}
+{"type": "manuel", "t": 959.07, "port": "wusts", "ok": true, "valeur": {"wusts": 257}, "ts": 1789072126.993041}
+{"type": "manuel", "t": 959.79, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": true}, "ts": 1789072127.7209547}
+{"type": "manuel", "t": 960.53, "port": "wusts", "ok": true, "valeur": {"wusts": 257}, "ts": 1789072128.456955}
+{"type": "manuel", "t": 961.29, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": true}, "ts": 1789072129.212972}
+{"type": "manuel", "t": 962.02, "port": "wusts", "ok": true, "valeur": {"wusts": 257}, "ts": 1789072129.9490278}
+{"type": "manuel", "t": 962.73, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": true}, "ts": 1789072130.652967}
+{"type": "manuel", "t": 963.46, "port": "wusts", "ok": true, "valeur": {"wusts": 257}, "ts": 1789072131.389032}
+{"type": "manuel", "t": 964.19, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": true}, "ts": 1789072132.1129575}
+{"type": "manuel", "t": 964.91, "port": "wusts", "ok": true, "valeur": {"wusts": 257}, "ts": 1789072132.8410952}
+{"type": "manuel", "t": 965.64, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": true}, "ts": 1789072133.5689528}
+{"type": "manuel", "t": 966.39, "port": "wusts", "ok": true, "valeur": {"wusts": 257}, "ts": 1789072134.3130565}
+{"type": "manuel", "t": 967.1, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": true}, "ts": 1789072135.0289543}
+{"type": "manuel", "t": 967.83, "port": "wusts", "ok": true, "valeur": {"wusts": 257}, "ts": 1789072135.7610393}
+{"type": "manuel", "t": 968.55, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": true}, "ts": 1789072136.4809773}
+{"type": "manuel", "t": 969.3, "port": "wusts", "ok": true, "valeur": {"wusts": 257}, "ts": 1789072137.2250206}
+{"type": "manuel", "t": 970.03, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": true}, "ts": 1789072137.9609878}
+{"type": "manuel", "t": 970.78, "port": "wusts", "ok": true, "valeur": {"wusts": 257}, "ts": 1789072138.7050133}
+{"type": "manuel", "t": 971.75, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": true}, "ts": 1789072139.6770713}
+{"type": "manuel", "t": 972.49, "port": "wusts", "ok": true, "valeur": {"wusts": 257}, "ts": 1789072140.420535}
+{"type": "manuel", "t": 973.21, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": true}, "ts": 1789072141.136461}
+{"type": "manuel", "t": 973.95, "port": "wusts", "ok": true, "valeur": {"wusts": 257}, "ts": 1789072141.88052}
+{"type": "manuel", "t": 974.68, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": true}, "ts": 1789072142.608938}
+{"type": "manuel", "t": 975.43, "port": "wusts", "ok": true, "valeur": {"wusts": 257}, "ts": 1789072143.353012}
+{"type": "manuel", "t": 976.14, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": true}, "ts": 1789072144.068953}
+{"type": "manuel", "t": 976.89, "port": "wusts", "ok": true, "valeur": {"wusts": 257}, "ts": 1789072144.8130221}
+{"type": "manuel", "t": 977.61, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": true}, "ts": 1789072145.5369713}
+{"type": "manuel", "t": 978.36, "port": "wusts", "ok": true, "valeur": {"wusts": 257}, "ts": 1789072146.285045}
+{"type": "manuel", "t": 979.09, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": true}, "ts": 1789072147.0209641}
+{"type": "manuel", "t": 979.83, "port": "wusts", "ok": true, "valeur": {"wusts": 257}, "ts": 1789072147.753031}
+{"type": "manuel", "t": 980.56, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": true}, "ts": 1789072148.4849412}
+{"type": "manuel", "t": 981.31, "port": "wusts", "ok": true, "valeur": {"wusts": 257}, "ts": 1789072149.2370462}
+{"type": "manuel", "t": 982.04, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": true}, "ts": 1789072149.9649522}
+{"type": "manuel", "t": 982.78, "port": "wusts", "ok": true, "valeur": {"wusts": 257}, "ts": 1789072150.7090106}
+{"type": "manuel", "t": 983.51, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": true}, "ts": 1789072151.436946}
+{"type": "manuel", "t": 984.25, "port": "wusts", "ok": true, "valeur": {"wusts": 257}, "ts": 1789072152.181037}
+{"type": "manuel", "t": 984.98, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": true}, "ts": 1789072152.9089527}
+{"type": "manuel", "t": 985.74, "port": "wusts", "ok": true, "valeur": {"wusts": 257}, "ts": 1789072153.6650255}
+{"type": "manuel", "t": 986.46, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": true}, "ts": 1789072154.388847}
+{"type": "manuel", "t": 987.19, "port": "wusts", "ok": true, "valeur": {"wusts": 257}, "ts": 1789072155.120938}
+{"type": "manuel", "t": 987.92, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": true}, "ts": 1789072155.8448443}
+{"type": "manuel", "t": 988.65, "port": "wusts", "ok": true, "valeur": {"wusts": 257}, "ts": 1789072156.5809243}
+{"type": "manuel", "t": 989.37, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": true}, "ts": 1789072157.2968574}
+{"type": "manuel", "t": 990.11, "port": "wusts", "ok": true, "valeur": {"wusts": 257}, "ts": 1789072158.032907}
+{"type": "manuel", "t": 990.83, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": true}, "ts": 1789072158.7608533}
+{"type": "manuel", "t": 991.63, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072159.5569067}
+{"type": "manuel", "t": 992.37, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072160.300906}
+{"type": "manuel", "t": 993.11, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072161.036927}
+{"type": "manuel", "t": 993.85, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072161.7809012}
+{"type": "manuel", "t": 994.58, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072162.5049133}
+{"type": "manuel", "t": 995.31, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072163.2328496}
+{"type": "manuel", "t": 996.05, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072163.980909}
+{"type": "manuel", "t": 996.78, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072164.7088625}
+{"type": "manuel", "t": 997.54, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072165.4649112}
+{"type": "manuel", "t": 998.26, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072166.1848605}
+{"type": "manuel", "t": 998.98, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072166.9048586}
+{"type": "manuel", "t": 999.7, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072167.6248658}
+{"type": "manuel", "t": 1000.45, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072168.3769054}
+{"type": "manuel", "t": 1001.17, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072169.0928504}
+{"type": "manuel", "t": 1001.91, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072169.8369324}
+{"type": "manuel", "t": 1002.62, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072170.548401}
+{"type": "manuel", "t": 1003.36, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072171.28441}
+{"type": "manuel", "t": 1004.1, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072172.0288508}
+{"type": "manuel", "t": 1004.83, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072172.7569242}
+{"type": "manuel", "t": 1005.55, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072173.4808724}
+{"type": "manuel", "t": 1006.31, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072174.2369392}
+{"type": "manuel", "t": 1007.05, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072174.9808443}
+{"type": "manuel", "t": 1007.81, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072175.732956}
+{"type": "manuel", "t": 1008.53, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072176.4608512}
+{"type": "manuel", "t": 1009.28, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072177.2089047}
+{"type": "manuel", "t": 1010.02, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072177.9448466}
+{"type": "manuel", "t": 1010.74, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072178.6689079}
+{"type": "manuel", "t": 1011.46, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072179.388869}
+{"type": "manuel", "t": 1012.2, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072180.1289034}
+{"type": "manuel", "t": 1012.92, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072180.8448617}
+{"type": "manuel", "t": 1013.67, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072181.5929127}
+{"type": "manuel", "t": 1014.43, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072182.3609052}
+{"type": "manuel", "t": 1015.23, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072183.1569095}
+{"type": "manuel", "t": 1015.95, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072183.8768497}
+{"type": "manuel", "t": 1016.69, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072184.620921}
+{"type": "manuel", "t": 1017.42, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072185.3488557}
+{"type": "manuel", "t": 1018.17, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072186.0929153}
+{"type": "manuel", "t": 1018.89, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072186.8129618}
+{"type": "manuel", "t": 1019.61, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072187.5381565}
+{"type": "manuel", "t": 1020.38, "port": "wulgt", "ok": true, "valeur": {"onoff": false, "ngtlt": false}, "ts": 1789072188.3090672}
+{"type": "manuel", "t": 1021.25, "port": "wusts", "ok": true, "valeur": {"wusts": 1}, "ts": 1789072189.1768987}
+{"type": "fin", "ts": 1789072189.3797092}

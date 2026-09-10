@@ -583,9 +583,30 @@ alors `unknown`.
 **`2` est un état transitoire d'extinction, et sa durée est déterministe.** Échantillonné à
 0,5 s par `wusts_exhaustif.py`, il tient **7,46 s — trois fois de suite, à 10 ms près** (vu de
 t+0,7 s à t+8,2 s après l'extinction). Il apparaît après extinction de la lampe et du coucher
-de soleil, **pas** après celle de la veilleuse. C'est pourquoi les captures échantillonnées à 30 s le manquaient
+de soleil, **jamais** après celle de la veilleuse (mesuré le 2026-09-10, voir ci-dessous). C'est pourquoi les captures échantillonnées à 30 s le manquaient
 une fois sur deux. Ce qu'il *désigne* reste inconnu — la mesure dit quand il apparaît et
 combien il dure, pas ce qu'affiche l'appareil.
+
+**La veilleuse ne produit pas `2` — 0 extinction sur 18, le 2026-09-10.** L'affirmation
+reposait jusque-là sur un seul essai (`veilleuse.py`, séquence A). `extinction_veilleuse.py` l'a
+mise à l'épreuve : chaque essai part d'un repos vérifié, relit `wulgt` après l'allumage, puis lit
+`wusts` toutes les ~0,7 s pendant 12 s après l'extinction — 10 à 11 lectures valides dans la
+fenêtre de `2`.
+
+| Condition | Extinctions suivies de `2` |
+| --- | --- |
+| Lampe (niveau 3), témoin, même séance | **5 / 5** — de `t+0` à 7,3-7,9 s |
+| Veilleuse tenue 2 s, extinction des trois champs | 0 / 5 |
+| Veilleuse tenue 15 s, puis 120 s | 0 / 4 |
+| Veilleuse allumée pendant le `2` de la lampe (elle vaut alors `258`) | 0 / 3 |
+| Veilleuse éteinte par `{"ngtlt": false}` seul | 0 / 3 |
+| Veilleuse allumée et éteinte **au bouton de l'appareil** (tenues ~6 s, ~6 s, ~60 s) | 0 / 3 |
+
+Le bouton agit sur `ngtlt`, comme l'écriture réseau : `wulgt` passe à `ngtlt: true` puis revient,
+`onoff` reste `false`. Relevés : `probes/results/extinction-veilleuse-20260910T214825.jsonl` et
+`extinction-veilleuse-manuel-20260910T221245.jsonl`. Les trois extinctions de veilleuse relevées
+par la capture les 07, 08 et 09/09 (`mslux` ≈ 6) vont dans le même sens, sans rien prouver à 30 s
+d'échantillonnage.
 
 **Une alarme complète, observée sans y toucher — 2026-09-07.** Les états ci-dessus étaient
 provoqués à la main. Celui-ci a été relevé au fil d'un vrai réveil, `wusts` interrogé toutes
@@ -643,9 +664,32 @@ Deux points s'en trouvent renforcés, un troisième corrigé :
   éteinte (confirmé le 2026-09-08). Rien dans ces bits ne distingue une intention d'un geste
   de travers.
 
+**Deux alarmes de plus, les 2026-09-09 et 2026-09-10** — même capture, `wusts` toutes les 30 s,
+sans intervention :
+
+| Matin | Sortie d'alarme | Premier relevé de `wungt` avec `night: false` |
+| --- | --- | --- |
+| 09 | `2817` (`A + 16 s`) → `2` (`A + 47 s`) → `1` (`A + 1 min 17 s`) | `A + 21 s` |
+| 10 | `2817` (`A + 3 s`, `A + 34 s`) → **lecture échouée** (`A + 1 min 04 s`) → `1` (`A + 1 min 35 s`) | `A + 40 s` |
+
+- **Le rappel n'apparaît toujours pas.** Le 10, le propriétaire pensait avoir appuyé sur le
+  rappel. Le relevé ne le montre pas : après `A + 1 min 35 s`, `wusts` vaut `1` sans
+  interruption jusqu'au soir, et **aucune seconde sonnerie** ne se produit (`snztm` vaut 8).
+  Un rappel laissé courir aurait refait sonner l'alarme. Restent deux lectures, que ce relevé ne
+  départage pas : l'arrêt a été pressé, ou un rappel a été annulé en moins de trente secondes —
+  dans la fenêtre que la lecture échouée laisse aveugle. **`2321` reste non observé après quatre
+  alarmes.**
+- **La lecture échouée tombe au moment de l'appui**, en `SSL: UNEXPECTED_EOF_WHILE_READING` —
+  la signature d'une connexion concurrente (§7). Une seule occurrence sur quatre matins : notée,
+  pas généralisée.
+- **La clôture de la nuit par le firmware à l'heure programmée se confirme**, les 09 et 10 comme
+  le 08 : `tendb` y vaut `A`, et `wungt` passe à `night: false` dans la minute qui suit `A`,
+  avant tout geste.
+
   > **Ce qu'on sait, et ce qu'on ne sait pas — à tenir séparé.** `2` est un **état transitoire
   > d'extinction de 7,46 s**, mesuré le 2026-09-09 (§ modèle en bits) sur douze extinctions,
-  > dont trois échantillonnées à 0,5 s. Il ne suit pas l'extinction de la veilleuse. S'y
+  > dont trois échantillonnées à 0,5 s. Il ne suit jamais l'extinction de la veilleuse (0 sur
+  > 18, 2026-09-10). S'y
   > ajoutent quatre observations fortuites, toujours juste avant le retour à `1` : la
   > restauration du 06, les alarmes des 07 et 09, l'extinction de lampe du 08.
   >
