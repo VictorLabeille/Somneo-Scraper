@@ -85,7 +85,7 @@ lecture du tas).
 | `marche.py` | Où se situe la marche : 1, 2 ou 3 requêtes en vol, trois séries par palier |
 | `chevauchement.py` | Le motif réel de Home Assistant : une action pendant un rafraîchissement |
 | `repro_requests.py` | Le même phénomène dans la pile `requests`, avec la politique de relance de `pysomneo` |
-| `bornes_brght.py` | Bornes réelles de `brght` — **seule sonde qui écrit**, avec restauration vérifiée |
+| `bornes_brght.py` | Bornes réelles de `brght`, avec restauration vérifiée |
 | `capture.py` | Campagne longue : capteurs, état, suivi de nuit, agrégats de fenêtre |
 
 `probes/results/` conserve les relevés bruts, **corps de réponse retirés** : ils portaient le

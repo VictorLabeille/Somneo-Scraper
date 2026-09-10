@@ -34,7 +34,7 @@ Le dépôt contient **deux ensembles sans rapport l'un avec l'autre**. Ne pas le
 | `radxa-flash/` | **Terminé et archivé** | Outillage ponctuel ayant servi à installer Armbian sur l'eMMC. La carte est en service depuis le 22 août 2026. **Ne pas modifier**, sauf demande explicite de réinstallation du système. |
 | `radxa-config/` | **Déployé sur la carte** | Configuration de la carte en service. Ces scripts ont déjà tourné — modifier un script sans le redéployer fait diverger le dépôt et la carte, silencieusement. |
 | `docs/` | **Référence** | Documentation, pas du code. À mettre à jour si un relevé contredit ce qui y est écrit. |
-| `probes/` | **Outillage vivant** | Sondes de mesure, lancées depuis la Radxa. Elles fondent les chiffres publiés dans `docs/` et ceux qu'on avancera en amont : une mesure qu'on ne peut plus rejouer ne se défend pas. `bornes_brght.py` est la seule qui écrive. |
+| `probes/` | **Outillage vivant** | Sondes de mesure, lancées depuis la Radxa. Elles fondent les chiffres publiés dans `docs/` et ceux qu'on avancera en amont : une mesure qu'on ne peut plus rejouer ne se défend pas. **Une vingtaine écrivent sur l'appareil** — lumière, son, afficheur ; aucune sur `wualm` ni `fac` — et leur nom ne le dit pas : lire le code d'une sonde avant de la lancer. |
 | Le serveur FastAPI | **À écrire** | C'est le travail en cours. Tout nouveau code applicatif va là. |
 
 Sauf demande portant explicitement sur la réinstallation de l'OS, `radxa-flash/` n'est jamais
