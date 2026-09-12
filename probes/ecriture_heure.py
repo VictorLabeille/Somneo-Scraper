@@ -44,7 +44,10 @@ de toucher a l'horloge elle-meme.
 
 Restauration : horloge remise au decalage d'origine mesure en P2-1 — pas a l'heure de la
 carte : on rend l'appareil tel qu'on l'a trouve —, reessayee jusqu'a un ecart < 0,15 s ; les
-champs de `time` et de `wutms` a leur valeur d'origine.
+champs de `time` et de `wutms` a leur valeur d'origine. Le decalage final de `wutim` est mesure
+et rapporte a son origine : cette horloge ne s'ecrit pas directement, et P1 a montre le
+2026-09-12, avant ce test, qu'elle retarde de ~4,5 s sur `time` et que c'est elle qui date les
+nuits (`tg2bd`, `tendb`).
 
 `--lecture` : P2-1 seulement, aucune ecriture. `--ecriture` : tout.
 
@@ -325,7 +328,7 @@ def p27(s, rel, tz, origine):
     print(f"P2-7 l'horloge a bouge seule : {bouge}", flush=True)
 
 
-def restaurer(s, rel, origine, tz, time0, wutms0):
+def restaurer(s, rel, origine, origine_wutim, tz, time0, wutms0):
     limite = time.monotonic() + DUREE_RESTAURATION / ACCELERATION
     etapes = []
     t = s.corps(0, "time") or {}
@@ -347,11 +350,15 @@ def restaurer(s, rel, origine, tz, time0, wutms0):
     t, w = s.corps(0, "time") or {}, s.corps(1, "wutms") or {}
     champs_ok = (all(egal_heure(t.get(c), time0[c]) for c in CHAMPS_TIME if c in time0)
                  and all(w.get(c) == wutms0[c] for c in CHAMPS_WUTMS if c in wutms0))
+    dw, _ = decalage(s, "wutim", tz, interruptible=False)
+    ecart_wutim = (None if dw is None or origine_wutim is None
+                   else round(dw - origine_wutim, 4))
     rel.ecrire(type="restauration", horloge_conforme=ok, champs_conformes=champs_ok,
-               decalage_final=d, origine=origine, etapes=etapes)
+               decalage_final=d, origine=origine, ecart_wutim_final=ecart_wutim, etapes=etapes)
     print(f"restauration : horloge {'conforme' if ok else 'NON CONFORME — A VERIFIER'} "
           f"(decalage {None if d is None else round(d, 3)} s, origine {round(origine, 3)} s) ; "
-          f"champs {'conformes' if champs_ok else 'NON CONFORMES — A VERIFIER'}", flush=True)
+          f"champs {'conformes' if champs_ok else 'NON CONFORMES — A VERIFIER'} ; "
+          f"wutim a {ecart_wutim} s de son origine", flush=True)
     return ok and champs_ok
 
 
@@ -436,7 +443,7 @@ def main():
         print("interrompue — restauration", flush=True)
     finally:
         lever_arret()
-        ok = restaurer(s, rel, origine, tz, time0, wutms0)
+        ok = restaurer(s, rel, origine, origine_wutim, tz, time0, wutms0)
         snap1 = instantane(s, interruptible=False)
         effets = effets_de_bord(snap0, snap1, ECRITS)
         rel.ecrire(type="P2-9", effets=effets)

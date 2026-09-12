@@ -246,7 +246,8 @@ def p2(recs):
             out["restauration"] = {"horloge_conforme": r["horloge_conforme"],
                                    "champs_conformes": r["champs_conformes"],
                                    "ecart_final_s": None if r["decalage_final"] is None
-                                   else round(r["decalage_final"] - r["origine"], 3)}
+                                   else round(r["decalage_final"] - r["origine"], 3),
+                                   "ecart_wutim_final_s": r.get("ecart_wutim_final")}
         elif t in ("arret_securite", "interruption"):
             out.setdefault("incidents", []).append({k: r[k] for k in ("type", "raison") if k in r})
         elif t == "fin":
