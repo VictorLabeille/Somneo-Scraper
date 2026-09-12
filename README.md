@@ -213,7 +213,9 @@ est dans `docs/radxa.md`.
       [#26](https://github.com/theneweinstein/pysomneo/pull/26) et
       [#27](https://github.com/theneweinstein/pysomneo/pull/27)
 - [ ] Blocage de l'accès internet du Somneo (pare-feu / VLAN / DNS sinkhole)
-- [ ] Conception de l'API interne
+- [x] Plan technique du collecteur et conception de l'API interne
+      (`.claude/specs/2026-09-12-plan-technique-collecteur.md`)
+- [ ] Mesures préalables sur l'appareil : `wungt`, `time` et `wualm/prfwu` en écriture
 - [ ] Service FastAPI + intégration `pysomneo`
 - [ ] Historisation SQLite
 - [ ] Conteneurisation

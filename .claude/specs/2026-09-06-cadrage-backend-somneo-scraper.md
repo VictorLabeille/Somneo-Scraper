@@ -1,6 +1,7 @@
 # Cadrage — Somneo-Scraper, le collecteur
 
-> Statut : **validé** · Date : 2026-09-06
+> Statut : **validé** · Date : 2026-09-06 · Contrat précisé le 2026-09-12 par le plan technique
+> (§5)
 
 Premier cadrage du backend. Il porte sur le **collecteur entier**, pas sur une fonctionnalité.
 Il arrive volontairement **après** celui de SleepMaxxer : la forme de l'API interne doit être
@@ -143,7 +144,8 @@ L'API sert, sans jamais juger :
   **dérivés**, jamais saisis : ils se recalculent, donc ils ne peuvent pas diverger de leur
   série. Ils évitent à l'app de parcourir 1 440 points par grandeur pour afficher un écran, et
   permettent à un mois de calendrier de tenir en une réponse.
-- **Le rattrapage** : « tout ce qui est arrivé depuis telle date », **paginé**, les nuits
+- **Le rattrapage** : tout ce qui a été créé **ou modifié** depuis la dernière synchronisation,
+  repéré par un **numéro de séquence** et non par une date (§5), **paginé**, les nuits
   **récentes d'abord** — c'est ce qu'on regarde. Reprenable là où il s'est arrêté.
 - **L'état du système** : liaison au réveil, dernier relevé réussi, trous récents et leur
   cause, écart d'horloge constaté, état de la liaison cloud du réveil.
@@ -194,9 +196,9 @@ soleil, geste de coucher et de lever.
   l'eMMC — c'est le rôle du téléphone et de l'export Drive — mais elle protège du mode de
   panne le plus probable au quotidien : une base corrompue par une coupure de courant en pleine
   écriture, sur une carte alimentée par le port USB d'un réveil.
-- **Journal des périodes d'indisponibilité, avec leur cause** : collecteur arrêté, réveil
-  injoignable, appareil saturé. Une absence de lignes ne dit pas laquelle des trois s'est
-  produite, et l'app doit pouvoir montrer un trou **en le nommant** plutôt qu'en le laissant
+- **Journal des périodes d'indisponibilité, avec leur cause** : collecteur arrêté, carte hors
+  réseau, réveil injoignable, appareil saturé — la deuxième ajoutée le 2026-09-12 (§5). Une
+  absence de lignes ne dit pas laquelle des quatre s'est produite, et l'app doit pouvoir montrer un trou **en le nommant** plutôt qu'en le laissant
   ressembler à une base vide.
 - **Instantané daté des réglages du réveil à chaque changement constaté** — alarmes (les seize
   profils, pas seulement les visibles), thèmes, coucher de soleil, réglages globaux. Il
@@ -215,7 +217,8 @@ soleil, geste de coucher et de lever.
 
 - **Le collecteur découvre le réveil par SSDP**, jamais par une adresse en dur, et
   **redécouvre périodiquement** — l'adresse est en DHCP.
-- **Le collecteur s'annonce lui-même sur le réseau** (mDNS), pour que l'application le trouve
+- **Le collecteur s'annonce lui-même sur le réseau** (mDNS, service `_somneo-scraper._tcp`,
+  §5), pour que l'application le trouve
   seule à la première ouverture et le retrouve quand son propre bail change. Aucune adresse en
   dur nulle part, ni dans un sens ni dans l'autre. C'est la réponse à une question laissée
   ouverte par le cadrage de SleepMaxxer.
@@ -278,6 +281,7 @@ soleil, geste de coucher et de lever.
 | --- | --- | --- |
 | Collecteur arrêté | Redémarrage, coupure de courant, mise à jour | Une **période d'indisponibilité nommée** est enregistrée, bornée par le dernier relevé réussi et le premier de la reprise. Le trou est visible et sa cause lisible. |
 | Réveil muet pendant une période | Panne ou débranchement prolongé | Même chose, avec une cause différente : l'app doit pouvoir dire laquelle. |
+| Carte hors réseau | Le WiFi de la carte tombe — 12 déconnexions le 2026-09-10, 9 le 12 | Période nommée « carte hors réseau », distincte de « réveil injoignable » : c'est la carte qui manque, pas le réveil. Le collecteur continue de tourner et reprend seul au retour du réseau. Ajouté le 2026-09-12 (§5). |
 | Mesure aberrante | Valeur hors de toute plage physique | **Enregistrée telle quelle.** Le collecteur n'est pas juge de la réalité ; il n'invente ni ne masque une mesure. |
 | Grandeur absente | Un capteur ne renvoie rien alors que les autres répondent | Cette grandeur seule est absente pour cet instant ; les autres sont enregistrées. Pas d'échec global du cycle. |
 | Fenêtre d'agrégation manquée | Le collecteur n'a pas lu `dataupload/*/data` avant que la fenêtre bascule | Les extrema de cette fenêtre sont perdus, la période est marquée comme telle. **Jamais reconstitués depuis les points**, qui ne les contiennent pas. |
@@ -329,7 +333,7 @@ soleil, geste de coucher et de lever.
 | Cas | Déclencheur | Comportement attendu |
 | --- | --- | --- |
 | Première synchronisation | App neuve devant des mois d'historique | Servi **par lots paginés, les nuits récentes d'abord**. Le collecteur reste utilisable pendant ce temps. |
-| Rattrapage interrompu | App fermée, réseau coupé, téléphone en veille | Reprend là où il s'était arrêté. Le collecteur ne tient aucun état de progression du client : c'est le client qui redemande depuis sa dernière date. |
+| Rattrapage interrompu | App fermée, réseau coupé, téléphone en veille | Reprend là où il s'était arrêté. Le collecteur ne tient aucun état de progression du client : c'est le client qui redemande depuis son dernier numéro de séquence (§5). |
 | Période déjà connue redemandée | Le téléphone redemande ce qu'il a | Servie à l'identique. Les réponses sont **rejouables** : une même demande donne le même contenu. |
 | Le téléphone en sait plus que le collecteur | Collecteur réinstallé ou restauré depuis une sauvegarde plus ancienne | Le collecteur ne le sait pas et n'a rien à faire : il sert ce qu'il a. **C'est le téléphone qui ne perd rien** et signale l'écart. |
 | Correction arrivée après copie | Une heure est corrigée après que le téléphone a copié la nuit | La nuit revient corrigée au rattrapage suivant et remplace la copie. |
@@ -502,6 +506,27 @@ citable. Ajouté le 2026-09-06 : **aucune PR ne part avant**
 
 Ces contributions sont une pièce de portfolio à traçabilité publique, lue par un chercheur :
 une PR fusionnée mais bâclée vaut moins que pas de PR du tout.
+
+### Le contrat précisé par le plan technique — 2026-09-12
+
+Trois points du contrat avec SleepMaxxer, tranchés par Victor en validant le plan technique
+(`2026-09-12-plan-technique-collecteur.md`, §11). Modifiés sur place : le collecteur n'est pas
+écrit.
+
+- **Le rattrapage se fait par numéro de séquence, pas par date.** Ce document disait « tout ce
+  qui est arrivé depuis telle date ». Or une nuit ancienne corrigée ce matin n'est pas
+  « arrivée depuis » la dernière synchronisation, et §3.F exige pourtant qu'elle revienne
+  corrigée : une date ne pouvait pas tenir les deux. Première synchronisation en reculant nuit
+  par nuit, les récentes d'abord ; ensuite, « tout ce qui a été créé ou modifié depuis le
+  numéro n ».
+- **Une quatrième cause de trou : la carte hors réseau.** La capture l'a montrée fréquente
+  (12 déconnexions WiFi le 2026-09-10, 9 le 12) : le collecteur tourne mais ne joint plus rien.
+  La fondre dans « réveil injoignable » ferait accuser le réveil à tort, dans le cas le plus
+  fréquent.
+- **Le collecteur s'annonce sous `_somneo-scraper._tcp`.** Le premier nom envisagé,
+  `_somneo-collector._tcp`, dépasse les 15 octets que DNS-SD permet, et `zeroconf` le refuse.
+
+> **Reporté le jour même** dans le cadrage et l'`AGENTS.md` de SleepMaxxer.
 
 ---
 
