@@ -215,7 +215,8 @@ est dans `docs/radxa.md`.
 - [ ] Blocage de l'accès internet du Somneo (pare-feu / VLAN / DNS sinkhole)
 - [x] Plan technique du collecteur et conception de l'API interne
       (`.claude/specs/2026-09-12-plan-technique-collecteur.md`)
-- [ ] Mesures préalables sur l'appareil : `wungt`, `time` et `wualm/prfwu` en écriture
+- [ ] Mesures préalables sur l'appareil : `wungt`, `time` et la sélection d'un profil d'alarme
+      en écriture
 - [ ] Service FastAPI + intégration `pysomneo`
 - [ ] Historisation SQLite
 - [ ] Conteneurisation

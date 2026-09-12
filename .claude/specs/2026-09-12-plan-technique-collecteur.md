@@ -52,8 +52,9 @@ l'heure du retour. Le geste n'est pas perdu, mais le réveil cesse d'être le «
 l'heure » dans ce cas précis. À reporter alors dans les deux cadrages.
 
 Effet observable : aucun, ni lumière ni son. Mais l'essai ouvre une session de nuit dans le
-réveil, et on ne sait pas si une session ouverte change autre chose. **En journée, session
-refermée aussitôt, relue.**
+réveil, et on ne sait pas si une session ouverte change autre chose. **Jamais pendant une
+vraie nuit** — `wungt` ne tient qu'une session, un essai écraserait la vraie — ni à quelques
+heures d'une alarme. Session refermée aussitôt, relue.
 
 ### P2. La remise à l'heure : `PUT products/0/time`
 
@@ -72,10 +73,15 @@ Tant que P2 n'est pas fait, le collecteur **mesure** la dérive sans rien corrig
 
 ### P3. La lecture d'un profil d'alarme
 
-`pysomneo` lit le détail d'un profil en le sélectionnant par `PUT wualm/prfwu {"prfnr": n}`.
-On s'attend à ce que la sélection ne change rien ; ce n'est pas vérifié. Un essai unique :
-relire `wualm/aenvs` et `wualm/aalms` avant et après la sélection d'un profil **dormant**, et
-comparer. Effet observable attendu : aucun. **En journée, jamais pendant une alarme.**
+`pysomneo` lit le détail d'un profil en le sélectionnant : `PUT wualm {"prfnr": n}`
+(`modify_alarm_details`, appelé par `get_alarm_details`). La racine `wualm` porte alors `prfnr`
+= n et le détail du profil dans `prfwu`. À ne pas confondre avec `PUT wualm/prfwu`, qui
+**configure** un profil (`modify_alarm_wake_up_configuration`). On s'attend à ce que la
+sélection ne change rien d'autre ; ce n'est pas vérifié. Effet observable attendu : aucun.
+**Jamais pendant une alarme.**
+
+Les protocoles sont dans la docstring de chaque sonde, commitée avant la mesure :
+`probes/ecriture_wungt.py` (P1), `probes/selection_profil.py` (P3).
 
 ---
 
@@ -286,7 +292,7 @@ minute, 45 min, zéro échec). Sur une connexion réutilisée, une lecture coût
 ~36 ms : l'appareil passe plus de 95 % du temps sans aucune requête.
 
 **Lire un profil d'alarme passe par une écriture.** `pysomneo` sélectionne le profil par
-`PUT wualm/prfwu {"prfnr": n}`, puis le relit. C'est une écriture sans effet observable — le
+`PUT wualm {"prfnr": n}`, puis le relit. C'est une écriture sans effet observable — le
 profil ne change pas — mais c'en est une, et sur les alarmes. **Tranché le 2026-09-12** : une
 fois par jour, en journée, jamais pendant une alarme, et après tout changement vu dans
 `aenvs`/`aalms` — une fois l'essai P3 passé (§1).
@@ -467,9 +473,8 @@ Ordre de bascule : arrêter le superviseur **par son PID**, puis la capture **pa
 Le risque cardinal est la **nuit perdue**. Aujourd'hui, `capture.py` est le seul filet ; le
 premier incrément doit donc le remplacer entièrement, et rien d'autre.
 
-**Avant l'incrément 1 : les préalables P1 à P3** (§1), en journée, la liste des tests montrée
-à Victor avant chaque essai. P1 décide d'une partie du schéma des nuits ; P3 conditionne
-l'instantané des profils.
+**Avant l'incrément 1 : les préalables P1 à P3** (§1, §11 point 10). P1 décide d'une partie
+du schéma des nuits ; P3 conditionne l'instantané des profils.
 
 | Incrément | Contenu | Condition de passage |
 | --- | --- | --- |
@@ -514,7 +519,10 @@ corps du plan ; ce qui est reporté ailleurs est dit au point concerné.
 9. ~~Lecture quotidienne des 16 profils~~ — **tranché le 2026-09-12 : oui**, une fois par jour
    et après tout changement de `aenvs`/`aalms`, une fois l'essai P3 passé (§1, §4).
 10. ~~Préalables P1, P2 et P3~~ — **tranché le 2026-09-12 : accord donné** pour écrire sur
-    `wungt`, sur `time` et sur `wualm/prfwu`, en journée, **avant l'incrément 1**. La liste des
-    tests qui pourraient contredire chaque hypothèse est montrée à Victor avant l'essai.
+    `wungt`, sur `time` et sur `wualm` (sélection d'un profil), **avant l'incrément 1** — et,
+    à sa demande, **les trois le soir même**, aucune alarme ne sonnant avant le 14. Victor a vu
+    la liste des tests et délégué la relecture du code : elle est remplacée par un essai contre
+    un faux réveil local, témoins positifs compris, puis un passage en lecture seule sur
+    l'appareil.
 11. ~~Heure de lever estimée~~ — **tranché le 2026-09-12** : la première lecture où le bit 11 est
     retombé, la lecture précédente gardée comme borne basse (§5).
