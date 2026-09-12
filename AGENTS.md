@@ -35,7 +35,7 @@ Le dépôt contient **deux ensembles sans rapport l'un avec l'autre**. Ne pas le
 | `radxa-config/` | **Déployé sur la carte** | Configuration de la carte en service. Ces scripts ont déjà tourné — modifier un script sans le redéployer fait diverger le dépôt et la carte, silencieusement. |
 | `docs/` | **Référence** | Documentation, pas du code. À mettre à jour si un relevé contredit ce qui y est écrit. |
 | `probes/` | **Outillage vivant** | Sondes de mesure, lancées depuis la Radxa. Elles fondent les chiffres publiés dans `docs/` et ceux qu'on avancera en amont : une mesure qu'on ne peut plus rejouer ne se défend pas. **Une vingtaine écrivent sur l'appareil** — lumière, son, afficheur ; aucune sur `wualm` ni `fac` — et leur nom ne le dit pas : lire le code d'une sonde avant de la lancer. |
-| Le serveur FastAPI | **À écrire** | C'est le travail en cours. Tout nouveau code applicatif va là. |
+| Le serveur FastAPI — « le collecteur » du cadrage et des notes | **À écrire** | C'est le travail en cours. Tout nouveau code applicatif va là. |
 
 Sauf demande portant explicitement sur la réinstallation de l'OS, `radxa-flash/` n'est jamais
 concerné par une tâche. Son contenu est de la documentation d'incident autant que de
@@ -149,7 +149,8 @@ README.md          présentation, architecture, procédure de flash, avancement
 AGENTS.md          ce fichier
 CLAUDE.md          pointeur vers AGENTS.md
 LICENSE            GPL-3.0
-docs/              somneo-api.md (protocole du réveil) · radxa.md (la carte)
+docs/              somneo-api.md (protocole du réveil) · radxa.md (la carte) ·
+                   wusts-bitfield.en.md (extrait anglais figé, cité par la PR #25)
 probes/            sondes de mesure de l'appareil, et results/ leurs relevés nettoyés
 radxa-flash/       outillage d'installation d'Armbian sur l'eMMC (ponctuel, archivé)
 radxa-config/      configuration de la carte en service, déployée par SSH

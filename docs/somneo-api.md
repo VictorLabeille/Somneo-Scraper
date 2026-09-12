@@ -1303,10 +1303,19 @@ transformer en code l'est**.
    `gdngt`, `gdday`, `prfvs`, `pwrsv`, `ctype`, `curve`), résolue par les annotations
    `@SerializedName` de l'application.
 
-**Marche à suivre suggérée**, cohérente avec les usages du dépôt (petit mainteneur) :
-commenter d'abord les issues #16, #13 et #8 avec les éléments ci-dessus, puis proposer des PR
-courtes et séparées plutôt qu'un gros apport — en commençant par #13 (petite, fermée par
-quelques lignes) avant `wungt` et les agrégats.
+**Ce qui en est parti — état au 2026-09-12.** Des commentaires sur les issues #13 (2026-09-07),
+#16 (2026-09-08) et #8 (2026-09-09), puis trois PR courtes et séparées sur `ai-improvements`,
+la branche que le mainteneur a désignée :
+
+| PR | Ce qu'elle change | Point ci-dessus |
+| --- | --- | --- |
+| [#25](https://github.com/theneweinstein/pysomneo/pull/25) | `STATUS` : `2` n'est plus « sunset », `264` et `265` le sont | 2 |
+| [#26](https://github.com/theneweinstein/pysomneo/pull/26) | `TCPConnector(ssl=False, limit=1)` : une seule connexion en vol | 5 |
+| [#27](https://github.com/theneweinstein/pysomneo/pull/27) | docstring de `set_display()` : `brght` va de 1 à 6 | 3 |
+
+Restent les agrégats `dataupload` (1) et `wungt`, prévus après le collecteur. La sémantique des
+champs de #16 (6) est dans le commentaire du 2026-09-08. L'abonnement UDP (4) n'a jamais pu être
+déclenché (§6) : rien à proposer.
 
 ## 9. Méthode (reproductible)
 

@@ -88,6 +88,9 @@ lecture du tas).
 | `bornes_brght.py` | Bornes réelles de `brght`, avec restauration vérifiée |
 | `capture.py` | Campagne longue : capteurs, état, suivi de nuit, agrégats de fenêtre |
 
+Le tableau ne reprend que les premières sondes. Il en existe une quarantaine : chacune dit en
+tête ce qu'elle établit, et si elle écrit sur l'appareil.
+
 `probes/results/` conserve les relevés bruts, **corps de réponse retirés** : ils portaient le
 numéro de série de l'appareil, son adresse MAC et les conditions de la chambre. La valeur
 probante — latences, échecs, tas — est intacte. Les résultats chiffrés sont interprétés dans
@@ -202,6 +205,13 @@ est dans `docs/radxa.md`.
 - [x] Découverte SSDP et connexion locale au Somneo — **API accessible sans
       authentification, en lecture comme en écriture**
 - [x] Rétro-ingénierie de SleepMapper et cartographie complète de l'API (`docs/somneo-api.md`)
+- [x] Cadrage fonctionnel du backend (`.claude/specs/2026-09-06-cadrage-backend-somneo-scraper.md`)
+- [x] Campagnes de mesure sur l'appareil — concurrence, cadence, `wusts`, nuits et alarmes ;
+      sondes dans `probes/`, relevés dans `probes/results/`
+- [x] Contributions à `pysomneo` : commentaires sur les issues #8, #13 et #16, puis les PR
+      [#25](https://github.com/theneweinstein/pysomneo/pull/25),
+      [#26](https://github.com/theneweinstein/pysomneo/pull/26) et
+      [#27](https://github.com/theneweinstein/pysomneo/pull/27)
 - [ ] Blocage de l'accès internet du Somneo (pare-feu / VLAN / DNS sinkhole)
 - [ ] Conception de l'API interne
 - [ ] Service FastAPI + intégration `pysomneo`
