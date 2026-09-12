@@ -362,6 +362,24 @@ en douceur), `pwrsz`/`pszhr`/`pszmn` (PowerWake), `snztm` (snooze), `lgtds`.
 Masque `daynm` : bit 1 = lundi … bit 7 = dimanche. `62` = jours ouvrés, `192` = week-end,
 `254` = tous les jours, `0` = demain uniquement.
 
+**Lire un profil, c'est le sélectionner — et c'est sans effet, mesuré le 2026-09-12**
+(`probes/selection_profil.py`, relevé nettoyé
+`probes/results/selection-profil-20260912T212537.json`). Le détail d'un profil ne se lit qu'après l'avoir sélectionné :
+`PUT wualm {"prfnr": n}`, ce que fait `pysomneo` (`get_alarm_details`). À ne pas confondre avec
+`PUT wualm/prfwu`, qui **écrit** la configuration d'un profil. La racine `wualm`, elle, ne
+porte que `prfnr` et `snztm` : ses sous-objets y reviennent vides (§7).
+
+| Constat | Mesure |
+| --- | --- |
+| La réponse du `PUT` porte le profil complet (20 champs), identique à `GET wualm/prfwu` relu ensuite | 5 sélections sur 5 |
+| `wualm.prfnr` prend la valeur choisie ; `aenvs`, `aalms`, `alctr`, `snztm` et tous les autres ports relus restent identiques | 5 sélections relues à +0,5 s et +5 s, puis 2 × 16 |
+| Deux passes sur les 16 profils rendent les mêmes profils, et le profil actif à l'identique | 32 lectures sur 32 |
+| `prfnr` = 0 → **`200`, corps vide, ignoré** (`prfnr` reste inchangé) ; `prfnr` = 17 → `422 No such Property` | 1 + 1 |
+
+Chaque sélection partait de l'état initial vérifié et y revenait ; l'état final était identique
+au premier, champ pour champ. Le `200` sur `prfnr` = 0 s'ajoute aux réponses qui ne prouvent
+rien : l'appareil accepte et n'applique pas. Un client borne `prfnr` à 1–16 lui-même, et relit.
+
 > **Extrait figé en anglais pour l'amont** : [`wusts-bitfield.en.md`](wusts-bitfield.en.md),
 > daté du 2026-09-09, écrit pour `pysomneo` et son intégration Home Assistant. **Ce fichier-ci
 > reste la source** ; l'extrait ne sera pas mis à jour et ne fait pas autorité.
@@ -1213,12 +1231,18 @@ n'est plus nécessaire.
 | Port inexistant (`wusrd` → `zzzzz`) | `422 {"error":"No such Port"}` |
 | Produit inexistant (`products/9`) | `404 {"error":"Unknown product"}` |
 | Sous-ressource inexistante (`wusrd/zzz`) | `422 {"error":"No such Port"}` |
-| Port connu avec barre oblique finale (`wualm/`) | **`200`** — renvoie l'arbre complet du port |
+| Port connu avec barre oblique finale (`wualm/`) | **`200`** — renvoie les clés de l'arbre, **sous-objets vides** |
 | Casse différente (`WUSRD`) | `422` — les noms sont sensibles à la casse |
 | Nom de 64 caractères | **expire**, aucune réponse |
 
-Deux points à retenir. `wualm/` renvoie `200` avec l'ensemble `snztm` / `aenvs` / `alctr` /
-`aalms` / `prfnr` : une barre oblique finale n'est pas une erreur, c'est un raccourci. Et un
+Deux points à retenir. `wualm/` renvoie `200` avec les clés `snztm` / `aenvs` / `alctr` /
+`aalms` / `prfnr` / `prfwu` : une barre oblique finale n'est pas une erreur. Mais **ce n'est pas
+un raccourci** : seuls `snztm` et `prfnr` y portent une valeur, `aenvs`, `alctr`, `aalms` et
+`prfwu` reviennent vides — avec ou sans la barre oblique. Corrigé le 2026-09-12, en lecture
+seule (`probes/selection_profil.py --lecture`) : le relevé du 2026-09-06 n'avait compté que les
+clés, et « l'arbre complet » écrit ici aurait fait lire du vide comme un état. Le contenu se lit
+port par port : `wualm/aenvs`, `wualm/aalms`, `wualm/alctr`, et `wualm/prfwu` pour le profil
+sélectionné. Et un
 **nom de port très long fait expirer l'appareil** au lieu de produire un `422` — sur un
 appareil sans aucun contrôle d'accès sur le LAN, c'est une raison de plus de l'isoler.
 

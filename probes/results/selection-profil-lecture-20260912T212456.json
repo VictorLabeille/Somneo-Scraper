@@ -1,0 +1,38 @@
+{
+ "sonde": "probes/selection_profil.py",
+ "essais": [],
+ "passes": [],
+ "mode": "lecture",
+ "P3-1": {
+  "stable_sans_ecriture": true,
+  "wusts": 1
+ },
+ "choix": {
+  "initial": 1,
+  "dormant": 3,
+  "profil2": {
+   "prfen": false,
+   "prfvs": true
+  }
+ },
+ "wualm_slash": {
+  "status": 200,
+  "cles": [
+   "aalms",
+   "aenvs",
+   "alctr",
+   "prfnr",
+   "prfwu",
+   "snztm"
+  ],
+  "sous_objets_vides": [
+   "aalms",
+   "aenvs",
+   "alctr",
+   "prfwu"
+  ]
+ },
+ "fin": {},
+ "date": "2026-09-12",
+ "releve_brut": "selection-profil-lecture-20260912T212456.jsonl (non versionne)"
+}

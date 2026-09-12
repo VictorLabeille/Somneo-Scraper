@@ -1,0 +1,412 @@
+{
+ "sonde": "probes/selection_profil.py",
+ "essais": [
+  {
+   "test": "P3-2",
+   "rep": 1,
+   "n": 3,
+   "put": {
+    "methode": "PUT",
+    "port": "wualm",
+    "status": 200,
+    "ms": 83.9,
+    "ok": true
+   },
+   "jugement": {
+    "put_ok": true,
+    "prfnr_relu": 3,
+    "prfnr_conforme": true,
+    "profil_porte_n": true,
+    "stable_05_5": true,
+    "invariants_intacts": true,
+    "sans_effet_de_bord": true,
+    "reponse_put_cles": [
+     "alday",
+     "almhr",
+     "almmn",
+     "amnth",
+     "ayear",
+     "ctype",
+     "curve",
+     "daynm",
+     "durat",
+     "pname",
+     "prfen",
+     "prfnr",
+     "prfvs",
+     "pszhr",
+     "pszmn",
+     "pwrsz",
+     "sndch",
+     "snddv",
+     "sndlv",
+     "sndss"
+    ],
+    "reponse_put_egale_profil": true
+   },
+   "champs_changes": [
+    "wualm.prfnr",
+    "wualm/prfwu.almhr",
+    "wualm/prfwu.almmn",
+    "wualm/prfwu.curve",
+    "wualm/prfwu.daynm",
+    "wualm/prfwu.durat",
+    "wualm/prfwu.pname",
+    "wualm/prfwu.prfen",
+    "wualm/prfwu.prfnr",
+    "wualm/prfwu.prfvs",
+    "wualm/prfwu.pszhr",
+    "wualm/prfwu.pwrsz",
+    "wualm/prfwu.sndch"
+   ],
+   "inattendus": [],
+   "effets": [],
+   "retour": {
+    "methode": "PUT",
+    "port": "wualm",
+    "status": 200,
+    "ms": 79.8,
+    "ok": true
+   },
+   "retour_conforme": true,
+   "conforme": true
+  },
+  {
+   "test": "P3-2",
+   "rep": 2,
+   "n": 3,
+   "put": {
+    "methode": "PUT",
+    "port": "wualm",
+    "status": 200,
+    "ms": 111.7,
+    "ok": true
+   },
+   "jugement": {
+    "put_ok": true,
+    "prfnr_relu": 3,
+    "prfnr_conforme": true,
+    "profil_porte_n": true,
+    "stable_05_5": true,
+    "invariants_intacts": true,
+    "sans_effet_de_bord": true,
+    "reponse_put_cles": [
+     "alday",
+     "almhr",
+     "almmn",
+     "amnth",
+     "ayear",
+     "ctype",
+     "curve",
+     "daynm",
+     "durat",
+     "pname",
+     "prfen",
+     "prfnr",
+     "prfvs",
+     "pszhr",
+     "pszmn",
+     "pwrsz",
+     "sndch",
+     "snddv",
+     "sndlv",
+     "sndss"
+    ],
+    "reponse_put_egale_profil": true
+   },
+   "champs_changes": [
+    "wualm.prfnr",
+    "wualm/prfwu.almhr",
+    "wualm/prfwu.almmn",
+    "wualm/prfwu.curve",
+    "wualm/prfwu.daynm",
+    "wualm/prfwu.durat",
+    "wualm/prfwu.pname",
+    "wualm/prfwu.prfen",
+    "wualm/prfwu.prfnr",
+    "wualm/prfwu.prfvs",
+    "wualm/prfwu.pszhr",
+    "wualm/prfwu.pwrsz",
+    "wualm/prfwu.sndch"
+   ],
+   "inattendus": [],
+   "effets": [],
+   "retour": {
+    "methode": "PUT",
+    "port": "wualm",
+    "status": 200,
+    "ms": 75.8,
+    "ok": true
+   },
+   "retour_conforme": true,
+   "conforme": true
+  },
+  {
+   "test": "P3-2",
+   "rep": 3,
+   "n": 3,
+   "put": {
+    "methode": "PUT",
+    "port": "wualm",
+    "status": 200,
+    "ms": 127.9,
+    "ok": true
+   },
+   "jugement": {
+    "put_ok": true,
+    "prfnr_relu": 3,
+    "prfnr_conforme": true,
+    "profil_porte_n": true,
+    "stable_05_5": true,
+    "invariants_intacts": true,
+    "sans_effet_de_bord": true,
+    "reponse_put_cles": [
+     "alday",
+     "almhr",
+     "almmn",
+     "amnth",
+     "ayear",
+     "ctype",
+     "curve",
+     "daynm",
+     "durat",
+     "pname",
+     "prfen",
+     "prfnr",
+     "prfvs",
+     "pszhr",
+     "pszmn",
+     "pwrsz",
+     "sndch",
+     "snddv",
+     "sndlv",
+     "sndss"
+    ],
+    "reponse_put_egale_profil": true
+   },
+   "champs_changes": [
+    "wualm.prfnr",
+    "wualm/prfwu.almhr",
+    "wualm/prfwu.almmn",
+    "wualm/prfwu.curve",
+    "wualm/prfwu.daynm",
+    "wualm/prfwu.durat",
+    "wualm/prfwu.pname",
+    "wualm/prfwu.prfen",
+    "wualm/prfwu.prfnr",
+    "wualm/prfwu.prfvs",
+    "wualm/prfwu.pszhr",
+    "wualm/prfwu.pwrsz",
+    "wualm/prfwu.sndch"
+   ],
+   "inattendus": [],
+   "effets": [],
+   "retour": {
+    "methode": "PUT",
+    "port": "wualm",
+    "status": 200,
+    "ms": 79.8,
+    "ok": true
+   },
+   "retour_conforme": true,
+   "conforme": true
+  },
+  {
+   "test": "P3-4",
+   "rep": 1,
+   "n": 2,
+   "put": {
+    "methode": "PUT",
+    "port": "wualm",
+    "status": 200,
+    "ms": 67.7,
+    "ok": true
+   },
+   "jugement": {
+    "put_ok": true,
+    "prfnr_relu": 2,
+    "prfnr_conforme": true,
+    "profil_porte_n": true,
+    "stable_05_5": true,
+    "invariants_intacts": true,
+    "sans_effet_de_bord": true,
+    "reponse_put_cles": [
+     "alday",
+     "almhr",
+     "almmn",
+     "amnth",
+     "ayear",
+     "ctype",
+     "curve",
+     "daynm",
+     "durat",
+     "pname",
+     "prfen",
+     "prfnr",
+     "prfvs",
+     "pszhr",
+     "pszmn",
+     "pwrsz",
+     "sndch",
+     "snddv",
+     "sndlv",
+     "sndss"
+    ],
+    "reponse_put_egale_profil": true
+   },
+   "champs_changes": [
+    "wualm.prfnr",
+    "wualm/prfwu.almhr",
+    "wualm/prfwu.almmn",
+    "wualm/prfwu.curve",
+    "wualm/prfwu.daynm",
+    "wualm/prfwu.durat",
+    "wualm/prfwu.prfen",
+    "wualm/prfwu.prfnr",
+    "wualm/prfwu.pszhr",
+    "wualm/prfwu.pwrsz",
+    "wualm/prfwu.sndch"
+   ],
+   "inattendus": [],
+   "effets": [],
+   "retour": {
+    "methode": "PUT",
+    "port": "wualm",
+    "status": 200,
+    "ms": 111.8,
+    "ok": true
+   },
+   "retour_conforme": true,
+   "conforme": true
+  },
+  {
+   "test": "P3-4",
+   "rep": 2,
+   "n": 1,
+   "put": {
+    "methode": "PUT",
+    "port": "wualm",
+    "status": 200,
+    "ms": 79.8,
+    "ok": true
+   },
+   "jugement": {
+    "put_ok": true,
+    "prfnr_relu": 1,
+    "prfnr_conforme": true,
+    "profil_porte_n": true,
+    "stable_05_5": true,
+    "invariants_intacts": true,
+    "sans_effet_de_bord": true,
+    "reponse_put_cles": [
+     "alday",
+     "almhr",
+     "almmn",
+     "amnth",
+     "ayear",
+     "ctype",
+     "curve",
+     "daynm",
+     "durat",
+     "pname",
+     "prfen",
+     "prfnr",
+     "prfvs",
+     "pszhr",
+     "pszmn",
+     "pwrsz",
+     "sndch",
+     "snddv",
+     "sndlv",
+     "sndss"
+    ],
+    "reponse_put_egale_profil": true
+   },
+   "champs_changes": [],
+   "inattendus": [],
+   "effets": [],
+   "retour": {
+    "methode": "PUT",
+    "port": "wualm",
+    "status": 200,
+    "ms": 79.9,
+    "ok": true
+   },
+   "retour_conforme": true,
+   "conforme": true
+  }
+ ],
+ "passes": [
+  {
+   "k": 1,
+   "anomalies": [],
+   "retour_conforme": true
+  },
+  {
+   "k": 2,
+   "anomalies": [],
+   "retour_conforme": true
+  }
+ ],
+ "mode": "ecriture",
+ "P3-1": {
+  "stable_sans_ecriture": true,
+  "wusts": 1
+ },
+ "choix": {
+  "initial": 1,
+  "dormant": 3,
+  "profil2": {
+   "prfen": false,
+   "prfvs": true
+  }
+ },
+ "P3-5": {
+  "passes_egales": true,
+  "differents": [],
+  "profil_initial_coherent": true
+ },
+ "P3-6": [
+  {
+   "prfnr_ecrit": 0,
+   "put": {
+    "methode": "PUT",
+    "port": "wualm",
+    "status": 200,
+    "ms": 63.7,
+    "ok": true
+   },
+   "put_corps": null,
+   "prfnr_relu": 1,
+   "champs_changes": [],
+   "retour_conforme": true
+  },
+  {
+   "prfnr_ecrit": 17,
+   "put": {
+    "methode": "PUT",
+    "port": "wualm",
+    "status": 422,
+    "ms": 51.7,
+    "ok": false,
+    "error": "HTTP 422"
+   },
+   "put_corps": {
+    "error": "No such Property"
+   },
+   "prfnr_relu": 1,
+   "champs_changes": [],
+   "retour_conforme": true
+  }
+ ],
+ "restauration": {
+  "conforme": true,
+  "ecart": []
+ },
+ "fin": {
+  "bilan": true,
+  "restaure": true
+ },
+ "date": "2026-09-12",
+ "releve_brut": "selection-profil-ecriture-20260912T212537.jsonl (non versionne)"
+}
