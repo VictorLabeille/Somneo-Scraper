@@ -56,6 +56,21 @@ réveil, et on ne sait pas si une session ouverte change autre chose. **Jamais p
 vraie nuit** — `wungt` ne tient qu'une session, un essai écraserait la vraie — ni à quelques
 heures d'une alarme. Session refermée aussitôt, relue.
 
+**Résultat, 2026-09-12** (`docs/somneo-api.md` §4, « `wungt` en écriture ») : **`tg2bd` et
+`tendb` ne s'écrivent pas** — six formes, six `200`, la valeur envoyée jamais prise. La branche
+prévue ci-dessus s'applique : l'heure d'un appui retenu vit dans la base du collecteur, qui fait
+autorité, et le réveil date la session de l'instant où il la reçoit. Reporté le jour même dans
+les deux cadrages (§5 de chacun). Deux faits de plus pour le collecteur : l'appareil filtre
+lui-même le double appui, et `wungt` date les nuits sur l'horloge `wutim`, qui retarde de ~4,5 s
+sur le port `time`. Écrire `{"night": true}` fait exactement ce que fait SleepMapper (contrôle
+par un appui réel).
+
+**Question nouvelle, à trancher par Victor** : dans quel référentiel le collecteur sert-il les
+heures d'une nuit ? Une nuit dont l'appui a été retenu mêle l'heure du collecteur (NTP) et
+celles du réveil (horloge `wutim`, à quelques secondes) ; le cadrage de SleepMaxxer (§3.F) veut
+une seule source par nuit. Piste : ramener les heures du réveil à l'heure NTP par le décalage de
+`wutim`, mesuré chaque heure (§6). Ce que P2 dit de la remise à l'heure en décide en partie.
+
 ### P2. La remise à l'heure : `PUT products/0/time`
 
 Le port `time` expose `datetime`, `dst`, `dstchangeover`, `dstoffset`, `timezone` et `calday`.

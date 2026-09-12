@@ -353,6 +353,47 @@ l'obfuscation.
 > C'est la deuxième nuit où `mslux` donne le coucher à la minute. Là où le geste manque — et il
 > a manqué la nuit précédente — elle reste la seule source.
 
+**`wungt` en écriture — mesuré le 2026-09-12** (`probes/ecriture_wungt.py`, relevé nettoyé
+`probes/results/ecriture-wungt-20260912T212907.json`). Trois cycles ouverture, seconde
+ouverture, fermeture, seconde fermeture, chacun depuis une session close vérifiée ; `wungt`
+relu à +0,5 s, +5 s et +30 s ; quinze ports relus avant et après chaque essai. Les écarts sont
+donnés par rapport à l'heure du port `time` lue juste avant l'écriture.
+
+| Écriture | Ce que fait l'appareil | Mesure |
+| --- | --- | --- |
+| `{"night": true}` | ouvre la session ; `tg2bd` = l'heure de la requête **sur l'horloge `wutim`** | 3/3, **−4 s** chaque fois |
+| `{"night": true}`, session déjà ouverte | rien : `tg2bd` ne bouge pas | 3/3 |
+| `{"night": false}` | ferme la session ; `tendb` = l'heure de la requête, même horloge | 3/3, −4 s chaque fois |
+| `{"night": false}`, session déjà close | rien : `tendb` ne bouge pas | 3/3 |
+| `tg2bd` ou `tendb` écrits — dans l'ouverture ou la fermeture, ou seuls, session ouverte ou close | **`200`, et la valeur envoyée n'est jamais prise.** Porté par l'ouverture ou la fermeture, le champ est daté à la requête (−4 s ou −5 s) ; écrit seul, il reste inchangé | 6/6 |
+| Session ouverte par écriture, tenue 10 min | aucun changement, aucun échec de lecture | 10 lectures |
+| **Appui « je me couche » dans SleepMapper** (contrôle) | change **les mêmes champs** que notre `{"night": true}` — `night` et `tg2bd` — et rien sur aucun autre port ; notre `{"night": false}` referme cette session, `tendb` à −4 s | 1 appui, relevé `ecriture-wungt-controle-20260912T215440.json` |
+
+Ce contrôle remplace la preuve perdue : la décompilation du 31 août, qui disait « `night` est le
+seul champ écrit par l'app », n'existe plus. Écrire `{"night": true}`, c'est faire ce que fait
+SleepMapper.
+
+Aucune de ces écritures n'a touché un autre port : lumière, alarmes (port par port), afficheur,
+lecteur, coucher de soleil, réglages d'heure sont restés identiques à chaque instantané.
+La réponse au `PUT` ne dit pas ce qui a changé : elle omet parfois `tg2bd` alors qu'il vient
+d'être posé, et renvoie le port entier quand rien ne change. Seule la relecture fait foi.
+
+Trois conséquences :
+
+1. **Une heure de nuit ne se pose pas après coup.** `tg2bd` et `tendb` ne s'écrivent pas : un
+   appui fait pendant que le réveil ne répond pas ne peut pas y être reporté avec son heure.
+   C'est le collecteur qui la garde.
+2. **Le double appui est filtré par l'appareil** : une seconde ouverture ne déplace pas
+   `tg2bd`, une seconde fermeture ne déplace pas `tendb`.
+3. **Le réveil a deux horloges.** L'horloge décomposée `wutim` retarde d'environ 4,5 s sur le
+   port `time` (relevés à la seconde, lus à 0,24 s d'intervalle, constants sur trois cycles), et
+   c'est sur elle que `wungt` date les nuits. Remettre `time` à l'heure ne dit donc rien, en
+   soi, de l'heure des nuits : voir la mesure au centième de P2, plus bas.
+
+Le critère inscrit dans la sonde avant la mesure (±1 s autour de `time`) classe ces écarts
+« inattendu » dans le relevé. Il n'a pas été réécrit après coup : c'est l'horloge qui diffère,
+pas l'écriture.
+
 **`wualm/prfwu` — profil d'alarme.** `prfnr` (n° 1-16), `pname`, `prfen` (activé),
 `prfvs` (visible), `almhr`/`almmn`, `daynm` (masque de jours), `ayear`/`amnth`/`alday`
 (date pour une alarme unique), `curve` (intensité du lever de soleil), `durat` (durée),

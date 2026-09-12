@@ -1,0 +1,56 @@
+{
+ "sonde": "probes/ecriture_wungt.py",
+ "cycles": [],
+ "inscriptions": [],
+ "convention": "tg2bd_s / tendb_s : secondes depuis l'heure du reveil lue juste avant l'ecriture ; « anterieure a la sonde » au-dela d'une heure",
+ "mode": "controle",
+ "initial": {
+  "wusts": 1,
+  "night": true
+ },
+ "P1-9": {
+  "jugement": {
+   "night_vrai": true,
+   "tg2bd_posterieur_a_la_sonde": true,
+   "champs_changes_app": [
+    "night",
+    "tg2bd"
+   ],
+   "champs_changes_sonde": [
+    "night",
+    "tg2bd"
+   ],
+   "effets_hors_wungt": [],
+   "memes_champs": true
+  },
+  "fermeture": {
+   "jugement": {
+    "night_faux": true,
+    "tendb_a_la_requete": false,
+    "tg2bd_inchange": true
+   },
+   "ecriture": {
+    "etiquette": "P1-9 fermeture d'une session ouverte par SleepMapper",
+    "champs_ecrits": [
+     "night"
+    ],
+    "put": {
+     "methode": "PUT",
+     "port": "wungt",
+     "status": 200,
+     "ms": 47.8,
+     "ok": true
+    },
+    "put_corps": null,
+    "duree_fenetre_s": 1.0,
+    "night": false,
+    "tg2bd_s": -50.0,
+    "tendb_s": -4.0,
+    "relus_identiques_05_5_30s": true
+   }
+  }
+ },
+ "fin": {},
+ "date": "2026-09-12",
+ "releve_brut": "ecriture-wungt-controle-20260912T215440.jsonl (non versionne)"
+}

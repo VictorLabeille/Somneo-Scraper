@@ -1,0 +1,763 @@
+{
+ "sonde": "probes/ecriture_wungt.py",
+ "cycles": [
+  {
+   "k": 1,
+   "jugement": {
+    "P1-1": {
+     "put_ok": true,
+     "night_vrai": true,
+     "tg2bd_a_la_requete": false,
+     "tendb_inchange": true,
+     "champs_changes": [
+      "night",
+      "tg2bd"
+     ],
+     "stable": true,
+     "effets": []
+    },
+    "P1-2": {
+     "put_ok": true,
+     "night_vrai": true,
+     "tg2bd_deplace": false,
+     "tg2bd_a_la_seconde_requete": false,
+     "champs_changes": [],
+     "stable": true
+    },
+    "P1-3": {
+     "put_ok": true,
+     "night_faux": true,
+     "tendb_a_la_requete": false,
+     "tg2bd_inchange": true,
+     "champs_changes": [
+      "night",
+      "tendb"
+     ],
+     "stable": true,
+     "effets": []
+    },
+    "P1-4": {
+     "put_ok": true,
+     "night_faux": true,
+     "tendb_deplace": false,
+     "champs_changes": [],
+     "stable": true
+    },
+    "H1_tient": false,
+    "H2_tient": false
+   },
+   "ecritures": [
+    {
+     "etiquette": "P1-1 ouverture",
+     "champs_ecrits": [
+      "night"
+     ],
+     "put": {
+      "methode": "PUT",
+      "port": "wungt",
+      "status": 200,
+      "ms": 31.6,
+      "ok": true
+     },
+     "put_corps": null,
+     "duree_fenetre_s": 1.0,
+     "night": true,
+     "tg2bd_s": -4.0,
+     "tendb_s": "anterieure a la sonde",
+     "relus_identiques_05_5_30s": true
+    },
+    {
+     "etiquette": "P1-2 seconde ouverture",
+     "champs_ecrits": [
+      "night"
+     ],
+     "put": {
+      "methode": "PUT",
+      "port": "wungt",
+      "status": 200,
+      "ms": 47.9,
+      "ok": true
+     },
+     "put_corps": null,
+     "duree_fenetre_s": 0.0,
+     "night": true,
+     "tg2bd_s": -39.0,
+     "tendb_s": "anterieure a la sonde",
+     "relus_identiques_05_5_30s": true
+    },
+    {
+     "etiquette": "P1-3 fermeture",
+     "champs_ecrits": [
+      "night"
+     ],
+     "put": {
+      "methode": "PUT",
+      "port": "wungt",
+      "status": 200,
+      "ms": 19.7,
+      "ok": true
+     },
+     "put_corps": null,
+     "duree_fenetre_s": 0.0,
+     "night": false,
+     "tg2bd_s": -69.0,
+     "tendb_s": -4.0,
+     "relus_identiques_05_5_30s": true
+    },
+    {
+     "etiquette": "P1-4 seconde fermeture",
+     "champs_ecrits": [
+      "night"
+     ],
+     "put": {
+      "methode": "PUT",
+      "port": "wungt",
+      "status": 200,
+      "ms": 63.7,
+      "ok": true
+     },
+     "put_corps": null,
+     "duree_fenetre_s": 1.0,
+     "night": false,
+     "tg2bd_s": -103.0,
+     "tendb_s": -38.0,
+     "relus_identiques_05_5_30s": true
+    }
+   ]
+  },
+  {
+   "k": 2,
+   "jugement": {
+    "P1-1": {
+     "put_ok": true,
+     "night_vrai": true,
+     "tg2bd_a_la_requete": false,
+     "tendb_inchange": true,
+     "champs_changes": [
+      "night",
+      "tg2bd"
+     ],
+     "stable": true,
+     "effets": []
+    },
+    "P1-2": {
+     "put_ok": true,
+     "night_vrai": true,
+     "tg2bd_deplace": false,
+     "tg2bd_a_la_seconde_requete": false,
+     "champs_changes": [],
+     "stable": true
+    },
+    "P1-3": {
+     "put_ok": true,
+     "night_faux": true,
+     "tendb_a_la_requete": false,
+     "tg2bd_inchange": true,
+     "champs_changes": [
+      "night",
+      "tendb"
+     ],
+     "stable": true,
+     "effets": []
+    },
+    "P1-4": {
+     "put_ok": true,
+     "night_faux": true,
+     "tendb_deplace": false,
+     "champs_changes": [],
+     "stable": true
+    },
+    "H1_tient": false,
+    "H2_tient": false
+   },
+   "ecritures": [
+    {
+     "etiquette": "P1-1 ouverture",
+     "champs_ecrits": [
+      "night"
+     ],
+     "put": {
+      "methode": "PUT",
+      "port": "wungt",
+      "status": 200,
+      "ms": 31.7,
+      "ok": true
+     },
+     "put_corps": null,
+     "duree_fenetre_s": 1.0,
+     "night": true,
+     "tg2bd_s": -4.0,
+     "tendb_s": -72.0,
+     "relus_identiques_05_5_30s": true
+    },
+    {
+     "etiquette": "P1-2 seconde ouverture",
+     "champs_ecrits": [
+      "night"
+     ],
+     "put": {
+      "methode": "PUT",
+      "port": "wungt",
+      "status": 200,
+      "ms": 47.7,
+      "ok": true
+     },
+     "put_corps": null,
+     "duree_fenetre_s": 1.0,
+     "night": true,
+     "tg2bd_s": -39.0,
+     "tendb_s": -107.0,
+     "relus_identiques_05_5_30s": true
+    },
+    {
+     "etiquette": "P1-3 fermeture",
+     "champs_ecrits": [
+      "night"
+     ],
+     "put": {
+      "methode": "PUT",
+      "port": "wungt",
+      "status": 200,
+      "ms": 27.8,
+      "ok": true
+     },
+     "put_corps": null,
+     "duree_fenetre_s": 0.0,
+     "night": false,
+     "tg2bd_s": -70.0,
+     "tendb_s": -4.0,
+     "relus_identiques_05_5_30s": true
+    },
+    {
+     "etiquette": "P1-4 seconde fermeture",
+     "champs_ecrits": [
+      "night"
+     ],
+     "put": {
+      "methode": "PUT",
+      "port": "wungt",
+      "status": 200,
+      "ms": 47.8,
+      "ok": true
+     },
+     "put_corps": null,
+     "duree_fenetre_s": 1.0,
+     "night": false,
+     "tg2bd_s": -104.0,
+     "tendb_s": -38.0,
+     "relus_identiques_05_5_30s": true
+    }
+   ]
+  },
+  {
+   "k": 3,
+   "jugement": {
+    "P1-1": {
+     "put_ok": true,
+     "night_vrai": true,
+     "tg2bd_a_la_requete": false,
+     "tendb_inchange": true,
+     "champs_changes": [
+      "night",
+      "tg2bd"
+     ],
+     "stable": true,
+     "effets": []
+    },
+    "P1-2": {
+     "put_ok": true,
+     "night_vrai": true,
+     "tg2bd_deplace": false,
+     "tg2bd_a_la_seconde_requete": false,
+     "champs_changes": [],
+     "stable": true
+    },
+    "P1-3": {
+     "put_ok": true,
+     "night_faux": true,
+     "tendb_a_la_requete": false,
+     "tg2bd_inchange": true,
+     "champs_changes": [
+      "night",
+      "tendb"
+     ],
+     "stable": true,
+     "effets": []
+    },
+    "P1-4": {
+     "put_ok": true,
+     "night_faux": true,
+     "tendb_deplace": false,
+     "champs_changes": [],
+     "stable": true
+    },
+    "H1_tient": false,
+    "H2_tient": false
+   },
+   "ecritures": [
+    {
+     "etiquette": "P1-1 ouverture",
+     "champs_ecrits": [
+      "night"
+     ],
+     "put": {
+      "methode": "PUT",
+      "port": "wungt",
+      "status": 200,
+      "ms": 31.7,
+      "ok": true
+     },
+     "put_corps": null,
+     "duree_fenetre_s": 1.0,
+     "night": true,
+     "tg2bd_s": -4.0,
+     "tendb_s": -72.0,
+     "relus_identiques_05_5_30s": true
+    },
+    {
+     "etiquette": "P1-2 seconde ouverture",
+     "champs_ecrits": [
+      "night"
+     ],
+     "put": {
+      "methode": "PUT",
+      "port": "wungt",
+      "status": 200,
+      "ms": 47.7,
+      "ok": true
+     },
+     "put_corps": null,
+     "duree_fenetre_s": 0.0,
+     "night": true,
+     "tg2bd_s": -39.0,
+     "tendb_s": -107.0,
+     "relus_identiques_05_5_30s": true
+    },
+    {
+     "etiquette": "P1-3 fermeture",
+     "champs_ecrits": [
+      "night"
+     ],
+     "put": {
+      "methode": "PUT",
+      "port": "wungt",
+      "status": 200,
+      "ms": 35.8,
+      "ok": true
+     },
+     "put_corps": null,
+     "duree_fenetre_s": 1.0,
+     "night": false,
+     "tg2bd_s": -69.0,
+     "tendb_s": -4.0,
+     "relus_identiques_05_5_30s": true
+    },
+    {
+     "etiquette": "P1-4 seconde fermeture",
+     "champs_ecrits": [
+      "night"
+     ],
+     "put": {
+      "methode": "PUT",
+      "port": "wungt",
+      "status": 200,
+      "ms": 80.1,
+      "ok": true
+     },
+     "put_corps": null,
+     "duree_fenetre_s": 1.0,
+     "night": false,
+     "tg2bd_s": -103.0,
+     "tendb_s": -38.0,
+     "relus_identiques_05_5_30s": true
+    }
+   ]
+  }
+ ],
+ "inscriptions": [
+  {
+   "test": "P1-6 #1",
+   "champ": "tg2bd",
+   "recul_s": 600,
+   "champs_ecrits": [
+    "night",
+    "tg2bd"
+   ],
+   "issue": "inattendu",
+   "cible_s": -604.0,
+   "ecriture": {
+    "etiquette": "P1-6 #1",
+    "champs_ecrits": [
+     "night",
+     "tg2bd"
+    ],
+    "put": {
+     "methode": "PUT",
+     "port": "wungt",
+     "status": 200,
+     "ms": 31.6,
+     "ok": true
+    },
+    "put_corps": null,
+    "duree_fenetre_s": 0.0,
+    "night": true,
+    "tg2bd_s": -5.0,
+    "tendb_s": -73.0,
+    "relus_identiques_05_5_30s": true
+   },
+   "ouverture_prealable": null,
+   "night_apres": true,
+   "champs_changes": [
+    "night",
+    "tg2bd"
+   ],
+   "effets": [],
+   "close_a_la_fin": true
+  },
+  {
+   "test": "P1-6 #2",
+   "champ": "tg2bd",
+   "recul_s": 900,
+   "champs_ecrits": [
+    "night",
+    "tg2bd"
+   ],
+   "issue": "inattendu",
+   "cible_s": -904.0,
+   "ecriture": {
+    "etiquette": "P1-6 #2",
+    "champs_ecrits": [
+     "night",
+     "tg2bd"
+    ],
+    "put": {
+     "methode": "PUT",
+     "port": "wungt",
+     "status": 200,
+     "ms": 47.9,
+     "ok": true
+    },
+    "put_corps": null,
+    "duree_fenetre_s": 0.0,
+    "night": true,
+    "tg2bd_s": -4.0,
+    "tendb_s": -39.0,
+    "relus_identiques_05_5_30s": true
+   },
+   "ouverture_prealable": null,
+   "night_apres": true,
+   "champs_changes": [
+    "night",
+    "tg2bd"
+   ],
+   "effets": [],
+   "close_a_la_fin": true
+  },
+  {
+   "test": "P1-7a",
+   "champ": "tg2bd",
+   "recul_s": 300,
+   "champs_ecrits": [
+    "tg2bd"
+   ],
+   "issue": "ignore (inchange)",
+   "cible_s": -304.0,
+   "ecriture": {
+    "etiquette": "P1-7a",
+    "champs_ecrits": [
+     "tg2bd"
+    ],
+    "put": {
+     "methode": "PUT",
+     "port": "wungt",
+     "status": 200,
+     "ms": 47.8,
+     "ok": true
+    },
+    "put_corps": null,
+    "duree_fenetre_s": 0.0,
+    "night": true,
+    "tg2bd_s": -39.0,
+    "tendb_s": -70.0,
+    "relus_identiques_05_5_30s": true
+   },
+   "ouverture_prealable": {
+    "etiquette": "P1-7a ouverture prealable",
+    "champs_ecrits": [
+     "night"
+    ],
+    "put": {
+     "methode": "PUT",
+     "port": "wungt",
+     "status": 200,
+     "ms": 35.6,
+     "ok": true
+    },
+    "put_corps": null,
+    "duree_fenetre_s": 1.0,
+    "night": true,
+    "tg2bd_s": -4.0,
+    "tendb_s": -35.0,
+    "relus_identiques_05_5_30s": true
+   },
+   "night_apres": true,
+   "champs_changes": [],
+   "effets": [],
+   "close_a_la_fin": true
+  },
+  {
+   "test": "P1-7b",
+   "champ": "tg2bd",
+   "recul_s": 300,
+   "champs_ecrits": [
+    "tg2bd"
+   ],
+   "issue": "ignore (inchange)",
+   "cible_s": -304.0,
+   "ecriture": {
+    "etiquette": "P1-7b",
+    "champs_ecrits": [
+     "tg2bd"
+    ],
+    "put": {
+     "methode": "PUT",
+     "port": "wungt",
+     "status": 200,
+     "ms": 47.8,
+     "ok": true
+    },
+    "put_corps": null,
+    "duree_fenetre_s": 0.0,
+    "night": false,
+    "tg2bd_s": -108.0,
+    "tendb_s": -40.0,
+    "relus_identiques_05_5_30s": true
+   },
+   "ouverture_prealable": null,
+   "night_apres": false,
+   "champs_changes": [],
+   "effets": [],
+   "close_a_la_fin": true
+  },
+  {
+   "test": "P1-8a",
+   "champ": "tendb",
+   "recul_s": 300,
+   "champs_ecrits": [
+    "night",
+    "tendb"
+   ],
+   "issue": "inattendu",
+   "cible_s": -303.0,
+   "ecriture": {
+    "etiquette": "P1-8a",
+    "champs_ecrits": [
+     "night",
+     "tendb"
+    ],
+    "put": {
+     "methode": "PUT",
+     "port": "wungt",
+     "status": 200,
+     "ms": 47.7,
+     "ok": true
+    },
+    "put_corps": null,
+    "duree_fenetre_s": 1.0,
+    "night": false,
+    "tg2bd_s": -38.0,
+    "tendb_s": -4.0,
+    "relus_identiques_05_5_30s": true
+   },
+   "ouverture_prealable": {
+    "etiquette": "P1-8a ouverture prealable",
+    "champs_ecrits": [
+     "night"
+    ],
+    "put": {
+     "methode": "PUT",
+     "port": "wungt",
+     "status": 200,
+     "ms": 23.7,
+     "ok": true
+    },
+    "put_corps": null,
+    "duree_fenetre_s": 1.0,
+    "night": true,
+    "tg2bd_s": -4.0,
+    "tendb_s": -74.0,
+    "relus_identiques_05_5_30s": true
+   },
+   "night_apres": false,
+   "champs_changes": [
+    "night",
+    "tendb"
+   ],
+   "effets": [],
+   "close_a_la_fin": true
+  },
+  {
+   "test": "P1-8b",
+   "champ": "tendb",
+   "recul_s": 300,
+   "champs_ecrits": [
+    "tendb"
+   ],
+   "issue": "ignore (inchange)",
+   "cible_s": -304.0,
+   "ecriture": {
+    "etiquette": "P1-8b",
+    "champs_ecrits": [
+     "tendb"
+    ],
+    "put": {
+     "methode": "PUT",
+     "port": "wungt",
+     "status": 200,
+     "ms": 47.7,
+     "ok": true
+    },
+    "put_corps": null,
+    "duree_fenetre_s": 0.0,
+    "night": false,
+    "tg2bd_s": -77.0,
+    "tendb_s": -43.0,
+    "relus_identiques_05_5_30s": true
+   },
+   "ouverture_prealable": null,
+   "night_apres": false,
+   "champs_changes": [],
+   "effets": [],
+   "close_a_la_fin": true
+  }
+ ],
+ "convention": "tg2bd_s / tendb_s : secondes depuis l'heure du reveil lue juste avant l'ecriture ; « anterieure a la sonde » au-dela d'une heure",
+ "mode": "ecriture",
+ "initial": {
+  "wusts": 1,
+  "night": false
+ },
+ "remises": [
+  {
+   "etiquette": "remise a l'etat ferme",
+   "champs_ecrits": [
+    "night"
+   ],
+   "put": {
+    "methode": "PUT",
+    "port": "wungt",
+    "status": 200,
+    "ms": 47.8,
+    "ok": true
+   },
+   "put_corps": null,
+   "duree_fenetre_s": 1.0,
+   "night": false,
+   "tg2bd_s": -39.0,
+   "tendb_s": -4.0,
+   "relus_identiques_05_5_30s": true
+  },
+  {
+   "etiquette": "remise a l'etat ferme",
+   "champs_ecrits": [
+    "night"
+   ],
+   "put": {
+    "methode": "PUT",
+    "port": "wungt",
+    "status": 200,
+    "ms": 47.8,
+    "ok": true
+   },
+   "put_corps": null,
+   "duree_fenetre_s": 1.0,
+   "night": false,
+   "tg2bd_s": -38.0,
+   "tendb_s": -4.0,
+   "relus_identiques_05_5_30s": true
+  },
+  {
+   "etiquette": "remise a l'etat ferme",
+   "champs_ecrits": [
+    "night"
+   ],
+   "put": {
+    "methode": "PUT",
+    "port": "wungt",
+    "status": 200,
+    "ms": 19.6,
+    "ok": true
+   },
+   "put_corps": null,
+   "duree_fenetre_s": 0.0,
+   "night": false,
+   "tg2bd_s": -73.0,
+   "tendb_s": -5.0,
+   "relus_identiques_05_5_30s": true
+  }
+ ],
+ "P1-5": {
+  "lectures": 10,
+  "derives": 0,
+  "echecs": 0,
+  "ouverture": {
+   "etiquette": "P1-5 ouverture",
+   "champs_ecrits": [
+    "night"
+   ],
+   "put": {
+    "methode": "PUT",
+    "port": "wungt",
+    "status": 200,
+    "ms": 23.6,
+    "ok": true
+   },
+   "put_corps": null,
+   "duree_fenetre_s": 1.0,
+   "night": true,
+   "tg2bd_s": -4.0,
+   "tendb_s": -77.0,
+   "relus_identiques_05_5_30s": true
+  },
+  "fermeture": {
+   "etiquette": "P1-5 fermeture",
+   "champs_ecrits": [
+    "night"
+   ],
+   "put": {
+    "methode": "PUT",
+    "port": "wungt",
+    "status": 200,
+    "ms": 47.8,
+    "ok": true
+   },
+   "put_corps": null,
+   "duree_fenetre_s": 0.0,
+   "night": false,
+   "tg2bd_s": -635.0,
+   "tendb_s": -4.0,
+   "relus_identiques_05_5_30s": true
+  }
+ },
+ "restauration": {
+  "session_close": true,
+  "heures_reposees": [],
+  "identique_au_debut": false
+ },
+ "issues": {
+  "P1-6 #1": "inattendu",
+  "P1-6 #2": "inattendu",
+  "P1-7a": "ignore (inchange)",
+  "P1-7b": "ignore (inchange)",
+  "P1-8a": "inattendu",
+  "P1-8b": "ignore (inchange)",
+  "P1-5": true
+ },
+ "champs_ouverture": [
+  "night",
+  "tg2bd"
+ ],
+ "fin": {},
+ "date": "2026-09-12",
+ "releve_brut": "ecriture-wungt-ecriture-20260912T212907.jsonl (non versionne)"
+}

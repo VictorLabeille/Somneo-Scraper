@@ -293,7 +293,7 @@ soleil, geste de coucher et de lever.
 
 | Cas | Déclencheur | Comportement attendu |
 | --- | --- | --- |
-| Appui « je me couche » alors que le réveil ne répond pas | Réveil débranché, carte qui redémarre, adresse changée | **L'heure de l'appui est conservée et posée dans le réveil dès qu'il répond.** Le geste n'est jamais perdu. L'app affiche « en attente du réveil », **jamais** « suivi en cours » : ce qui n'est pas encore vrai ne s'affiche pas comme vrai. Voir §5. |
+| Appui « je me couche » alors que le réveil ne répond pas | Réveil débranché, carte qui redémarre, adresse changée | **L'heure de l'appui est conservée par le collecteur, qui fait foi, et la session est ouverte dans le réveil dès qu'il répond** — le réveil la date de ce moment-là, `tg2bd` ne s'écrivant pas (§5, précisé le 2026-09-12). Le geste n'est jamais perdu. L'app affiche « en attente du réveil », **jamais** « suivi en cours » : ce qui n'est pas encore vrai ne s'affiche pas comme vrai. Voir §5. |
 | Double appui | Deux pressions rapprochées | Une seule session. La seconde ne crée rien et ne déplace pas l'heure. |
 | Appui après-coup | Appui à 2 h pour un coucher à 23 h | L'heure enregistrée est celle de l'appui, marquée **confirmée**, et corrigeable ensuite. |
 | Geste de lever absent | On ne marque pas le lever | La session se clôt sur **l'extinction de l'alarme**, observée dans `wusts`, et l'heure est alors marquée **estimée**. Sinon elle reste ouverte. **Jamais sur `tendb`** — voir §5. |
@@ -358,8 +358,8 @@ soleil, geste de coucher et de lever.
       consultables.
 - [ ] Une correction d'heure sur une nuit vieille de trois jours est acceptée, et la valeur
       relevée d'origine reste consultable.
-- [ ] Un appui « je me couche » fait pendant que le réveil est injoignable **finit par être
-      posé dans le réveil**, avec l'heure de l'appui.
+- [ ] Un appui « je me couche » fait pendant que le réveil est injoignable **garde l'heure de
+      l'appui** dans le collecteur, et la session finit par être ouverte dans le réveil.
 - [ ] L'horloge du réveil ne dérive jamais de plus de quelques secondes sur un mois, et l'écart
       relevé avant chaque correction est journalisé.
 - [ ] Aucune écriture du collecteur n'a produit d'effet observable dans la chambre.
@@ -393,8 +393,8 @@ qu'on enfreindrait en silence.
 
 **Question posée** : que faire quand le geste est fait alors que le réveil ne répond pas ?
 
-**Décision retenue** : le collecteur **retient l'heure de l'appui et la pose dans le réveil dès
-qu'il répond**. Le geste est la seule chose que l'utilisateur produit lui-même ; le perdre
+**Décision retenue** : le collecteur **retient l'heure de l'appui et ouvre la session dans le
+réveil dès qu'il répond**. Le geste est la seule chose que l'utilisateur produit lui-même ; le perdre
 parce qu'une carte redémarrait serait le pire échec possible sur la fonction la plus simple.
 
 **Ce que cela impose** : l'application affiche « coucher enregistré, en attente du réveil », et
@@ -404,6 +404,13 @@ d'interface de plus, qui n'existe pas dans les maquettes.
 
 > **À reporter dans le cadrage et les maquettes de SleepMaxxer** : un état « en attente du
 > réveil » sur le suivi de coucher.
+
+> **Précisé le 2026-09-12 par la mesure** (`probes/ecriture_wungt.py`, `docs/somneo-api.md`
+> §4) : `tg2bd` ne s'écrit pas — le réveil répond `200` et ne prend jamais la valeur envoyée ;
+> il date la session de l'instant où il la reçoit. L'heure de l'appui ne peut donc pas être
+> « posée dans le réveil » : elle vit dans la base du collecteur, qui fait autorité, à côté du
+> `tg2bd` daté au retour. Le fond ne change pas — le geste n'est jamais perdu —, la forme si.
+> Reporté le jour même dans le cadrage de SleepMaxxer.
 
 ### L'isolement ne se fera pas depuis l'appareil
 
