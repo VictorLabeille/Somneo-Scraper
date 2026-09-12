@@ -31,8 +31,10 @@ ESPACEMENT = 0.2        # s entre la fin d'une requete et l'envoi de la suivante
 ACCELERATION = float(os.environ.get("SONDE_ACCELERATION", "1"))
 
 # Relus avant et apres chaque ecriture. Les capteurs (wusrd, dataupload) n'y sont pas : ils
-# bougent seuls. Les horloges y sont, pour la datation, mais hors du diff.
+# bougent seuls. Les horloges y sont, pour la datation, mais hors du diff. Les alarmes se
+# relisent port par port : la racine `wualm` ne renvoie que des sous-objets vides.
 INSTANTANE = [(1, "wusts"), (1, "wungt"), (1, "wulgt"), (1, "wudsk"), (1, "wualm"),
+              (1, "wualm/aenvs"), (1, "wualm/aalms"), (1, "wualm/alctr"), (1, "wualm/prfwu"),
               (1, "wuply"), (1, "wutms"), (1, "wutim"), (0, "time"), (0, "backend"),
               (0, "transport")]
 HORLOGES = ("1/wutim", "0/time")

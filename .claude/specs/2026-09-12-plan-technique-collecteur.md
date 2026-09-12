@@ -75,7 +75,8 @@ Tant que P2 n'est pas fait, le collecteur **mesure** la dérive sans rien corrig
 
 `pysomneo` lit le détail d'un profil en le sélectionnant : `PUT wualm {"prfnr": n}`
 (`modify_alarm_details`, appelé par `get_alarm_details`). La racine `wualm` porte alors `prfnr`
-= n et le détail du profil dans `prfwu`. À ne pas confondre avec `PUT wualm/prfwu`, qui
+= n, et `GET wualm/prfwu` sert le détail du profil n — la racine, elle, ne renvoie que des
+sous-objets vides (lecture du 2026-09-12). À ne pas confondre avec `PUT wualm/prfwu`, qui
 **configure** un profil (`modify_alarm_wake_up_configuration`). On s'attend à ce que la
 sélection ne change rien d'autre ; ce n'est pas vérifié. Effet observable attendu : aucun.
 **Jamais pendant une alarme.**
