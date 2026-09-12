@@ -1062,6 +1062,63 @@ n'est plus nécessaire.
 
   Le correctif est donc `TCPConnector(ssl=False, limit=1)` : sérialiser sans jamais refermer.
 
+  **Le correctif exécuté tel qu'il sera proposé — 2026-09-12.** Le tableau ci-dessus injectait
+  `limit=1` en remplaçant `_get_session` ; `probes/banc_limit.py` fait tourner le fichier patché
+  lui-même, à côté de la branche d'origine, ordre alterné d'une série à l'autre, aiohttp 3.14.3.
+  « Absorbés » compte les tentatives échouées que la boucle de réessai de
+  `SomneoSession.request` rattrape sans rien remonter (journal DEBUG de `pysomneo.api`) :
+
+  | N | l'existant : réussite, médiane, absorbés | `limit=1` : réussite, médiane, absorbés |
+  | --- | --- | --- |
+  | 1 | 3/3, 0,5 s, 0 | 3/3, 0,5 s, 0 |
+  | 2 | 6/6, 9,8 s, 0 | 6/6, 0,9 s, 0 |
+  | 3 | 9/9, 15,2 s, 12 | 9/9, 1,4 s, 0 |
+  | 6 | 18/18, 21,1 s, 36 | 18/18, 2,7 s, 0 |
+  | 12 | **15/36**, 52,1 s, 196 | **36/36**, 8,0 s, 2 |
+  | 24 | **8/72**, 51,3 s, 443 | **72/72**, 18,6 s, 43 |
+
+  - **Les chiffres du 07 se retrouvent.** L'existant ne perd plus rien à 6 tâches, mais il y
+    absorbe 36 échecs : la boucle de réessai convertit la panne en attente.
+  - **La limite de `limit=1` apparaît à 12 et 24 tâches.** aiohttp compte l'attente d'une place
+    dans le pool dans `timeout.connect` (5 s ici) : une requête trop longtemps en file expire en
+    attendant. Le réessai les rattrape toutes, sans un abandon.
+  - **Session recréée après `_reset_session()`** : `limit=1` avant et après (100 et 100 pour
+    l'existant). Le correctif étant dans `_get_session`, le chemin de reprise est couvert.
+  - **Une requête isolée pendant un `fetch_data`**, le motif de Home Assistant, 15 essais : 15/15
+    des deux côtés, sans échec absorbé, mais rafraîchissement médian 1,43 s contre 0,46 s.
+  - **Deux instances `Somneo` en parallèle** : ~9,8 s avec ou sans correctif, `limit` valant par
+    session — c'est ce que le correctif ne couvre pas. C'est aussi le ~9,8 s de l'existant à 2
+    tâches, sans un échec absorbé : le coût de deux connexions simultanées sur cet appareil ne
+    passe pas par les réessais. D'où il vient n'est pas établi.
+  - Reprise après 30 s puis 90 s d'inactivité : ~1 s des deux côtés, sans échec.
+
+  Relevé : `probes/results/banc-limit-20260912T125554.jsonl`.
+
+  **Deuxième passe, le même jour — ce qui pouvait encore faire tomber `limit=1`**
+  (`probes/banc_limit2.py`, `probes/banc_limit3.py`) :
+
+  | Test | l'existant | `limit=1` |
+  | --- | --- | --- |
+  | Rafraîchissement rapide (`force_slow_refresh=False`), 6 tâches, 3 séries | 18/18, ~11 s, 21 absorbés | 18/18, 0,5 s, 0 |
+  | Idem, 12 tâches | **23/36**, ~24 s, 86 absorbés, 13 abandons | **36/36**, 1,0 s, 0 |
+  | Écriture (`PUT wusts`, valeurs inchangées) pendant un rafraîchissement, 10 essais | 10/10 ; 1,46 s et 0,53 s | 10/10 ; 0,47 s et 0,38 s |
+  | Trois tâches annulées en vol, puis un `fetch_data`, 8 essais | 8/8, 1,23 s, 9 absorbés | 8/8, 1,01 s, 0 |
+  | Endurance 8 min : rafraîchissement toutes les 5 s, actions au hasard | 86/87, pire 18,5 s, 1 abandon | **96/96**, pire 0,63 s, 0 absorbé |
+  | Reprise forcée : connexion expirée, 8 puis 16 connexions tierces, 4 tours | 8 resets, `limit` 100 après | 8 resets, **`limit=1` après chacun**, 4/4 reprises |
+
+  - **L'annulation rend la place du pool.** C'était le risque propre à une limite à 1 : une
+    requête annulée qui la garderait bloquerait toutes les autres.
+  - **La reprise est exercée en vrai.** Une ouverture de connexion refusée
+    (`ClientConnectorError`) déclenche `_reset_session()`, et la session recréée garde
+    `limit=1`. Une perturbation plus douce — un tiers à deux requêtes — ne l'avait pas
+    provoquée : l'appareil ralentit sans couper une connexion déjà ouverte.
+  - **Le tas libre ne bouge pas** : 24 936 octets avant et après chaque rafale, des deux côtés.
+  - L'écriture réécrit `dspon` et `brght` à leur valeur, relus identiques à la fin.
+
+  Home Assistant épingle `aiohttp==3.14.3` (`homeassistant/package_constraints.txt`, relu le
+  2026-09-12) : la version de ces bancs. Relevés : `banc-limit2-20260912T132441.jsonl`,
+  `banc-limit3-20260912T135150.jsonl`.
+
 > **Piège de mesure, pour qui voudrait rejouer ceci.** Substituer l'attribut `_session` de
 > `SomneoSession` ne suffit pas : sur une erreur de connexion, la branche appelle
 > `_reset_session()`, et `_get_session()` recrée alors une session avec **son** connecteur.
