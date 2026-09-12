@@ -181,6 +181,12 @@ soleil, geste de coucher et de lever.
   l'horloge saute d'une heure d'un coup au lieu de dériver : ne poser que l'heure exposerait à
   un réveil qui sonne une heure à côté deux fois par an — la panne la plus visible que ce
   projet puisse produire. **Prochaine bascule : 25 octobre 2026.**
+
+  > **Mis en question le 2026-09-12 par la mesure** (`probes/ecriture_heure.py`) : `PUT
+  > products/0/time {"datetime": …}` est refusé (`422 Invalid parameter`, trois formats,
+  > neuf essais), `dstchangeover` aussi. L'écriture « acceptée » que supposait ce paragraphe
+  > venait de l'APK et n'avait jamais été mesurée. Le moyen de poser l'heure reste à trouver ;
+  > la fonction n'est pas retirée, elle est à rouvrir avec Victor.
 - **Jamais pendant une nuit déclarée, jamais pendant qu'une alarme sonne ou est en rappel.**
 - L'application ne remet jamais l'heure ; elle signale un écart si le collecteur en rapporte un.
 
