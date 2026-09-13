@@ -51,6 +51,39 @@ class Rappel(BaseModel):
     minutes: StrictInt
 
 
+class SunsetSettings(BaseModel):
+    """Réglages du coucher de soleil, tous optionnels ; numéros bruts (comme les alarmes)."""
+
+    durat: StrictInt | None = None         # durée (5-60 min)
+    curve: StrictInt | None = None         # intensité (0-25 : un coucher peut être éteint)
+    ctype: StrictInt | None = None         # thème lumineux
+    snddv: str | None = None
+    sndch: str | None = None
+    sndlv: StrictInt | None = None         # volume (1-25)
+
+
+class PowerWake(BaseModel):
+    on: StrictBool
+    delta: StrictInt | None = None     # minutes après l'heure de l'alarme (1-59) ; bornes : relay
+
+
+class AlarmEdit(BaseModel):
+    """Champs éditables d'un profil, tous optionnels. Numéros bruts de l'appareil pour thème
+    (`ctype`), source (`snddv`) et canal (`sndch`) : l'app les tient de /v1/catalog/themes."""
+
+    enabled: StrictBool | None = None
+    hour: StrictInt | None = None
+    minute: StrictInt | None = None
+    days: StrictInt | None = None          # masque `daynm` (bit 1 = lundi … bit 7 = dimanche)
+    ctype: StrictInt | None = None         # thème lumineux du lever
+    curve: StrictInt | None = None         # intensité du lever (1-25)
+    durat: StrictInt | None = None         # durée du lever (5-40 min)
+    snddv: str | None = None               # source sonore (ex. "wus", "fmr", "off")
+    sndch: str | None = None               # canal / piste
+    sndlv: StrictInt | None = None         # volume (1-25)
+    powerwake: PowerWake | None = None
+
+
 def _resume_nuit(store: Store, nuit: dict) -> dict:
     """Résumé calculé à la demande (jamais stocké) : durée, couverture, min/moy/max par grandeur."""
     debut, fin = nuit.get("bedtime"), nuit.get("risetime")
@@ -280,8 +313,28 @@ def create_app(store: Store, cfg: Config, state: RuntimeState | None = None,
     async def sunset(cmd: Interrupteur) -> JSONResponse:
         return repondre(await relay.sunset(cmd.on))
 
+    @app.put("/v1/sunset/settings")
+    async def sunset_settings(cmd: SunsetSettings) -> JSONResponse:
+        return repondre(await relay.sunset_settings(cmd.model_dump(exclude_none=True)))
+
     @app.put("/v1/snooze")
     async def snooze(cmd: Rappel) -> JSONResponse:
         return repondre(await relay.snooze(cmd.minutes))
+
+    @app.get("/v1/alarms/{n}")
+    async def alarm(n: int) -> JSONResponse:
+        return repondre(await relay.get_alarm(n))
+
+    @app.post("/v1/alarms")
+    async def creer_alarme() -> JSONResponse:
+        return repondre(await relay.create_alarm())
+
+    @app.put("/v1/alarms/{n}")
+    async def modifier_alarme(n: int, cmd: AlarmEdit) -> JSONResponse:
+        return repondre(await relay.set_alarm(n, cmd.model_dump(exclude_none=True)))
+
+    @app.delete("/v1/alarms/{n}")
+    async def supprimer_alarme(n: int) -> JSONResponse:
+        return repondre(await relay.delete_alarm(n))
 
     return app

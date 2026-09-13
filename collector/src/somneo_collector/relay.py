@@ -35,6 +35,17 @@ _LOGGER = logging.getLogger(__name__)
 BORNES_LAMPE = (1, 25)       # `ltlvl`. 0 n'est pas relevé dans SleepMapper et pysomneo l'ignore :
                              # éteindre, c'est `on: false`
 BORNES_RAPPEL = (1, 20)      # minutes, global à toutes les alarmes
+# Réglages du coucher de soleil (cadrage §3.D : durée 5-60, intensité 0-25 — différent du lever).
+BORNES_SUNSET = {"durat": (5, 60), "curve": (0, 25), "sndlv": (1, 25)}
+# Bornes des champs scalaires d'un profil d'alarme (lever), cadrage §3.D et relevé du 2026-09-13.
+BORNES_ALARME = {
+    "hour": (0, 23), "minute": (0, 59), "days": (0, 254),
+    "durat": (5, 40),        # durée du lever de soleil
+    "curve": (1, 25),        # intensité du lever
+    "sndlv": (1, 25),        # volume
+    "powerwake_delta": (1, 59),   # minutes après l'heure de l'alarme (SleepMapper, 2026-09-13)
+}
+N_PROFILS = 16               # seize emplacements de profil dans le réveil
 
 
 @dataclass(frozen=True)
@@ -132,6 +143,52 @@ class Relay:
             return self._injoignable("wudsk")
         return await self._ecrire_relire(gw, "wudsk", lambda: gw.toggle_sunset(on), {"onoff": on})
 
+    async def sunset_settings(self, champs: dict) -> Resultat:
+        """Règle les paramètres du coucher de soleil (durée, thème, intensité, son, volume) en
+        numéros bruts. S'il tourne, on l'**arrête, applique, relance** (décision du 2026-09-13) :
+        le firmware ignore un réglage à chaud. Une coupure brève, mais le réglage prend."""
+        for nom, bornes in BORNES_SUNSET.items():
+            v = champs.get(nom)
+            if v is not None and (refus := _hors_bornes(nom, v, bornes)):
+                return refus
+        payload = {c: champs[c] for c in ("durat", "curve", "ctype", "snddv", "sndch", "sndlv")
+                   if champs.get(c) is not None}
+        if not payload:
+            return _refus("aucun réglage à modifier")
+        gw = self._getter()
+        if gw is None:
+            return self._injoignable("wudsk")
+        avant = await gw.read_body("wudsk") or {}
+        etait_allume = bool(avant.get("onoff"))
+        if etait_allume:
+            r = await gw.put("wudsk", {"onoff": False})   # à chaud, un réglage serait ignoré
+            if r.injoignable:
+                return self._injoignable("wudsk", "réveil injoignable pendant l'arrêt")
+        ecriture = await gw.put("wudsk", payload)
+        if etait_allume and not ecriture.injoignable:
+            await gw.put("wudsk", {"onoff": True})        # relancé comme l'utilisateur l'avait laissé
+        attendu = {**payload, "onoff": etait_allume}
+        return await self._relire_wudsk(gw, ecriture, attendu)
+
+    async def _relire_wudsk(self, gw: DeviceGateway, ecriture: Releve, attendu: dict) -> Resultat:
+        if ecriture.injoignable:
+            return self._injoignable("wudsk", f"réveil injoignable pendant l'écriture : {ecriture.error}")
+        relu = await gw.read("wudsk")
+        etat = relu.corps
+        if etat is not None:
+            self.store.record_port_change("wudsk", etat, ts=relu.observed_at)
+        corps = {"served_at": time.time(), "port": "wudsk", "requested": attendu, "state": etat}
+        if not ecriture.ok:
+            return Resultat(502, {**corps, "ok": False,
+                                  "reason": f"écriture refusée par le réveil : {ecriture.error}"})
+        if etat is None:
+            return Resultat(502, {**corps, "ok": False, "reason": "relecture impossible"})
+        ecarts = {k: etat.get(k) for k, v in attendu.items() if etat.get(k) != v}
+        if ecarts:
+            return Resultat(502, {**corps, "ok": False, "mismatch": ecarts,
+                                  "reason": "réglage non reflété par l'appareil"})
+        return Resultat(200, {**corps, "ok": True})
+
     async def snooze(self, minutes: int) -> Resultat:
         if refus := _hors_bornes("durée du rappel", minutes, BORNES_RAPPEL):
             return refus
@@ -207,6 +264,133 @@ class Relay:
             self.nights.rise_confirmed(nid, ts)
             self.store.add_pending_gesture("risetime", ts, nid)
             return Resultat(202, self._nuit(nid, "en attente du réveil"))
+
+    # ---- alarmes (plan §7, décisions du 2026-09-13) -------------------------------------
+    async def _profil(self, gw: DeviceGateway, n: int) -> dict | None:
+        """Sélectionne le profil n (`PUT wualm {prfnr}`, sans effet — P3) et le relit."""
+        await gw.put("wualm", {"prfnr": n})
+        relu = await gw.read("wualm/prfwu")
+        return relu.corps
+
+    async def _rafraichir_liste(self, gw: DeviceGateway) -> None:
+        """Après une écriture d'alarme, remet à jour le miroir de la liste (aenvs, aalms)."""
+        for port in ("wualm/aenvs", "wualm/aalms"):
+            r = await gw.read(port)
+            if r.corps is not None:
+                self.store.record_port_change(port, r.corps, ts=r.observed_at)
+
+    async def _ecrire_profil(self, gw: DeviceGateway, n: int, payload: dict,
+                             attendu: dict) -> Resultat:
+        """`PUT wualm/prfwu` partiel, puis relit le profil et confirme `attendu`. Miroir à jour."""
+        r = await gw.put("wualm/prfwu", {"prfnr": n, **payload})
+        if r.injoignable:
+            return self._injoignable("wualm/prfwu",
+                                     f"réveil injoignable pendant l'écriture : {r.error}")
+        profil = await self._profil(gw, n)
+        if profil is not None:
+            self.store.record_port_change("wualm/prfwu", profil, ts=time.time())
+            await self._rafraichir_liste(gw)
+        corps = {"served_at": time.time(), "port": "wualm/prfwu", "n": n, "requested": attendu,
+                 "profile": profil}
+        if not r.ok:
+            return Resultat(502, {**corps, "ok": False,
+                                  "reason": f"écriture refusée par le réveil : {r.error}"})
+        if profil is None:
+            return Resultat(502, {**corps, "ok": False, "reason": "relecture du profil impossible"})
+        ecarts = {k: profil.get(k) for k, v in attendu.items() if profil.get(k) != v}
+        if ecarts:
+            return Resultat(502, {**corps, "ok": False, "mismatch": ecarts,
+                                  "reason": "écriture non reflétée par l'appareil"})
+        return Resultat(200, {**corps, "ok": True})
+
+    async def get_alarm(self, n: int) -> Resultat:
+        if not 1 <= n <= N_PROFILS:
+            return _refus(f"numéro de profil hors 1–{N_PROFILS} : {n}")
+        gw = self._getter()
+        if gw is None:
+            return self._injoignable("wualm/prfwu")
+        profil = await self._profil(gw, n)
+        if profil is None:
+            return self._injoignable("wualm/prfwu", "relecture du profil impossible")
+        self.store.record_port_change("wualm/prfwu", profil, ts=time.time())
+        return Resultat(200, {"served_at": time.time(), "n": n, "profile": profil})
+
+    async def set_alarm(self, n: int, champs: dict) -> Resultat:
+        """Édite un profil : `PUT wualm/prfwu` partiel, en numéros bruts (plan §7). Les bornes
+        scalaires sont vérifiées avant l'envoi ; un numéro de thème/son passe tel quel, la
+        relecture est son garde-fou. `sndss` n'est pas écrit tant que `probes/sndss.py` ne l'a
+        pas mesuré."""
+        if not 1 <= n <= N_PROFILS:
+            return _refus(f"numéro de profil hors 1–{N_PROFILS} : {n}")
+        pw = champs.get("powerwake")
+        if isinstance(pw, dict) and pw.get("on") and pw.get("delta") is None:
+            return _refus("PowerWake activé sans délai (minutes après l'alarme)")
+        for nom in ("hour", "minute", "days", "durat", "curve", "sndlv"):
+            v = champs.get(nom)
+            if v is not None and (refus := _hors_bornes(nom, v, BORNES_ALARME[nom])):
+                return refus
+        if isinstance(pw, dict) and pw.get("on"):
+            if refus := _hors_bornes("PowerWake (min après l'alarme)", pw["delta"],
+                                     BORNES_ALARME["powerwake_delta"]):
+                return refus
+        gw = self._getter()
+        if gw is None:
+            return self._injoignable("wualm/prfwu")
+        courant = await self._profil(gw, n)
+        if courant is None:
+            return self._injoignable("wualm/prfwu", "relecture du profil impossible")
+
+        payload, attendu = {}, {}
+        for cle, champ in (("enabled", "prfen"), ("days", "daynm"), ("ctype", "ctype"),
+                           ("curve", "curve"), ("durat", "durat"), ("snddv", "snddv"),
+                           ("sndch", "sndch"), ("sndlv", "sndlv")):
+            if champs.get(cle) is not None:
+                payload[champ] = attendu[champ] = champs[cle]
+        if champs.get("hour") is not None:
+            payload["almhr"] = attendu["almhr"] = champs["hour"]
+        if champs.get("minute") is not None:
+            payload["almmn"] = attendu["almmn"] = champs["minute"]
+        pw = champs.get("powerwake")
+        if isinstance(pw, dict):
+            if pw.get("on"):
+                base = (champs.get("hour", courant.get("almhr")) * 60
+                        + champs.get("minute", courant.get("almmn")) + pw["delta"]) % (24 * 60)
+                payload.update(pwrsz=1, pszhr=base // 60, pszmn=base % 60)
+            else:
+                payload.update(pwrsz=0, pszhr=0, pszmn=0)
+            attendu.update(pwrsz=payload["pwrsz"], pszhr=payload["pszhr"], pszmn=payload["pszmn"])
+        if not payload:
+            return _refus("aucun champ à modifier")
+        return await self._ecrire_profil(gw, n, payload, attendu)
+
+    async def create_alarm(self) -> Resultat:
+        """Rend visible le premier emplacement masqué, désactivé (`prfvs: true, prfen: false`).
+        Seize visibles → `409`, jamais d'écrasement (cadrage §3.D)."""
+        gw = self._getter()
+        if gw is None:
+            return self._injoignable("wualm/aenvs")
+        envs = await gw.read_body("wualm/aenvs") or {}
+        prfvs = envs.get("prfvs") or []
+        libre = next((i + 1 for i, v in enumerate(prfvs) if not v), None)
+        if libre is None:
+            return Resultat(409, {"served_at": time.time(), "ok": False,
+                                  "reason": f"les {N_PROFILS} emplacements d'alarme sont occupés"})
+        res = await self._ecrire_profil(gw, libre, {"prfvs": True, "prfen": False},
+                                        {"prfvs": True, "prfen": False})
+        if res.status == 200:
+            return Resultat(201, res.body)
+        return res
+
+    async def delete_alarm(self, n: int) -> Resultat:
+        """Masque le profil (`prfen`/`prfvs` à false), réglages conservés — pas de remise à
+        l'usine (décision du 2026-09-13). Aucune alarme masquée ne peut sonner (cadrage §3.D)."""
+        if not 1 <= n <= N_PROFILS:
+            return _refus(f"numéro de profil hors 1–{N_PROFILS} : {n}")
+        gw = self._getter()
+        if gw is None:
+            return self._injoignable("wualm/prfwu")
+        return await self._ecrire_profil(gw, n, {"prfen": False, "prfvs": False},
+                                         {"prfen": False, "prfvs": False})
 
     async def replay_pending(self, gw: DeviceGateway) -> None:
         """Rejoue les gestes retenus, dans l'ordre des appuis (appelé par la collecte).

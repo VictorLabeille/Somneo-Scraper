@@ -578,6 +578,40 @@ passerelle.
 **Relire un profil passe par sa sélection** (`PUT wualm {"prfnr": n}`, sans effet — P3) : c'est
 la seule façon de vérifier un champ que `aenvs`/`aalms` ne portent pas (thème, intensité, son).
 
+**Les alarmes, tranché le 2026-09-13** (Victor, avant l'écriture de 4b) :
+
+- **Un profil s'écrit par un `PUT wualm/prfwu` direct, partiel, en numéros bruts** — pas par les
+  méthodes de `pysomneo`. **Écart assumé à la règle « pysomneo pour tout dialogue »** (`AGENTS.md`),
+  et pour trois raisons : c'est le **même** `PUT wualm/prfwu` que `pysomneo` émet (champs documentés
+  §4, rien de réimplémenté) ; ses méthodes sont **découpées en cinq** (heure/jours, lumière, son,
+  PowerWake, activation), chacune relit puis réécrit — une édition complète ferait ~15 requêtes là
+  où un `PUT` partiel + une relecture suffisent ; et elles prennent des **noms** de thème/son, que
+  le collecteur devrait traduire alors qu'il sert par ailleurs les numéros bruts. Une édition =
+  sélection + lecture (état courant), `PUT wualm/prfwu {prfnr, champs}`, sélection + relecture,
+  rafraîchissement de `aenvs`/`aalms`. Motif « écrire → relire → confirmer » comme les autres.
+- **L'API porte les numéros bruts de l'appareil** pour thème (`ctype`), source (`snddv`), canal
+  (`sndch`) : l'app les tient de `GET /v1/catalog/themes` et les renvoie tels quels. Le collecteur
+  ne traduit pas de noms — cohérent avec « il conserve ce que l'appareil dit ». Les bornes scalaires
+  sont vérifiées avant l'envoi (§3.D) ; un numéro de thème/son ne l'est pas (plage inconnue sans le
+  catalogue), la relecture est son garde-fou.
+- **PowerWake : `on` + `delta` de 1 à 59 min après l'heure de l'alarme** (relevé par Victor dans
+  SleepMapper le 2026-09-13). Le collecteur calcule `pszhr`/`pszmn` = heure d'alarme + delta ;
+  `pwrsz` = 1/0.
+- **Supprimer, c'est masquer** (déjà tranché) : `PUT wualm/prfwu {prfnr, prfen: false, prfvs: false}`,
+  réglages conservés. **Créer** (`POST /v1/alarms`) rend visible le premier emplacement masqué
+  (`prfvs: true`), **désactivé** (`prfen: false`, pas d'alarme armée à une heure d'usine) ; seize
+  visibles → `409`, jamais d'écrasement.
+- **`sndss` (départ en douceur) reste à mesurer** avant d'être écrit : son sens et ses bornes ne
+  sont pas établis (une valeur `200` vue une fois dans `wudsk`), SleepMapper ne l'expose pas. 4b
+  l'ignore ; une sonde (`probes/sndss.py`) le mesurera d'abord (comme `lgtds`, encore ouvert). Le
+  champ est servi en lecture dans le profil, jamais écrit.
+
+**Le coucher de soleil pendant qu'il tourne — tranché le 2026-09-13** : régler ses paramètres
+(`PUT /v1/sunset` avec des réglages) pendant qu'il est allumé l'**arrête, applique, puis le
+relance**. `pysomneo` (`set_sunset`) l'éteint pour appliquer — le firmware ignore un réglage à
+chaud — mais ne le relance pas ; le relais relance si l'utilisateur l'avait laissé allumé. Un effet
+visible (une coupure brève), mais c'est le réglage demandé qui prend, pas l'arrêt.
+
 ### Le rattrapage — contrat arrêté le 2026-09-12
 
 Le cadrage dit « tout ce qui est arrivé **depuis telle date** ». Une date ne suffit pas : une

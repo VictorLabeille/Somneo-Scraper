@@ -225,9 +225,10 @@ est dans `docs/radxa.md`.
 - [~] **Collecteur** (`collector/`) — incréments 1 à 3 écrits et testés hors appareil, contre
       un faux réveil : collecte de tous les ports, nuits (machine à états), rattrapage par
       séquence, catalogue, annonce mDNS. L'incrément 5 (surveillance d'horloge) est couvert par
-      le premier. **Incrément 4 (relais du pilotage) en cours** : gestes de nuit, lumière,
-      veilleuse, coucher de soleil, rappel et miroir de l'appareil écrits ; restent les alarmes
-      et les réglages du coucher de soleil. Porté le 2026-09-13 sur `pysomneo` 6.0 async, la
+      le premier. **Incrément 4 (relais du pilotage) écrit** : gestes de nuit (appui jamais
+      perdu), lumière, veilleuse, coucher de soleil (marche/arrêt et réglages), rappel, alarmes
+      (lecture, création, édition, masquage) et miroir de l'appareil ; seul le départ en douceur
+      (`sndss`) attend une mesure sur l'appareil. Porté le 2026-09-13 sur `pysomneo` 6.0 async, la
       version retenue au plan : l'incrément 1 avait été écrit par erreur contre la 5.0.6, qui
       réessaie un `500` douze fois. Reste le critère de chaque incrément sur la carte : tourner
       sept jours, la capture arrêtée

@@ -134,6 +134,30 @@ async def test_coucher_de_soleil_marche_arret(banc):
     assert banc.fake.corps[(1, "wudsk")]["onoff"] is False
 
 
+async def test_sunset_settings_eteint_applique_direct(banc):
+    res = await banc.relay.sunset_settings({"durat": 45, "curve": 12, "sndlv": 8})
+    assert res.status == 200 and res.body["ok"] is True
+    assert res.body["state"]["durat"] == 45 and res.body["state"]["onoff"] is False
+    # coucher éteint : aucun arrêt/relance, juste le réglage
+    assert {"onoff": False} not in _puts(banc.fake, "wudsk")
+
+
+async def test_sunset_settings_allume_arrete_applique_relance(banc):
+    await banc.relay.sunset(True)
+    banc.fake.puts.clear()
+    res = await banc.relay.sunset_settings({"durat": 50})
+    assert res.status == 200
+    assert res.body["state"]["durat"] == 50 and res.body["state"]["onoff"] is True
+    # arrêté, réglé, relancé — dans cet ordre
+    assert _puts(banc.fake, "wudsk") == [{"onoff": False}, {"durat": 50}, {"onoff": True}]
+
+
+@pytest.mark.parametrize("champs", [{"durat": 4}, {"durat": 61}, {"curve": 26}, {"sndlv": 0}])
+async def test_sunset_settings_hors_bornes(banc, champs):
+    assert (await banc.relay.sunset_settings(champs)).status == 422
+    assert banc.fake.total == 0
+
+
 async def test_rappel_global(banc):
     res = await banc.relay.snooze(12)
     assert res.status == 200 and res.body["state"]["snztm"] == 12
@@ -303,6 +327,120 @@ async def test_la_collecte_rejoue_les_gestes(banc):
     await collector.tache_gestes()
     assert banc.fake.corps[WUNGT]["night"] is True
     assert banc.nights.current()["state"] == "open"
+
+
+# ---- alarmes ----------------------------------------------------------------------------
+PRFWU = (1, "wualm/prfwu")
+
+
+async def test_get_alarm_selectionne_et_relit(banc):
+    res = await banc.relay.get_alarm(1)
+    assert res.status == 200 and res.body["profile"]["prfnr"] == 1
+    assert res.body["profile"]["prfen"] is True
+
+
+async def test_get_alarm_hors_bornes(banc):
+    assert (await banc.relay.get_alarm(0)).status == 422
+    assert (await banc.relay.get_alarm(17)).status == 422
+    assert banc.fake.total == 0
+
+
+async def test_set_alarm_heure_jours_confirmes(banc):
+    res = await banc.relay.set_alarm(2, {"hour": 6, "minute": 45, "days": 62, "enabled": True})
+    assert res.status == 200 and res.body["ok"] is True
+    p = res.body["profile"]
+    assert (p["almhr"], p["almmn"], p["daynm"], p["prfen"]) == (6, 45, 62, True)
+    assert banc.fake.profils[2]["almhr"] == 6
+    # le miroir de la liste (aalms) est rafraîchi : l'app le lit sans attendre la collecte
+    aalms = banc.store.last_port("wualm/aalms")["body"]
+    assert aalms["almhr"][1] == 6 and aalms["almmn"][1] == 45
+
+
+async def test_set_alarm_powerwake_calcule_l_heure(banc):
+    res = await banc.relay.set_alarm(2, {"hour": 7, "minute": 0,
+                                         "powerwake": {"on": True, "delta": 15}})
+    assert res.status == 200
+    p = res.body["profile"]
+    assert (p["pwrsz"], p["pszhr"], p["pszmn"]) == (1, 7, 15)
+
+
+async def test_set_alarm_powerwake_franchit_minuit(banc):
+    res = await banc.relay.set_alarm(2, {"hour": 23, "minute": 50,
+                                         "powerwake": {"on": True, "delta": 20}})
+    assert res.body["profile"]["pszhr"] == 0 and res.body["profile"]["pszmn"] == 10
+
+
+async def test_set_alarm_powerwake_off(banc):
+    await banc.relay.set_alarm(2, {"hour": 7, "minute": 0, "powerwake": {"on": True, "delta": 10}})
+    res = await banc.relay.set_alarm(2, {"powerwake": {"on": False}})
+    assert res.status == 200 and res.body["profile"]["pwrsz"] == 0
+
+
+async def test_set_alarm_theme_son_passent_en_numeros(banc):
+    res = await banc.relay.set_alarm(2, {"ctype": 3, "curve": 20, "durat": 30,
+                                         "snddv": "fmr", "sndch": "2", "sndlv": 8})
+    assert res.status == 200
+    p = res.body["profile"]
+    assert (p["ctype"], p["curve"], p["durat"], p["snddv"], p["sndch"], p["sndlv"]) == \
+        (3, 20, 30, "fmr", "2", 8)
+
+
+@pytest.mark.parametrize("champs", [
+    {"hour": 24}, {"minute": 60}, {"days": 255}, {"durat": 4}, {"durat": 41},
+    {"curve": 0}, {"curve": 26}, {"sndlv": 0}, {"sndlv": 26},
+    {"powerwake": {"on": True, "delta": 0}}, {"powerwake": {"on": True, "delta": 60}},
+    {"powerwake": {"on": True}},                          # activé sans délai
+])
+async def test_set_alarm_hors_bornes_rien_ne_part(banc, champs):
+    res = await banc.relay.set_alarm(2, champs)
+    assert res.status == 422
+    assert banc.fake.total == 0
+
+
+async def test_set_alarm_non_reflete_est_un_echec(banc):
+    banc.fake.ignorer.add(PRFWU)
+    res = await banc.relay.set_alarm(2, {"hour": 5})
+    assert res.status == 502 and "non reflétée" in res.body["reason"]
+    assert res.body["mismatch"] == {"almhr": 8}          # la valeur relue, inchangée (défaut du 2)
+
+
+async def test_set_alarm_injoignable(banc):
+    banc.lien["gw"] = None
+    res = await banc.relay.set_alarm(2, {"hour": 5})
+    assert res.status == 503 and banc.fake.total == 0
+
+
+async def test_create_alarm_rend_visible_le_premier_masque(banc):
+    res = await banc.relay.create_alarm()
+    assert res.status == 201
+    assert res.body["n"] == 3                             # profils 1-2 visibles, 3 le premier libre
+    assert res.body["profile"]["prfvs"] is True and res.body["profile"]["prfen"] is False
+    assert banc.fake.profils[3]["prfvs"] is True
+
+
+async def test_create_alarm_tous_occupes(banc):
+    for n in range(1, 17):
+        banc.fake.profils[n]["prfvs"] = True
+    banc.fake.synchroniser()
+    res = await banc.relay.create_alarm()
+    assert res.status == 409 and "occupés" in res.body["reason"]
+
+
+async def test_delete_alarm_masque_sans_remise_a_l_usine(banc):
+    await banc.relay.set_alarm(2, {"hour": 9, "minute": 15})
+    res = await banc.relay.delete_alarm(2)
+    assert res.status == 200
+    assert res.body["profile"]["prfen"] is False and res.body["profile"]["prfvs"] is False
+    apres = (await banc.relay.get_alarm(2)).body["profile"]
+    assert apres["almhr"] == 9 and apres["almmn"] == 15   # réglages conservés, pas d'usine
+
+
+async def test_alarme_absente_du_device_apres_masquage(banc):
+    from somneo_collector.api.app import _device
+    await banc.relay.delete_alarm(1)                      # 1 était la seule armée et visible
+    d = _device(banc.store)
+    assert 1 not in [a["n"] for a in d["alarms"]]
+    assert d["hidden_armed_alarms"] == []                 # masquée ET désactivée : pas d'anomalie
 
 
 # ---- l'API : miroir et codes ------------------------------------------------------------

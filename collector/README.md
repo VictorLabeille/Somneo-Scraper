@@ -8,12 +8,14 @@ SQLite. Back-end de SleepMaxxer. **Le fonctionnel et les décisions sont dans le
 
 **Incréments 1, 2, 3 écrits et testés hors appareil** : collecte, nuits (machine à états,
 `/v1/nights`), rattrapage (`/v1/sync`), catalogue, mDNS. L'incrément 5 (surveillance d'horloge)
-est de fait couvert par l'incrément 1. **Incrément 4 (relais du pilotage) en cours** : gestes de
+est de fait couvert par l'incrément 1. **Incrément 4 (relais du pilotage) écrit** : gestes de
 nuit (`POST /v1/nights/bedtime|risetime`, appui retenu puis rejoué si le réveil ne répond pas),
-lumière, veilleuse, coucher de soleil (marche/arrêt), rappel, et le miroir `GET /v1/device`.
-Restent les alarmes (création, édition, masquage, profils) et les réglages du coucher de soleil.
-75 tests. **Reste aussi** le critère du plan §10 pour chaque incrément déployé (*tourne sept
-jours*, etc.), qui se constate après déploiement sur la carte.
+lumière, veilleuse, coucher de soleil (marche/arrêt et réglages), rappel, alarmes (lecture,
+création, édition, masquage), et le miroir `GET /v1/device`. Seul `sndss` (départ en douceur)
+attend une mesure sur l'appareil (`probes/sndss.py`) avant d'être écrit. 106 tests. **Reste** le
+critère du plan §10 pour chaque incrément déployé (*tourne sept jours*, etc.), qui se constate
+après déploiement sur la carte, et — critère propre à l'incrément 4 — la validation *sur
+l'appareil* qu'aucune écriture n'a d'effet non demandé (le faux réveil ne peut pas la donner).
 
 ## Développer et tester (hors appareil)
 
