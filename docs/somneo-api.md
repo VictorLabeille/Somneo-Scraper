@@ -945,19 +945,39 @@ La pente de P2-7 (+0,39 s/h, soit +9,4 s/jour) tombe au milieu de cette distribu
 mesures, indépendantes, se recoupent. Le réveil **avance** d'environ 10 s par jour — 115 ppm,
 un quartz médiocre — et quelque chose le ramène à zéro toutes les quelques heures.
 
-Ce quelque chose n'est pas identifié, mais il n'est pas dans le réseau local : `tmsrc` vaut
-`irq` et `tmser` `http://www.noserver.com`, et l'appareil était encore abonné au cloud pendant
-toute la mesure (`backend.dcs-state: subscribed`). **C'est donc la liaison Philips qui tient
-l'horloge à l'heure** — celle-là même que le projet veut couper. La carte, elle, n'est pas en
-cause : `timedatectl` la donne synchronisée, à 2 ms, avec une correction de fréquence de
-−4,6 ppm.
+**Ce quelque chose est la reconnexion au cloud, et la mesure le dit sans ambiguïté.** Le même
+dépouillement apparie chaque lecture d'heure au port `backend` relevé dans le même lot :
 
-> **Conséquence pour le collecteur.** Une fois le réveil isolé, plus rien ne corrige cette
-> dérive, et l'API ne donne aucun moyen de la corriger : dix secondes au bout d'un jour, une
+| Recoupement | Résultat |
+| --- | --- |
+| Remises précédées d'un nouveau `backend.lastsignon` | **20 sur 20** |
+| Reconnexions n'ayant pas produit de remise > 1 s | 14 — le décalage y valait −1,0 à +1,3 s |
+| Valeurs distinctes de (`tmsrc`, `tmser`, `tmsyn`, `tmupd`) sur 154 lectures | **une seule** |
+
+Autrement dit : **le réveil remet son horloge à chaque ouverture de session avec la plateforme
+Philips**, et seulement là — jamais entre deux. Quand le décalage est déjà petit, la session
+passe sans rien corriger ; c'est cohérent avec un seuil de correction de l'ordre de la seconde.
+
+Et le chemin par lequel l'heure arrive **n'est pas celui que les noms de champs suggèrent** :
+`tmsrc` est resté `irq`, `tmser` `http://www.noserver.com`, `tmsyn` `00:00` et `tmupd` `0`,
+sans varier une seule fois, pendant que l'horloge était corrigée vingt fois. Ces champs sont
+de la configuration inerte — le serveur de temps HTTP qu'ils décrivent n'est pas utilisé.
+L'heure passe par la session `DCDeviceClient` vers `www.ecdinterface.philips.com`. La carte,
+elle, n'est pas en cause : `timedatectl` la donne synchronisée, à 2 ms, avec une correction de
+fréquence de −4,6 ppm.
+
+> **Conséquence pour le collecteur, et elle est lourde.** Couper l'accès internet du réveil,
+> c'est lui retirer sa seule source d'heure — la coupure et la dérive sont **le même
+> événement**, pas deux risques séparés. Plus rien ne corrige alors les ~10 s par jour, et
+> l'API locale n'offre aucune écriture qui le fasse : dix secondes au bout d'un jour, une
 > minute au bout d'une semaine, cinq minutes au bout d'un mois. Un réveil qui sonne cinq
-> minutes trop tôt est la panne la plus visible que ce projet puisse produire. Le moyen de
-> poser l'heure reste à trouver — la piste ouverte est `wutms.tmser`, le serveur de temps, qui
-> accepte peut-être d'être redirigé vers la carte ; il n'a pas été essayé.
+> minutes trop tôt est la panne la plus visible que ce projet puisse produire.
+>
+> **La piste `wutms.tmser` est écartée par cette même mesure** : elle n'a jamais bougé pendant
+> vingt corrections. Restent trois voies, aucune essayée — répondre soi-même à la session
+> `DCDeviceClient` (le sinkhole DNS de l'isolement pointerait alors sur la carte), compenser la
+> dérive en décalant l'heure programmée de l'alarme dans `wualm/prfwu`, ou renoncer à corriger
+> et se contenter de signaler l'écart.
 
 **4. Deux horloges, et l'écart entre elles n'est pas constant.**
 

@@ -112,23 +112,38 @@ Trois conséquences immédiates :
    n'est pas trouvée. Il devient « surveillance de l'horloge », et l'alerte remplace la
    correction.
 
-### P2bis. Par où l'heure pourrait entrer — à proposer avant d'écrire
+### P2bis. Par où l'heure entre — répondu le 2026-09-13, en lecture seule
 
-Le réveil se remet seul à l'heure : la fonction existe dans le firmware, elle n'est simplement
-pas exposée par `PUT time`. Deux choses restent à établir, et **la première est en lecture
-seule** :
+Le réveil se remet seul à l'heure : la fonction existe dans le firmware. **Par où** était la
+question ; le dépouillement des journaux de capture y répond sans toucher à l'appareil
+(`probes/derive_horloge.py`, `docs/somneo-api.md` §4) :
 
-1. **Quel champ bouge au moment d'une remise.** Suivre `products/0/time`, `wutim` et `wutms`
-   toutes les ~30 s pendant une dizaine d'heures : une remise tombe toutes les 8 h en médiane,
-   on en attrape une ou deux. Si `tmupd` ou `tmsyn` changent à cet instant, on tient le
-   mécanisme. La même mesure tranche l'autre question laissée ouverte par P2 — l'écart entre
-   `time` et `wutim` s'est déplacé de +2 s pendant la sonde, et on ne sait pas si c'est une
-   écriture de `wutms` qui l'a bousculé ou si cette horloge se promène seule. Aucune écriture,
-   aucun risque ; le coût est que `capture.py` s'arrête pendant ce temps.
-2. **Rediriger `wutms.tmser`** (`http://www.noserver.com`) vers un service de temps sur la
-   carte, et voir si le réveil s'y adresse. `tmser` n'a jamais été écrit — il n'était pas dans
-   la liste des champs de P2. C'est une écriture, sur la configuration de l'heure d'un appareil
-   en service : **elle ne se fait pas sans l'accord de Victor**, et pas avant le point 1.
+- **Les 20 remises sur 20 suivent une nouvelle ouverture de session cloud** (`backend.lastsignon`).
+  Jamais entre deux. Quatorze sessions n'ont rien corrigé — le décalage y était déjà petit.
+- **`tmsrc`, `tmser`, `tmsyn` et `tmupd` n'ont pas varié une seule fois** sur 154 lectures,
+  pendant que l'horloge était corrigée vingt fois. **La piste « rediriger `tmser` vers la
+  carte » est donc écartée** : ce serveur de temps HTTP n'est pas le chemin, c'est de la
+  configuration inerte. Elle n'a pas à être essayée, et aucune écriture n'a été nécessaire pour
+  l'écarter.
+
+**Ce que cela change au cadrage** : couper l'accès internet et perdre l'heure sont le même
+événement, pas deux risques distincts. Trois voies restent, aucune essayée, et le choix est à
+Victor (§11, point 12) :
+
+1. **Répondre soi-même à la session `DCDeviceClient`.** L'isolement par sinkhole DNS pointerait
+   `www.ecdinterface.philips.com` sur la carte, qui rendrait l'heure. C'est la seule voie qui
+   garde l'afficheur juste. C'est aussi la plus lourde : il faut parler assez du protocole CPP
+   pour que la session aboutisse, et rien ne dit que ce soit à notre portée.
+2. **Compenser par l'alarme.** Décaler l'heure programmée dans `wualm/prfwu` du décalage
+   mesuré : l'alarme sonne juste, l'afficheur reste faux. Le collecteur doit alors servir à
+   l'app l'heure *voulue*, pas celle posée dans l'appareil — le schéma a déjà le champ pour ça.
+3. **Renoncer à corriger** : mesurer, journaliser, signaler l'écart à l'app.
+
+**Reste ouvert, et c'est une mesure, pas un arbitrage** : l'écart entre `time` et `wutim` s'est
+déplacé de +2 s pendant P2, et `wutim` date les nuits. Écriture de `wutms` ou horloge
+rafraîchie par à-coups ? Depuis le 2026-09-13, `capture.py` lit `time`, `wutim` et `wutms`
+**toutes les 30 s** (groupe `horloge`, décision de Victor) : la réponse viendra de la prochaine
+remise observée, sans fenêtre à réserver ni nuit perdue.
 
 ### P3. La lecture d'un profil d'alarme
 
@@ -593,3 +608,7 @@ corps du plan ; ce qui est reporté ailleurs est dit au point concerné.
     l'appareil.
 11. ~~Heure de lever estimée~~ — **tranché le 2026-09-12** : la première lecture où le bit 11 est
     retombé, la lecture précédente gardée comme borne basse (§5).
+12. **L'horloge d'un réveil isolé — ouvert depuis le 2026-09-13.** La mesure a retiré au
+    collecteur une fonction que le cadrage lui donnait : il ne peut pas poser l'heure, et
+    l'isolement supprime la seule source qui la pose. Trois voies en §1, P2bis. Point le plus
+    lourd du projet à ce jour ; il touche les deux cadrages et il conditionne l'incrément 5.

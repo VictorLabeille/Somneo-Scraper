@@ -1,8 +1,8 @@
 {
- "source": "probes/capture.py, port products/0/time, ~1 lecture par heure",
+ "source": "probes/capture.py, ports products/0/time, 0/backend et 1/wutms",
  "convention": "decalage = heure du reveil - heure de la carte (NTP), au milieu de la requete ; le reveil tronque a la seconde, donc chaque valeur est basse d'un residu constant dans [0, 1)",
- "lectures": 153,
- "duree_h": 159.13,
+ "lectures": 154,
+ "duree_h": 159.96,
  "seuil_saut_s": 1.0,
  "sauts": [
   {
@@ -10,140 +10,180 @@
    "avant_s": 3.704,
    "apres_s": -0.34,
    "amplitude_s": -4.044,
-   "intervalle_min": 80.4
+   "intervalle_min": 80.4,
+   "sign_on_entre_les_deux": true,
+   "lastsignon": "2026-09-06T22:26:38Z"
   },
   {
    "h": 18.8,
    "avant_s": 3.575,
    "apres_s": 0.484,
    "amplitude_s": -3.091,
-   "intervalle_min": 387.1
+   "intervalle_min": 387.1,
+   "sign_on_entre_les_deux": true,
+   "lastsignon": "2026-09-07T13:10:12Z"
   },
   {
    "h": 22.97,
    "avant_s": 0.93,
    "apres_s": -0.269,
    "amplitude_s": -1.199,
-   "intervalle_min": 69.9
+   "intervalle_min": 69.9,
+   "sign_on_entre_les_deux": true,
+   "lastsignon": "2026-09-07T17:47:24Z"
   },
   {
    "h": 33.01,
    "avant_s": 1.9,
    "apres_s": -0.926,
    "amplitude_s": -2.826,
-   "intervalle_min": 60.0
+   "intervalle_min": 60.0,
+   "sign_on_entre_les_deux": true,
+   "lastsignon": "2026-09-08T04:11:50Z"
   },
   {
    "h": 40.01,
    "avant_s": 0.856,
    "apres_s": -0.506,
    "amplitude_s": -1.362,
-   "intervalle_min": 60.0
+   "intervalle_min": 60.0,
+   "sign_on_entre_les_deux": true,
+   "lastsignon": "2026-09-08T10:46:49Z"
   },
   {
    "h": 50.01,
    "avant_s": 2.209,
    "apres_s": -0.038,
    "amplitude_s": -2.247,
-   "intervalle_min": 60.0
+   "intervalle_min": 60.0,
+   "sign_on_entre_les_deux": true,
+   "lastsignon": "2026-09-08T21:08:06Z"
   },
   {
    "h": 60.01,
    "avant_s": 4.016,
    "apres_s": -0.846,
    "amplitude_s": -4.862,
-   "intervalle_min": 60.0
+   "intervalle_min": 60.0,
+   "sign_on_entre_les_deux": true,
+   "lastsignon": "2026-09-09T07:06:09Z"
   },
   {
    "h": 65.01,
    "avant_s": 0.882,
    "apres_s": -0.722,
    "amplitude_s": -1.604,
-   "intervalle_min": 60.0
+   "intervalle_min": 60.0,
+   "sign_on_entre_les_deux": true,
+   "lastsignon": "2026-09-09T12:22:35Z"
   },
   {
    "h": 73.67,
    "avant_s": 1.78,
    "apres_s": 0.324,
    "amplitude_s": -1.456,
-   "intervalle_min": 60.0
+   "intervalle_min": 60.0,
+   "sign_on_entre_les_deux": true,
+   "lastsignon": "2026-09-09T20:42:32Z"
   },
   {
    "h": 77.35,
    "avant_s": 1.121,
    "apres_s": -0.924,
    "amplitude_s": -2.045,
-   "intervalle_min": 60.0
+   "intervalle_min": 60.0,
+   "sign_on_entre_les_deux": true,
+   "lastsignon": "2026-09-10T00:15:22Z"
   },
   {
    "h": 86.36,
    "avant_s": 2.424,
    "apres_s": 0.582,
    "amplitude_s": -1.842,
-   "intervalle_min": 60.0
+   "intervalle_min": 60.0,
+   "sign_on_entre_les_deux": true,
+   "lastsignon": "2026-09-10T09:37:32Z"
   },
   {
    "h": 97.62,
    "avant_s": 4.537,
    "apres_s": -0.102,
    "amplitude_s": -4.639,
-   "intervalle_min": 60.2
+   "intervalle_min": 60.2,
+   "sign_on_entre_les_deux": true,
+   "lastsignon": "2026-09-10T20:55:21Z"
   },
   {
    "h": 101.15,
    "avant_s": 0.866,
    "apres_s": -0.642,
    "amplitude_s": -1.508,
-   "intervalle_min": 60.0
+   "intervalle_min": 60.0,
+   "sign_on_entre_les_deux": true,
+   "lastsignon": "2026-09-11T00:25:37Z"
   },
   {
    "h": 107.15,
    "avant_s": 2.032,
    "apres_s": -1.038,
    "amplitude_s": -3.07,
-   "intervalle_min": 60.0
+   "intervalle_min": 60.0,
+   "sign_on_entre_les_deux": true,
+   "lastsignon": "2026-09-11T06:37:45Z"
   },
   {
    "h": 116.15,
    "avant_s": 1.242,
    "apres_s": -0.236,
    "amplitude_s": -1.478,
-   "intervalle_min": 60.0
+   "intervalle_min": 60.0,
+   "sign_on_entre_les_deux": true,
+   "lastsignon": "2026-09-11T15:27:41Z"
   },
   {
    "h": 124.16,
    "avant_s": 2.27,
    "apres_s": -0.144,
    "amplitude_s": -2.414,
-   "intervalle_min": 60.1
+   "intervalle_min": 60.1,
+   "sign_on_entre_les_deux": true,
+   "lastsignon": "2026-09-11T23:45:44Z"
   },
   {
    "h": 138.62,
    "avant_s": 5.206,
    "apres_s": 0.048,
    "amplitude_s": -5.158,
-   "intervalle_min": 87.9
+   "intervalle_min": 87.9,
+   "sign_on_entre_les_deux": true,
+   "lastsignon": "2026-09-12T13:45:38Z"
   },
   {
    "h": 140.52,
    "avant_s": -0.189,
    "apres_s": -1.317,
    "amplitude_s": -1.128,
-   "intervalle_min": 53.7
+   "intervalle_min": 53.7,
+   "sign_on_entre_les_deux": true,
+   "lastsignon": "2026-09-12T16:00:31Z"
   },
   {
    "h": 154.13,
    "avant_s": 4.072,
    "apres_s": -0.306,
    "amplitude_s": -4.378,
-   "intervalle_min": 60.0
+   "intervalle_min": 60.0,
+   "sign_on_entre_les_deux": true,
+   "lastsignon": "2026-09-13T05:12:56Z"
   },
   {
    "h": 159.13,
    "avant_s": 1.13,
    "apres_s": -0.794,
    "amplitude_s": -1.924,
-   "intervalle_min": 59.9
+   "intervalle_min": 59.9,
+   "sign_on_entre_les_deux": true,
+   "lastsignon": "2026-09-13T10:20:50Z"
   }
  ],
  "segments": [
@@ -309,12 +349,107 @@
   },
   {
    "debut_h": 159.13,
-   "fin_h": 159.13,
-   "points": 1,
+   "fin_h": 159.96,
+   "points": 2,
    "decalage_debut_s": -0.794,
-   "decalage_fin_s": -0.794,
+   "decalage_fin_s": 0.656,
    "pente_s_par_jour": null
   }
+ ],
+ "sauts_suivant_un_sign_on": 20,
+ "sign_ons_sans_saut": [
+  {
+   "h": 21.8,
+   "ecart_s": -0.37,
+   "decalage_avant_s": 1.3,
+   "lastsignon": "2026-09-07T16:41:31Z"
+  },
+  {
+   "h": 24.84,
+   "ecart_s": -0.14,
+   "decalage_avant_s": 0.654,
+   "lastsignon": "2026-09-07T20:22:19Z"
+  },
+  {
+   "h": 26.44,
+   "ecart_s": -0.966,
+   "decalage_avant_s": 0.21,
+   "lastsignon": "2026-09-07T21:39:33Z"
+  },
+  {
+   "h": 37.01,
+   "ecart_s": -0.492,
+   "decalage_avant_s": 0.31,
+   "lastsignon": "2026-09-08T07:52:17Z"
+  },
+  {
+   "h": 41.01,
+   "ecart_s": 0.55,
+   "decalage_avant_s": -0.506,
+   "lastsignon": "2026-09-08T12:12:35Z"
+  },
+  {
+   "h": 42.01,
+   "ecart_s": -0.826,
+   "decalage_avant_s": 0.044,
+   "lastsignon": "2026-09-08T13:27:55Z"
+  },
+  {
+   "h": 67.01,
+   "ecart_s": -0.568,
+   "decalage_avant_s": -0.118,
+   "lastsignon": "2026-09-09T14:20:30Z"
+  },
+  {
+   "h": 74.12,
+   "ecart_s": -0.567,
+   "decalage_avant_s": 0.324,
+   "lastsignon": "2026-09-09T21:22:53Z"
+  },
+  {
+   "h": 79.36,
+   "ecart_s": 0.355,
+   "decalage_avant_s": -0.585,
+   "lastsignon": "2026-09-10T02:20:13Z"
+  },
+  {
+   "h": 80.36,
+   "ecart_s": 0.312,
+   "decalage_avant_s": -0.23,
+   "lastsignon": "2026-09-10T03:00:48Z"
+  },
+  {
+   "h": 108.15,
+   "ecart_s": 0.484,
+   "decalage_avant_s": -1.038,
+   "lastsignon": "2026-09-11T06:55:36Z"
+  },
+  {
+   "h": 110.15,
+   "ecart_s": 0.374,
+   "decalage_avant_s": -0.54,
+   "lastsignon": "2026-09-11T09:37:50Z"
+  },
+  {
+   "h": 111.15,
+   "ecart_s": -0.304,
+   "decalage_avant_s": -0.166,
+   "lastsignon": "2026-09-11T10:22:54Z"
+  },
+  {
+   "h": 159.96,
+   "ecart_s": 1.45,
+   "decalage_avant_s": -0.794,
+   "lastsignon": "2026-09-13T10:54:30Z"
+  }
+ ],
+ "reglages_de_temps_distincts": [
+  [
+   "irq",
+   "http://www.noserver.com",
+   "00:00",
+   0
+  ]
  ],
  "points": [
   [
@@ -928,6 +1063,10 @@
   [
    159.126,
    -0.794
+  ],
+  [
+   159.957,
+   0.656
   ]
  ]
 }

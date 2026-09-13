@@ -5,7 +5,9 @@ Sert trois fins d'un seul relevé, parce que la nuit ne se rejoue pas :
      agregats `dataupload/*/data`, port `wungt` absent de la bibliotheque) ;
   2. les questions ouvertes du cadrage : d'ou vient une heure « estimee » (wungt se
      remplit-il sans qu'on ecrive ?), et quelle cadence l'appareil supporte ;
-  3. la courbe de reconstitution du tas ThreadX, mesure qui repond a l'issue #8.
+  3. la courbe de reconstitution du tas ThreadX, mesure qui repond a l'issue #8 ;
+  4. depuis le 2026-09-13, la derive de l'horloge du reveil et ses remises spontanees
+     (groupe `horloge`, 30 s) — depouillee par `derive_horloge.py`.
 
 Phase calme d'abord : 15 minutes a une seule requete par minute (`mem`), pour voir si le tas
 remonte apres la rafale — avec le moins de trafic possible pour ne pas fausser la mesure.
@@ -27,6 +29,11 @@ PHASE_CALME = 15 * 60   # s de mesure de reconstitution du tas
 ECHECS_AVANT_REDECOUVERTE = 5
 
 RAPIDE = [(1, "wusts")]                                   # etat : alarme, snooze, veille
+# P2bis, ajoutee le 2026-09-13 : le reveil avance de ~9,9 s/jour et se remet seul a l'heure
+# toutes les ~8 h (docs/somneo-api.md §4). A une lecture par heure on voit le saut, jamais ce
+# qui bouge avec lui. A 30 s on attrape la remise en cours et on voit si `tmupd` ou `tmsyn`
+# changent a cet instant — et si l'ecart entre les deux horloges se promene seul.
+HORLOGE = [(0, "time"), (1, "wutim"), (1, "wutms")]       # les deux horloges et leurs reglages
 MOYEN = [(1, "wusrd"), (1, "wungt")]                      # capteurs et suivi de nuit
 LENT = [(1, f"dataupload/{g}.1/data") for g in ("temp", "hum", "snd", "lux")]
 TAS = [(0, "mem")]
@@ -124,11 +131,13 @@ def main():
         lire(cible, "instantane")
 
     t0 = time.time()
-    prochaine = {"rapide": 0.0, "moyen": 0.0, "lent": 0.0, "tas": 0.0, "instantane": 3600.0}
+    prochaine = {"rapide": 0.0, "horloge": 0.0, "moyen": 0.0, "lent": 0.0, "tas": 0.0,
+                 "instantane": 3600.0}
     while not _stop:
         maintenant = time.time() - t0
         for nom, cibles, periode in (
             ("rapide", RAPIDE, 30.0),
+            ("horloge", HORLOGE, 30.0),
             ("moyen", MOYEN, 60.0),
             ("lent", LENT, 300.0),
             ("tas", TAS, 300.0),
