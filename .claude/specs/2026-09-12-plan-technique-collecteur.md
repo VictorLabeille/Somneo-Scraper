@@ -449,6 +449,18 @@ correction ne produit jamais « estimé » : elle produit « corrigé ».
 
 **Rattachement.** Une nuit appartient au jour local (Europe/Paris) de son heure de coucher.
 
+**Référentiel des heures d'une nuit — tranché le 2026-09-13.** Une nuit mêle deux horloges : celle
+du collecteur (NTP, via la carte) pour un appui retenu et pour l'instant où il observe un
+changement de `wungt`, et celle du réveil (`tg2bd`/`tendb`, sur `wutim`, quelques secondes derrière
+le port `time`). Le contrat SleepMaxxer (§3.F) veut **une seule source par nuit**. Décision :
+**l'heure servie est celle du collecteur (NTP)** — pour une nuit vue via `wungt`, c'est l'instant
+où le collecteur observe la transition (`wungt` lu toutes les 30 s, donc granularité ~30 s), pas
+la date `tg2bd` inscrite par le réveil. Les valeurs brutes du réveil (`tg2bd`/`tendb`) sont
+**conservées dans `night`** pour la traçabilité, jamais servies comme l'heure. Motif : une base
+cohérente prime la précision à la seconde ; l'écart `wutim`↔`time` est variable (2–5 s) et non
+modélisé, le ramener introduirait un bruit qu'on ne maîtrise pas. **Point de contrat : à reporter
+dans le cadrage de SleepMaxxer (§3.F), son `AGENTS.md`, et les jumelles des deux projets.**
+
 ---
 
 ## 6. L'horloge du réveil
