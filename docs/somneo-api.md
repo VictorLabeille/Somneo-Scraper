@@ -1027,6 +1027,34 @@ vaut `true`. Le port `backend` donne la destination et prouve que la liaison est
  "dcs-state":"subscribed","clientversion":"DCDeviceClient_1.9.0.5","dcsenabled":true}
 ```
 
+### Ce qu'il faudrait pour répondre à la place de Philips — relevé le 2026-09-13
+
+La question s'est posée le jour où la mesure a montré que **l'heure du réveil arrive par cette
+session et par aucune autre** (§4, « L'heure en écriture »). Quatre faits, tous en lecture
+seule, en disent le coût :
+
+- **La liaison cloud est en clair.** `backend.url` commence par `http://`, pas `https://` : pas
+  de certificat à forger, pas de TLS à ouvrir. L'échange s'observe et se répond.
+- **Le réveil n'a pas de résolveur à lui.** `GET products/0/wifi` expose `cppid`, `dhcp`,
+  `gateway`, `ipaddress`, `macaddress`, `netmask`, `password`, `protection`, `ssid`,
+  `travelpassword`, `travelssid` — **aucun champ DNS**, et `dhcp` vaut `true`. On ne peut donc
+  pas le rediriger par l'API locale : il suit le résolveur que lui donne la box. **C'est le même
+  levier que l'isolement** (règle box, VLAN, sinkhole DNS), pas un accès de plus à obtenir.
+- **Son identité cloud dérive de son adresse MAC.** `cppid` est la MAC en forme EUI-64, et
+  l'API locale la sert sans authentification. Ce n'est pas un secret que l'appareil garde.
+- **Ce qui reste inconnu**, et qu'aucune lecture ne donnera : si la réponse d'ouverture de
+  session porte l'heure, et si le réveil authentifie son interlocuteur. Le port `security`
+  expose `key` et `nextkey` sans authentification — s'il s'agit du même secret, l'obstacle
+  tombe ; rien ne le dit aujourd'hui.
+
+La première étape ne demande **aucune écriture sur l'appareil** : intercaler un relais qui
+journalise, le sinkhole pointant sur la carte, qui transmet à Philips et enregistre les deux
+sens. On saurait alors ce que contient une ouverture de session — et cette même mise en place
+est le banc d'essai de l'isolement.
+
+> **Un tel relevé contient les données de la chambre en cours de téléversement** — c'est
+> précisément ce que le projet veut arrêter. Il reste sur la carte et ne se verse nulle part.
+
 Côté application, les graphiques d'historique ne sont **jamais** construits à partir de
 l'API locale : ils viennent de `com.philips.platform.core.datatypes.Moment`, la couche de
 synchronisation HealthSuite, sous les types `sleepRoomSession`,
