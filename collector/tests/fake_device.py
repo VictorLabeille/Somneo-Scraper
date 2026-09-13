@@ -18,13 +18,31 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 # Corps par (produit, port). Forme réelle, valeurs neutres. Absent → 422 « No such Port ».
 CORPS = {
-    (1, "wusrd"): {"mslux": 0, "mstmp": 20, "msrhu": 50, "mssnd": 30, "avlght": 0},
+    (1, "wusrd"): {"mslux": 0, "mstmp": 20, "msrhu": 50, "mssnd": 30,
+                   "avlux": 0, "avtmp": 20, "avrhu": 50, "avsnd": 30},
     (1, "wusts"): {"wusts": 1, "brght": 1, "dspon": False},
     (1, "wungt"): {"night": False, "tg2bd": "", "tendb": "", "ntstr": "", "ntend": ""},
     (1, "wulgt"): {"ltlvl": 15, "onoff": False, "ngtlt": False},
+    (1, "wudsk"): {"durat": 30, "onoff": False, "curve": 20},
+    (1, "wualm"): {"prfnr": 1, "snztm": 8},
+    (1, "wualm/aenvs"): {"prfen": [True, False], "prfvs": [True, True]},
+    (1, "wualm/aalms"): {"almhr": [7], "almmn": [0]},
+    (1, "wuply"): {"onoff": False, "snddv": "off"},
+    (1, "wutim"): {"yrltm": 2026, "moltm": 9, "dtltm": 13, "hrltm": 12, "miltm": 0, "scltm": 0},
+    (1, "device"): {"serial": "TESTSERIAL", "type": "HF3671", "swversion": "1.2.3"},
     (1, "dataupload/temp.1/data"): {"svper": 898, "avtmp": 20.0, "lotmp": 19.9, "hitmp": 20.1},
+    (1, "dataupload/hum.1/data"): {"svper": 898, "avhum": 50.0, "lohum": 49.0, "hihum": 51.0},
+    (1, "dataupload/snd.1/data"): {"svper": 898, "avsnd": 30, "losnd": 26, "hisnd": 40,
+                                   "absnd": [1, [0, 40, 100]], "rlsnd": [0]},
+    (1, "dataupload/lux.1/data"): {"svper": 898, "avlux": 5.0, "lolux": 0.0, "hilux": 10.0,
+                                   "ablux": [1, [0, 10, 100]], "rllux": [0]},
+    (1, "files/wakeup"): {"1": "Sunny day"},
+    (1, "files/lightthemes"): {"1": "Sunny day"},
+    (1, "files/dusklightthemes"): {"1": "Soft Rain"},
+    (1, "files/winddowndusk"): {"1": "Forest"},
     (0, "time"): {"datetime": "2026-09-13T12:00:00+02:00", "dst": "+01:00"},
-    (0, "backend"): {"dcs-state": "subscribed", "transport": ""},
+    (0, "backend"): {"dcs-state": "subscribed", "lastsignon": "2026-09-13T10:00:00Z"},
+    (0, "transport"): {"state": "closed"},
     (0, "mem"): {"heap_size": 87200, "heap_free": 25000},
 }
 
