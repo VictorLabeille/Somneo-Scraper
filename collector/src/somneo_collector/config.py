@@ -8,11 +8,14 @@ détails propres à l'installation. La lecture TOML est celle de la bibliothèqu
 """
 from __future__ import annotations
 
+import os
 import tomllib
 from dataclasses import dataclass, field, replace
 from pathlib import Path
 
-CHEMIN_CONFIG_DEFAUT = Path("/etc/somneo-collector/config.toml")
+# La variable d'env permet de pointer un autre TOML (essais hors carte) sans toucher au code.
+CHEMIN_CONFIG_DEFAUT = Path(os.environ.get("SOMNEO_COLLECTOR_CONFIG",
+                                           "/etc/somneo-collector/config.toml"))
 
 
 @dataclass(frozen=True)

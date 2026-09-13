@@ -116,7 +116,7 @@ async def amain(cfg: Config) -> None:
 
     stop = asyncio.Event()
     superviseur = Superviseur(store, cfg, state)
-    mdns = discovery.MdnsAnnonce(cfg)
+    # L'annonce mDNS du collecteur (discovery.MdnsAnnonce) est de l'incrément 3, pas ici.
 
     server = uvicorn.Server(uvicorn.Config(app, host=cfg.api_host, port=cfg.api_port,
                                            workers=1, log_level="info", lifespan="off"))
@@ -131,7 +131,6 @@ async def amain(cfg: Config) -> None:
     for sig in (signal.SIGTERM, signal.SIGINT):
         loop.add_signal_handler(sig, demander_arret)
 
-    mdns.demarrer()
     taches = [
         asyncio.create_task(superviseur.run()),
         asyncio.create_task(_boucle_sauvegarde(store, cfg, stop)),
@@ -144,7 +143,6 @@ async def amain(cfg: Config) -> None:
         for t in taches:
             t.cancel()
         await asyncio.gather(*taches, return_exceptions=True)
-        mdns.arreter()
         store.close()
         _LOGGER.info("collecteur arrêté")
 
