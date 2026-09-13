@@ -222,8 +222,12 @@ est dans `docs/radxa.md`.
       directe est refusée, la config de serveur de temps est ignorée, et la session cloud qui
       pose l'heure est chiffrée (clé non exposée). Le réveil reste donc connecté pour l'instant ;
       le collecteur mesure et signale la dérive (`docs/somneo-api.md` §4-5)
-- [ ] Service FastAPI + intégration `pysomneo`
-- [ ] Historisation SQLite
+- [~] **Collecteur, incrément 1 (collecte)** — écrit et testé hors appareil (`collector/`,
+      29 tests, essai de bout en bout contre un faux réveil) : passerelle à connexion unique,
+      découverte SSDP, base SQLite, planificateur de tous les ports, horloge en lecture seule,
+      indisponibilités, sauvegarde en rotation, `GET /v1/status` et `/v1/readings`. Reste son
+      critère : tourner sept jours sur la carte, la capture arrêtée
+- [ ] Incréments 2-5 : nuits, rattrapage + mDNS, relais du pilotage, surveillance d'horloge
 - [ ] Conteneurisation
 
 ## Liens
