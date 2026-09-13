@@ -124,38 +124,43 @@ def resoudre_mac(sock, iface, mon_mac, mon_ip, ip_cible, essais=5):
 
 # ---- parseur de trames --------------------------------------------------------------------
 
-def parse_trame(trame, ip_reveil):
-    """Extrait un segment TCP a destination/en provenance du reveil sur le port 80.
+def est_wan(ip, mon_ip):
+    """Vrai si `ip` est hors du /24 de la carte : trafic vers l'exterieur, pas l'API locale."""
+    quart = mon_ip.rsplit(".", 1)[0]
+    return not ip.startswith(quart + ".") and not ip.startswith(("224.", "239.", "255."))
 
-    Rend None si la trame ne concerne pas ce qu'on capture, sinon un dict :
-    {sens, pair_ip, pair_port, seq, payload(bytes)}. `sens` : "montant" (reveil->cloud) ou
-    "descendant" (cloud->reveil)."""
-    if len(trame) < 14:
-        return None
-    if struct.unpack("!H", trame[12:14])[0] != ETH_P_IP:
+
+def parse_trame(trame, ip_reveil, mon_ip):
+    """Extrait un segment TCP entre le reveil et un hote EXTERNE, quel que soit le port.
+
+    On ne filtre plus sur le port 80 : le CPP peut sortir ailleurs (443, 30000…). On ignore le
+    trafic vers le /24 local (API locale du reveil, autres appareils). Rend None si hors sujet,
+    sinon {sens, pair_ip, pair_port, port_reveil, seq, syn, fin, rst, payload}."""
+    if len(trame) < 14 or struct.unpack("!H", trame[12:14])[0] != ETH_P_IP:
         return None
     ip = trame[14:]
-    if len(ip) < 20:
+    if len(ip) < 20 or ip[9] != 6:                   # trop court, ou protocole != TCP
         return None
     ihl = (ip[0] & 0x0F) * 4
-    if ip[9] != 6:                                   # protocole != TCP
-        return None
     src = socket.inet_ntoa(ip[12:16])
     dst = socket.inet_ntoa(ip[16:20])
-    total = struct.unpack("!H", ip[2:4])[0]
-    tcp = ip[ihl:total]
+    tcp = ip[ihl:struct.unpack("!H", ip[2:4])[0]]
     if len(tcp) < 20:
         return None
     sport, dport, seq = struct.unpack("!HHI", tcp[0:8])
-    data_off = (tcp[12] >> 4) * 4
-    payload = tcp[data_off:]
-    if src == ip_reveil and dport == 80:
-        return {"sens": "montant", "pair_ip": dst, "pair_port": dport, "seq": seq,
-                "payload": payload}
-    if dst == ip_reveil and sport == 80:
-        return {"sens": "descendant", "pair_ip": src, "pair_port": sport, "seq": seq,
-                "payload": payload}
-    return None
+    flags = tcp[13]
+    payload = tcp[(tcp[12] >> 4) * 4:]
+    if src == ip_reveil:
+        sens, pair, pport, rport = "montant", dst, dport, sport
+    elif dst == ip_reveil:
+        sens, pair, pport, rport = "descendant", src, sport, dport
+    else:
+        return None
+    if not est_wan(pair, mon_ip):
+        return None
+    return {"sens": sens, "pair_ip": pair, "pair_port": pport, "port_reveil": rport, "seq": seq,
+            "syn": bool(flags & 0x02), "fin": bool(flags & 0x01), "rst": bool(flags & 0x04),
+            "payload": payload}
 
 
 INTERESSANT = (b"RequestHandler", b"HTTP/1", b"POST ", b"GET ", b"ecdinterface")
@@ -245,6 +250,7 @@ def capturer(a):
     th.start()
 
     vu_montant = vu_descendant = False
+    endpoints = {}                                  # (ip,port) -> octets de clair vus
     fin_prevue = time.monotonic() + a.duree * 60
     try:
         while time.monotonic() < fin_prevue:
@@ -253,22 +259,29 @@ def capturer(a):
                 trame = sock.recv(65535)
             except socket.timeout:
                 continue
-            seg = parse_trame(trame, reveil)
-            if not seg or not seg["payload"]:
+            seg = parse_trame(trame, reveil, mon_ip)
+            if not seg:
                 continue
+            cle = (seg["pair_ip"], seg["pair_port"])
+            if cle not in endpoints:                # nouvel hote externe : on l'annonce
+                endpoints[cle] = 0
+                rel.ecrire(type="endpoint", pair_ip=seg["pair_ip"], pair_port=seg["pair_port"])
+                print(f"  hote externe : {seg['pair_ip']}:{seg['pair_port']}", flush=True)
+            if not seg["payload"]:
+                continue
+            endpoints[cle] += len(seg["payload"])
             marque = next((m.decode() for m in INTERESSANT if m in seg["payload"]), None)
             rel.ecrire(type="segment", sens=seg["sens"], pair_ip=seg["pair_ip"],
-                       pair_port=seg["pair_port"], seq=seg["seq"], marque=marque,
+                       pair_port=seg["pair_port"], port_reveil=seg["port_reveil"],
+                       seq=seg["seq"], marque=marque,
                        payload_b64=base64.b64encode(seg["payload"]).decode())
             if marque:
                 print(f"  >>> {seg['sens']} {seg['pair_ip']}:{seg['pair_port']} "
-                      f"[{marque}] {len(seg['payload'])} o", flush=True)
-                if seg["sens"] == "montant":
-                    vu_montant = True
-                else:
-                    vu_descendant = True
+                      f"[{marque}] {len(seg['payload'])} o de clair", flush=True)
+                vu_montant = vu_montant or seg["sens"] == "montant"
+                vu_descendant = vu_descendant or seg["sens"] == "descendant"
                 if vu_montant and vu_descendant:
-                    print("session cloud captee (requete + reponse) — arret", flush=True)
+                    print("echange HTTP en clair capte (requete + reponse) — arret", flush=True)
                     break
     except Arret:
         print("interrompu — restauration", flush=True)
@@ -292,16 +305,19 @@ def selftest():
     ip += socket.inet_aton(reveil) + socket.inet_aton(cloud)
     eth = mac_octets("aa:bb:cc:dd:ee:ff") + mac_octets("11:22:33:44:55:66")
     eth += struct.pack("!H", ETH_P_IP)
-    seg = parse_trame(eth + ip + tcp, reveil)
+    mon_ip = "192.168.1.198"
+    seg = parse_trame(eth + ip + tcp, reveil, mon_ip)
     assert seg is not None, "trame non reconnue"
-    assert seg["sens"] == "montant", seg["sens"]
-    assert seg["pair_ip"] == cloud, seg["pair_ip"]
-    assert seg["pair_port"] == 80
+    assert seg["sens"] == "montant" and seg["pair_ip"] == cloud and seg["pair_port"] == 80, seg
     assert b"RequestHandler" in seg["payload"]
-    # une trame sans rapport doit etre ignoree
+    # un hote du /24 local (API locale, autre appareil) doit etre ignore
+    ip_lan = struct.pack("!BBHHHBBH", 0x45, 0, 20 + len(tcp), 0, 0, 64, 6, 0)
+    ip_lan += socket.inet_aton(reveil) + socket.inet_aton("192.168.1.50")
+    assert parse_trame(eth + ip_lan + tcp, reveil, mon_ip) is None, "LAN non filtre"
+    # une trame non-IPv4 doit etre ignoree
     autre = mac_octets("11:22:33:44:55:66") * 2 + struct.pack("!H", 0x86DD)
-    assert parse_trame(autre, reveil) is None
-    print("selftest OK : parseur valide")
+    assert parse_trame(autre, reveil, mon_ip) is None
+    print("selftest OK : parseur valide (WAN capte, LAN filtre)")
     return 0
 
 
