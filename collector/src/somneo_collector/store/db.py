@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import json
 import sqlite3
+import threading
 import time
 from importlib import resources
 from pathlib import Path
@@ -28,10 +29,15 @@ class Store:
     def __init__(self, path: str | Path) -> None:
         self.path = str(path)
         Path(self.path).parent.mkdir(parents=True, exist_ok=True)
-        self._w = sqlite3.connect(self.path, timeout=30.0)
+        # Un seul écrivain LOGIQUE (plan §3), mais deux threads l'appellent : la boucle de
+        # collecte et le threadpool des routes de l'API (une correction est une écriture). D'où
+        # check_same_thread=False + un verrou qui SÉRIALISE toutes les écritures : jamais deux à
+        # la fois, la garantie du plan tenue à travers les threads.
+        self._wlock = threading.Lock()
+        self._w = sqlite3.connect(self.path, timeout=30.0, check_same_thread=False)
         _pragmas(self._w)
         schema = resources.files("somneo_collector.store").joinpath("schema.sql").read_text()
-        with self._w:
+        with self._wlock, self._w:
             self._w.executescript(schema)
         self._dernier_corps: dict[str, str] = {}     # port -> dernier body JSON, pour « au changement »
 
@@ -43,12 +49,13 @@ class Store:
         return seq
 
     def seq_courant(self) -> int:
-        return self._w.execute("SELECT value FROM meta WHERE key='next_seq'").fetchone()[0] - 1
+        with self._wlock:
+            return self._w.execute("SELECT value FROM meta WHERE key='next_seq'").fetchone()[0] - 1
 
     # ---- écritures ----------------------------------------------------------------------
     def add_reading(self, body: dict, ts: float | None = None) -> int:
         ts = ts if ts is not None else time.time()
-        with self._w:
+        with self._wlock, self._w:
             seq = self._next_seq()
             vals = [body.get(c) for c in CHAMPS_READING]
             self._w.execute(
@@ -59,7 +66,7 @@ class Store:
 
     def add_window_aggregate(self, kind: str, avg, lo, hi, hist, ts: float | None = None) -> int:
         ts = ts if ts is not None else time.time()
-        with self._w:
+        with self._wlock, self._w:
             seq = self._next_seq()
             self._w.execute(
                 "INSERT INTO window_aggregate (seq, ts, kind, avg, lo, hi, hist) "
@@ -68,28 +75,31 @@ class Store:
         return seq
 
     def record_port_change(self, port: str, body: Any, ts: float | None = None) -> int | None:
-        """Insère le corps SEULEMENT s'il diffère du dernier vu pour ce port. Rend le seq, ou None."""
+        """Insère le corps SEULEMENT s'il diffère du dernier vu pour ce port. Rend le seq, ou None.
+
+        Tout se fait sous le verrou en une prise (le verrou n'est pas réentrant) : la relecture
+        du dernier corps après un redémarrage, la comparaison, et l'insertion."""
         encode = json.dumps(body, sort_keys=True, ensure_ascii=False)
-        if port not in self._dernier_corps:
-            row = self._w.execute(
-                "SELECT body FROM port_change WHERE port=? ORDER BY seq DESC LIMIT 1",
-                (port,)).fetchone()
-            if row is not None:
-                self._dernier_corps[port] = row[0]
-        if self._dernier_corps.get(port) == encode:
-            return None
         ts = ts if ts is not None else time.time()
-        with self._w:
+        with self._wlock, self._w:
+            if port not in self._dernier_corps:
+                row = self._w.execute(
+                    "SELECT body FROM port_change WHERE port=? ORDER BY seq DESC LIMIT 1",
+                    (port,)).fetchone()
+                if row is not None:
+                    self._dernier_corps[port] = row[0]
+            if self._dernier_corps.get(port) == encode:
+                return None
             seq = self._next_seq()
             self._w.execute("INSERT INTO port_change (seq, ts, port, body) VALUES (?, ?, ?, ?)",
                             [seq, ts, port, encode])
-        self._dernier_corps[port] = encode
+            self._dernier_corps[port] = encode
         return seq
 
     def see_device(self, serial: str, model: str | None, firmware: str | None,
                    ts: float | None = None) -> None:
         ts = ts if ts is not None else time.time()
-        with self._w:
+        with self._wlock, self._w:
             row = self._w.execute("SELECT id FROM device WHERE serial=?", (serial,)).fetchone()
             if row is None:
                 seq = self._next_seq()
@@ -102,7 +112,7 @@ class Store:
 
     def heartbeat(self, ts: float | None = None) -> None:
         ts = ts if ts is not None else time.time()
-        with self._w:
+        with self._wlock, self._w:
             self._w.execute("INSERT INTO heartbeat (id, ts) VALUES (1, ?) "
                             "ON CONFLICT(id) DO UPDATE SET ts=excluded.ts", (ts,))
 
@@ -111,7 +121,7 @@ class Store:
         ts = ts if ts is not None else time.time()
         off_t = round(device_time - card_time, 3) if (device_time and card_time) else None
         off_w = round(wutim_time - card_time, 3) if (wutim_time and card_time) else None
-        with self._w:
+        with self._wlock, self._w:
             seq = self._next_seq()
             self._w.execute(
                 "INSERT INTO clock_check (seq, ts, card_time, device_time, wutim_time, "
@@ -121,7 +131,7 @@ class Store:
 
     def open_outage(self, cause: str, ts: float | None = None) -> int:
         ts = ts if ts is not None else time.time()
-        with self._w:
+        with self._wlock, self._w:
             seq = self._next_seq()
             cur = self._w.execute(
                 "INSERT INTO outage (seq, start, cause, failures) VALUES (?, ?, ?, 0)",
@@ -129,14 +139,102 @@ class Store:
         return cur.lastrowid
 
     def bump_outage(self, outage_id: int) -> None:
-        with self._w:
+        with self._wlock, self._w:
             self._w.execute("UPDATE outage SET failures = failures + 1 WHERE id=?", (outage_id,))
 
     def close_outage(self, outage_id: int, ts: float | None = None) -> None:
         ts = ts if ts is not None else time.time()
-        with self._w:
+        with self._wlock, self._w:
             self._w.execute("UPDATE outage SET end=?, seq=? WHERE id=?",
                             [ts, self._next_seq(), outage_id])
+
+    # ---- nuits (incrément 2) ------------------------------------------------------------
+    def create_night(self, day: str, bedtime: float, raw_tg2bd: str | None,
+                     ts: float | None = None) -> int:
+        """Ouvre une nuit ; rend son `id` STABLE. `bedtime` en heure COLLECTEUR (NTP), pas tg2bd."""
+        with self._wlock, self._w:
+            cur = self._w.execute(
+                "INSERT INTO night (seq, day, bedtime, state, bedtime_origin, raw_tg2bd) "
+                "VALUES (?, ?, ?, 'open', 'observed', ?)",
+                [self._next_seq(), day, bedtime, raw_tg2bd])
+        return cur.lastrowid
+
+    def night_awaiting_rise(self, night_id: int, raw_tendb: str | None) -> None:
+        """La session est close côté `wungt`, mais le lever attend la fin de l'alarme (bit 11)."""
+        with self._wlock, self._w:
+            self._w.execute(
+                "UPDATE night SET state='closed', risetime=NULL, risetime_origin='estimated', "
+                "raw_tendb=?, seq=? WHERE id=?", [raw_tendb, self._next_seq(), night_id])
+
+    def night_set_rise(self, night_id: int, risetime: float) -> None:
+        with self._wlock, self._w:
+            self._w.execute(
+                "UPDATE night SET risetime=?, state='closed', risetime_origin='estimated', seq=? "
+                "WHERE id=?", [risetime, self._next_seq(), night_id])
+
+    def night_close(self, night_id: int, risetime: float, raw_tendb: str | None) -> None:
+        """Ferme d'un coup avec un lever connu (alarme déjà finie à la clôture)."""
+        with self._wlock, self._w:
+            self._w.execute(
+                "UPDATE night SET risetime=?, state='closed', risetime_origin='estimated', "
+                "raw_tendb=?, seq=? WHERE id=?",
+                [risetime, raw_tendb, self._next_seq(), night_id])
+
+    def night_abnormal(self, night_id: int, raw_tendb: str | None) -> None:
+        """Nuit close sans alarme (expiration à 12 h) : pas d'heure de lever, signalée."""
+        with self._wlock, self._w:
+            self._w.execute(
+                "UPDATE night SET state='abnormal', raw_tendb=?, seq=? WHERE id=?",
+                [raw_tendb, self._next_seq(), night_id])
+
+    def get_open_night(self) -> dict | None:
+        with self._wlock:
+            row = self._w.execute("SELECT * FROM night WHERE state='open' "
+                                  "ORDER BY id DESC LIMIT 1").fetchone()
+        return dict(row) if row else None
+
+    def get_awaiting_night(self) -> dict | None:
+        with self._wlock:
+            row = self._w.execute("SELECT * FROM night WHERE state='closed' AND risetime IS NULL "
+                                  "ORDER BY id DESC LIMIT 1").fetchone()
+        return dict(row) if row else None
+
+    def add_night_correction(self, night_id: int, field: str, value: float,
+                             ts: float | None = None) -> int:
+        ts = ts if ts is not None else time.time()
+        with self._wlock, self._w:
+            seq = self._next_seq()
+            self._w.execute(
+                "INSERT INTO night_correction (seq, night_id, ts, field, value) "
+                "VALUES (?, ?, ?, ?, ?)", [seq, night_id, ts, field, value])
+            # la correction fait foi : la valeur servie de la nuit suit, sa valeur relevée reste
+            if field in ("bedtime", "risetime"):
+                self._w.execute(f"UPDATE night SET {field}=?, seq=? WHERE id=?",
+                                [value, self._next_seq(), night_id])
+        return seq
+
+    def list_nights(self, debut: float, fin: float) -> list[dict]:
+        conn = self._ro()
+        try:
+            rows = conn.execute(
+                "SELECT * FROM night WHERE bedtime >= ? AND bedtime <= ? ORDER BY bedtime",
+                (debut, fin)).fetchall()
+            return [dict(r) for r in rows]
+        finally:
+            conn.close()
+
+    def get_night(self, night_id: int) -> dict | None:
+        conn = self._ro()
+        try:
+            row = conn.execute("SELECT * FROM night WHERE id=?", (night_id,)).fetchone()
+            if not row:
+                return None
+            night = dict(row)
+            night["corrections"] = [dict(c) for c in conn.execute(
+                "SELECT * FROM night_correction WHERE night_id=? ORDER BY seq", (night_id,))]
+            return night
+        finally:
+            conn.close()
 
     def close(self) -> None:
         self._w.close()

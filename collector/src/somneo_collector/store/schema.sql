@@ -88,8 +88,11 @@ CREATE INDEX IF NOT EXISTS idx_clock_ts ON clock_check (ts);
 
 -- ---- Nuits : écrites à l'incrément 2. Tables posées dès maintenant pour figer le schéma. ----
 
+-- `id` stable identifie la nuit (API, corrections, machine à états) ; `seq` est repris à chaque
+-- modification pour le rattrapage — il ne peut donc pas servir de clé d'identité.
 CREATE TABLE IF NOT EXISTS night (
-    seq        INTEGER PRIMARY KEY,
+    id         INTEGER PRIMARY KEY AUTOINCREMENT,
+    seq        INTEGER NOT NULL,
     day        TEXT NOT NULL,       -- jour local (Europe/Paris) de l'heure de coucher
     bedtime    REAL,                -- heure de coucher, référentiel COLLECTEUR (NTP) — contrat §F
     risetime   REAL,
@@ -100,11 +103,12 @@ CREATE TABLE IF NOT EXISTS night (
     raw_tendb  TEXT
 );
 CREATE INDEX IF NOT EXISTS idx_night_day ON night (day);
+CREATE INDEX IF NOT EXISTS idx_night_seq ON night (seq);
 
 CREATE TABLE IF NOT EXISTS night_correction (
     id        INTEGER PRIMARY KEY AUTOINCREMENT,
     seq       INTEGER NOT NULL,
-    night_seq INTEGER NOT NULL REFERENCES night (seq),
+    night_id  INTEGER NOT NULL REFERENCES night (id),
     ts        REAL NOT NULL,
     field     TEXT NOT NULL,        -- bedtime | risetime
     value     REAL NOT NULL

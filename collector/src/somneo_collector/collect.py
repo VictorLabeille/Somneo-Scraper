@@ -18,6 +18,7 @@ import time
 from . import clock
 from .config import Config
 from .gateway import DeviceGateway, Releve
+from .nights import NightTracker
 from .store import Store
 
 _LOGGER = logging.getLogger(__name__)
@@ -39,6 +40,7 @@ class Collector:
         self._echecs = 0
         self._outage_id: int | None = None
         self._stop = asyncio.Event()
+        self.nights = NightTracker(store)     # machine à états des nuits (incrément 2, lecture seule)
 
     # ---- suivi de la disponibilité ------------------------------------------------------
     def _succes(self) -> None:
@@ -77,11 +79,13 @@ class Collector:
         r = await self._lire("wusts")
         if r.ok:
             self.store.record_port_change("wusts", r.corps, ts=r.observed_at)
+            self.nights.on_wusts((r.corps or {}).get("wusts"), r.observed_at)
 
     async def tache_wungt(self) -> None:
         r = await self._lire("wungt")
         if r.ok:
             self.store.record_port_change("wungt", r.corps, ts=r.observed_at)
+            self.nights.on_wungt(r.corps, r.observed_at)
 
     async def tache_dataupload(self) -> None:
         for kind, suf in AGREGATS.items():
