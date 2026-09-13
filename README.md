@@ -232,7 +232,9 @@ est dans `docs/radxa.md`.
       version retenue au plan : l'incrément 1 avait été écrit par erreur contre la 5.0.6, qui
       réessaie un `500` douze fois. Reste le critère de chaque incrément sur la carte : tourner
       sept jours, la capture arrêtée
-- [ ] Déploiement sur la carte et bascule depuis la capture
+- [~] **Déployé sur la carte le 13 septembre 2026, bascule faite** : le collecteur (service
+      systemd) a remplacé la capture ; il découvre le réveil, collecte et sert l'API. Reste le
+      *soak* de sept jours et la validation, sur l'appareil, que le relais n'a aucun effet non demandé
 - [ ] Conteneurisation
 
 ## Liens
