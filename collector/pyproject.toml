@@ -1,0 +1,30 @@
+[project]
+name = "somneo-collector"
+version = "0.1.0"
+description = "Collecteur local du Philips Somneo — back-end de SleepMaxxer"
+requires-python = ">=3.11"
+license = { text = "GPL-3.0-or-later" }
+dependencies = [
+    # pysomneo (fork épinglé) est installé à part : depuis le fork tant que la 6.0.0 n'est
+    # pas publiée, puis depuis PyPI. Voir deploy/install.sh et le plan technique §8.
+    "fastapi",
+    "uvicorn",
+    "zeroconf",   # LGPL-2.1-or-later, compatible GPL-3.0
+]
+
+[project.optional-dependencies]
+test = ["pytest", "pytest-asyncio", "httpx"]
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+somneo_collector = ["store/*.sql"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]

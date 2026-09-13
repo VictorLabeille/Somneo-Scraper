@@ -1,0 +1,4 @@
+# Rien de spécifique au collecteur ne se versionne hors du code et des tests.
+__pycache__/
+*.egg-info/
+.pytest_cache/
