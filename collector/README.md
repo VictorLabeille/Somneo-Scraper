@@ -6,9 +6,11 @@ SQLite. Back-end de SleepMaxxer. **Le fonctionnel et les décisions sont dans le
 
 ## État
 
-**Incrément 1 (collecte) écrit, testé hors appareil.** Reste, avant de le déclarer fini, son
-critère du plan §10 : *tourne sept jours sans intervention, la capture arrêtée* — ce qui, par
-nature, se constate après déploiement.
+**Incréments 1, 2, 3 écrits et testés hors appareil** (38 tests) : collecte, nuits (machine à
+états, `/v1/nights`), rattrapage (`/v1/sync`), catalogue, mDNS. L'incrément 5 (surveillance
+d'horloge) est de fait couvert par l'incrément 1. **Reste** : l'incrément 4 (relais du pilotage
+— socle posé, endpoints à écrire) et le critère du plan §10 pour chaque incrément déployé
+(*tourne sept jours*, etc.), qui se constate après déploiement sur la carte.
 
 ## Développer et tester (hors appareil)
 
