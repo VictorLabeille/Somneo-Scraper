@@ -647,7 +647,12 @@ corps du plan ; ce qui est reporté ailleurs est dit au point concerné.
     l'appareil.
 11. ~~Heure de lever estimée~~ — **tranché le 2026-09-12** : la première lecture où le bit 11 est
     retombé, la lecture précédente gardée comme borne basse (§5).
-12. **L'horloge d'un réveil isolé — ouvert depuis le 2026-09-13.** La mesure a retiré au
-    collecteur une fonction que le cadrage lui donnait : il ne peut pas poser l'heure, et
-    l'isolement supprime la seule source qui la pose. Trois voies en §1, P2bis. Point le plus
-    lourd du projet à ce jour ; il touche les deux cadrages et il conditionne l'incrément 5.
+12. ~~**L'horloge d'un réveil isolé.**~~ **Tranché le 2026-09-13.** Toutes les voies d'écriture
+    de l'heure ont été épuisées et écartées : `datetime` refusé (P2), `tmser`/`tmsrc` acceptés
+    mais ignorés (P2ter), session cloud chiffrée avec une clé non exposée (`relais_cpp.py`,
+    §1 P2bis, `docs/somneo-api.md` §5). **Décision : le réveil reste connecté** — le cloud
+    tient son horloge, le problème disparaît. Le collecteur **mesure, journalise, signale et
+    sert l'heure corrigée** (§6), sans rien écrire sur l'appareil. L'isolement (couper le
+    téléversement vers Philips) devient un interrupteur daté à part : il ne casse **que**
+    l'horloge, et le jour venu on compensera par l'alarme ou on se contentera de signaler.
+    L'incrément 5 devient « surveillance de l'horloge », sans code d'écriture.

@@ -193,9 +193,20 @@ soleil, geste de coucher et de lever.
   > Ce que la mesure donne en échange : le réveil **avance de ~9,9 s/jour** et la liaison
   > Philips le remet seul à l'heure toutes les ~8 h. Isolé, il dépasse dix secondes en un
   > jour, une minute en une semaine. **Le premier point de ce §E tient donc — comparer,
-  > journaliser, signaler —, le second n'a plus de moyen connu de s'exécuter.** Piste ouverte,
-  > jamais essayée : rediriger `wutms.tmser` vers un service de temps sur la carte (plan
-  > technique §1, P2bis). À rouvrir avec Victor avant d'écrire quoi que ce soit.
+  > journaliser, signaler —, le second n'a plus de moyen connu de s'exécuter.**
+  >
+  > **Tranché le 2026-09-13, après avoir épuisé les voies d'écriture.** Poser l'heure est
+  > écarté en pratique : `wutms.tmser`/`tmsrc` répondent `200` mais n'appliquent rien (P2ter),
+  > et la seule source d'heure — la session cloud — est chiffrée avec une clé que le port
+  > `security` ne fournit pas (capture `relais_cpp.py` : `dcp.dc1.philips.com`, HTTP en clair
+  > mais corps `CB-Encrypted/AES`, clé dérivée au provisioning ; `docs/somneo-api.md` §5). **Ce
+  > §E devient donc : mesurer la dérive, la journaliser, la signaler, et servir à l'app l'heure
+  > corrigée** (le champ existe déjà, §5). **Décision liée (Victor, 2026-09-13) : le réveil
+  > reste connecté au cloud pour l'instant** — l'horloge se resynchronise seule, le problème ne
+  > se pose pas. L'isolement (qui coupe le téléversement vers Philips, l'objet du projet) est un
+  > interrupteur à actionner plus tard ; couper le cloud ne casse **que** l'horloge, rien
+  > d'autre. Compenser la dérive en décalant l'alarme (`wualm/prfwu`) reste une option pour le
+  > jour de l'isolement, non retenue aujourd'hui.
 - **Jamais pendant une nuit déclarée, jamais pendant qu'une alarme sonne ou est en rappel.**
 - L'application ne remet jamais l'heure ; elle signale un écart si le collecteur en rapporte un.
 

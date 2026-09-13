@@ -218,8 +218,10 @@ est dans `docs/radxa.md`.
 - [x] Mesures préalables sur l'appareil : `wungt`, `time` et la sélection d'un profil d'alarme
       en écriture — dont un résultat négatif de taille : **l'heure du réveil ne s'écrit pas**,
       et il avance de ~10 s par jour (`docs/somneo-api.md` §4)
-- [ ] Trouver par où poser l'heure d'un réveil isolé — sans quoi il dérivera d'une minute par
-      semaine
+- [x] Peut-on remettre un réveil isolé à l'heure ? — **non, écarté après mesure** : l'écriture
+      directe est refusée, la config de serveur de temps est ignorée, et la session cloud qui
+      pose l'heure est chiffrée (clé non exposée). Le réveil reste donc connecté pour l'instant ;
+      le collecteur mesure et signale la dérive (`docs/somneo-api.md` §4-5)
 - [ ] Service FastAPI + intégration `pysomneo`
 - [ ] Historisation SQLite
 - [ ] Conteneurisation
