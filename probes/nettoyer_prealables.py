@@ -25,6 +25,12 @@ LIMITE_ECART_S = 3600
 CLES_INTERDITES = {"almhr", "almmn", "aalms", "ayear", "amnth", "alday", "pszhr", "pszmn",
                    "tg2bd", "tendb", "datetime", "serial", "macaddress", "ssid"}
 HEURE_ABSOLUE = re.compile(r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}")
+ADRESSE_IP = re.compile(r"\b\d{1,3}(?:\.\d{1,3}){3}\b")
+
+
+def masque_ip(v):
+    """Remplace toute adresse IPv4 par <ip> : l'IP de la carte est propre au reseau."""
+    return ADRESSE_IP.sub("<ip>", v) if isinstance(v, str) else v
 
 
 def heure(v):
@@ -255,6 +261,56 @@ def p2(recs):
     return out
 
 
+# ---- P2ter (tmser) ------------------------------------------------------------------------
+
+def tmser(recs):
+    """Verdict de P2ter, sans secret : statuts, decalages, et la STRUCTURE des requetes recues.
+
+    Les corps et valeurs d'en-tetes des requetes du reveil (identite possible) ne sont pas
+    recopies : seuls methode, chemin (IP masquee) et noms d'en-tetes le sont."""
+    out = {"sonde": "probes/tmser.py", "T2_tmsrc": [], "requetes": []}
+    noms_entetes = set()
+    for r in recs:
+        t = r["type"]
+        if t == "debut":
+            out["mode"] = r["mode"]
+        elif t == "etat_initial":
+            w = r.get("wutms") or {}
+            out["etat_initial"] = {"tmser": masque_ip(w.get("tmser")), "tmsrc": w.get("tmsrc"),
+                                   "url_servie": masque_ip(r.get("url_servie"))}
+        elif t == "T1":
+            out["T1_tmser"] = {"put_status": (r["put"] or {}).get("status"),
+                               "persistant": r["persistant"], "relu": masque_ip(r["relu"])}
+        elif t == "T2":
+            out["T2_tmsrc"].append({"valeur": r["valeur"],
+                                    "put_status": (r["put"] or {}).get("status"),
+                                    "persistant": r["persistant"]})
+        elif t == "hit":
+            out["requetes"].append({"du_reveil": r["du_reveil"], "methode": r["methode"],
+                                    "chemin": masque_ip(r["chemin"])})
+            noms_entetes |= set((r.get("entetes") or {}).keys())
+        elif t == "T3":
+            if "saute" in r:
+                out["T3"] = {"saute": r["saute"]}
+            else:
+                out["T3"] = {"tmsrc_actif": r["tmsrc"], "hits_total": r["hits"],
+                             "hits_du_reveil": r["hits_reveil"],
+                             "suivi": [{"t_min": x["t_min"], "decalage_s": x["decalage_s"],
+                                        "hits": x["hits"]} for x in r["suivi"]]}
+        elif t == "restauration":
+            out["restauration"] = {"conforme": r["conforme"],
+                                   "champs_remis": [x["champ"] for x in r["remises"]]}
+        elif t in ("effet_de_bord", "effets_finaux"):
+            out.setdefault("effets", []).extend(chemins(r["effets"]))
+        elif t in ("arret_securite", "interruption"):
+            out.setdefault("incidents", []).append({k: r[k] for k in ("type", "raison") if k in r})
+        elif t == "fin":
+            out["fin"] = {k: r[k] for k in ("bilan", "restaure", "abandon") if k in r}
+    if out["requetes"]:
+        out["entetes_recus"] = sorted(noms_entetes)     # noms seulement, jamais les valeurs
+    return out
+
+
 # ---- controle et sortie -------------------------------------------------------------------
 
 def fuites(obj, exceptions, chemin=""):
@@ -283,6 +339,8 @@ def main():
         out = p1(recs)
     elif nom.startswith("ecriture-heure"):
         out = p2(recs)
+    elif nom.startswith("tmser"):
+        out = tmser(recs)
     else:
         sys.exit(f"releve inconnu : {nom}")
     out["date"] = datetime.fromtimestamp(recs[0]["ts"], timezone.utc).strftime("%Y-%m-%d")
