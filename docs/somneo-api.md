@@ -1030,8 +1030,20 @@ vaut `true`. Le port `backend` donne la destination et prouve que la liaison est
 ### Ce qu'il faudrait pour répondre à la place de Philips — relevé le 2026-09-13
 
 La question s'est posée le jour où la mesure a montré que **l'heure du réveil arrive par cette
-session et par aucune autre** (§4, « L'heure en écriture »). Quatre faits, tous en lecture
-seule, en disent le coût :
+session et par aucune autre** (§4, « L'heure en écriture »).
+
+**Ce qu'est la plateforme.** `www.ecdinterface.philips.com`, chemin
+`/DevicePortalICPRequestHandler/RequestHandler.ashx`, client `DCDeviceClient_1.9.0.5` : c'est
+le **CPP de Philips** (*Connected Product Platform*, aussi dit ICP), le même dorsal que les
+ponts Philips Hue et l'ancien Streamium — pas un service propre au Somneo. Deux conséquences.
+D'abord, la plateforme est **déjà largement rétro-conçue** côté pont (projets `diyHue`,
+`hass-emulated-hue`), ce qui documente le protocole et prouve qu'il se réimplémente. Ensuite, et
+c'est la limite : ces projets émulent **le pont que l'application interroge**, pas **le portail
+cloud que l'appareil appelle**. Le sens dont on a besoin ici — répondre à la place du cloud, avec
+l'heure — n'y est pas traité. L'identité du protocole est acquise ; le format exact de la réponse
+de temps pour ce modèle ne l'est pas, et **aucune recherche ne le donnera** : il se capture.
+
+Quatre faits, tous en lecture seule, disent le coût de cette capture :
 
 - **La liaison cloud est en clair.** `backend.url` commence par `http://`, pas `https://` : pas
   de certificat à forger, pas de TLS à ouvrir. L'échange s'observe et se répond.
@@ -1047,13 +1059,23 @@ seule, en disent le coût :
   expose `key` et `nextkey` sans authentification — s'il s'agit du même secret, l'obstacle
   tombe ; rien ne le dit aujourd'hui.
 
-La première étape ne demande **aucune écriture sur l'appareil** : intercaler un relais qui
-journalise, le sinkhole pointant sur la carte, qui transmet à Philips et enregistre les deux
-sens. On saurait alors ce que contient une ouverture de session — et cette même mise en place
-est le banc d'essai de l'isolement.
+**Se mettre sur le chemin sans la box ni matériel.** La Bbox ne redirige pas de DNS (voir la
+note Obsidian, recherche du 2026-09-13), mais on n'en a pas besoin pour *observer* : la carte
+est déjà sur le même segment que le réveil (elle le découvre en SSDP multicast), et la liaison
+est en clair. Elle peut donc s'intercaler par **empoisonnement ARP** — se faire passer pour la
+passerelle auprès du réveil et pour le réveil auprès de la passerelle —, réacheminer le HTTP
+vers un mandataire qui journalise, et relayer vers Philips. Aucune écriture sur l'appareil,
+aucune config de la box, réversible dès que les entrées ARP expirent. On saurait alors ce que
+contient une ouverture de session, et c'est le même banc d'essai que l'isolement.
 
-> **Un tel relevé contient les données de la chambre en cours de téléversement** — c'est
-> précisément ce que le projet veut arrêter. Il reste sur la carte et ne se verse nulle part.
+> **Trois réserves avant d'y aller.** (1) Le relevé contient les données de la chambre en cours
+> de téléversement — c'est ce que le projet veut arrêter : il reste sur la carte et ne se verse
+> nulle part. (2) L'ARP fait transiter le trafic du réveil par une carte dont le WiFi tombe
+> plusieurs fois par jour : à faire **attendu, en journée, sur une courte fenêtre**, jamais la
+> nuit ni avant une alarme. (3) Même la capture obtenue, forger la réponse suppose d'en
+> implémenter assez pour que le réveil l'accepte, et de savoir s'il authentifie son
+> interlocuteur (question du port `security`, ci-dessus). L'observation est à notre portée ;
+> l'usurpation reste à prouver.
 
 Côté application, les graphiques d'historique ne sont **jamais** construits à partir de
 l'API locale : ils viennent de `com.philips.platform.core.datatypes.Moment`, la couche de
