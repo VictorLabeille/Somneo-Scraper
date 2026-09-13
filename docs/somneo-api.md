@@ -1059,14 +1059,18 @@ Quatre faits, tous en lecture seule, disent le coût de cette capture :
   expose `key` et `nextkey` sans authentification — s'il s'agit du même secret, l'obstacle
   tombe ; rien ne le dit aujourd'hui.
 
-**Se mettre sur le chemin sans la box ni matériel.** La Bbox ne redirige pas de DNS (voir la
-note Obsidian, recherche du 2026-09-13), mais on n'en a pas besoin pour *observer* : la carte
-est déjà sur le même segment que le réveil (elle le découvre en SSDP multicast), et la liaison
-est en clair. Elle peut donc s'intercaler par **empoisonnement ARP** — se faire passer pour la
-passerelle auprès du réveil et pour le réveil auprès de la passerelle —, réacheminer le HTTP
-vers un mandataire qui journalise, et relayer vers Philips. Aucune écriture sur l'appareil,
-aucune config de la box, réversible dès que les entrées ARP expirent. On saurait alors ce que
-contient une ouverture de session, et c'est le même banc d'essai que l'isolement.
+**Se mettre sur le chemin — et ce que ça demande vraiment.** La Bbox ne redirige pas de DNS, et
+son contrôle parental ne bloque pas par nom de domaine (vérifié par Victor le 2026-09-13, voir
+la note Obsidian) : on ne passera pas par elle. La liaison étant en clair et la carte déjà sur
+le segment du réveil (SSDP multicast), l'idée juste reste l'**empoisonnement ARP** depuis la
+carte, réacheminant le HTTP vers un mandataire qui journalise. Mais le repérage du 2026-09-13
+corrige l'optimisme du paragraphe : **la carte n'a ni `tcpdump`, ni `scapy`, ni `iptables`, et
+`sudo` exige un mot de passe.** ARP, `ip_forward` et capture sont tous privilégiés (`CAP_NET_RAW`) :
+sans root, rien ne se renifle, et forcer root sur une carte au chemin de boot fragile va contre
+la règle « réversible à chaud » (`AGENTS.md`). Il faut donc un **vantage disposant de root** —
+soit la carte, en acceptant l'exception, soit un boîtier intercalé dédié. Le détail des voies
+et le choix sont dans la note Obsidian. Ce qui reste vrai : la capture ne demande **aucune
+écriture sur l'appareil**, et c'est le même banc d'essai que l'isolement.
 
 > **Trois réserves avant d'y aller.** (1) Le relevé contient les données de la chambre en cours
 > de téléversement — c'est ce que le projet veut arrêter : il reste sur la carte et ne se verse
