@@ -148,6 +148,23 @@ class Store:
             self._w.execute("UPDATE outage SET end=?, seq=? WHERE id=?",
                             [ts, self._next_seq(), outage_id])
 
+    # ---- gestes en attente (incrément 4) ------------------------------------------------
+    def add_pending_gesture(self, kind: str, ts: float | None = None) -> int:
+        """Un appui reçu pendant que le réveil ne répondait pas : son heure fait foi (cadrage §5)."""
+        ts = ts if ts is not None else time.time()
+        with self._wlock, self._w:
+            cur = self._w.execute(
+                "INSERT INTO pending_gesture (ts, kind, applied) VALUES (?, ?, 0)", [ts, kind])
+        return cur.lastrowid
+
+    def pending_gestures(self) -> list[dict]:
+        conn = self._ro()
+        try:
+            return [dict(r) for r in conn.execute(
+                "SELECT * FROM pending_gesture WHERE applied=0 ORDER BY ts")]
+        finally:
+            conn.close()
+
     # ---- nuits (incrément 2) ------------------------------------------------------------
     def create_night(self, day: str, bedtime: float, raw_tg2bd: str | None,
                      ts: float | None = None) -> int:
@@ -293,6 +310,46 @@ class Store:
             rows = conn.execute(
                 "SELECT * FROM outage WHERE start >= ? OR end IS NULL ORDER BY start DESC",
                 (depuis,)).fetchall()
+            return [dict(r) for r in rows]
+        finally:
+            conn.close()
+
+    def aggregates_between(self, debut: float, fin: float) -> list[dict]:
+        conn = self._ro()
+        try:
+            rows = conn.execute(
+                "SELECT * FROM window_aggregate WHERE ts >= ? AND ts <= ? ORDER BY ts",
+                (debut, fin)).fetchall()
+            return [dict(r) for r in rows]
+        finally:
+            conn.close()
+
+    def changes_since(self, since_seq: int, limit: int = 500) -> list[dict]:
+        """Tout ce qui a été créé OU modifié depuis `since_seq`, dans l'ordre du seq (rattrapage §7).
+
+        Une nuit corrigée voit son seq repris : elle revient ici d'office avec sa valeur à jour."""
+        conn = self._ro()
+        try:
+            items: list[dict] = []
+            for kind, table in (("reading", "reading"), ("aggregate", "window_aggregate"),
+                                ("night", "night"), ("outage", "outage")):
+                for r in conn.execute(
+                        f"SELECT * FROM {table} WHERE seq > ? ORDER BY seq LIMIT ?",
+                        (since_seq, limit)):
+                    d = dict(r)
+                    d["kind"] = kind
+                    items.append(d)
+            items.sort(key=lambda d: d["seq"])
+            return items[:limit]
+        finally:
+            conn.close()
+
+    def nights_before(self, jour_epoch: float, limit: int) -> list[dict]:
+        conn = self._ro()
+        try:
+            rows = conn.execute(
+                "SELECT * FROM night WHERE bedtime < ? ORDER BY bedtime DESC LIMIT ?",
+                (jour_epoch, limit)).fetchall()
             return [dict(r) for r in rows]
         finally:
             conn.close()

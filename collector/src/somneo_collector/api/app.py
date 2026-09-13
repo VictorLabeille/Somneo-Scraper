@@ -146,4 +146,36 @@ def create_app(store: Store, cfg: Config, state: RuntimeState | None = None) -> 
         store.add_night_correction(night_id, c.field, c.value)
         return {"served_at": time.time(), "night": store.get_night(night_id)}
 
+    @app.get("/v1/sync")
+    def sync(before: float | None = None, since_seq: int | None = None,
+             limit: int = Query(500, le=5000)) -> dict:
+        """Rattrapage (§7). `since_seq` : tout ce qui a changé depuis, dans l'ordre. `before` :
+        les nuits récentes d'un jour donné, avec leurs points et agrégats, du plus récent au
+        plus ancien. Le collecteur ne tient aucun état du client : même demande, même contenu."""
+        base = {"served_at": time.time(), "current_seq": store.seq_courant()}
+        if since_seq is not None:
+            items = store.changes_since(since_seq, limit)
+            return {**base, "mode": "since_seq", "since_seq": since_seq,
+                    "count": len(items), "items": items}
+        if before is not None:
+            nuits = store.nights_before(before, limit)
+            for n in nuits:
+                if n.get("bedtime") and n.get("risetime"):
+                    n["readings"] = store.readings_between(n["bedtime"], n["risetime"])
+                    n["aggregates"] = store.aggregates_between(n["bedtime"], n["risetime"])
+            return {**base, "mode": "before", "before": before, "count": len(nuits),
+                    "nights": nuits}
+        raise HTTPException(422, "préciser before=<epoch> ou since_seq=<n>")
+
+    @app.get("/v1/catalog/themes")
+    def catalog_themes() -> dict:
+        """Numéros → noms des thèmes et sons, avec leur source. Ici : l'appareil (ports files/*)."""
+        out: dict[str, dict] = {}
+        for port in ("files/wakeup", "files/lightthemes", "files/dusklightthemes",
+                     "files/winddowndusk"):
+            corps = store.last_port_body(port) or {}
+            out[port.split("/", 1)[1]] = {"source": "appareil",
+                                          "themes": {k: v for k, v in corps.items()}}
+        return {"served_at": time.time(), "catalog": out}
+
     return app

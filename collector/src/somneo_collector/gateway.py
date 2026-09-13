@@ -120,9 +120,34 @@ class DeviceGateway:
     async def run(self, fn: Callable[[], Any]) -> Any:
         """Exécute un appel `pysomneo` arbitraire (écriture de haut niveau), sérialisé.
 
-        Sert aux incréments ultérieurs (relais du pilotage). Passe par le même verrou : une
-        écriture ne double jamais une lecture de collecte."""
+        Sert au relais du pilotage : une écriture ne double jamais une lecture de collecte."""
         return await self._serialise(fn)
+
+    async def put(self, port: str, payload: dict, produit: int = 1) -> Releve:
+        """PUT sérialisé pour les ports que `pysomneo` ne couvre pas (ex. `wungt` : gestes de nuit).
+
+        Ne lève pas : un `422`/`500` revient dans `error`, comme pour `read`."""
+        chemin = _chemin(produit, port)
+
+        def appel() -> Releve:
+            t0 = time.monotonic()
+            try:
+                body = self._somneo._client._internal_call("PUT", chemin, payload=payload)
+                return Releve(produit, port, True, 200, body,
+                              ms=round((time.monotonic() - t0) * 1000, 1),
+                              observed_at=time.time())
+            except SomneoInvalidURLError:
+                return Releve(produit, port, False, 422, error="HTTP 422",
+                              ms=round((time.monotonic() - t0) * 1000, 1))
+            except HTTPError as exc:
+                status = getattr(exc.response, "status_code", None)
+                return Releve(produit, port, False, status, error=f"HTTP {status}",
+                              ms=round((time.monotonic() - t0) * 1000, 1))
+            except (RequestException, OSError) as exc:
+                return Releve(produit, port, False, None, error=f"{type(exc).__name__}: {exc}",
+                              ms=round((time.monotonic() - t0) * 1000, 1))
+
+        return await self._serialise(appel)
 
     def close(self) -> None:
         try:

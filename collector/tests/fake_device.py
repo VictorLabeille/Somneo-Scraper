@@ -55,6 +55,7 @@ class FakeDevice:
         self.total = 0
         self._en_cours = 0
         self._verrou = threading.Lock()
+        self.corps = {k: dict(v) for k, v in CORPS.items()}   # copie par instance : pas de fuite entre tests
         outer = self
 
         class H(BaseHTTPRequestHandler):
@@ -74,7 +75,7 @@ class FakeDevice:
                     return h._json(400, {"error": "Bad Request"})
                 if port == "err500":
                     return h._json(500, {"error": "Timeout"})
-                corps = CORPS.get((produit, port))
+                corps = outer.corps.get((produit, port))
                 if corps is None:
                     return h._json(422, {"error": "No such Port"})
                 h._json(200, corps)
@@ -91,7 +92,24 @@ class FakeDevice:
                     with outer._verrou:
                         outer._en_cours -= 1
 
-            do_PUT = do_GET
+            def do_PUT(h):
+                # applique la charge : fusionne dans le corps du port, pour que la relecture du
+                # relais voie la valeur écrite (test « écrire → relire → confirmer »).
+                n = int(h.headers.get("Content-Length") or 0)
+                try:
+                    charge = json.loads(h.rfile.read(n) or b"{}")
+                except ValueError:
+                    charge = {}
+                parts = h.path.split("/di/v1/products/", 1)
+                if len(parts) == 2:
+                    produit_str, _, port = parts[1].partition("/")
+                    try:
+                        cle = (int(produit_str), port.rstrip("/"))
+                    except ValueError:
+                        cle = None
+                    if cle in outer.corps and isinstance(charge, dict):
+                        outer.corps[cle] = {**outer.corps[cle], **charge}
+                h._json(200, {})
 
             def _json(h, code, obj):
                 b = json.dumps(obj).encode()
