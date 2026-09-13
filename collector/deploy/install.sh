@@ -20,7 +20,11 @@ id somneo &>/dev/null || useradd --system --home "$STATE" --shell /usr/sbin/nolo
 install -d -o somneo -g somneo "$STATE" "$STATE/backups"
 install -d "$PREFIX" "$CONF"
 
-python3 -m venv "$PREFIX/venv"
+# `ensurepip` peut manquer (Debian minimal le sépare : vérifié absent sur la carte le 2026-09-13).
+# `python3 -m venv` échouerait alors. On crée donc le venv SANS pip et on l'amorce par get-pip
+# (la carte a Internet). Portable : marche aussi là où ensurepip est présent.
+python3 -m venv "$PREFIX/venv" --without-pip
+curl -fsS https://bootstrap.pypa.io/get-pip.py | "$PREFIX/venv/bin/python"
 "$PREFIX/venv/bin/pip" install --upgrade pip
 "$PREFIX/venv/bin/pip" install "$PYSOMNEO"
 "$PREFIX/venv/bin/pip" install .
