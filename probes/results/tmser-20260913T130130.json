@@ -1,0 +1,74 @@
+{
+ "sonde": "probes/tmser.py",
+ "T2_tmsrc": [
+  {
+   "valeur": "ntp",
+   "put_status": 200,
+   "persistant": false
+  },
+  {
+   "valeur": "sntp",
+   "put_status": 200,
+   "persistant": false
+  },
+  {
+   "valeur": "http",
+   "put_status": 200,
+   "persistant": false
+  },
+  {
+   "valeur": "net",
+   "put_status": 200,
+   "persistant": false
+  },
+  {
+   "valeur": "srv",
+   "put_status": 200,
+   "persistant": false
+  },
+  {
+   "valeur": "cpp",
+   "put_status": 200,
+   "persistant": false
+  },
+  {
+   "valeur": "cloud",
+   "put_status": 200,
+   "persistant": false
+  },
+  {
+   "valeur": "manual",
+   "put_status": 200,
+   "persistant": false
+  }
+ ],
+ "requetes": [],
+ "mode": "ecriture",
+ "etat_initial": {
+  "tmser": "http://www.noserver.com",
+  "tmsrc": "irq",
+  "url_servie": "http://<ip>:8123/time"
+ },
+ "T1_tmser": {
+  "put_status": 200,
+  "persistant": false,
+  "relu": "http://www.noserver.com"
+ },
+ "T3": {
+  "saute": "tmser non inscriptible : rien a surveiller"
+ },
+ "restauration": {
+  "conforme": true,
+  "champs_remis": []
+ },
+ "effets": [],
+ "fin": {
+  "bilan": {
+   "tmser_inscriptible": false,
+   "tmsrc_acceptes": []
+  },
+  "restaure": true
+ },
+ "date": "2026-09-13",
+ "releve_brut": "tmser-ecriture-20260913T130130.jsonl (non versionne)"
+}

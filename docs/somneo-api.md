@@ -973,11 +973,21 @@ fréquence de −4,6 ppm.
 > minute au bout d'une semaine, cinq minutes au bout d'un mois. Un réveil qui sonne cinq
 > minutes trop tôt est la panne la plus visible que ce projet puisse produire.
 >
-> **La piste `wutms.tmser` est écartée par cette même mesure** : elle n'a jamais bougé pendant
-> vingt corrections. Restent trois voies, aucune essayée — répondre soi-même à la session
-> `DCDeviceClient` (le sinkhole DNS de l'isolement pointerait alors sur la carte), compenser la
-> dérive en décalant l'heure programmée de l'alarme dans `wualm/prfwu`, ou renoncer à corriger
-> et se contenter de signaler l'écart.
+> **La piste `wutms.tmser` — pointer le réveil sur un serveur de temps à nous — est réfutée
+> par la mesure (P2ter, 2026-09-13, `probes/tmser.py`, relevé `probes/results/tmser-20260913T130130.json`).**
+> `PUT wutms {"tmser": "http://<carte>:…"}` rend `200`, et les huit valeurs de `tmsrc` essayées
+> (`ntp`, `sntp`, `http`, `net`, `srv`, `cpp`, `cloud`, `manual`) aussi — mais **aucune n'est
+> appliquée** : la relecture rend toujours `noserver.com` et `irq`. C'est le motif « `200`,
+> valeur jamais prise » déjà vu sur `tg2bd`/`tendb` (§4, `wungt`) : le nom du champ est reconnu
+> (sinon `422`, comme `datetime`), la valeur est jetée. *(Un doute subsiste, non tranché : le
+> réveil étant relié au cloud pendant l'essai, on ne distingue pas « firmware qui ignore » de
+> « cloud qui réécrit dans la seconde ». Le tester une fois isolé demanderait d'être déjà isolé
+> — et resterait sans objet tant qu'on ne sait pas atteindre un serveur.)*
+>
+> Restent donc trois voies, aucune retenue à ce stade — répondre soi-même à la session
+> `DCDeviceClient` (le sinkhole DNS de l'isolement pointerait alors sur la carte ; capture du
+> protocole d'abord, §5), compenser la dérive en décalant l'heure programmée de l'alarme dans
+> `wualm/prfwu`, ou renoncer à corriger et se contenter de signaler l'écart.
 
 **4. Deux horloges, et l'écart entre elles n'est pas constant.**
 

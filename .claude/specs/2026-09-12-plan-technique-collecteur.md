@@ -131,10 +131,9 @@ question ; le dépouillement des journaux de capture y répond sans toucher à l
 événement, pas deux risques distincts. Quatre voies, aucune close, et le choix est à Victor
 (§11, point 12) :
 
-0. **Provisionner le serveur de temps du réveil (P2ter, ci-dessous).** La plus légère, à tenter
-   d'abord : écrire `wutms.tmser` (et un `tmsrc` non-`irq`) pour que le réveil aille chercher
-   l'heure à une URL qu'on tient sur la carte. Si ça marche, on n'a besoin ni de forger le CPP,
-   ni de MITM, ni de boîtier — et le réveil vient à nous, ce qui révèle le protocole au passage.
+0. ~~**Provisionner le serveur de temps du réveil.**~~ **Réfutée le 2026-09-13 (P2ter).**
+   `wutms.tmser` et `tmsrc` répondent `200` mais n'appliquent rien (motif `tg2bd`). Voir
+   ci-dessous.
 1. **Répondre soi-même à la session `DCDeviceClient`.** L'isolement par sinkhole DNS pointerait
    `www.ecdinterface.philips.com` sur la carte, qui rendrait l'heure. Seule voie qui garde
    l'afficheur juste par le chemin d'origine, mais la plus lourde : parler assez de CPP pour que
@@ -167,6 +166,17 @@ l'heure. **Si `tmser`/`tmsrc` sont en lecture seule** (`422`), la piste tombe pr
 retombe sur les voies 1 à 3. Risque faible : écriture de configuration, sans lumière ni son,
 restaurée ; mais c'est une écriture sur l'appareil — **go de Victor requis**, protocole de sonde
 commité avant la mesure comme P1/P2/P3.
+
+**Résultat, 2026-09-13 — réfutée** (`probes/tmser.py`, éprouvée d'abord contre un faux réveil
+avec témoins positifs ; relevé nettoyé `probes/results/tmser-20260913T130130.json`). Ni `422`
+ni écriture appliquée : **`200`, valeur jamais prise**. `PUT wutms {"tmser": …}` → `200`, relu
+`noserver.com` ; les huit `tmsrc` essayés (`ntp`, `sntp`, `http`, `net`, `srv`, `cpp`, `cloud`,
+`manual`) → `200`, relu `irq`. C'est le motif de `tg2bd`/`tendb` (P1) : le nom du champ est
+reconnu, la valeur jetée. **On ne peut pas donner au réveil un serveur de temps par sa config.**
+Restauration : rien à remettre, l'appareil est resté identique. Doute non tranché (§4) : firmware
+qui ignore, ou cloud qui réécrit dans la seconde — indiscernables tant que l'appareil voit le
+cloud. Il reste donc les voies 1 à 3, et la voie 1 (répondre à la session cloud) demande la
+capture du §5, dont le vantage n'est pas encore choisi.
 
 **Reste ouvert, et c'est une mesure, pas un arbitrage** : l'écart entre `time` et `wutim` s'est
 déplacé de +2 s pendant P2, et `wutim` date les nuits. Écriture de `wutms` ou horloge
