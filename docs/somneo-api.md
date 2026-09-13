@@ -1103,6 +1103,28 @@ et le choix sont dans la note Obsidian. Ce qui reste vrai : la capture ne demand
 > interlocuteur (question du port `security`, ci-dessus). L'observation est à notre portée ;
 > l'usurpation reste à prouver.
 
+**Capture réalisée le 2026-09-13** (`probes/relais_cpp.py`, empoisonnement ARP depuis la carte
+avec l'accord de Victor, root ; relevé brut non versionné — corps chiffrés + identité). Ce
+qu'elle établit, et qui change la difficulté de l'usurpation :
+
+- **Le réveil parle à `dcp.dc1.philips.com`** (résolu vers plusieurs EC2 eu-west-1 : `52.17.69.80`,
+  `52.51.219.8`, `34.247.239.46`), pas au `www.ecdinterface.philips.com` du port `backend`. Le
+  chemin actif est **`POST /DcpRequestHandler/index.ashx`** (« DCP » = *Device Cloud Platform*),
+  pas le `DevicePortalICPRequestHandler` que `backend.url` annonce.
+- **Le transport est en clair (HTTP/1.1, port 80) mais la charge est chiffrée** :
+  `Content-Type: application/CB-Encrypted; cipher=AES`, corps de ~5 ko, plus un en-tête
+  `Authorization`. Répondre l'heure ne peut donc pas être un simple texte : il faut **chiffrer
+  la réponse en AES avec la clé du réveil**, et satisfaire `Authorization`.
+- **Le candidat pour cette clé est le port `security`** (`key`/`nextkey`, servis en clair sans
+  authentification) : c'est par là que les émulateurs Hue déchiffrent le CPP. Non vérifié ici —
+  il faudrait déchiffrer une capture avec cette clé pour le confirmer.
+
+Bilan : l'usurpation de l'heure passe de « écrire un petit répondeur » à **« réimplémenter le
+chiffrement CPP (CB-Encrypted/AES) avec la clé de l'appareil »** — un vrai travail de
+rétro-ingénierie cryptographique, possible (précédent Hue, clé exposée) mais incertain. Les
+réponses n'ont pas été captées dans la fenêtre ; le point chiffrement, lui, est tranché par les
+requêtes.
+
 Côté application, les graphiques d'historique ne sont **jamais** construits à partir de
 l'API locale : ils viennent de `com.philips.platform.core.datatypes.Moment`, la couche de
 synchronisation HealthSuite, sous les types `sleepRoomSession`,
