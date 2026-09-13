@@ -121,23 +121,52 @@ question ; le dépouillement des journaux de capture y répond sans toucher à l
 - **Les 20 remises sur 20 suivent une nouvelle ouverture de session cloud** (`backend.lastsignon`).
   Jamais entre deux. Quatorze sessions n'ont rien corrigé — le décalage y était déjà petit.
 - **`tmsrc`, `tmser`, `tmsyn` et `tmupd` n'ont pas varié une seule fois** sur 154 lectures,
-  pendant que l'horloge était corrigée vingt fois. **La piste « rediriger `tmser` vers la
-  carte » est donc écartée** : ce serveur de temps HTTP n'est pas le chemin, c'est de la
-  configuration inerte. Elle n'a pas à être essayée, et aucune écriture n'a été nécessaire pour
-  l'écarter.
+  pendant que l'horloge était corrigée vingt fois. Donc **`tmser` n'est pas le canal du cloud** :
+  la remise passe par la session `DCDeviceClient`, pas par ce serveur de temps, resté à
+  `http://www.noserver.com`. *(Rectification du 2026-09-13 : j'avais d'abord écrit la piste
+  `tmser` « écartée » — trop fort. Que `tmser` soit inerte pendant que le cloud fait le travail
+  ne dit rien de ce qui se passerait si on l'**écrivait**. Voir P2ter.)*
 
 **Ce que cela change au cadrage** : couper l'accès internet et perdre l'heure sont le même
-événement, pas deux risques distincts. Trois voies restent, aucune essayée, et le choix est à
-Victor (§11, point 12) :
+événement, pas deux risques distincts. Quatre voies, aucune close, et le choix est à Victor
+(§11, point 12) :
 
+0. **Provisionner le serveur de temps du réveil (P2ter, ci-dessous).** La plus légère, à tenter
+   d'abord : écrire `wutms.tmser` (et un `tmsrc` non-`irq`) pour que le réveil aille chercher
+   l'heure à une URL qu'on tient sur la carte. Si ça marche, on n'a besoin ni de forger le CPP,
+   ni de MITM, ni de boîtier — et le réveil vient à nous, ce qui révèle le protocole au passage.
 1. **Répondre soi-même à la session `DCDeviceClient`.** L'isolement par sinkhole DNS pointerait
-   `www.ecdinterface.philips.com` sur la carte, qui rendrait l'heure. C'est la seule voie qui
-   garde l'afficheur juste. C'est aussi la plus lourde : il faut parler assez du protocole CPP
-   pour que la session aboutisse, et rien ne dit que ce soit à notre portée.
+   `www.ecdinterface.philips.com` sur la carte, qui rendrait l'heure. Seule voie qui garde
+   l'afficheur juste par le chemin d'origine, mais la plus lourde : parler assez de CPP pour que
+   la session aboutisse, et rien ne dit que ce soit à notre portée. Capture d'abord (§5).
 2. **Compenser par l'alarme.** Décaler l'heure programmée dans `wualm/prfwu` du décalage
    mesuré : l'alarme sonne juste, l'afficheur reste faux. Le collecteur doit alors servir à
    l'app l'heure *voulue*, pas celle posée dans l'appareil — le schéma a déjà le champ pour ça.
 3. **Renoncer à corriger** : mesurer, journaliser, signaler l'écart à l'app.
+
+### P2ter. Provisionner le serveur de temps du réveil — à tester, écriture
+
+Le port `wutms` porte `tmser` (« time server », `http://www.noserver.com` sur notre unité) et
+`tmsrc` (« time source », `irq`). Le nom, le schéma `http://`, et le défaut « noserver »
+suggèrent un champ **fait pour recevoir une URL de serveur de temps** — inutilisé ici parce que
+l'heure vient du cloud. **P2 ne l'a pas testé en écriture** (sa liste couvrait `tzhrm`, `dstwu`,
+`tmsrc`, `tmsyn`, `tmupd`, jamais `tmser`, et n'a réécrit `tmsrc` qu'à `irq`→`irq`).
+
+À établir, depuis la carte, en journée, hors alarme, avec restauration :
+
+1. `PUT wutms {"tmser": "http://<ip-carte>:<port>/…"}` : accepté (`200`) et persistant ?
+2. `PUT wutms {"tmsrc": …}` : quelles valeurs autres que `irq` sont acceptées ? (`ntp`, `sntp`,
+   `http`, `cpp` à essayer — l'appareil répond `422` pour un champ non inscriptible, cf. §4.)
+3. Si `tmser` prend une URL : lever un serveur minimal sur la carte à cette URL, journaliser ce
+   que le réveil demande (chemin, en-têtes, format attendu), et regarder si son horloge se
+   corrige (décalage mesuré comme en P2-1).
+
+**Si ça marche, c'est la solution complète** : le réveil interroge la carte directement (son URL,
+pas de DNS à détourner), on voit son protocole de temps sans MITM ni root, et on lui rend
+l'heure. **Si `tmser`/`tmsrc` sont en lecture seule** (`422`), la piste tombe proprement et on
+retombe sur les voies 1 à 3. Risque faible : écriture de configuration, sans lumière ni son,
+restaurée ; mais c'est une écriture sur l'appareil — **go de Victor requis**, protocole de sonde
+commité avant la mesure comme P1/P2/P3.
 
 **Reste ouvert, et c'est une mesure, pas un arbitrage** : l'écart entre `time` et `wutim` s'est
 déplacé de +2 s pendant P2, et `wutim` date les nuits. Écriture de `wutms` ou horloge

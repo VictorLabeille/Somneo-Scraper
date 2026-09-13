@@ -1043,6 +1043,18 @@ cloud que l'appareil appelle**. Le sens dont on a besoin ici — répondre à la
 l'heure — n'y est pas traité. L'identité du protocole est acquise ; le format exact de la réponse
 de temps pour ce modèle ne l'est pas, et **aucune recherche ne le donnera** : il se capture.
 
+**Ni l'APK de SleepMapper — analysé le 2026-09-13** (`com.philips.src.hss`, dex minés par
+chaînes et classes, sans décompilateur). Ce qu'il contient : la bibliothèque LAN `condor`
+(`com.philips.connectivity.condor`), avec un `TimePort` qui adresse le port local
+`products/0/time` (champs `datetime`, `dst`, `dstchangeover`, `dstoffset`) — c'est le canal
+local, celui que `pysomneo` réimplémente, pas le cloud. L'app cale **sa propre** horloge par
+**SNTP** (`com.philips.platform.appinfra.timesync.TimeSyncSntpClient`, clé de config
+`timesync.ntp.hosts`, défaut `time.googleapis.com`) — le téléphone, pas le réveil. Ce qu'il ne
+contient **pas** sous forme lisible : la couche ICP/CPP (`RequestHandler.ashx`), donc pas le
+message de temps que le réveil reçoit du cloud — obfusqué, côté serveur, ou dans le firmware.
+Conclusion : **l'APK ne raccourcit pas la capture**, et les champs `tmser`/`tmsrc` du port
+`wutms` (propres au firmware Somneo) n'y figurent pas — ils ne se comprennent que sur l'appareil.
+
 Quatre faits, tous en lecture seule, disent le coût de cette capture :
 
 - **La liaison cloud est en clair.** `backend.url` commence par `http://`, pas `https://` : pas
