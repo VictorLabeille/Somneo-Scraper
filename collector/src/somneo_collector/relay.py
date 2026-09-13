@@ -151,7 +151,8 @@ class Relay:
             v = champs.get(nom)
             if v is not None and (refus := _hors_bornes(nom, v, bornes)):
                 return refus
-        payload = {c: champs[c] for c in ("durat", "curve", "ctype", "snddv", "sndch", "sndlv")
+        payload = {c: champs[c] for c in ("durat", "curve", "ctype", "snddv", "sndch", "sndlv",
+                                          "sndss")
                    if champs.get(c) is not None}
         if not payload:
             return _refus("aucun réglage à modifier")
@@ -341,9 +342,12 @@ class Relay:
             return self._injoignable("wualm/prfwu", "relecture du profil impossible")
 
         payload, attendu = {}, {}
+        # sndss (départ en douceur) passe en numéro brut, non borné : mesuré le 2026-09-13
+        # (probes/sndss.py) librement inscriptible et repris verbatim jusqu'à 300, sans effet de
+        # bord ; son SENS reste inconnu, la relecture est son seul garde-fou.
         for cle, champ in (("enabled", "prfen"), ("days", "daynm"), ("ctype", "ctype"),
                            ("curve", "curve"), ("durat", "durat"), ("snddv", "snddv"),
-                           ("sndch", "sndch"), ("sndlv", "sndlv")):
+                           ("sndch", "sndch"), ("sndlv", "sndlv"), ("sndss", "sndss")):
             if champs.get(cle) is not None:
                 payload[champ] = attendu[champ] = champs[cle]
         if champs.get("hour") is not None:

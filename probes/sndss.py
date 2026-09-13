@@ -90,7 +90,9 @@ def essai_port(s, rel, ecrire, relire, valeur, depart, test):
     large1 = instantane(s)
     pris = put["ok"] and apres == valeur
     refuse = not put["ok"]
-    effets = effets_de_bord(large0, large1, ports_ecrits=("wualm", "wualm/prfwu", "wudsk"))
+    # ports ecrits prefixes du produit, comme les cles de l'instantane (1/wualm...) : sinon le
+    # champ qu'on vient d'ecrire est pris pour un effet de bord (modele : selection_profil.py).
+    effets = effets_de_bord(large0, large1, ports_ecrits=("1/wualm", "1/wualm/prfwu", "1/wudsk"))
     rel.ecrire(type=test, valeur=valeur, put_status=put.get("status"), put_ok=put["ok"],
                sndss_relu=apres, pris=pris, refuse=refuse, effets=effets)
     print(f"{test} sndss={valeur:>3} : put {put.get('status')} relu={apres} "

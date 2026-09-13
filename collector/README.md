@@ -11,8 +11,9 @@ SQLite. Back-end de SleepMaxxer. **Le fonctionnel et les décisions sont dans le
 est de fait couvert par l'incrément 1. **Incrément 4 (relais du pilotage) écrit** : gestes de
 nuit (`POST /v1/nights/bedtime|risetime`, appui retenu puis rejoué si le réveil ne répond pas),
 lumière, veilleuse, coucher de soleil (marche/arrêt et réglages), rappel, alarmes (lecture,
-création, édition, masquage), et le miroir `GET /v1/device`. Seul `sndss` (départ en douceur)
-attend une mesure sur l'appareil (`probes/sndss.py`) avant d'être écrit. 106 tests. **Reste** le
+création, édition, masquage), et le miroir `GET /v1/device`. Le départ en douceur (`sndss`) a été
+mesuré sur l'appareil (`probes/sndss.py`, 2026-09-13) et est relayé en numéro brut ; son sens
+physique reste inconnu, à ne pas surfacer côté app avant de l'établir. 108 tests. **Reste** le
 critère du plan §10 pour chaque incrément déployé (*tourne sept jours*, etc.), qui se constate
 après déploiement sur la carte, et — critère propre à l'incrément 4 — la validation *sur
 l'appareil* qu'aucune écriture n'a d'effet non demandé (le faux réveil ne peut pas la donner).

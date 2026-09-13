@@ -83,8 +83,9 @@ plan technique. Deux règles tiennent la connexion unique au réveil **par const
   wualm/prfwu` direct**, partiel, en numéros bruts (pas les cinq méthodes `pysomneo`, découpées et
   basées sur des noms). C'est le même `PUT` que `pysomneo` émet ; motivé et daté au plan §7
   (2026-09-13). L'API du collecteur porte les numéros bruts de thème/son ; l'app les tient du
-  catalogue. `sndss` (départ en douceur) n'est **pas** écrit tant que `probes/sndss.py` ne l'a pas
-  mesuré (sens et bornes inconnus).
+  catalogue. `sndss` (départ en douceur) est mesuré (`probes/sndss.py`, 2026-09-13) : inscriptible,
+  non borné, sens physique inconnu — relayé en numéro brut relu-confirmé, à ne pas surfacer côté
+  app tant que la correspondance n'est pas établie (comme `lgtds`).
 - **Une boucle de restauration doit abandonner quand l'écriture est refusée.** Celle de
   `probes/ecriture_heure.py` réessaie jusqu'à ce que l'horloge revienne à sa valeur d'origine :
   comme `datetime` n'est pas inscriptible, elle a envoyé **489 `PUT` refusés en une demi-heure**

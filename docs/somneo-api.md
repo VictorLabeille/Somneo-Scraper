@@ -403,6 +403,16 @@ en douceur), `pwrsz`/`pszhr`/`pszmn` (PowerWake), `snztm` (snooze), `lgtds`.
 Masque `daynm` : bit 1 = lundi … bit 7 = dimanche. `62` = jours ouvrés, `192` = week-end,
 `254` = tous les jours, `0` = demain uniquement.
 
+**`sndss` (« départ en douceur ») — inscriptible, non borné, sens inconnu, mesuré le 2026-09-13**
+(`probes/sndss.py --ecriture`, relevé nettoyé `probes/results/sndss-20260913.json`). Écrit sur un
+profil dormant (`wualm/prfwu`) et sur le coucher de soleil (`wudsk`, éteint), `0, 1, 100, 200, 255`
+et **`300` sont tous acceptés** (`200 OK`) et **repris verbatim** à la relecture ; aucun `422`,
+aucune borne appliquée jusqu'à `300` ; aucun effet sur un autre port. Au repos, les seize profils
+d'alarme le portent à `0` et le coucher de soleil à `200`. On sait donc l'**écrire** — le collecteur
+le relaie en numéro brut, relu-confirmé — mais **pas ce qu'il commande physiquement** : le mesurer
+demanderait de faire réellement démarrer une alarme et d'observer la montée du son, ce qui n'a pas
+été fait. À laisser hors de l'interface tant que la correspondance n'est pas établie (comme `lgtds`).
+
 **Lire un profil, c'est le sélectionner — et c'est sans effet, mesuré le 2026-09-12**
 (`probes/selection_profil.py`, relevé nettoyé
 `probes/results/selection-profil-20260912T212537.json`). Le détail d'un profil ne se lit qu'après l'avoir sélectionné :

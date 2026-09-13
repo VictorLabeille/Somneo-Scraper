@@ -60,6 +60,7 @@ class SunsetSettings(BaseModel):
     snddv: str | None = None
     sndch: str | None = None
     sndlv: StrictInt | None = None         # volume (1-25)
+    sndss: StrictInt | None = None         # départ en douceur, numéro brut non borné (sens inconnu)
 
 
 class PowerWake(BaseModel):
@@ -81,6 +82,7 @@ class AlarmEdit(BaseModel):
     snddv: str | None = None               # source sonore (ex. "wus", "fmr", "off")
     sndch: str | None = None               # canal / piste
     sndlv: StrictInt | None = None         # volume (1-25)
+    sndss: StrictInt | None = None         # départ en douceur, numéro brut non borné (sens inconnu)
     powerwake: PowerWake | None = None
 
 

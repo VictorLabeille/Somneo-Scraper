@@ -1,0 +1,164 @@
+{
+  "sonde": "sndss.py --ecriture",
+  "date": "2026-09-13",
+  "appareil": "Philips Somneo HF3671/01",
+  "note": "Releve nettoye : la sonde n'enregistre aucune heure d'alarme (effets vide, ecart vide). Horodatages retires.",
+  "etat_initial": {
+    "stable": true,
+    "wualm_prfwu.sndss_tous_profils": 0,
+    "wudsk.sndss": 200,
+    "wudsk.onoff": false
+  },
+  "choix": {
+    "type": "choix",
+    "dormant": 3,
+    "profil_initial": 1,
+    "sndss_profil_depart": 0,
+    "sndss_wudsk_depart": 200
+  },
+  "essais": [
+    {
+      "type": "S-2",
+      "valeur": 0,
+      "put_status": 200,
+      "put_ok": true,
+      "sndss_relu": 0,
+      "pris": true,
+      "refuse": false,
+      "effets": []
+    },
+    {
+      "type": "S-2",
+      "valeur": 1,
+      "put_status": 200,
+      "put_ok": true,
+      "sndss_relu": 1,
+      "pris": true,
+      "refuse": false,
+      "effets": []
+    },
+    {
+      "type": "S-2",
+      "valeur": 100,
+      "put_status": 200,
+      "put_ok": true,
+      "sndss_relu": 100,
+      "pris": true,
+      "refuse": false,
+      "effets": []
+    },
+    {
+      "type": "S-2",
+      "valeur": 200,
+      "put_status": 200,
+      "put_ok": true,
+      "sndss_relu": 200,
+      "pris": true,
+      "refuse": false,
+      "effets": []
+    },
+    {
+      "type": "S-2",
+      "valeur": 255,
+      "put_status": 200,
+      "put_ok": true,
+      "sndss_relu": 255,
+      "pris": true,
+      "refuse": false,
+      "effets": []
+    },
+    {
+      "type": "S-2",
+      "valeur": 300,
+      "put_status": 200,
+      "put_ok": true,
+      "sndss_relu": 300,
+      "pris": true,
+      "refuse": false,
+      "effets": []
+    },
+    {
+      "type": "S-3",
+      "valeur": 0,
+      "put_status": 200,
+      "put_ok": true,
+      "sndss_relu": 0,
+      "pris": true,
+      "refuse": false,
+      "effets": []
+    },
+    {
+      "type": "S-3",
+      "valeur": 1,
+      "put_status": 200,
+      "put_ok": true,
+      "sndss_relu": 1,
+      "pris": true,
+      "refuse": false,
+      "effets": []
+    },
+    {
+      "type": "S-3",
+      "valeur": 100,
+      "put_status": 200,
+      "put_ok": true,
+      "sndss_relu": 100,
+      "pris": true,
+      "refuse": false,
+      "effets": []
+    },
+    {
+      "type": "S-3",
+      "valeur": 200,
+      "put_status": 200,
+      "put_ok": true,
+      "sndss_relu": 200,
+      "pris": true,
+      "refuse": false,
+      "effets": []
+    },
+    {
+      "type": "S-3",
+      "valeur": 255,
+      "put_status": 200,
+      "put_ok": true,
+      "sndss_relu": 255,
+      "pris": true,
+      "refuse": false,
+      "effets": []
+    },
+    {
+      "type": "S-3",
+      "valeur": 300,
+      "put_status": 200,
+      "put_ok": true,
+      "sndss_relu": 300,
+      "pris": true,
+      "refuse": false,
+      "effets": []
+    }
+  ],
+  "restauration": [
+    {
+      "type": "restauration",
+      "port": "wualm/prfwu.sndss",
+      "conforme": true,
+      "cible": 0,
+      "relu": 0
+    },
+    {
+      "type": "restauration",
+      "port": "wudsk.sndss",
+      "conforme": true,
+      "cible": 200,
+      "relu": 200
+    }
+  ],
+  "fin": {
+    "type": "fin",
+    "restauration_profil": true,
+    "restauration_wudsk": true,
+    "arrete_avant_la_fin": false
+  },
+  "conclusion": "sndss est librement inscriptible sur wualm/prfwu (profil dormant) et sur wudsk : 0, 1, 100, 200, 255 et 300 sont tous acceptes (200 OK) et repris verbatim a la relecture ; aucun 422, aucune borne appliquee jusqu'a 300 ; aucun effet sur un autre port. Le SENS physique du champ reste inconnu (tous les profils a 0, coucher de soleil a 200) : mesure du comment, pas du quoi."
+}

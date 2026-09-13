@@ -385,6 +385,19 @@ async def test_set_alarm_theme_son_passent_en_numeros(banc):
         (3, 20, 30, "fmr", "2", 8)
 
 
+async def test_set_alarm_sndss_passe_en_numero_brut(banc):
+    """sndss (départ en douceur) : passe-through non borné, relu-confirmé. Mesuré librement
+    inscriptible sur l'appareil le 2026-09-13 (probes/results/sndss-20260913.json)."""
+    res = await banc.relay.set_alarm(2, {"sndss": 200})
+    assert res.status == 200 and res.body["profile"]["sndss"] == 200
+    assert banc.fake.profils[2]["sndss"] == 200
+
+
+async def test_sunset_settings_sndss(banc):
+    res = await banc.relay.sunset_settings({"sndss": 100})
+    assert res.status == 200 and res.body["state"]["sndss"] == 100
+
+
 @pytest.mark.parametrize("champs", [
     {"hour": 24}, {"minute": 60}, {"days": 255}, {"durat": 4}, {"durat": 41},
     {"curve": 0}, {"curve": 26}, {"sndlv": 0}, {"sndlv": 26},

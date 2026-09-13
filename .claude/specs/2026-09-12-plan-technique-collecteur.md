@@ -601,10 +601,11 @@ la seule façon de vérifier un champ que `aenvs`/`aalms` ne portent pas (thème
   réglages conservés. **Créer** (`POST /v1/alarms`) rend visible le premier emplacement masqué
   (`prfvs: true`), **désactivé** (`prfen: false`, pas d'alarme armée à une heure d'usine) ; seize
   visibles → `409`, jamais d'écrasement.
-- **`sndss` (départ en douceur) reste à mesurer** avant d'être écrit : son sens et ses bornes ne
-  sont pas établis (une valeur `200` vue une fois dans `wudsk`), SleepMapper ne l'expose pas. 4b
-  l'ignore ; une sonde (`probes/sndss.py`) le mesurera d'abord (comme `lgtds`, encore ouvert). Le
-  champ est servi en lecture dans le profil, jamais écrit.
+- **`sndss` (départ en douceur) — mesuré le 2026-09-13** (`probes/sndss.py`, `docs/somneo-api.md`
+  §4) : librement inscriptible sur `wualm/prfwu` et `wudsk`, repris verbatim jusqu'à `300`, sans
+  borne ni effet de bord ; son **sens physique reste inconnu**. Le relais le **relaie en numéro
+  brut**, non borné, relu-confirmé (comme `ctype`/`sndch`) ; c'est à l'app de ne pas le surfacer
+  tant que la correspondance n'est pas établie (comme `lgtds`).
 
 **Le coucher de soleil pendant qu'il tourne — tranché le 2026-09-13** : régler ses paramètres
 (`PUT /v1/sunset` avec des réglages) pendant qu'il est allumé l'**arrête, applique, puis le
