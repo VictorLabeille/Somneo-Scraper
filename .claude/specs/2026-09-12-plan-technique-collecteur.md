@@ -86,6 +86,50 @@ l'effet invisible. **En journée, jamais le soir.**
 
 Tant que P2 n'est pas fait, le collecteur **mesure** la dérive sans rien corriger (§6).
 
+**Résultat, 2026-09-12 et 2026-09-13** (`docs/somneo-api.md` §4, « L'heure en écriture ») :
+**l'heure ne s'écrit pas.** `PUT products/0/time {"datetime": …}` est refusé `422 Invalid
+parameter` **500 fois sur 500**, sous trois formes, de l'heure juste au recul d'une minute ;
+l'horloge n'a pas bougé d'un centième. `dstoffset` et `dstchangeover` sont refusés de même,
+`dstchangeover` y compris avec la chaîne exacte que l'appareil vient de rendre — ce ne sont pas
+des formats mal écrits, ce sont des champs en lecture seule. Ce qui accepte l'écriture :
+`time.timezone`, `time.dst`, `wutms.tzhrm`, `tmsrc`, `tmsyn`, `tmupd` (réécrits à l'identique,
+`200`, rien d'autre n'a bougé sur quinze ports).
+
+Et la dérive est chiffrée : **+9,9 s/jour** (médiane de 15 segments, 153 lectures horaires sur
+159 h, `probes/derive_horloge.py`), avec **une remise à l'heure spontanée toutes les 8 h
+environ** tant que la liaison cloud est debout. Isolé, le réveil dépasse donc le seuil de 10 s
+(§6) **en un jour**, une minute en une semaine, cinq minutes en un mois — et le collecteur n'a
+aucun moyen de le corriger.
+
+Trois conséquences immédiates :
+
+1. **Le §2.E du cadrage est en question**, pas seulement précisé : la remise à l'heure n'est
+   plus une fonction qu'on code, c'est un problème ouvert. À rouvrir avec Victor.
+2. **§6 tient tel quel pour la partie mesure** — elle devient même la seule chose que le
+   collecteur sache faire de l'horloge — et le seuil de 10 s garde son sens : il dit quand
+   signaler, à défaut de corriger.
+3. **L'incrément 5 (« Remise à l'heure », §10) n'a plus d'objet** tant qu'une voie d'écriture
+   n'est pas trouvée. Il devient « surveillance de l'horloge », et l'alerte remplace la
+   correction.
+
+### P2bis. Par où l'heure pourrait entrer — à proposer avant d'écrire
+
+Le réveil se remet seul à l'heure : la fonction existe dans le firmware, elle n'est simplement
+pas exposée par `PUT time`. Deux choses restent à établir, et **la première est en lecture
+seule** :
+
+1. **Quel champ bouge au moment d'une remise.** Suivre `products/0/time`, `wutim` et `wutms`
+   toutes les ~30 s pendant une dizaine d'heures : une remise tombe toutes les 8 h en médiane,
+   on en attrape une ou deux. Si `tmupd` ou `tmsyn` changent à cet instant, on tient le
+   mécanisme. La même mesure tranche l'autre question laissée ouverte par P2 — l'écart entre
+   `time` et `wutim` s'est déplacé de +2 s pendant la sonde, et on ne sait pas si c'est une
+   écriture de `wutms` qui l'a bousculé ou si cette horloge se promène seule. Aucune écriture,
+   aucun risque ; le coût est que `capture.py` s'arrête pendant ce temps.
+2. **Rediriger `wutms.tmser`** (`http://www.noserver.com`) vers un service de temps sur la
+   carte, et voir si le réveil s'y adresse. `tmser` n'a jamais été écrit — il n'était pas dans
+   la liste des champs de P2. C'est une écriture, sur la configuration de l'heure d'un appareil
+   en service : **elle ne se fait pas sans l'accord de Victor**, et pas avant le point 1.
+
 ### P3. La lecture d'un profil d'alarme
 
 `pysomneo` lit le détail d'un profil en le sélectionnant : `PUT wualm {"prfnr": n}`
@@ -359,8 +403,15 @@ correction ne produit jamais « estimé » : elle produit « corrigé ».
   l'écart, au point milieu de la requête. **Chaque contrôle est journalisé**, pas seulement
   ceux qui précèdent une correction : c'est la courbe de dérive du réveil isolé, la seule
   mesure qu'on en aura.
+- **Ce que la mesure du 2026-09-13 impose** : le réveil avance de **~9,9 s/jour** et
+  `datetime` ne s'écrit pas (§1, P2). La correction n'a donc pas de code à écrire tant que
+  P2bis n'a pas trouvé de voie ; la surveillance, elle, devient la seule chose qu'on sache
+  faire, et le seuil de 10 s sert à **signaler** au lieu de déclencher. Tant que le réveil voit
+  le cloud, il se remet seul à l'heure toutes les ~8 h et le seuil n'est jamais atteint : le
+  jour où il l'est en permanence, c'est que l'isolement a pris effet. **Cette bascule est
+  elle-même un fait à journaliser.**
 - **Une fois par jour, en journée** (12 h – 18 h), il corrige si l'écart dépasse **10 s**
-  (tranché le 2026-09-12), et seulement si :
+  (tranché le 2026-09-12) — **si une voie d'écriture existe** —, et seulement si :
   - l'horloge de la carte est synchronisée (`timedatectl` : `NTPSynchronized=yes`) — sinon il
     ne corrige rien et le signale ;
   - aucune nuit n'est ouverte ;
@@ -370,7 +421,7 @@ correction ne produit jamais « estimé » : elle produit « corrigé ».
   lecture seule et n'attend pas P2 : elle doit être **en service avant le 25 octobre**. Si
   l'isolement n'est pas fait d'ici là, on observera un réveil encore relié au cloud, ce qui
   reste utile : c'est la référence à laquelle comparer le printemps suivant.
-- **Le code de correction attend P2** (§1).
+- **Le code de correction attend P2bis** (§1) : P2 a montré qu'il n'y a rien à coder.
 
 ---
 
@@ -498,7 +549,7 @@ du schéma des nuits ; P3 conditionne l'instantané des profils.
 | **2. Nuits** | machine à états, en lecture seule (gestes faits par SleepMapper), `/v1/nights`, corrections | une nuit « coucher, lever, recoucher » donne deux sessions |
 | **3. Rattrapage et mDNS** | `/v1/sync`, `/v1/catalog/themes`, annonce mDNS | contrat validé côté SleepMaxxer |
 | **4. Relais du pilotage** | gestes (après P1), lumière, coucher de soleil, alarmes | chaque écriture relue ; aucune n'a eu d'effet que l'utilisateur n'a pas demandé |
-| **5. Remise à l'heure** | correction quotidienne (après P2) | un mois sans dérive au-delà du seuil |
+| **5. Horloge** | ~~correction quotidienne~~ → surveillance et alerte (§6) ; la correction attend P2bis | la courbe de dérive est complète, et l'alerte part au franchissement du seuil |
 
 Puis, hors code : l'isolement à la box, **une fois l'historique en train de se constituer**.
 

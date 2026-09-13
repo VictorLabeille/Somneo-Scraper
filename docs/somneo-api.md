@@ -864,6 +864,129 @@ la docstring ne décrit donc aucune conversion, elle est simplement fausse.
 **`wulgt`** : `ltlvl` (0-25), `onoff`, `ngtlt` (veilleuse), `ctype`, `tempy`, `diman`, `pwmon`.
 **`wufmp/00`** : dictionnaire `"1".."5"` → fréquence en MHz.
 
+### L'heure en écriture — mesuré les 2026-09-12 et 2026-09-13
+
+Le projet supposait depuis le début qu'on pouvait remettre le réveil à l'heure : c'est la
+fonction que la coupure d'internet rend nécessaire, et le cadrage l'attribuait au collecteur.
+La supposition venait de l'APK, elle n'avait jamais été mesurée ici. **Elle est fausse.**
+
+Sonde `probes/ecriture_heure.py`, relevés nettoyés `probes/results/ecriture-heure-20260912T215626.json`
+(écriture, le 2026-09-12 au soir) et `ecriture-heure-lecture-20260913T111752.json` (lecture
+seule, le lendemain matin).
+
+**La méthode d'abord**, parce que tout le reste en dépend. Le réveil ne donne l'heure qu'à la
+seconde : réécrire l'heure juste ne prouverait rien, une écriture ignorée ressemble à une
+écriture appliquée. On mesure donc le **décalage** entre l'horloge du réveil et celle de la
+carte (synchronisée NTP, offset 2 ms, jitter 7 ms) en le lisant en boucle sur une connexion
+réutilisée et en guettant l'instant où sa seconde change : à cet instant, l'heure du réveil
+vaut exactement la nouvelle seconde. Incertitude **±0,035 s**, dispersion **0,02 à 0,04 s** sur cinq
+mesures — assez pour voir un déplacement d'une demi-seconde.
+
+**1. `datetime` ne s'écrit pas.**
+
+| Écriture | Réponse | Essais |
+| --- | --- | --- |
+| `PUT time {"datetime": "…+02:00"}` (heure locale) | `422 {"error":"Invalid parameter"}` | 498 |
+| `PUT time {"datetime": "…Z"}` (UTC) | `422 {"error":"Invalid parameter"}` | 1 |
+| `PUT time {"datetime": "…"}` (sans décalage) | `422 {"error":"Invalid parameter"}` | 1 |
+
+500 refus sur 500, sous trois formes, pour des cibles allant de l'heure juste à un recul d'une
+minute. Le décalage de l'horloge n'a jamais bougé de plus de 0,034 s d'une écriture — c'est le
+bruit de la mesure. Le témoin positif grossier (reculer l'horloge de 60 s, effet visible sur
+l'afficheur) n'a rien produit non plus : **l'appareil n'a pas été mis à une autre heure une
+seule fois pendant la sonde.**
+
+**2. Champ par champ**, chacun réécrit à sa propre valeur relue (P2-2) :
+
+| Port | Champ | Réponse |
+| --- | --- | --- |
+| `time` | `timezone` | `200` |
+| `time` | `dst` | `200` |
+| `time` | `dstoffset` | `422 {"error":"Invalid parameter"}` |
+| `time` | `dstchangeover` | `422 {"error":"Invalid parameter"}` |
+| `time` | `calday` | `422 {"error":"Unknown property"}` |
+| `wutms` | `tzhrm` | `200` |
+| `wutms` | `dstwu` | `422 {"error":"No such Property"}` |
+| `wutms` | `tmsrc`, `tmsyn`, `tmupd` | `200` |
+
+Aucun champ relu n'avait changé, et aucun autre champ n'avait bougé — ni sur `time`, ni sur
+`wutms`, ni sur les treize autres ports de l'instantané, sur toute la durée de la sonde.
+
+Deux messages d'erreur, et ils ne disent pas la même chose. `calday` et `dstwu` sont **lus**
+dans le corps du port mais **inconnus en écriture** (« Unknown property », « No such
+Property ») : ils ne sont pas dans le schéma d'écriture. `datetime`, `dstoffset` et
+`dstchangeover` répondent « Invalid parameter » : le nom est connu, la valeur est refusée.
+On pourrait croire à un problème de format — mais `dstchangeover` a été refusé **trois fois,
+dont deux avec la chaîne exacte que l'appareil venait de renvoyer**, octet pour octet. Ce
+n'est donc pas la forme de la valeur : ces trois champs sont en lecture seule, et
+« Invalid parameter » est ce que le firmware répond pour un champ qu'il n'écrit pas.
+
+**3. Le réveil dérive d'environ 10 s par jour, et se remet seul à l'heure.**
+
+P2-7 devait guetter pendant une heure si l'horloge, déplacée d'une demi-seconde, revenait
+seule à sa place — signe d'une resynchronisation. Comme rien n'avait été déplacé, cette heure a
+mesuré autre chose, de plus utile : la dérive libre. Le décalage est passé de +1,81 s à +2,22 s en une heure, soit **+0,39 s/h**, sans
+qu'aucune écriture n'aboutisse.
+
+Un seul créneau d'une heure ne fait pas une courbe. Le reste vient des journaux de la campagne
+de capture, qui lit `products/0/time` une fois par heure depuis le 2026-09-06 : **153 lectures
+sur 159 h**, dépouillées par `probes/derive_horloge.py` (lecture seule, pas une requête de plus
+à l'appareil), relevé `probes/results/derive-horloge-20260913.json`.
+
+| Mesure | Valeur |
+| --- | --- |
+| Pente entre deux remises, médiane de 15 segments d'au moins 5 points | **+9,9 s/jour** (3,3 à 12,5) |
+| Remises à l'heure spontanées, vers le bas | **20 en 159 h**, soit une toutes les 8 h en médiane (1,9 h à 15,5 h) |
+| Amplitude d'une remise | −1,1 s à −5,2 s |
+| Décalage après une remise | −1,3 s à +0,6 s |
+| Décalage extrême observé sur toute la semaine | −1,3 s à +5,2 s |
+
+La pente de P2-7 (+0,39 s/h, soit +9,4 s/jour) tombe au milieu de cette distribution : les deux
+mesures, indépendantes, se recoupent. Le réveil **avance** d'environ 10 s par jour — 115 ppm,
+un quartz médiocre — et quelque chose le ramène à zéro toutes les quelques heures.
+
+Ce quelque chose n'est pas identifié, mais il n'est pas dans le réseau local : `tmsrc` vaut
+`irq` et `tmser` `http://www.noserver.com`, et l'appareil était encore abonné au cloud pendant
+toute la mesure (`backend.dcs-state: subscribed`). **C'est donc la liaison Philips qui tient
+l'horloge à l'heure** — celle-là même que le projet veut couper. La carte, elle, n'est pas en
+cause : `timedatectl` la donne synchronisée, à 2 ms, avec une correction de fréquence de
+−4,6 ppm.
+
+> **Conséquence pour le collecteur.** Une fois le réveil isolé, plus rien ne corrige cette
+> dérive, et l'API ne donne aucun moyen de la corriger : dix secondes au bout d'un jour, une
+> minute au bout d'une semaine, cinq minutes au bout d'un mois. Un réveil qui sonne cinq
+> minutes trop tôt est la panne la plus visible que ce projet puisse produire. Le moyen de
+> poser l'heure reste à trouver — la piste ouverte est `wutms.tmser`, le serveur de temps, qui
+> accepte peut-être d'être redirigé vers la carte ; il n'a pas été essayé.
+
+**4. Deux horloges, et l'écart entre elles n'est pas constant.**
+
+L'horloge décomposée `wutim` — celle qui date les nuits dans `wungt` — retarde sur le port
+`time`, mais pas d'une valeur fixe :
+
+| Instant | `time` − carte | `wutim` − carte | `time` − `wutim` |
+| --- | --- | --- | --- |
+| 2026-09-12, début de la sonde | +1,81 s | −2,88 s | **4,70 s** |
+| 2026-09-12, après les six écritures acceptées | ≈ +1,84 s | ≈ −0,91 s | **≈ 2,75 s** |
+| 2026-09-13, lecture seule le lendemain | +0,38 s | −1,69 s | **2,07 s** |
+
+Le saut de `wutim` a été vu **au centième, trois fois de suite** (+1,97 s, +2,00 s, +1,98 s),
+entre la mesure initiale et le premier déplacement — `wutim` n'est lu qu'à ces deux moments.
+Sa cause n'est pas isolée. Dans cet intervalle, les seules écritures **acceptées** sont les six
+réécritures à l'identique de P2-2 (`time.timezone`, `time.dst`, `wutms.tzhrm`, `tmsrc`, `tmsyn`,
+`tmupd`) ; les douze autres ont été refusées en `422`, et un refus n'est pas censé déplacer
+une horloge. P1 avait mesuré ~4,5 s d'écart quelques minutes plus tôt. Les deux lectures que ce
+document peut opposer :
+
+- soit une réécriture de `wutms`, même à l'identique, bouscule l'horloge décomposée ;
+- soit `wutim` n'est pas une horloge qui bat, mais une valeur rafraîchie par à-coups, dont
+  l'instant de bascule apparent se promène.
+
+Trancher demande une mesure **en lecture seule** des deux horloges sur plusieurs heures, sans
+la moindre écriture. Tant que ce n'est pas fait, **une heure de nuit lue dans `wungt` porte une
+incertitude de quelques secondes** qu'on ne sait pas modéliser, et qui ne se corrige pas en
+soustrayant un décalage constant.
+
 ## 5. Ce que l'application fait via le cloud — le point qui change le projet
 
 Le port `dataupload` du produit 1 décrit une collecte **poussée vers Philips** :
@@ -1259,8 +1382,11 @@ n'est plus nécessaire.
   est également exposé. Le réveil n'a aucun contrôle d'accès sur le LAN : raison
   supplémentaire de l'isoler.
 - **`tmser` vaut `http://www.noserver.com`** et `tmsrc` vaut `irq` : l'heure ne vient pas
-  d'un NTP configurable mais de la liaison cloud. À surveiller après l'isolement — c'est le
-  risque le plus concret de la coupure d'internet (dérive de l'horloge, changement d'heure).
+  d'un NTP configurable mais de la liaison cloud. **Mesuré depuis** (§4, « L'heure en
+  écriture ») : le réveil avance de ~10 s par jour et la liaison Philips le remet seul à
+  l'heure toutes les 8 h environ ; `PUT products/0/time {"datetime": …}` est refusé, 500 fois
+  sur 500. C'est le risque le plus concret de la coupure d'internet, et il n'a pas de parade
+  connue à ce jour.
 - **`pysomneo` couvre 11 des 21 ports** et ignore notamment `wungt`, donc tout le suivi de
   sommeil. Il faudra des appels directs en complément — voir la colonne du §4, et le §8 pour
   ce qui mérite de remonter en amont.

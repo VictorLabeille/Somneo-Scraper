@@ -1,0 +1,612 @@
+{
+ "sonde": "probes/ecriture_heure.py",
+ "convention": "decalages en secondes : horloge du reveil - horloge de la carte (NTP)",
+ "mode": "ecriture",
+ "P2-1": {
+  "mesures": [
+   {
+    "decalage_s": 1.8125499999999999,
+    "incertitudes_s": [
+     0.034,
+     0.034
+    ]
+   },
+   {
+    "decalage_s": 1.8151000000000002,
+    "incertitudes_s": [
+     0.033,
+     0.034
+    ]
+   },
+   {
+    "decalage_s": 1.8106,
+    "incertitudes_s": [
+     0.034,
+     0.034
+    ]
+   },
+   {
+    "decalage_s": 1.8231,
+    "incertitudes_s": [
+     0.033,
+     0.034
+    ]
+   },
+   {
+    "decalage_s": 1.8016,
+    "incertitudes_s": [
+     0.034,
+     0.032
+    ]
+   }
+  ],
+  "origine_s": 1.8125499999999999,
+  "dispersion_s": 0.0215,
+  "origine_wutim_s": -2.88335,
+  "time_initial": {
+   "dst": "+01:00",
+   "dstchangeover": "2026-10-25T03:00:00+02:00",
+   "dstoffset": "-01:00",
+   "timezone": "+01:00",
+   "calday": 6
+  },
+  "wutms_initial": {
+   "fmthr": true,
+   "fmtwk": true,
+   "tmupd": 0,
+   "tzhrm": [
+    2,
+    0
+   ],
+   "dstwu": -60,
+   "tmsrc": "irq",
+   "tmsyn": "00:00",
+   "tmser": "http://www.noserver.com",
+   "locat": ""
+  }
+ },
+ "P2-2": {
+  "resultats": [
+   {
+    "port": "time",
+    "champ": "timezone",
+    "absent": false,
+    "put": {
+     "methode": "PUT",
+     "port": "time",
+     "status": 200,
+     "ms": 11.8,
+     "ok": true
+    },
+    "put_corps": null,
+    "relu_inchange": true,
+    "autres_inchanges": true
+   },
+   {
+    "port": "time",
+    "champ": "dst",
+    "absent": false,
+    "put": {
+     "methode": "PUT",
+     "port": "time",
+     "status": 200,
+     "ms": 15.9,
+     "ok": true
+    },
+    "put_corps": null,
+    "relu_inchange": true,
+    "autres_inchanges": true
+   },
+   {
+    "port": "time",
+    "champ": "dstoffset",
+    "absent": false,
+    "put": {
+     "methode": "PUT",
+     "port": "time",
+     "status": 422,
+     "ms": 11.7,
+     "ok": false,
+     "error": "HTTP 422"
+    },
+    "put_corps": {
+     "error": "Invalid parameter"
+    },
+    "relu_inchange": true,
+    "autres_inchanges": true
+   },
+   {
+    "port": "time",
+    "champ": "dstchangeover",
+    "absent": false,
+    "put": {
+     "methode": "PUT",
+     "port": "time",
+     "status": 422,
+     "ms": 11.7,
+     "ok": false,
+     "error": "HTTP 422"
+    },
+    "put_corps": {
+     "error": "Invalid parameter"
+    },
+    "relu_inchange": true,
+    "autres_inchanges": true
+   },
+   {
+    "port": "time",
+    "champ": "calday",
+    "absent": false,
+    "put": {
+     "methode": "PUT",
+     "port": "time",
+     "status": 422,
+     "ms": 59.7,
+     "ok": false,
+     "error": "HTTP 422"
+    },
+    "put_corps": {
+     "error": "Unknown property"
+    },
+    "relu_inchange": true,
+    "autres_inchanges": true
+   },
+   {
+    "port": "wutms",
+    "champ": "tzhrm",
+    "absent": false,
+    "put": {
+     "methode": "PUT",
+     "port": "wutms",
+     "status": 200,
+     "ms": 31.6,
+     "ok": true
+    },
+    "put_corps": null,
+    "relu_inchange": true,
+    "autres_inchanges": true
+   },
+   {
+    "port": "wutms",
+    "champ": "dstwu",
+    "absent": false,
+    "put": {
+     "methode": "PUT",
+     "port": "wutms",
+     "status": 422,
+     "ms": 23.6,
+     "ok": false,
+     "error": "HTTP 422"
+    },
+    "put_corps": {
+     "error": "No such Property"
+    },
+    "relu_inchange": true,
+    "autres_inchanges": true
+   },
+   {
+    "port": "wutms",
+    "champ": "tmsrc",
+    "absent": false,
+    "put": {
+     "methode": "PUT",
+     "port": "wutms",
+     "status": 200,
+     "ms": 19.7,
+     "ok": true
+    },
+    "put_corps": null,
+    "relu_inchange": true,
+    "autres_inchanges": true
+   },
+   {
+    "port": "wutms",
+    "champ": "tmsyn",
+    "absent": false,
+    "put": {
+     "methode": "PUT",
+     "port": "wutms",
+     "status": 200,
+     "ms": 19.6,
+     "ok": true
+    },
+    "put_corps": null,
+    "relu_inchange": true,
+    "autres_inchanges": true
+   },
+   {
+    "port": "wutms",
+    "champ": "tmupd",
+    "absent": false,
+    "put": {
+     "methode": "PUT",
+     "port": "wutms",
+     "status": 200,
+     "ms": 23.7,
+     "ok": true
+    },
+    "put_corps": null,
+    "relu_inchange": true,
+    "autres_inchanges": true
+   }
+  ],
+  "decalage_apres_s": 1.8256000000000001
+ },
+ "P2-6": {
+  "nouvelle_valeur": "2026-10-26T03:00:00+02:00",
+  "put": {
+   "methode": "PUT",
+   "port": "time",
+   "status": 422,
+   "ms": 11.7,
+   "ok": false,
+   "error": "HTTP 422"
+  },
+  "put_restauration": {
+   "methode": "PUT",
+   "port": "time",
+   "status": 422,
+   "ms": 11.8,
+   "ok": false,
+   "error": "HTTP 422"
+  },
+  "jugement": {
+   "applique": false,
+   "restaure": true,
+   "autres_inchanges_pendant": true
+  }
+ },
+ "P2-8": {
+  "pose": {
+   "cible_moins_origine_s": -60.0,
+   "forme": "local",
+   "put": {
+    "methode": "PUT",
+    "port": "time",
+    "status": 422,
+    "ms": 8.6,
+    "ok": false,
+    "error": "HTTP 422"
+   },
+   "put_corps": {
+    "error": "Invalid parameter"
+   },
+   "aller_estime_s": 0.0399,
+   "retard_envoi_s": 0.0002
+  },
+  "ecart_grossier_s": 0.8,
+  "deplacement_mesure_s": -0.001,
+  "verdict": "ignore",
+  "remise": {
+   "conforme": true,
+   "residuel_s": 0.0143,
+   "essais": [
+    {
+     "cible_moins_origine_s": 0.0,
+     "forme": "local",
+     "put": {
+      "methode": "PUT",
+      "port": "time",
+      "status": 422,
+      "ms": 16.7,
+      "ok": false,
+      "error": "HTTP 422"
+     },
+     "put_corps": {
+      "error": "Invalid parameter"
+     },
+     "aller_estime_s": 0.008,
+     "retard_envoi_s": 0.0003
+    }
+   ]
+  }
+ },
+ "P2-5": [
+  {
+   "forme": "utc",
+   "pose": {
+    "cible_moins_origine_s": 0.0,
+    "forme": "utc",
+    "put": {
+     "methode": "PUT",
+     "port": "time",
+     "status": 422,
+     "ms": 10.4,
+     "ok": false,
+     "error": "HTTP 422"
+    },
+    "put_corps": {
+     "error": "Invalid parameter"
+    },
+    "aller_estime_s": 0.0058,
+    "retard_envoi_s": 0.0003
+   },
+   "jugement": {
+    "put_ok": false,
+    "saut_s": -0.0,
+    "saut_h": -0.0,
+    "mal_lu": false,
+    "decalage_ecart": -0.0069
+   },
+   "remise": {
+    "conforme": true,
+    "residuel_s": 0.0062,
+    "essais": [
+     {
+      "cible_moins_origine_s": 0.0,
+      "forme": "local",
+      "put": {
+       "methode": "PUT",
+       "port": "time",
+       "status": 422,
+       "ms": 12.5,
+       "ok": false,
+       "error": "HTTP 422"
+      },
+      "put_corps": {
+       "error": "Invalid parameter"
+      },
+      "aller_estime_s": 0.008,
+      "retard_envoi_s": 0.0003
+     }
+    ]
+   }
+  },
+  {
+   "forme": "naif",
+   "pose": {
+    "cible_moins_origine_s": 0.0,
+    "forme": "naif",
+    "put": {
+     "methode": "PUT",
+     "port": "time",
+     "status": 422,
+     "ms": 18.6,
+     "ok": false,
+     "error": "HTTP 422"
+    },
+    "put_corps": {
+     "error": "Invalid parameter"
+    },
+    "aller_estime_s": 0.0059,
+    "retard_envoi_s": 0.0003
+   },
+   "jugement": {
+    "put_ok": false,
+    "saut_s": -0.0,
+    "saut_h": -0.0,
+    "mal_lu": false,
+    "decalage_ecart": 0.0037
+   },
+   "remise": {
+    "conforme": true,
+    "residuel_s": 0.0121,
+    "essais": [
+     {
+      "cible_moins_origine_s": 0.0,
+      "forme": "local",
+      "put": {
+       "methode": "PUT",
+       "port": "time",
+       "status": 422,
+       "ms": 12.6,
+       "ok": false,
+       "error": "HTTP 422"
+      },
+      "put_corps": {
+       "error": "Invalid parameter"
+      },
+      "aller_estime_s": 0.008,
+      "retard_envoi_s": 0.0003
+     }
+    ]
+   }
+  }
+ ],
+ "P2-3": [
+  {
+   "rep": 1,
+   "pose": {
+    "cible_moins_origine_s": -0.5,
+    "forme": "local",
+    "put": {
+     "methode": "PUT",
+     "port": "time",
+     "status": 422,
+     "ms": 18.5,
+     "ok": false,
+     "error": "HTTP 422"
+    },
+    "put_corps": {
+     "error": "Invalid parameter"
+    },
+    "aller_estime_s": 0.0098,
+    "retard_envoi_s": 0.0002
+   },
+   "jugement": {
+    "delta_time": 0.0335,
+    "delta_wutim": 1.967,
+    "verdict_time": "ignore",
+    "verdict_wutim": "inattendu"
+   },
+   "remise_P2-4": {
+    "conforme": true,
+    "residuel_s": 0.0196,
+    "essais": [
+     {
+      "cible_moins_origine_s": 0.0,
+      "forme": "local",
+      "put": {
+       "methode": "PUT",
+       "port": "time",
+       "status": 422,
+       "ms": 14.7,
+       "ok": false,
+       "error": "HTTP 422"
+      },
+      "put_corps": {
+       "error": "Invalid parameter"
+      },
+      "aller_estime_s": 0.006,
+      "retard_envoi_s": 0.0002
+     }
+    ]
+   }
+  },
+  {
+   "rep": 2,
+   "pose": {
+    "cible_moins_origine_s": -0.5,
+    "forme": "local",
+    "put": {
+     "methode": "PUT",
+     "port": "time",
+     "status": 422,
+     "ms": 14.5,
+     "ok": false,
+     "error": "HTTP 422"
+    },
+    "put_corps": {
+     "error": "Invalid parameter"
+    },
+    "aller_estime_s": 0.0059,
+    "retard_envoi_s": 0.0003
+   },
+   "jugement": {
+    "delta_time": 0.0182,
+    "delta_wutim": 2.0021,
+    "verdict_time": "ignore",
+    "verdict_wutim": "inattendu"
+   },
+   "remise_P2-4": {
+    "conforme": true,
+    "residuel_s": 0.0381,
+    "essais": [
+     {
+      "cible_moins_origine_s": 0.0,
+      "forme": "local",
+      "put": {
+       "methode": "PUT",
+       "port": "time",
+       "status": 422,
+       "ms": 10.6,
+       "ok": false,
+       "error": "HTTP 422"
+      },
+      "put_corps": {
+       "error": "Invalid parameter"
+      },
+      "aller_estime_s": 0.01,
+      "retard_envoi_s": 0.0003
+     }
+    ]
+   }
+  },
+  {
+   "rep": 3,
+   "pose": {
+    "cible_moins_origine_s": -0.5,
+    "forme": "local",
+    "put": {
+     "methode": "PUT",
+     "port": "time",
+     "status": 422,
+     "ms": 10.6,
+     "ok": false,
+     "error": "HTTP 422"
+    },
+    "put_corps": {
+     "error": "Invalid parameter"
+    },
+    "aller_estime_s": 0.0059,
+    "retard_envoi_s": 0.0002
+   },
+   "jugement": {
+    "delta_time": 0.0281,
+    "delta_wutim": 1.9776,
+    "verdict_time": "ignore",
+    "verdict_wutim": "inattendu"
+   },
+   "remise_P2-4": null
+  }
+ ],
+ "P2-7": {
+  "suivi": [
+   {
+    "t_s": 300,
+    "ecart_au_deplacement_s": 0.5621
+   },
+   {
+    "t_s": 600,
+    "ecart_au_deplacement_s": 0.5961
+   },
+   {
+    "t_s": 900,
+    "ecart_au_deplacement_s": 0.5946
+   },
+   {
+    "t_s": 1200,
+    "ecart_au_deplacement_s": 0.6619
+   },
+   {
+    "t_s": 1500,
+    "ecart_au_deplacement_s": 0.701
+   },
+   {
+    "t_s": 1800,
+    "ecart_au_deplacement_s": 0.7441
+   },
+   {
+    "t_s": 2100,
+    "ecart_au_deplacement_s": 0.7681
+   },
+   {
+    "t_s": 2400,
+    "ecart_au_deplacement_s": 0.784
+   },
+   {
+    "t_s": 2700,
+    "ecart_au_deplacement_s": 0.7986
+   },
+   {
+    "t_s": 3000,
+    "ecart_au_deplacement_s": 0.8361
+   },
+   {
+    "t_s": 3300,
+    "ecart_au_deplacement_s": 0.8881
+   },
+   {
+    "t_s": 3600,
+    "ecart_au_deplacement_s": 0.9061
+   }
+  ],
+  "bouge_seul": true
+ },
+ "restauration": {
+  "horloge_conforme": false,
+  "champs_conformes": true,
+  "ecart_final_s": 0.612,
+  "ecart_wutim_final_s": 1.993
+ },
+ "P2-9": [
+  {
+   "etape": "fin",
+   "effets": []
+  }
+ ],
+ "fin": {
+  "bilan": {
+   "P2-2": 1.8256000000000001,
+   "P2-8": "ignore",
+   "P2-3": [
+    "ignore",
+    "ignore",
+    "ignore"
+   ]
+  },
+  "restaure": false
+ },
+ "date": "2026-09-12",
+ "releve_brut": "ecriture-heure-ecriture-20260912T215626.jsonl (non versionne)"
+}

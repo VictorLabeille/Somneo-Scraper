@@ -76,6 +76,13 @@ plan technique. Deux règles tiennent la connexion unique au réveil **par const
   `500 Timeout` sous une rafale — ~25 ko de tas libre. C'est le matériel, pas un bug.
 - **`pysomneo` pour tout dialogue avec le réveil** — ne pas réimplémenter le protocole. Il ne
   couvre que 11 des 21 ports : compléter par des appels directs, pas par un remplacement.
+- **Une boucle de restauration doit abandonner quand l'écriture est refusée.** Celle de
+  `probes/ecriture_heure.py` réessaie jusqu'à ce que l'horloge revienne à sa valeur d'origine :
+  comme `datetime` n'est pas inscriptible, elle a envoyé **489 `PUT` refusés en une demi-heure**
+  le 2026-09-12, sans rien restaurer et sans le dire. Et son verdict « remise conforme » est
+  alors **vide de sens** — il constate que l'horloge n'a pas bougé, ce qui est vrai précisément
+  parce que rien ne s'écrit. Condition d'arrêt sur le **statut de la réponse**, pas seulement
+  sur l'état relu.
 - **Ne jamais chercher d'historique côté appareil** : l'API locale n'a aucune mémoire, toutes
   les variantes ont été testées. La base SQLite du collecteur en est la **source** — l'app en
   tient une copie sur le téléphone depuis le 2026-09-06, mais c'est le collecteur qui fait

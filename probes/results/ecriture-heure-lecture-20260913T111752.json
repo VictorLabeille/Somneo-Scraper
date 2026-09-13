@@ -1,0 +1,71 @@
+{
+ "sonde": "probes/ecriture_heure.py",
+ "convention": "decalages en secondes : horloge du reveil - horloge de la carte (NTP)",
+ "mode": "lecture",
+ "P2-1": {
+  "mesures": [
+   {
+    "decalage_s": 0.37060000000000004,
+    "incertitudes_s": [
+     0.034,
+     0.034
+    ]
+   },
+   {
+    "decalage_s": 0.3826,
+    "incertitudes_s": [
+     0.034,
+     0.034
+    ]
+   },
+   {
+    "decalage_s": 0.36460000000000004,
+    "incertitudes_s": [
+     0.034,
+     0.034
+    ]
+   },
+   {
+    "decalage_s": 0.40065,
+    "incertitudes_s": [
+     0.034,
+     0.034
+    ]
+   },
+   {
+    "decalage_s": 0.3786,
+    "incertitudes_s": [
+     0.034,
+     0.034
+    ]
+   }
+  ],
+  "origine_s": 0.3786,
+  "dispersion_s": 0.036,
+  "origine_wutim_s": -1.6900499999999998,
+  "time_initial": {
+   "dst": "+01:00",
+   "dstchangeover": "2026-10-25T03:00:00+02:00",
+   "dstoffset": "-01:00",
+   "timezone": "+01:00",
+   "calday": 7
+  },
+  "wutms_initial": {
+   "fmthr": true,
+   "fmtwk": true,
+   "tmupd": 0,
+   "tzhrm": [
+    2,
+    0
+   ],
+   "dstwu": -60,
+   "tmsrc": "irq",
+   "tmsyn": "00:00",
+   "tmser": "http://www.noserver.com",
+   "locat": ""
+  }
+ },
+ "fin": {},
+ "date": "2026-09-13",
+ "releve_brut": "ecriture-heure-lecture-20260913T111752.jsonl (non versionne)"
+}

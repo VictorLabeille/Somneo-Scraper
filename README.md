@@ -215,8 +215,11 @@ est dans `docs/radxa.md`.
 - [ ] Blocage de l'accès internet du Somneo (pare-feu / VLAN / DNS sinkhole)
 - [x] Plan technique du collecteur et conception de l'API interne
       (`.claude/specs/2026-09-12-plan-technique-collecteur.md`)
-- [ ] Mesures préalables sur l'appareil : `wungt`, `time` et la sélection d'un profil d'alarme
-      en écriture
+- [x] Mesures préalables sur l'appareil : `wungt`, `time` et la sélection d'un profil d'alarme
+      en écriture — dont un résultat négatif de taille : **l'heure du réveil ne s'écrit pas**,
+      et il avance de ~10 s par jour (`docs/somneo-api.md` §4)
+- [ ] Trouver par où poser l'heure d'un réveil isolé — sans quoi il dérivera d'une minute par
+      semaine
 - [ ] Service FastAPI + intégration `pysomneo`
 - [ ] Historisation SQLite
 - [ ] Conteneurisation

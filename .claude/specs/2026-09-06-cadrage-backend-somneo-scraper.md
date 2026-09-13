@@ -182,11 +182,20 @@ soleil, geste de coucher et de lever.
   un réveil qui sonne une heure à côté deux fois par an — la panne la plus visible que ce
   projet puisse produire. **Prochaine bascule : 25 octobre 2026.**
 
-  > **Mis en question le 2026-09-12 par la mesure** (`probes/ecriture_heure.py`) : `PUT
-  > products/0/time {"datetime": …}` est refusé (`422 Invalid parameter`, trois formats,
-  > neuf essais), `dstchangeover` aussi. L'écriture « acceptée » que supposait ce paragraphe
-  > venait de l'APK et n'avait jamais été mesurée. Le moyen de poser l'heure reste à trouver ;
-  > la fonction n'est pas retirée, elle est à rouvrir avec Victor.
+  > **Mis en question le 2026-09-12, confirmé le 2026-09-13 par la mesure**
+  > (`probes/ecriture_heure.py`, `docs/somneo-api.md` §4) : `PUT products/0/time
+  > {"datetime": …}` est refusé `422 Invalid parameter` **500 fois sur 500**, sous trois
+  > formats, et l'horloge n'a pas bougé d'un centième. `dstoffset` et `dstchangeover` sont
+  > refusés de même — `dstchangeover` y compris avec la chaîne exacte que l'appareil vient de
+  > rendre : ce sont des champs en lecture seule, pas des formats mal écrits. L'écriture
+  > « acceptée » que supposait ce paragraphe venait de l'APK et n'avait jamais été mesurée.
+  >
+  > Ce que la mesure donne en échange : le réveil **avance de ~9,9 s/jour** et la liaison
+  > Philips le remet seul à l'heure toutes les ~8 h. Isolé, il dépasse dix secondes en un
+  > jour, une minute en une semaine. **Le premier point de ce §E tient donc — comparer,
+  > journaliser, signaler —, le second n'a plus de moyen connu de s'exécuter.** Piste ouverte,
+  > jamais essayée : rediriger `wutms.tmser` vers un service de temps sur la carte (plan
+  > technique §1, P2bis). À rouvrir avec Victor avant d'écrire quoi que ce soit.
 - **Jamais pendant une nuit déclarée, jamais pendant qu'une alarme sonne ou est en rappel.**
 - L'application ne remet jamais l'heure ; elle signale un écart si le collecteur en rapporte un.
 
