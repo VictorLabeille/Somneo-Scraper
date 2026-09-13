@@ -1,0 +1,23 @@
+[Unit]
+Description=Collecteur Somneo — back-end local de SleepMaxxer
+Documentation=https://github.com/VictorLabeille/Somneo-Scraper
+# network-online sans Requires : le collecteur doit démarrer même sans réseau ni réveil, et
+# chercher en boucle (cadrage, plan §8). Un Requires= l'empêcherait de tourner hors ligne.
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=somneo
+Group=somneo
+WorkingDirectory=/opt/somneo-collector
+ExecStart=/opt/somneo-collector/venv/bin/python -m somneo_collector
+Restart=always
+RestartSec=5
+# Un seul processus, un seul worker (codé en dur dans __main__) : jamais de multi-worker ici,
+# un second ouvrirait une seconde connexion au réveil.
+StateDirectory=somneo-collector
+ConfigurationDirectory=somneo-collector
+
+[Install]
+WantedBy=multi-user.target
