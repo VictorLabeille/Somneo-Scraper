@@ -114,9 +114,13 @@ CREATE TABLE IF NOT EXISTS night_correction (
     value     REAL NOT NULL
 );
 
+-- Un geste de l'app que le réveil n'a pas encore pris (cadrage §5 : jamais perdu), rejoué par la
+-- collecte dès qu'il répond. `night_id` ajouté le 2026-09-13 sans migration : aucune base n'est
+-- encore déployée.
 CREATE TABLE IF NOT EXISTS pending_gesture (
-    id      INTEGER PRIMARY KEY AUTOINCREMENT,
-    ts      REAL NOT NULL,          -- heure de l'appui (collecteur), fait foi
-    kind    TEXT NOT NULL,          -- bedtime | risetime
-    applied INTEGER NOT NULL DEFAULT 0
+    id       INTEGER PRIMARY KEY AUTOINCREMENT,
+    ts       REAL NOT NULL,         -- heure de l'appui (collecteur), fait foi
+    kind     TEXT NOT NULL,         -- bedtime | risetime
+    night_id INTEGER REFERENCES night (id),
+    applied  INTEGER NOT NULL DEFAULT 0   -- 0 en attente · 1 réglé · 2 abandonné (refus du réveil)
 );

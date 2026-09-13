@@ -16,6 +16,9 @@ from pathlib import Path
 from typing import Any
 
 CHAMPS_READING = ("mslux", "mstmp", "msrhu", "mssnd", "avlux", "avtmp", "avrhu", "avsnd")
+# `pending_gesture.applied` : un geste retenu est en attente, réglé (appliqué, ou devenu sans
+# objet), ou abandonné parce que le réveil l'a refusé — jamais réessayé en boucle (AGENTS.md).
+GESTE_EN_ATTENTE, GESTE_REGLE, GESTE_ABANDONNE = 0, 1, 2
 
 
 def _pragmas(conn: sqlite3.Connection) -> None:
@@ -40,6 +43,7 @@ class Store:
         with self._wlock, self._w:
             self._w.executescript(schema)
         self._dernier_corps: dict[str, str] = {}     # port -> dernier body JSON, pour « au changement »
+        self._vu_a: dict[str, float] = {}           # port -> dernière lecture, même inchangée
 
     # ---- allocation du seq global -------------------------------------------------------
     def _next_seq(self) -> int:
@@ -82,6 +86,7 @@ class Store:
         encode = json.dumps(body, sort_keys=True, ensure_ascii=False)
         ts = ts if ts is not None else time.time()
         with self._wlock, self._w:
+            self._vu_a[port] = max(ts, self._vu_a.get(port, ts))
             if port not in self._dernier_corps:
                 row = self._w.execute(
                     "SELECT body FROM port_change WHERE port=? ORDER BY seq DESC LIMIT 1",
@@ -149,32 +154,71 @@ class Store:
                             [ts, self._next_seq(), outage_id])
 
     # ---- gestes en attente (incrément 4) ------------------------------------------------
-    def add_pending_gesture(self, kind: str, ts: float | None = None) -> int:
-        """Un appui reçu pendant que le réveil ne répondait pas : son heure fait foi (cadrage §5)."""
+    def add_pending_gesture(self, kind: str, ts: float | None = None,
+                            night_id: int | None = None) -> int:
+        """Un appui que le réveil n'a pas encore pris : son heure fait foi (cadrage §5)."""
         ts = ts if ts is not None else time.time()
         with self._wlock, self._w:
             cur = self._w.execute(
-                "INSERT INTO pending_gesture (ts, kind, applied) VALUES (?, ?, 0)", [ts, kind])
+                "INSERT INTO pending_gesture (ts, kind, night_id, applied) VALUES (?, ?, ?, ?)",
+                [ts, kind, night_id, GESTE_EN_ATTENTE])
         return cur.lastrowid
 
     def pending_gestures(self) -> list[dict]:
         conn = self._ro()
         try:
             return [dict(r) for r in conn.execute(
-                "SELECT * FROM pending_gesture WHERE applied=0 ORDER BY ts")]
+                "SELECT * FROM pending_gesture WHERE applied=? ORDER BY ts, id",
+                (GESTE_EN_ATTENTE,))]
         finally:
             conn.close()
 
+    def settle_gesture(self, gesture_id: int, applied: int) -> None:
+        with self._wlock, self._w:
+            self._w.execute("UPDATE pending_gesture SET applied=? WHERE id=?",
+                            [applied, gesture_id])
+
+    def settle_night_gestures(self, night_id: int, kind: str) -> None:
+        """Les gestes encore en attente d'une nuit, d'un genre donné, deviennent sans objet."""
+        with self._wlock, self._w:
+            self._w.execute(
+                "UPDATE pending_gesture SET applied=? WHERE night_id=? AND kind=? AND applied=?",
+                [GESTE_REGLE, night_id, kind, GESTE_EN_ATTENTE])
+
     # ---- nuits (incrément 2) ------------------------------------------------------------
     def create_night(self, day: str, bedtime: float, raw_tg2bd: str | None,
-                     ts: float | None = None) -> int:
-        """Ouvre une nuit ; rend son `id` STABLE. `bedtime` en heure COLLECTEUR (NTP), pas tg2bd."""
+                     ts: float | None = None, state: str = "open",
+                     origin: str = "observed") -> int:
+        """Ouvre une nuit ; rend son `id` STABLE. `bedtime` en heure COLLECTEUR (NTP), pas tg2bd.
+
+        `origin` : `observed` (transition de `wungt` vue par la collecte) ou `confirmed` (appui
+        relayé). `state` : `open`, ou `pending_device` pour un appui retenu (réveil injoignable)."""
         with self._wlock, self._w:
             cur = self._w.execute(
                 "INSERT INTO night (seq, day, bedtime, state, bedtime_origin, raw_tg2bd) "
-                "VALUES (?, ?, ?, 'open', 'observed', ?)",
-                [self._next_seq(), day, bedtime, raw_tg2bd])
+                "VALUES (?, ?, ?, ?, ?, ?)",
+                [self._next_seq(), day, bedtime, state, origin, raw_tg2bd])
         return cur.lastrowid
+
+    def night_opened(self, night_id: int, raw_tg2bd: str | None) -> None:
+        """Un coucher retenu a été pris par le réveil : la nuit s'ouvre, son heure ne bouge pas."""
+        with self._wlock, self._w:
+            self._w.execute("UPDATE night SET state='open', raw_tg2bd=?, seq=? WHERE id=?",
+                            [raw_tg2bd, self._next_seq(), night_id])
+
+    def night_confirm_bedtime(self, night_id: int, day: str, bedtime: float) -> None:
+        """La nuit qu'une observation vient d'ouvrir est celle d'un appui : l'heure de l'appui."""
+        with self._wlock, self._w:
+            self._w.execute(
+                "UPDATE night SET day=?, bedtime=?, bedtime_origin='confirmed', seq=? WHERE id=?",
+                [day, bedtime, self._next_seq(), night_id])
+
+    def night_rise_confirmed(self, night_id: int, risetime: float) -> None:
+        """Geste de lever : l'heure de l'appui, confirmée ; la nuit est close."""
+        with self._wlock, self._w:
+            self._w.execute(
+                "UPDATE night SET risetime=?, risetime_origin='confirmed', state='closed', seq=? "
+                "WHERE id=?", [risetime, self._next_seq(), night_id])
 
     def night_awaiting_rise(self, night_id: int, raw_tendb: str | None) -> None:
         """La session est close côté `wungt`, mais le lever attend la fin de l'alarme (bit 11)."""
@@ -213,6 +257,13 @@ class Store:
     def get_awaiting_night(self) -> dict | None:
         with self._wlock:
             row = self._w.execute("SELECT * FROM night WHERE state='closed' AND risetime IS NULL "
+                                  "ORDER BY id DESC LIMIT 1").fetchone()
+        return dict(row) if row else None
+
+    def get_pending_device_night(self) -> dict | None:
+        """La nuit d'un coucher retenu, que le réveil n'a pas encore pris."""
+        with self._wlock:
+            row = self._w.execute("SELECT * FROM night WHERE state='pending_device' "
                                   "ORDER BY id DESC LIMIT 1").fetchone()
         return dict(row) if row else None
 
@@ -363,3 +414,20 @@ class Store:
             return json.loads(row[0]) if row else None
         finally:
             conn.close()
+
+    def last_port(self, port: str) -> dict | None:
+        """Le miroir d'un port : son dernier corps, depuis quand il vaut cela (`since`), et la
+        dernière lecture qui l'a confirmé (`observed_at`). Le corps n'est stocké qu'au changement :
+        sans `observed_at`, une lampe éteinte depuis trois jours semblerait vue il y a trois jours.
+        Après un redémarrage, `observed_at` repart de `since` jusqu'à la lecture suivante."""
+        conn = self._ro()
+        try:
+            row = conn.execute(
+                "SELECT ts, body FROM port_change WHERE port=? ORDER BY seq DESC LIMIT 1",
+                (port,)).fetchone()
+        finally:
+            conn.close()
+        if row is None:
+            return None
+        return {"body": json.loads(row["body"]), "since": row["ts"],
+                "observed_at": max(self._vu_a.get(port, row["ts"]), row["ts"])}

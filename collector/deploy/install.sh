@@ -9,7 +9,10 @@ set -euo pipefail
 PREFIX=/opt/somneo-collector
 STATE=/var/lib/somneo-collector
 CONF=/etc/somneo-collector
-FORK="${PYSOMNEO_FORK:-$HOME/_PROJETS/pysomneo}"   # chemin du fork épinglé (sinon PyPI plus tard)
+# pysomneo 6.0 async, épinglée au commit 13ec0c5 du fork (365d313 + limit=1, PR #26) — plan §0,
+# §8. Une archive par SHA complet : pas besoin de git sur la carte. Ni le clone local (sur master)
+# ni PyPI tant que la 6.0.0 n'est pas publiée : la 5.0.6 réessaie un 500 douze fois (plan §2).
+PYSOMNEO="${PYSOMNEO_SPEC:-https://github.com/VictorLabeille/pysomneo/archive/13ec0c59c394de8aad943c5ced4f7b39f584790a.tar.gz}"
 
 [ "$(id -u)" -eq 0 ] || { echo "à lancer en root" >&2; exit 1; }
 
@@ -19,13 +22,7 @@ install -d "$PREFIX" "$CONF"
 
 python3 -m venv "$PREFIX/venv"
 "$PREFIX/venv/bin/pip" install --upgrade pip
-# pysomneo depuis le fork épinglé tant que la 6.0.0 n'est pas publiée (plan §8) ; sinon PyPI.
-if [ -d "$FORK" ]; then
-    "$PREFIX/venv/bin/pip" install "$FORK"
-else
-    echo "fork pysomneo introuvable ($FORK) ; installe pysomneo depuis PyPI" >&2
-    "$PREFIX/venv/bin/pip" install pysomneo
-fi
+"$PREFIX/venv/bin/pip" install "$PYSOMNEO"
 "$PREFIX/venv/bin/pip" install .
 
 install -m 644 deploy/somneo-collector.service /etc/systemd/system/somneo-collector.service

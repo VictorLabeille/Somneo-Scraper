@@ -1,4 +1,4 @@
-"""Routes de l'API, incrément 1 : `GET /v1/status` et `GET /v1/readings` (plan §7).
+"""Routes de l'API (plan §7).
 
 Versionnée (`/v1`), JSON, sans authentification, sur le seul réseau domestique. Chaque réponse
 porte `served_at` ; ce qui vient du miroir de l'appareil porte `observed_at`. L'app peut ainsi
@@ -6,6 +6,9 @@ s'ouvrir sans attendre le réveil, en disant de quand date ce qu'elle montre.
 
 Le statut se dérive de la base (disponibilité via les indisponibilités ouvertes, écart d'horloge,
 liaison cloud via les derniers corps de ports) et d'un état vif léger (démarrage, palier).
+
+Les écritures (incrément 4) passent toutes par le relais (`relay.py`) : bornes, passerelle,
+relecture, confirmation. Ces routes ne font que traduire son résultat en réponse HTTP.
 """
 from __future__ import annotations
 
@@ -15,18 +18,37 @@ import time
 from pathlib import Path
 
 from fastapi import FastAPI, HTTPException, Query
-from pydantic import BaseModel
+from fastapi.responses import JSONResponse
+from pydantic import BaseModel, StrictBool, StrictInt
 
 from ..config import Config
+from ..nights import NightTracker
+from ..relay import Relay, Resultat
 from ..state import RuntimeState
 from ..store import Store
 
 GRANDEURS = ("mslux", "mstmp", "msrhu", "mssnd")
+# Les ports que sert le miroir (plan §7), tels que la collecte les relève (§4).
+PORTS_MIROIR = ("wulgt", "wudsk", "wualm", "wualm/aenvs", "wualm/aalms", "wuply", "wusts",
+                "wungt")
 
 
 class Correction(BaseModel):
     field: str          # bedtime | risetime
     value: float        # epoch (référentiel collecteur / NTP)
+
+
+class Lampe(BaseModel):
+    on: StrictBool
+    level: StrictInt | None = None     # échelle de l'appareil ; bornes dans relay.py
+
+
+class Interrupteur(BaseModel):
+    on: StrictBool
+
+
+class Rappel(BaseModel):
+    minutes: StrictInt
 
 
 def _resume_nuit(store: Store, nuit: dict) -> dict:
@@ -45,6 +67,50 @@ def _resume_nuit(store: Store, nuit: dict) -> dict:
     return resume
 
 
+def _alarmes(aenvs: dict, aalms: dict) -> tuple[list[dict], list[int]]:
+    """Décode `aenvs`/`aalms` — tableaux par profil, dans la forme que lit `pysomneo`
+    (`util.alarms_to_dict`) — en alarmes visibles, et relève les masquées mais armées :
+    l'anomalie du cadrage §3.D, aucune alarme masquée ne doit pouvoir sonner."""
+    prfen, prfvs, pwrsv = (aenvs.get(k) or [] for k in ("prfen", "prfvs", "pwrsv"))
+    almhr, almmn, daynm = (aalms.get(k) or [] for k in ("almhr", "almmn", "daynm"))
+
+    def champ(liste: list, i: int):
+        return liste[i] if i < len(liste) else None
+
+    visibles, masquees_armees = [], []
+    for i, active in enumerate(prfen):
+        n = i + 1
+        visible = bool(champ(prfvs, i))
+        if active and not visible:
+            masquees_armees.append(n)
+        if not visible:
+            continue
+        pw = pwrsv[3 * i:3 * i + 3]
+        visibles.append({
+            "n": n, "enabled": bool(active),
+            "hour": champ(almhr, i), "minute": champ(almmn, i), "days": champ(daynm, i),
+            "powerwake": ({"on": bool(pw[0]), "hour": pw[1], "minute": pw[2]}
+                          if len(pw) == 3 else None),
+        })
+    return visibles, masquees_armees
+
+
+def _device(store: Store) -> dict:
+    """Le miroir (plan §7) : le dernier corps de chaque port, daté, et deux décodages — `wusts`
+    en bits, les alarmes visibles. Rien n'est interprété au-delà : le collecteur sert des mesures."""
+    ports = {p: store.last_port(p) for p in PORTS_MIROIR}
+    corps = {p: (v or {}).get("body") or {} for p, v in ports.items()}
+    visibles, masquees = _alarmes(corps["wualm/aenvs"], corps["wualm/aalms"])
+    wusts = corps["wusts"].get("wusts")
+    return {
+        "served_at": time.time(),
+        "ports": ports,
+        "wusts_bits": [b for b in range(16) if isinstance(wusts, int) and wusts >> b & 1],
+        "alarms": visibles,
+        "hidden_armed_alarms": masquees,
+    }
+
+
 def _status(store: Store, cfg: Config, state: RuntimeState) -> dict:
     maintenant = time.time()
     ouvertes = store.open_outages()
@@ -54,6 +120,8 @@ def _status(store: Store, cfg: Config, state: RuntimeState) -> dict:
     transport = store.last_port_body("transport") or {}
     device = store.last_port_body("device") or {}
     hb = store.last_heartbeat()
+    _, masquees_armees = _alarmes(store.last_port_body("wualm/aenvs") or {},
+                                  store.last_port_body("wualm/aalms") or {})
 
     ecart = horloge.get("offset_time_s") if horloge else None
     du = shutil.disk_usage(Path(store.path).parent)
@@ -82,6 +150,7 @@ def _status(store: Store, cfg: Config, state: RuntimeState) -> dict:
             "allowuploads": device.get("allowuploads"),
             "url": backend.get("url"),
         },
+        "alarmes": {"masquees_armees": masquees_armees},
         "collecteur": {
             "demarre_at": state.started_at,
             "dernier_battement_at": hb,
@@ -96,9 +165,17 @@ def _status(store: Store, cfg: Config, state: RuntimeState) -> dict:
     }
 
 
-def create_app(store: Store, cfg: Config, state: RuntimeState | None = None) -> FastAPI:
+def create_app(store: Store, cfg: Config, state: RuntimeState | None = None,
+               relay: Relay | None = None) -> FastAPI:
+    """`relay` porte la passerelle (`gateway_getter`) et la machine des nuits partagée avec la
+    collecte. Sans lui (tests des lectures), un relais sans passerelle : toute écriture → 503."""
     state = state or RuntimeState()
+    relay = relay or Relay(store, NightTracker(store), lambda: None)
     app = FastAPI(title="Somneo-Scraper — collecteur", version="v1")
+    app.state.relay = relay
+
+    def repondre(res: Resultat) -> JSONResponse:
+        return JSONResponse(status_code=res.status, content=res.body)
 
     @app.get("/v1/status")
     def status() -> dict:
@@ -177,5 +254,34 @@ def create_app(store: Store, cfg: Config, state: RuntimeState | None = None) -> 
             out[port.split("/", 1)[1]] = {"source": "appareil",
                                           "themes": {k: v for k, v in corps.items()}}
         return {"served_at": time.time(), "catalog": out}
+
+    @app.get("/v1/device")
+    def device() -> dict:
+        return _device(store)
+
+    # ---- écritures : le relais du pilotage (incrément 4) ---------------------------------
+    @app.post("/v1/nights/bedtime")
+    async def bedtime() -> JSONResponse:
+        return repondre(await relay.bedtime())
+
+    @app.post("/v1/nights/risetime")
+    async def risetime() -> JSONResponse:
+        return repondre(await relay.risetime())
+
+    @app.put("/v1/light")
+    async def light(cmd: Lampe) -> JSONResponse:
+        return repondre(await relay.light(cmd.on, cmd.level))
+
+    @app.put("/v1/nightlight")
+    async def nightlight(cmd: Interrupteur) -> JSONResponse:
+        return repondre(await relay.nightlight(cmd.on))
+
+    @app.put("/v1/sunset")
+    async def sunset(cmd: Interrupteur) -> JSONResponse:
+        return repondre(await relay.sunset(cmd.on))
+
+    @app.put("/v1/snooze")
+    async def snooze(cmd: Rappel) -> JSONResponse:
+        return repondre(await relay.snooze(cmd.minutes))
 
     return app

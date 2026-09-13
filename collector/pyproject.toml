@@ -5,8 +5,9 @@ description = "Collecteur local du Philips Somneo — back-end de SleepMaxxer"
 requires-python = ">=3.11"
 license = { text = "GPL-3.0-or-later" }
 dependencies = [
-    # pysomneo (fork épinglé) est installé à part : depuis le fork tant que la 6.0.0 n'est
-    # pas publiée, puis depuis PyPI. Voir deploy/install.sh et le plan technique §8.
+    # pysomneo 6.0 async est installé à part, épinglé au commit 13ec0c5 du fork tant que la
+    # 6.0.0 n'est pas publiée, puis depuis PyPI. Voir deploy/install.sh et le plan technique §8.
+    "aiohttp",    # importé par gateway.py (exceptions) ; tiré aussi par pysomneo 6.0
     "fastapi",
     "uvicorn",
     "zeroconf",   # LGPL-2.1-or-later, compatible GPL-3.0

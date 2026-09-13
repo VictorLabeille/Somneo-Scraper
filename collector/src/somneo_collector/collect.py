@@ -7,19 +7,25 @@ maintenant. Jamais de rafale après une reprise.
 Toutes les lectures passent par la passerelle (sérialisées, une en vol). Un échec incrémente un
 compteur ; au-delà d'un seuil, on ouvre une indisponibilité datée avec sa cause, et on demande
 une redécouverte. Le succès la referme. `capture.py` est ainsi entièrement remplacé — en
-lecture seule, comme lui (les écritures viendront aux incréments 2 et 4).
+lecture seule, comme lui. La seule écriture de la collecte est le rejeu d'un geste de nuit
+retenu pendant que le réveil ne répondait pas (incrément 4, `relay.py`) : demandée par
+l'utilisateur, seulement différée.
 """
 from __future__ import annotations
 
 import asyncio
 import logging
 import time
+from typing import TYPE_CHECKING
 
 from . import clock
 from .config import Config
 from .gateway import DeviceGateway, Releve
 from .nights import NightTracker
 from .store import Store
+
+if TYPE_CHECKING:
+    from .relay import Relay
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -32,7 +38,8 @@ AGREGATS = {"temp": "tmp", "hum": "hum", "snd": "snd", "lux": "lux"}
 
 class Collector:
     def __init__(self, gateway: DeviceGateway, store: Store, config: Config,
-                 on_lost=None) -> None:
+                 on_lost=None, nights: NightTracker | None = None,
+                 relay: Relay | None = None) -> None:
         self.gw = gateway
         self.store = store
         self.cfg = config
@@ -40,7 +47,10 @@ class Collector:
         self._echecs = 0
         self._outage_id: int | None = None
         self._stop = asyncio.Event()
-        self.nights = NightTracker(store)     # machine à états des nuits (incrément 2, lecture seule)
+        # machine à états des nuits : partagée avec le relais (une seule par processus, voir
+        # nights.py) ; une propre à défaut, pour les tests de la collecte seule
+        self.nights = nights if nights is not None else NightTracker(store)
+        self.relay = relay               # rejoue les gestes retenus (incrément 4)
 
     # ---- suivi de la disponibilité ------------------------------------------------------
     def _succes(self) -> None:
@@ -132,6 +142,11 @@ class Collector:
     async def tache_heartbeat(self) -> None:
         self.store.heartbeat()
 
+    async def tache_gestes(self) -> None:
+        """Rejoue les gestes de nuit retenus pendant que le réveil ne répondait pas (cadrage §5)."""
+        if self.relay is not None and self.store.pending_gestures():
+            await self.relay.replay_pending(self.gw)
+
     # ---- ordonnancement -----------------------------------------------------------------
     def _plan(self):
         c = self.cfg.cadences
@@ -145,6 +160,7 @@ class Collector:
             ("liaison", self.tache_liaison, c.liaison),
             ("fichiers", self.tache_fichiers, c.fichiers),
             ("heartbeat", self.tache_heartbeat, 60.0),
+            ("gestes", self.tache_gestes, c.wungt),
         ]
 
     def _periode(self, nom: str, defaut: float) -> float:

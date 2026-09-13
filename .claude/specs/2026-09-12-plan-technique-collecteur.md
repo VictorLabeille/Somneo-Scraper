@@ -242,7 +242,15 @@ production.
 **Les réessais de `pysomneo`.** `SomneoSession.request` retente trois fois les erreurs de
 connexion, avec attente croissante et recréation de session. Un `500 Timeout`, lui, n'est
 **pas** retenté : `raise_for_status` est appelé hors de la boucle, il remonte tel quel. C'est ce
-qui rend mesurable le critère du cadrage (« 24 h sans un seul `500` »). Les échecs absorbés par
+qui rend mesurable le critère du cadrage (« 24 h sans un seul `500` »). **Vrai de la 6.0
+(`13ec0c5`), faux de la 5.0.6 synchrone** — vérifié le 2026-09-13 contre le faux réveil : son
+adaptateur `requests` réessaie les `500` (`Retry(total=3, status_forcelist=[500, …])`, `PUT`
+compris), et la boucle de `request` rattrape le `RetryError` et recommence, soit **12 requêtes en
+39 s pour un seul `500`**, remonté comme une panne de connexion. L'incrément 1 avait été écrit
+par erreur contre la 5.0.6 ; porté sur `13ec0c5` le même jour (Victor). **La 6.0 a le travers
+inverse sur le `422`** : `SomneoInvalidURLError` hérite de `ClientError`, que la boucle de
+`request` attrape — le `422` est envoyé trois fois (`PUT` compris, ~2,5 s), puis remonte en
+`SomneoConnectionError`, comme une panne de connexion ; le `500`, lui, part une seule fois. La passerelle déplie `__cause__` pour le rendre comme un `422`. Les échecs absorbés par
 les réessais sont comptés en écoutant le journal DEBUG de `pysomneo.api`, comme dans
 `probes/banc_limit.py`.
 
@@ -289,6 +297,7 @@ collector/
     store/             schema.sql, migrations numérotées, accès à la base
     collect.py         planificateur des lectures
     nights.py          machine à états des sessions de nuit
+    relay.py           relais du pilotage : écrire, relire, confirmer (ajouté le 2026-09-13)
     clock.py           mesure de dérive, remise à l'heure
     backup.py          sauvegarde en rotation
     api/               routes et modèles
@@ -411,6 +420,12 @@ profil ne change pas — mais c'en est une, et sur les alarmes. **Tranché le 20
 fois par jour, en journée, jamais pendant une alarme, et après tout changement vu dans
 `aenvs`/`aalms` — une fois l'essai P3 passé (§1).
 
+**Précisé le 2026-09-13** (Victor, avant l'incrément 4 ; P3 est passé, confirmé le même jour) :
+« en journée » est la fenêtre de l'horloge, 12 h – 18 h ; un changement vu dans `aenvs`/`aalms`
+déclenche la relecture à toute heure hors alarme — la sélection est sans effet observable. Et
+l'app relit un profil **à la demande**, `GET /v1/alarms/{n}`, quand elle ouvre son écran :
+l'appareil fait foi, et le miroir peut dater de la veille.
+
 **Tant que SleepMapper est installée**, chaque ouverture de l'app ouvre une seconde connexion
 et fait tomber des lectures du collecteur. Ce n'est pas une panne : c'est la cause « appareil
 saturé », et elle disparaîtra avec la désinstallation.
@@ -429,7 +444,7 @@ Une machine à états par session. Ses règles viennent des quatre matins d'alar
 | `open` → `closed` | appui « je me lève » | lever = heure de l'appui, **confirmé** |
 | `open` → `closed` | `wungt` repasse à `night: false` sans nous, **et** une alarme a sonné (bit 11 levé puis retombé dans `wusts`) | lever = la **fin de l'alarme**, première lecture où le bit 11 est retombé, **estimé**. `tendb` est conservé brut, jamais utilisé : il vaut l'heure programmée |
 | `open` → `abnormal` | `wungt` repasse à `night: false` sans alarme — l'expiration à 12 h | pas d'heure de lever. Signalée, jamais close en silence |
-| `open` → `abnormal` + nouvelle `open` | nouvel appui de coucher, session ouverte | la précédente est figée d'abord, marquée close par nécessité |
+| ~~`open` → `abnormal` + nouvelle `open`~~ | ~~nouvel appui de coucher, session ouverte~~ | **Renversé le 2026-09-13** : traité comme le double appui, ligne suivante. Le réveil ignore `{"night": true}` sur une session ouverte (P1) ; distinguer « recoucher » de « double appui » exigerait un seuil de temps que rien ne fonde. Une nuit se fige quand sa session se clôt — geste de lever, alarme, expiration |
 | — | double appui | rien : la seconde demande renvoie la session en cours |
 
 Trois points de conception en découlent :
@@ -509,6 +524,7 @@ montre.
 | `GET /v1/aggregates?from=&to=` | les agrégats de fenêtre |
 | `GET /v1/outages?from=&to=` | les périodes d'indisponibilité, nommées |
 | `GET /v1/device` | le miroir : alarmes visibles, lumière, veilleuse, coucher de soleil, rappel, `wusts` décodé en bits |
+| `GET /v1/alarms/{n}` | le détail d'un profil, relu sur l'appareil à la demande — sélection sans effet (P3). Ajouté le 2026-09-13 (§4) |
 | `GET /v1/catalog/themes` | numéros → noms des thèmes et des sons, avec leur source (appareil ou relevé de SleepMapper) |
 | `GET /v1/sync` | le rattrapage, ci-dessous |
 
@@ -537,6 +553,30 @@ volume, le PowerWake et la durée du rappel. **Pas le départ en douceur** : `se
 n'écrit pas `sndss`, dont la seule occurrence dans `somneo.py` est une constante à 0 ailleurs
 (vérifié sur `365d313`, le 2026-09-12). Il s'écrira en direct sur `wualm/prfwu`, par la même
 passerelle.
+
+**Tranché le 2026-09-13, avant l'écriture de l'incrément 4** (Victor, quatre points) :
+
+- **Périmètre : tout ce paragraphe**, plus `GET /v1/device` — le miroir sans lequel l'app ne
+  connaît ni l'état ni les numéros des alarmes. En trois commits : socle, gestes et commandes
+  simples ; alarmes ; réglages du coucher de soleil.
+- **Les écritures passent par `pysomneo`, cache vidé avant chaque appel.** L'objet `Somneo` de
+  la passerelle n'est jamais rafraîchi par la collecte, qui lit les corps bruts ; or ses
+  méthodes envoient des charges **complètes reprises de son cache** — `toggle_light` réécrit
+  tout `wulgt`. Un réglage fait à la façade entre deux commandes de l'app serait écrasé sans
+  bruit : un effet que l'utilisateur n'a pas demandé. La passerelle remet donc à `None` les
+  attributs de cache (publics : `light_data`, `sunset_data`, `enabled_alarms`…) sous le verrou,
+  juste avant l'appel ; la méthode relit l'appareil, puis écrit. Ce que `pysomneo` ne sait pas
+  exprimer — une valeur nulle, qu'il ignore (`if level:`), et `sndss` — passe par `PUT` direct,
+  sur la même passerelle.
+- **Supprimer une alarme, c'est la masquer** : `prfen` et `prfvs` à `false`, réglages
+  conservés — ce que fait SleepMapper, dont le `+` rend un emplacement visible. Pas
+  `remove_alarm`, qui remet en plus le profil aux valeurs d'usine : une écriture de plus que ce
+  qui est demandé.
+- **« Je me couche » pendant une nuit ouverte ne fait rien** (§5) : la nuit en cours est
+  renvoyée, rien n'est écrit.
+
+**Relire un profil passe par sa sélection** (`PUT wualm {"prfnr": n}`, sans effet — P3) : c'est
+la seule façon de vérifier un champ que `aenvs`/`aalms` ne portent pas (thème, intensité, son).
 
 ### Le rattrapage — contrat arrêté le 2026-09-12
 

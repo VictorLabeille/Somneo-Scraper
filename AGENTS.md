@@ -76,6 +76,9 @@ plan technique. Deux règles tiennent la connexion unique au réveil **par const
   `500 Timeout` sous une rafale — ~25 ko de tas libre. C'est le matériel, pas un bug.
 - **`pysomneo` pour tout dialogue avec le réveil** — ne pas réimplémenter le protocole. Il ne
   couvre que 11 des 21 ports : compléter par des appels directs, pas par un remplacement.
+- **Une écriture par une méthode de `pysomneo` vide d'abord le cache de l'objet `Somneo`.** La
+  collecte ne le rafraîchit jamais, et ces méthodes envoient des charges complètes reprises du
+  cache : sans cela, un réglage fait à la façade serait écrasé sans bruit. Plan technique §7.
 - **Une boucle de restauration doit abandonner quand l'écriture est refusée.** Celle de
   `probes/ecriture_heure.py` réessaie jusqu'à ce que l'horloge revienne à sa valeur d'origine :
   comme `datetime` n'est pas inscriptible, elle a envoyé **489 `PUT` refusés en une demi-heure**

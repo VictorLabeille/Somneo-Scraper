@@ -222,12 +222,16 @@ est dans `docs/radxa.md`.
       directe est refusée, la config de serveur de temps est ignorée, et la session cloud qui
       pose l'heure est chiffrée (clé non exposée). Le réveil reste donc connecté pour l'instant ;
       le collecteur mesure et signale la dérive (`docs/somneo-api.md` §4-5)
-- [~] **Collecteur, incrément 1 (collecte)** — écrit et testé hors appareil (`collector/`,
-      29 tests, essai de bout en bout contre un faux réveil) : passerelle à connexion unique,
-      découverte SSDP, base SQLite, planificateur de tous les ports, horloge en lecture seule,
-      indisponibilités, sauvegarde en rotation, `GET /v1/status` et `/v1/readings`. Reste son
-      critère : tourner sept jours sur la carte, la capture arrêtée
-- [ ] Incréments 2-5 : nuits, rattrapage + mDNS, relais du pilotage, surveillance d'horloge
+- [~] **Collecteur** (`collector/`) — incréments 1 à 3 écrits et testés hors appareil, contre
+      un faux réveil : collecte de tous les ports, nuits (machine à états), rattrapage par
+      séquence, catalogue, annonce mDNS. L'incrément 5 (surveillance d'horloge) est couvert par
+      le premier. **Incrément 4 (relais du pilotage) en cours** : gestes de nuit, lumière,
+      veilleuse, coucher de soleil, rappel et miroir de l'appareil écrits ; restent les alarmes
+      et les réglages du coucher de soleil. Porté le 2026-09-13 sur `pysomneo` 6.0 async, la
+      version retenue au plan : l'incrément 1 avait été écrit par erreur contre la 5.0.6, qui
+      réessaie un `500` douze fois. Reste le critère de chaque incrément sur la carte : tourner
+      sept jours, la capture arrêtée
+- [ ] Déploiement sur la carte et bascule depuis la capture
 - [ ] Conteneurisation
 
 ## Liens

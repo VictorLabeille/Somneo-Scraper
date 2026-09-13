@@ -19,6 +19,8 @@ from .api import create_app
 from .collect import Collector
 from .config import Config, charger
 from .gateway import DeviceGateway
+from .nights import NightTracker
+from .relay import Relay
 from .state import RuntimeState
 from .store import Store
 
@@ -37,6 +39,16 @@ class Superviseur:
         self._stop = asyncio.Event()
         self.gw: DeviceGateway | None = None
         self.collector: Collector | None = None
+        # une seule machine des nuits, partagée par la collecte et le relais (nights.py)
+        self.nights = NightTracker(store)
+        self.relay = Relay(store, self.nights, self.gateway)
+
+    def gateway(self) -> DeviceGateway | None:
+        """La passerelle si le réveil répond — aucune indisponibilité ouverte —, sinon None : le
+        relais n'envoie alors rien, et répond « réveil injoignable » ou retient le geste."""
+        if self.gw is None or self.store.open_outages():
+            return None
+        return self.gw
 
     async def _decouvrir(self) -> str | None:
         if self.cfg.hote_force:
@@ -74,13 +86,15 @@ class Superviseur:
             self.state.reveil_host = host
             self._perte.clear()
             self.collector = Collector(self.gw, self.store, self.cfg,
-                                       on_lost=self._signaler_perte)
+                                       on_lost=self._signaler_perte,
+                                       nights=self.nights, relay=self.relay)
             tache = asyncio.create_task(self.collector.run())
             _LOGGER.info("passerelle établie vers %s", host)
             await self._perte.wait()                     # rendu quand la collecte perd le réveil
             self.collector.stop()
             await tache
-            self.gw.close()
+            await self.gw.close()
+            self.gw = None
             if not self._stop.is_set():
                 _LOGGER.warning("réveil reperdu, redécouverte")
 
@@ -112,10 +126,9 @@ async def amain(cfg: Config) -> None:
                         format="%(asctime)s %(levelname)s %(name)s %(message)s")
     store = Store(cfg.base)
     state = RuntimeState()
-    app = create_app(store, cfg, state)
-
     stop = asyncio.Event()
     superviseur = Superviseur(store, cfg, state)
+    app = create_app(store, cfg, state, relay=superviseur.relay)
     mdns = discovery.MdnsAnnonce(cfg)
 
     server = uvicorn.Server(uvicorn.Config(app, host=cfg.api_host, port=cfg.api_port,

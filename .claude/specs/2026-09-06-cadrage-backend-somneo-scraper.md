@@ -1,7 +1,7 @@
 # Cadrage — Somneo-Scraper, le collecteur
 
 > Statut : **validé** · Date : 2026-09-06 · Contrat précisé le 2026-09-12 par le plan technique
-> (§5)
+> (§5) · Relais du pilotage précisé le 2026-09-13 (§5)
 
 Premier cadrage du backend. Il porte sur le **collecteur entier**, pas sur une fonctionnalité.
 Il arrive volontairement **après** celui de SleepMaxxer : la forme de l'API interne doit être
@@ -324,7 +324,7 @@ soleil, geste de coucher et de lever.
 | Appui après-coup | Appui à 2 h pour un coucher à 23 h | L'heure enregistrée est celle de l'appui, marquée **confirmée**, et corrigeable ensuite. |
 | Geste de lever absent | On ne marque pas le lever | La session se clôt sur **l'extinction de l'alarme**, observée dans `wusts`, et l'heure est alors marquée **estimée**. Sinon elle reste ouverte. **Jamais sur `tendb`** — voir §5. |
 | Nuit jamais close | Ni geste, ni alarme éteinte, et le temps passe | La session **reste ouverte et visiblement anormale**. Aucune clôture automatique silencieuse. |
-| Nouveau coucher alors qu'une session est ouverte | Coucher, lever non marqué, recoucher | La session précédente est **figée avant** que la nouvelle ne commence, marquée close par nécessité et signalée comme anormale. Deux sessions distinctes existent, aucune n'écrase l'autre. |
+| Nouveau coucher alors qu'une session est ouverte | Coucher, lever non marqué, recoucher | La session précédente est **figée avant** que la nouvelle ne commence, marquée close par nécessité et signalée comme anormale. Deux sessions distinctes existent, aucune n'écrase l'autre. **Précisé le 2026-09-13 (§5)** : tant que la session du réveil est ouverte, un nouvel appui est un double appui — le réveil l'ignore. Les deux sessions existent dès que la première est close (geste de lever, alarme, expiration). |
 | Sieste, nuit très courte | Session d'une heure | Enregistrée telle quelle. Le collecteur ne décide pas de ce qui est une « vraie » nuit. |
 | Nuit à cheval sur minuit | Cas normal | Rattachée au jour de l'heure de coucher. Une nuit ne se scinde jamais. |
 | Correction incohérente | Lever antérieur au coucher | **Refusée**, valeur précédente conservée, raison renvoyée à l'app. |
@@ -560,6 +560,23 @@ Trois points du contrat avec SleepMaxxer, tranchés par Victor en validant le pl
   `_somneo-collector._tcp`, dépasse les 15 octets que DNS-SD permet, et `zeroconf` le refuse.
 
 > **Reporté le jour même** dans le cadrage et l'`AGENTS.md` de SleepMaxxer.
+
+### Le relais du pilotage précisé — 2026-09-13
+
+Deux points tranchés par Victor avant l'écriture du relais (plan technique §5 et §7). Modifiés
+sur place : le relais n'est pas écrit.
+
+- **Un appui « je me couche » pendant une session ouverte est un double appui.** Le réveil
+  ignore `{"night": true}` quand sa session est ouverte (mesure P1) : il n'y a pas de
+  « recoucher » à relayer, et le distinguer d'un double appui exigerait un seuil de temps que
+  rien ne fonde. Le collecteur renvoie la nuit en cours et n'écrit rien. Le cas « coucher,
+  lever, recoucher » reste entier dès que la première session est close — geste de lever,
+  alarme, expiration —, et côté app le bouton affiche « suivi en cours » une fois pressé.
+- **Supprimer une alarme la masque** : `prfen` et `prfvs` à `false`, réglages conservés.
+  Aucune alarme masquée ne peut sonner, et le profil n'est pas remis aux valeurs d'usine.
+
+> **Reporté le jour même** dans l'annexe de contrat de la jumelle de SleepMaxxer. Aucun écran
+> des maquettes n'en change.
 
 ---
 

@@ -12,11 +12,11 @@ from somneo_collector.store import Store
 
 
 @pytest.fixture
-def collector(fake, tmp_path):
+async def collector(fake, tmp_path):
     gw = DeviceGateway(fake.host, espacement_s=0.0)
     store = Store(tmp_path / "somneo.db")
     yield Collector(gw, store, Config())
-    gw.close()
+    await gw.close()
     store.close()
 
 
@@ -53,9 +53,15 @@ async def test_horloge_ecrit_un_controle_sans_correction(collector):
     assert c["corrected"] == 0
 
 
+async def test_un_vrai_500_ouvre_appareil_sature(collector):
+    """Bout en bout : un `500` de l'appareil ouvre « appareil saturé ». Avec la 5.0.6, les
+    réessais de son adaptateur le faisaient passer pour « réveil injoignable » (plan §2)."""
+    r = await collector._lire("err500")
+    assert r.status == 500
+    assert collector.store.open_outages()[0]["cause"] == "appareil saturé"
+
+
 async def test_panne_ouvre_puis_ferme_une_indisponibilite(collector):
-    # La logique d'indisponibilité se teste sur des relevés synthétiques : passer par un vrai
-    # 500 déclencherait les réessais urllib3 de pysomneo (~6 s chacun) sans rien prouver de plus.
     saturé = Releve(1, "wusts", ok=False, status=500, error="HTTP 500")
     for _ in range(5):
         await collector._echec(saturé)
