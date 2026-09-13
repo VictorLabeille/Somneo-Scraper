@@ -1115,15 +1115,22 @@ qu'elle établit, et qui change la difficulté de l'usurpation :
   `Content-Type: application/CB-Encrypted; cipher=AES`, corps de ~5 ko, plus un en-tête
   `Authorization`. Répondre l'heure ne peut donc pas être un simple texte : il faut **chiffrer
   la réponse en AES avec la clé du réveil**, et satisfaire `Authorization`.
-- **Le candidat pour cette clé est le port `security`** (`key`/`nextkey`, servis en clair sans
-  authentification) : c'est par là que les émulateurs Hue déchiffrent le CPP. Non vérifié ici —
-  il faudrait déchiffrer une capture avec cette clé pour le confirmer.
+- **Le port `security` ne fournit pas cette clé — testé et réfuté le 2026-09-13.** `key` et
+  `nextkey` valent chacun 32 caractères hexadécimaux (16 octets, une clé AES-128). Le corps capté
+  (5136 o, multiple de 16) a été déchiffré avec `openssl` **sur la carte** (la clé n'en est pas
+  sortie) sous toutes les combinaisons simples : `key` et `nextkey`, en AES-128 CBC (IV nul, IV =
+  premier bloc), ECB et CTR, plus l'hypothèse AES-192 (clé lue en base64, 24 octets). **Toutes
+  donnent du bruit (37–40 % d'octets imprimables).** La clé de chiffrement des messages n'est
+  donc pas la clé exposée : le CPP la **dérive** lors de son provisioning (KPS / sign-on), comme
+  la plupart des déploiements CPP.
 
-Bilan : l'usurpation de l'heure passe de « écrire un petit répondeur » à **« réimplémenter le
-chiffrement CPP (CB-Encrypted/AES) avec la clé de l'appareil »** — un vrai travail de
-rétro-ingénierie cryptographique, possible (précédent Hue, clé exposée) mais incertain. Les
-réponses n'ont pas été captées dans la fenêtre ; le point chiffrement, lui, est tranché par les
-requêtes.
+Bilan : l'usurpation de l'heure ne passe pas par un petit répondeur, ni même par la clé exposée.
+Elle demanderait de **rétro-concevoir la dérivation de clé de session du CPP** (capturer et
+comprendre le sign-on KPS) — un travail de cryptographie profond et à l'issue incertaine, hors de
+portée d'un gain rapide. **La voie « répondre comme Philips » est donc écartée en pratique** ;
+restent, pour l'horloge d'un réveil isolé, compenser par l'alarme (`wualm/prfwu`) ou signaler
+l'écart. La capture, elle, a rempli son office : endpoint, transport en clair, chiffrement
+applicatif, clé non exposée — le tout mesuré, rejouable par `probes/relais_cpp.py`.
 
 Côté application, les graphiques d'historique ne sont **jamais** construits à partir de
 l'API locale : ils viennent de `com.philips.platform.core.datatypes.Moment`, la couche de
