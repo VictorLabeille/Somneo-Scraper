@@ -24,6 +24,7 @@ SleepMapper). Voir `README.md`.
 | Protocole du Somneo : 21 ports, sémantique des champs, stratégie de collecte, pièges de l'appareil | `docs/somneo-api.md` |
 | La carte Radxa : état en service, WiFi, SSH, LED, pièges du flash | `docs/radxa.md` |
 | Ce que l'application attend du backend, et pourquoi | `.claude/specs/2026-09-05-spec-fonctionnelle-sleepmaxxer.md` **du dépôt SleepMaxxer** |
+| Ce que le collecteur ne tient pas encore de ce contrat, et ce que l'app contourne | `.claude/specs/2026-09-14-ecarts-contrat-sleepmaxxer.md` |
 | Décisions, arbitrages, ordre de construction, journal | Note Obsidian `Projets/Somneo-Scraper.md` |
 
 ## Périmètre de travail — à lire avant toute modification
