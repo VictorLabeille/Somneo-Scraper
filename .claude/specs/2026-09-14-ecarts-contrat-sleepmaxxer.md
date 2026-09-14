@@ -164,3 +164,34 @@ de SleepMapper, avec sa source citée ».
 
 **En attendant, côté app.** L'app porte elle-même ces libellés, avec leur source
 (`docs/sleepmapper/README.md` du dépôt SleepMaxxer). Non bloquant.
+
+## 10. Une indisponibilité reste ouverte à jamais après une redécouverte — **bloque le pilotage**
+
+> Ajouté le 2026-09-14 au soir, en essayant l'app sur émulateur contre le collecteur déployé.
+> **À traiter en premier** : c'est le seul écart qui empêche l'app de fonctionner.
+
+**Constat.** `GET /v1/status` rendait `reveil.joignable: false`, cause `réveil injoignable`, avec
+deux indisponibilités ouvertes (`end: null`, ids 11 et 15, ouvertes à 12 min d'écart) — alors que
+`dernier_releve_at` avançait à la minute : le collecteur lisait le réveil normalement.
+
+**Mécanisme, lu dans le code.** `Collector._echec` (`collect.py`) ouvre une indisponibilité et
+garde son id dans `self._outage_id`, un attribut **de l'instance**. Au cinquième échec
+(`ECHECS_AVANT_REDECOUVERTE`), `_signaler_perte` fait arrêter ce `Collector` par le superviseur
+(`__main__.py`, `Superviseur.run`), qui en crée un neuf après la redécouverte. Le neuf part de
+`_outage_id = None` : son premier succès ne ferme rien, et l'indisponibilité de l'ancien reste
+ouverte. Chaque perte du réveil qui mène à une redécouverte en laisse une de plus — ici, deux, de
+part et d'autre d'une salve de « carte hors réseau ».
+
+**Conséquence.** `Superviseur.gateway()` rend `None` dès qu'une indisponibilité est ouverte : le
+relais **refuse toute commande** (`503`, ou le geste de coucher retenu en `202`) alors que le réveil
+répond, et l'état annonce « réveil injoignable » à tort. Redémarrer le service ne répare rien : les
+lignes restent ouvertes dans la base, et `gateway()` les relit.
+
+**En attendant, côté app.** Rien à contourner : l'app affiche ce que le collecteur dit, et désactive
+le pilotage — que le relais refuserait de toute façon.
+
+**Piste.** Tenir l'indisponibilité en cours au niveau du superviseur, qui survit aux
+redécouvertes, ou fermer au premier succès toutes celles des causes « réveil injoignable » et
+« appareil saturé ». Et faire reposer `gateway()` sur l'état de la collecte courante plutôt que sur
+la base. Dépannage d'ici là : fermer les lignes ouvertes par `Store.close_outage`, service arrêté —
+pas par un `UPDATE` à la main, qui ne reprendrait pas de `seq` et que le rattrapage manquerait.
