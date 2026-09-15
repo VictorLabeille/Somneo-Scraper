@@ -187,6 +187,15 @@ relais **refuse toute commande** (`503`, ou le geste de coucher retenu en `202`)
 répond, et l'état annonce « réveil injoignable » à tort. Redémarrer le service ne répare rien : les
 lignes restent ouvertes dans la base, et `gateway()` les relit.
 
+**Revu le 2026-09-15.** Toujours actif : ids 11 et 15 ouverts depuis ~12 h (`failures: 9`
+chacun — la collecte finit sa tâche en cours après le seuil, d'où plus de cinq échecs), dernier
+relevé à moins d'une minute. Second défaut au même endroit : pendant la redécouverte,
+`Superviseur._decouvrir` ouvre **ses propres** indisponibilités (`carte hors réseau` ou `réveil
+injoignable`) alors que celle de la collecte est encore ouverte. Deux trous se superposent avec
+deux causes, et l'app, qui affiche une cause par trou, ne peut pas choisir. Le correctif doit
+donc aussi dire qui tient l'indisponibilité en cours quand on passe de la collecte à la
+redécouverte.
+
 **En attendant, côté app.** Rien à contourner : l'app affiche ce que le collecteur dit, et désactive
 le pilotage — que le relais refuserait de toute façon.
 
@@ -195,3 +204,60 @@ redécouvertes, ou fermer au premier succès toutes celles des causes « réveil
 « appareil saturé ». Et faire reposer `gateway()` sur l'état de la collecte courante plutôt que sur
 la base. Dépannage d'ici là : fermer les lignes ouvertes par `Store.close_outage`, service arrêté —
 pas par un `UPDATE` à la main, qui ne reprendrait pas de `seq` et que le rattrapage manquerait.
+
+**Tranché par Victor le 2026-09-15 : un suivi unique.** Un seul objet tient l'indisponibilité en
+cours. Le superviseur le crée, comme la machine des nuits, et la collecte comme la redécouverte
+l'utilisent : la même cause qui revient incrémente le compteur, une autre cause ferme la ligne
+en cours et en ouvre une nouvelle. Deux trous ne se chevauchent donc jamais, et chaque trou a une
+seule cause. Seul un relevé réussi ferme l'indisponibilité. `gateway()` interroge ce suivi, plus
+la base. Au démarrage, les lignes restées ouvertes sont fermées (par `close_outage`, le `seq` est
+repris) au premier relevé qui suit leur début, sinon au dernier battement, et jamais avant leur
+début. Les ids 11 et 15 se referment donc d'eux-mêmes au déploiement, à la cadence de `wusrd`
+près, sans dépannage à la main. L'autre piste (tout fermer au premier succès) a été écartée : elle
+laisse le chevauchement, et sans réparation au démarrage elle aurait daté la fin de 11 et 15 au
+jour du déploiement.
+
+**Corrigé dans le code le 2026-09-15** (`collector/src/somneo_collector/outages.py`,
+`tests/test_outages.py`). Deux tests écrits avant le correctif reproduisaient l'écart contre le
+faux réveil, qui a pour cela un levier `panne`, et échouaient : ligne restée ouverte après une
+redécouverte, battement muet pendant la redécouverte. Deux mutations du correctif (suivi non
+partagé, battement avant la réparation) sont détectées par la suite. Ce que ce choix a entraîné :
+
+- **le battement bat dans le superviseur, plus dans la collecte.** Il se taisait pendant une
+  redécouverte, et la réparation s'appuie sur lui ;
+- **la redécouverte ne ferme plus sa ligne à la fin de chaque attente.** Avant, chaque essai
+  ouvrait puis fermait sa propre ligne (`failures: 0`) ; maintenant, une ligne reste ouverte et
+  compte les essais, jusqu'au premier relevé. Trouver l'adresse ne prouve pas que le réveil
+  répond ;
+- `GET /v1/status` lit toujours la base. Après la réparation, la base et le suivi disent la même
+  chose.
+
+**Reste : déployer sur la carte** et constater que 11 et 15 se ferment, avec une date de fin qui
+tombe le 14 au soir, quelques minutes après leur ouverture, et non au jour du déploiement.
+
+## 11. Un agrégat est inséré à chaque lecture, pas au changement
+
+> Ajouté le 2026-09-15, en relisant `collect.py` pour l'écart 10.
+
+**Constat.** `Collector.tache_dataupload` appelle `Store.add_window_aggregate` à chaque lecture
+(toutes les 5 min, quatre genres), sans comparer avec le précédent. Vérifié sur le collecteur
+déployé, dans les 500 premiers éléments de `GET /v1/sync?since_seq=0` : 224 agrégats pour 71
+valeurs distinctes, dont une répétée 27 fois, par salves de quatre à 300 s d'écart.
+
+Autre point dans la même table : `hist` est rangé par `json.dumps` puis servi tel quel, donc
+comme **une chaîne JSON** (`"{\"ab\": …}"`) et non comme un objet — dans les deux modes du
+rattrapage.
+
+**Exigence manquée.** Plan technique §3, table `window_aggregate` : écriture « au changement » ;
+§11 point 3, tranché le 2026-09-12 : « au changement pour les ports d'état et les agrégats ».
+Principe 3 du §3 : « une valeur inchangée ne se répète pas ».
+
+**Conséquence.** Le rattrapage transporte trois fois trop d'agrégats, chacun avec son `seq` ; une
+fenêtre répétée ressemble à plusieurs fenêtres identiques. Rien n'est perdu, mais la même
+fenêtre apparaît plusieurs fois.
+
+**En attendant, côté app.** Non vérifié côté app ; aucun écran n'utilise les agrégats (écart 4).
+
+**Piste.** Dédoublonner par genre comme `record_port_change` le fait pour un port, sur `(avg, lo,
+hi, hist)` ; décoder `hist` avant de servir. Les doublons déjà en base restent, ou se purgent par
+une migration — à trancher.

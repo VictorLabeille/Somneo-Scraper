@@ -11,8 +11,9 @@ vol ; et, pour le relais (incrément 4), **les écritures telles que l'appareil 
 - `wualm {"prfnr": n}` **sélectionne** un profil (1-16, 0 ignoré — P3), que `wualm/prfwu` rend
   alors ; `PUT wualm/prfwu` écrit le profil désigné par son `prfnr`, et `aenvs`/`aalms` suivent.
 
-Trois leviers pour les cas d'échec : `ignorer` (réponse `200`, rien d'appliqué — « acceptée
-mais non reflétée »), `refuser` (code d'erreur sur `PUT`), et `puts`, le journal des écritures.
+Quatre leviers pour les cas d'échec : `ignorer` (réponse `200`, rien d'appliqué — « acceptée
+mais non reflétée »), `refuser` (code d'erreur sur `PUT`), `panne` (ce code sur toute requête,
+lecture comprise — le réveil saturé ou parti) et `puts`, le journal des écritures.
 
 N'écoute qu'en local, cert auto-signé (la passerelle appelle `pysomneo` avec `verify=False`).
 Aucune valeur réelle : les corps sont des formes, pas des données de chambre. `wulgt` et `wudsk`
@@ -88,6 +89,7 @@ class FakeDevice:
         self.puts: list[tuple[tuple[int, str], dict]] = []
         self.ignorer: set[tuple[int, str]] = set()
         self.refuser: dict[tuple[int, str], int] = {}
+        self.panne: int | None = None
         outer = self
 
         class H(BaseHTTPRequestHandler):
@@ -120,7 +122,15 @@ class FakeDevice:
             def do_PUT(h):
                 h._compter(h._ecrire)
 
+            def _en_panne(h) -> bool:
+                if outer.panne is None:
+                    return False
+                h._json(outer.panne, {"error": "Timeout"})
+                return True
+
             def _lire(h):
+                if h._en_panne():
+                    return
                 cle = h._cle()
                 if cle is None:
                     return h._json(404, {"error": "Unknown product"})
@@ -139,6 +149,8 @@ class FakeDevice:
                     charge = json.loads(h.rfile.read(n) or b"{}")
                 except ValueError:
                     charge = {}
+                if h._en_panne():
+                    return
                 cle = h._cle()
                 if cle is None:
                     return h._json(404, {"error": "Unknown product"})

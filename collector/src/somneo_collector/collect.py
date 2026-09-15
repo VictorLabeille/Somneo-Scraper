@@ -4,9 +4,11 @@ Un planificateur unique, sur l'horloge monotone. Chaque tâche a sa période et 
 échéance. **Après une interruption, on ne rattrape pas** : la prochaine échéance repart de
 maintenant. Jamais de rafale après une reprise.
 
-Toutes les lectures passent par la passerelle (sérialisées, une en vol). Un échec incrémente un
-compteur ; au-delà d'un seuil, on ouvre une indisponibilité datée avec sa cause, et on demande
-une redécouverte. Le succès la referme. `capture.py` est ainsi entièrement remplacé — en
+Toutes les lectures passent par la passerelle (sérialisées, une en vol). Un échec est signalé
+au suivi des indisponibilités (`outages.py`), qui ouvre une indisponibilité datée avec sa cause ;
+au-delà d'un seuil d'échecs, on demande une redécouverte. Le succès la referme — que l'ait ouverte
+cette collecte, celle d'avant la redécouverte ou la redécouverte elle-même : le suivi est partagé,
+et survit au remplacement du `Collector`. `capture.py` est ainsi entièrement remplacé — en
 lecture seule, comme lui. La seule écriture de la collecte est le rejeu d'un geste de nuit
 retenu pendant que le réveil ne répondait pas (incrément 4, `relay.py`) : demandée par
 l'utilisateur, seulement différée.
@@ -22,6 +24,7 @@ from . import clock
 from .config import Config
 from .gateway import DeviceGateway, Releve
 from .nights import NightTracker
+from .outages import OutageTracker
 from .store import Store
 
 if TYPE_CHECKING:
@@ -39,13 +42,15 @@ AGREGATS = {"temp": "tmp", "hum": "hum", "snd": "snd", "lux": "lux"}
 class Collector:
     def __init__(self, gateway: DeviceGateway, store: Store, config: Config,
                  on_lost=None, nights: NightTracker | None = None,
-                 relay: Relay | None = None) -> None:
+                 relay: Relay | None = None, outages: OutageTracker | None = None) -> None:
         self.gw = gateway
         self.store = store
         self.cfg = config
         self._on_lost = on_lost          # coroutine appelée après le seuil d'échecs (redécouverte)
         self._echecs = 0
-        self._outage_id: int | None = None
+        # l'indisponibilité en cours : tenue par le superviseur, qui survit à ce Collector (écart
+        # 10) ; un suivi propre à défaut, pour les tests de la collecte seule
+        self.outages = outages if outages is not None else OutageTracker(store)
         self._stop = asyncio.Event()
         # machine à états des nuits : partagée avec le relais (une seule par processus, voir
         # nights.py) ; une propre à défaut, pour les tests de la collecte seule
@@ -55,19 +60,14 @@ class Collector:
     # ---- suivi de la disponibilité ------------------------------------------------------
     def _succes(self) -> None:
         self._echecs = 0
-        if self._outage_id is not None:
-            self.store.close_outage(self._outage_id)
+        if self.outages.recover():
             _LOGGER.info("réveil de nouveau joignable, indisponibilité close")
-            self._outage_id = None
 
     async def _echec(self, r: Releve) -> None:
         self._echecs += 1
         cause = "appareil saturé" if r.status == 500 else "réveil injoignable"
-        if self._outage_id is None:
-            self._outage_id = self.store.open_outage(cause)
+        if self.outages.report(cause):
             _LOGGER.warning("indisponibilité ouverte (%s) après %s", cause, r.error)
-        else:
-            self.store.bump_outage(self._outage_id)
         if self._echecs == ECHECS_AVANT_REDECOUVERTE and self._on_lost is not None:
             await self._on_lost()        # redécouverte SSDP : le bail DHCP a peut-être changé
 
@@ -139,9 +139,6 @@ class Collector:
             if r.ok:
                 self.store.record_port_change(port, r.corps, ts=r.observed_at)
 
-    async def tache_heartbeat(self) -> None:
-        self.store.heartbeat()
-
     async def tache_gestes(self) -> None:
         """Rejoue les gestes de nuit retenus pendant que le réveil ne répondait pas (cadrage §5)."""
         if self.relay is not None and self.store.pending_gestures():
@@ -159,7 +156,6 @@ class Collector:
             ("horloge", self.tache_horloge, c.horloge),
             ("liaison", self.tache_liaison, c.liaison),
             ("fichiers", self.tache_fichiers, c.fichiers),
-            ("heartbeat", self.tache_heartbeat, 60.0),
             ("gestes", self.tache_gestes, c.wungt),
         ]
 

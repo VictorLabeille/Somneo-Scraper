@@ -20,12 +20,14 @@ from .collect import Collector
 from .config import Config, charger
 from .gateway import DeviceGateway
 from .nights import NightTracker
+from .outages import OutageTracker
 from .relay import Relay
 from .state import RuntimeState
 from .store import Store
 
 _LOGGER = logging.getLogger(__name__)
 BACKOFF_MIN, BACKOFF_MAX = 30.0, 600.0     # redécouverte : 30 s → 10 min
+BATTEMENT_S = 60.0
 
 
 class Superviseur:
@@ -39,14 +41,18 @@ class Superviseur:
         self._stop = asyncio.Event()
         self.gw: DeviceGateway | None = None
         self.collector: Collector | None = None
+        # l'indisponibilité en cours survit aux redécouvertes : un seul suivi, partagé par la
+        # collecte et la redécouverte (outages.py, écart 10)
+        self.outages = OutageTracker(store)
         # une seule machine des nuits, partagée par la collecte et le relais (nights.py)
         self.nights = NightTracker(store)
         self.relay = Relay(store, self.nights, self.gateway)
 
     def gateway(self) -> DeviceGateway | None:
-        """La passerelle si le réveil répond — aucune indisponibilité ouverte —, sinon None : le
-        relais n'envoie alors rien, et répond « réveil injoignable » ou retient le geste."""
-        if self.gw is None or self.store.open_outages():
+        """La passerelle si le réveil répond — aucune indisponibilité en cours —, sinon None : le
+        relais n'envoie alors rien, et répond « réveil injoignable » ou retient le geste. Lit le
+        suivi, pas la base : une ligne restée ouverte par erreur ne bloque plus le pilotage."""
+        if self.gw is None or self.outages.current is not None:
             return None
         return self.gw
 
@@ -64,10 +70,9 @@ class Superviseur:
             else:
                 cause = "réveil injoignable"
             if host:
-                return host
-            oid = self.store.open_outage(cause)
+                return host              # l'indisponibilité reste ouverte : un relevé la fermera
+            self.outages.report(cause)
             await self._attendre(backoff)
-            self.store.close_outage(oid)
             backoff = min(backoff * 2, BACKOFF_MAX)
         return None
 
@@ -77,26 +82,41 @@ class Superviseur:
         except asyncio.TimeoutError:
             pass
 
-    async def run(self) -> None:
+    async def _battre(self) -> None:
+        """Le battement, que le réveil réponde ou non : il borne un arrêt du processus (plan §3),
+        et la redécouverte fait partie du processus. Il battait dans la collecte, donc se taisait
+        pendant une redécouverte."""
         while not self._stop.is_set():
-            host = await self._decouvrir()
-            if host is None:
-                return
-            self.gw = DeviceGateway(host, self.cfg.espacement_s)
-            self.state.reveil_host = host
-            self._perte.clear()
-            self.collector = Collector(self.gw, self.store, self.cfg,
-                                       on_lost=self._signaler_perte,
-                                       nights=self.nights, relay=self.relay)
-            tache = asyncio.create_task(self.collector.run())
-            _LOGGER.info("passerelle établie vers %s", host)
-            await self._perte.wait()                     # rendu quand la collecte perd le réveil
-            self.collector.stop()
-            await tache
-            await self.gw.close()
-            self.gw = None
-            if not self._stop.is_set():
-                _LOGGER.warning("réveil reperdu, redécouverte")
+            self.store.heartbeat()
+            await self._attendre(BATTEMENT_S)
+
+    async def run(self) -> None:
+        # avant le premier battement : celui en base est encore celui de l'arrêt précédent
+        self.outages.repair_stale()
+        battement = asyncio.create_task(self._battre())
+        try:
+            while not self._stop.is_set():
+                host = await self._decouvrir()
+                if host is None:
+                    return
+                self.gw = DeviceGateway(host, self.cfg.espacement_s)
+                self.state.reveil_host = host
+                self._perte.clear()
+                self.collector = Collector(self.gw, self.store, self.cfg,
+                                           on_lost=self._signaler_perte, nights=self.nights,
+                                           relay=self.relay, outages=self.outages)
+                tache = asyncio.create_task(self.collector.run())
+                _LOGGER.info("passerelle établie vers %s", host)
+                await self._perte.wait()                 # rendu quand la collecte perd le réveil
+                self.collector.stop()
+                await tache
+                await self.gw.close()
+                self.gw = None
+                if not self._stop.is_set():
+                    _LOGGER.warning("réveil reperdu, redécouverte")
+        finally:
+            battement.cancel()
+            await asyncio.gather(battement, return_exceptions=True)
 
     async def _signaler_perte(self) -> None:
         self._perte.set()

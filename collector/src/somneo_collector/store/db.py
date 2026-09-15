@@ -331,6 +331,14 @@ class Store:
         finally:
             conn.close()
 
+    def first_reading_after(self, ts: float) -> float | None:
+        """L'heure du premier relevé postérieur à `ts` : le réveil répondait de nouveau."""
+        conn = self._ro()
+        try:
+            return conn.execute("SELECT min(ts) FROM reading WHERE ts > ?", (ts,)).fetchone()[0]
+        finally:
+            conn.close()
+
     def latest_clock_check(self) -> dict | None:
         conn = self._ro()
         try:
