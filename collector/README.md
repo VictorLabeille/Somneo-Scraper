@@ -45,6 +45,7 @@ sudo ./deploy/install.sh      # crée l'utilisateur, le venv, installe le servic
 
 Le service n'est pas démarré automatiquement : le lancer par-dessus `capture.py` ouvrirait une
 seconde connexion au réveil. La bascule se fait à la main, dans l'ordre — `install.sh` l'affiche.
+Sur une mise à jour, service déjà actif, il dit seulement de le redémarrer.
 
 ## Structure
 

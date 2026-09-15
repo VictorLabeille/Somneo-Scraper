@@ -3,7 +3,8 @@
 #
 # N'ACTIVE PAS le service tout seul : le démarrer par-dessus capture.py, ce serait deux clients
 # vers un réveil qui n'en sert qu'un, et l'appareil ferait tomber les deux (plan §8). La bascule
-# depuis la capture se fait à la main, dans l'ordre, et ce script l'affiche à la fin.
+# depuis la capture se fait à la main, dans l'ordre, et ce script l'affiche à la fin. Sur une mise
+# à jour — service déjà actif —, il dit seulement de redémarrer.
 set -euo pipefail
 
 PREFIX=/opt/somneo-collector
@@ -15,6 +16,12 @@ CONF=/etc/somneo-collector
 PYSOMNEO="${PYSOMNEO_SPEC:-https://github.com/VictorLabeille/pysomneo/archive/13ec0c59c394de8aad943c5ced4f7b39f584790a.tar.gz}"
 
 [ "$(id -u)" -eq 0 ] || { echo "à lancer en root" >&2; exit 1; }
+
+# L'état du service AVANT l'installation choisit le message final. Actif : c'est une mise à jour,
+# la bascule depuis la capture est faite, il ne reste qu'à redémarrer. Tout autre état (première
+# installation, retour arrière vers la capture, service en train de redémarrer) : la procédure de
+# bascule, le message prudent — un « redémarrer » par-dessus capture.py ferait deux clients.
+if systemctl is-active --quiet somneo-collector.service; then MISE_A_JOUR=1; else MISE_A_JOUR=0; fi
 
 id somneo &>/dev/null || useradd --system --home "$STATE" --shell /usr/sbin/nologin somneo
 install -d -o somneo -g somneo "$STATE" "$STATE/backups"
@@ -32,6 +39,19 @@ curl -fsS https://bootstrap.pypa.io/get-pip.py | "$PREFIX/venv/bin/python"
 install -m 644 deploy/somneo-collector.service /etc/systemd/system/somneo-collector.service
 systemctl daemon-reload
 systemctl enable somneo-collector.service     # activé au boot, mais PAS démarré maintenant
+
+if [ "$MISE_A_JOUR" -eq 1 ]; then
+    cat <<'FIN'
+
+Mis à jour. Le service tourne encore l'ANCIENNE version : le redémarrer pour charger la nouvelle.
+
+  systemctl restart somneo-collector
+
+  Le service était actif : la bascule depuis la capture est déjà faite, ne pas la refaire.
+  Config optionnelle : /etc/somneo-collector/config.toml (surcharge les défauts).
+FIN
+    exit 0
+fi
 
 cat <<'FIN'
 
