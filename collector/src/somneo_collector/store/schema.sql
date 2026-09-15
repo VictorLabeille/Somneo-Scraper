@@ -6,7 +6,8 @@
 -- La base vit sur la carte, jamais dans le dépôt : elle peut contenir numéro de série et
 -- conditions de chambre. Les fixtures de test, elles, n'ont que des formes (plan §9).
 
-PRAGMA user_version = 1;
+-- v2 (2026-09-15) : `night_correction.value` accepte NULL. Migration depuis v1 dans db.py.
+PRAGMA user_version = 2;
 
 CREATE TABLE IF NOT EXISTS meta (
     key   TEXT PRIMARY KEY,
@@ -90,6 +91,8 @@ CREATE INDEX IF NOT EXISTS idx_clock_ts ON clock_check (ts);
 
 -- `id` stable identifie la nuit (API, corrections, machine à états) ; `seq` est repris à chaque
 -- modification pour le rattrapage — il ne peut donc pas servir de clé d'identité.
+-- `bedtime`/`risetime` et leur origine sont le RELEVÉ, que seule la machine des nuits écrit : une
+-- correction n'y touche jamais. La nuit servie se dérive dans db.py (`_servir_nuits`).
 CREATE TABLE IF NOT EXISTS night (
     id         INTEGER PRIMARY KEY AUTOINCREMENT,
     seq        INTEGER NOT NULL,
@@ -105,13 +108,15 @@ CREATE TABLE IF NOT EXISTS night (
 CREATE INDEX IF NOT EXISTS idx_night_day ON night (day);
 CREATE INDEX IF NOT EXISTS idx_night_seq ON night (seq);
 
+-- Les corrections de l'app, en ajout seul (écarts 1-3, tranché le 2026-09-15). La dernière d'un
+-- champ fait foi ; une correction NULL revient au relevé — la trace de chacune reste.
 CREATE TABLE IF NOT EXISTS night_correction (
     id        INTEGER PRIMARY KEY AUTOINCREMENT,
     seq       INTEGER NOT NULL,
     night_id  INTEGER NOT NULL REFERENCES night (id),
     ts        REAL NOT NULL,
     field     TEXT NOT NULL,        -- bedtime | risetime
-    value     REAL NOT NULL
+    value     REAL                  -- epoch (NTP) ; NULL : retour au relevé
 );
 
 -- Un geste de l'app que le réveil n'a pas encore pris (cadrage §5 : jamais perdu), rejoué par la

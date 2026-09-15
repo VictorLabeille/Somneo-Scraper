@@ -67,6 +67,51 @@ l'écart 1, il ne peut pas non plus montrer la valeur d'origine.
 **Piste.** Joindre `corrections` à chaque nuit rendue par `/v1/sync` (les deux modes), ou exposer
 `night_correction` comme un genre de plus dans `changes_since`.
 
+## Écarts 1, 2 et 3 — tranchés ensemble par Victor le 2026-09-15
+
+Ils touchent la même ligne servie, et donc la même transaction : ils se traitent ensemble.
+
+**La nuit garde le relevé.** Une correction ne modifie plus `night.bedtime`/`risetime`. Elle
+s'ajoute à `night_correction`, qui ne reçoit que des ajouts, et reprend le `seq` de la nuit
+pour que le rattrapage la renvoie. La nuit est **servie**, par toutes les routes, rattrapage
+compris (les deux modes), avec :
+
+- `bedtime`/`risetime` : la dernière correction du champ, sinon le relevé ;
+- `bedtime_origin`/`risetime_origin` : `corrected` si la dernière correction du champ fait foi,
+  sinon l'origine du relevé ;
+- `bedtime_observed`/`risetime_observed` et `…_observed_origin` : le relevé et son origine,
+  toujours ;
+- `corrections` : le journal des corrections de la nuit.
+
+Principe 2 du plan §3 : stocker la source, dériver le reste. Motif décisif : `nights.py`
+continue d'écrire le relevé (`night_set_rise` à la chute du bit 11). Avec la valeur servie
+dérivée, une écriture de la machine ne peut plus écraser une correction ; avec des colonnes
+`*_observed` (la piste de l'écart 1), il aurait fallu apprendre à la machine à ne pas le faire.
+Aucune migration de données : aucune nuit n'était corrigée sur la carte au 2026-09-15.
+
+**Réversible par une correction « retour ».** `POST /v1/nights/{id}/corrections` avec
+`value: null` entre dans le journal comme les autres, et la nuit sert de nouveau le relevé avec
+son origine. `night_correction` reste en ajout seul (plan §3). Écartée : la suppression d'une
+correction (`DELETE`), qui efface la trace ; et « pas d'annulation », qui ne tient pas le
+cadrage app §5 (« tracée et réversible »).
+
+Contrat : tous les champs sont **ajoutés**, aucun n'est renommé. L'app pourra retirer son
+contournement, la mémoire locale `corrected` des champs qu'elle a corrigés elle-même : l'origine
+servie suffit, et c'est la seule qui voit une correction « retour ».
+
+**Corrigé dans le code le 2026-09-15** (`store/db.py` : `_servir_nuits`, migration v1 → v2 ;
+route des corrections ; `tests/test_corrections.py`). Deux tests échouaient sur le mécanisme
+avant le correctif : le relevé écrasé (`900 ≠ 1000`), et la correction écrasée par la machine
+(`1200 ≠ 1500`). La migration a été éprouvée sur une copie de la sauvegarde du 14 : comptes
+intacts, `integrity_check` sans erreur, aucune violation de clé étrangère. Choix
+d'implémentation : un retour sans correction en vigueur n'écrit rien et répond `200`, pour
+qu'un renvoi après une coupure réseau n'échoue pas. Côté app, un seul type change :
+`NightCorrection.value` peut être `null`.
+
+**Non traité** : `day`, et le filtrage des routes par dates (`from`/`to`, `before`), suivent le
+relevé. Une correction qui déplace un coucher de l'autre côté de minuit ne change pas le jour de
+la nuit. C'était déjà le cas quand la correction écrasait le relevé.
+
 ## 4. Le rattrapage par séquence efface le type d'un agrégat
 
 **Constat.** Dans `changes_since`, chaque ligne reçoit `d["kind"] = kind`, où `kind` est le genre
@@ -232,8 +277,16 @@ partagé, battement avant la réparation) sont détectées par la suite. Ce que 
 - `GET /v1/status` lit toujours la base. Après la réparation, la base et le suivi disent la même
   chose.
 
-**Reste : déployer sur la carte** et constater que 11 et 15 se ferment, avec une date de fin qui
-tombe le 14 au soir, quelques minutes après leur ouverture, et non au jour du déploiement.
+**Éprouvé sur données réelles le 2026-09-15**, sur une copie de la sauvegarde quotidienne du 14
+(v1, 21 indisponibilités, prise pendant une redécouverte). 11 est fermée 386 s après son début.
+15 est fermée à son début : la sauvegarde n'a aucun relevé après elle, et son dernier battement
+la précède de 46 s. C'est le battement qui se taisait pendant la redécouverte, et que ce
+correctif fait battre dans le superviseur. Limite : la réparation ne défait pas un chevauchement
+passé. 15 recouvre les lignes de redécouverte fermées depuis.
+
+**Reste : déployer sur la carte** et constater que 11 et 15 se ferment : 11 à 386 s de son début,
+15 à 2906 s, qui sont leurs premiers relevés, lus sur le collecteur le 2026-09-15
+(`/v1/readings`). Une fin datée du jour du déploiement signalerait un défaut.
 
 ## 11. Un agrégat est inséré à chaque lecture, pas au changement
 

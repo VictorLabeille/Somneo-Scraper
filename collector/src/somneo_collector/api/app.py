@@ -34,8 +34,8 @@ PORTS_MIROIR = ("wulgt", "wudsk", "wualm", "wualm/aenvs", "wualm/aalms", "wuply"
 
 
 class Correction(BaseModel):
-    field: str          # bedtime | risetime
-    value: float        # epoch (référentiel collecteur / NTP)
+    field: str                  # bedtime | risetime
+    value: float | None         # epoch (référentiel collecteur / NTP) ; null : retour au relevé
 
 
 class Lampe(BaseModel):
@@ -250,9 +250,14 @@ def create_app(store: Store, cfg: Config, state: RuntimeState | None = None,
             raise HTTPException(404, "nuit inconnue")
         if c.field not in ("bedtime", "risetime"):
             raise HTTPException(422, "champ corrigible : bedtime ou risetime")
+        # `null` revient au relevé (écarts 1-3) ; sans correction en vigueur, rien à annuler, et
+        # rien d'écrit : un renvoi après une coupure réseau ne doit pas échouer
+        if c.value is None and n[f"{c.field}_origin"] != "corrected":
+            return {"served_at": time.time(), "night": n}
+        nouvelle = c.value if c.value is not None else n[f"{c.field}_observed"]
         # un lever antérieur au coucher est refusé, valeur précédente conservée (cadrage §F)
-        bedtime = c.value if c.field == "bedtime" else n.get("bedtime")
-        risetime = c.value if c.field == "risetime" else n.get("risetime")
+        bedtime = nouvelle if c.field == "bedtime" else n.get("bedtime")
+        risetime = nouvelle if c.field == "risetime" else n.get("risetime")
         if bedtime and risetime and risetime < bedtime:
             raise HTTPException(422, "le lever ne peut pas précéder le coucher")
         store.add_night_correction(night_id, c.field, c.value)

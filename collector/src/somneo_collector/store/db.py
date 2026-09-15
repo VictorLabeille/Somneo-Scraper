@@ -19,6 +19,28 @@ CHAMPS_READING = ("mslux", "mstmp", "msrhu", "mssnd", "avlux", "avtmp", "avrhu",
 # `pending_gesture.applied` : un geste retenu est en attente, réglé (appliqué, ou devenu sans
 # objet), ou abandonné parce que le réveil l'a refusé — jamais réessayé en boucle (AGENTS.md).
 GESTE_EN_ATTENTE, GESTE_REGLE, GESTE_ABANDONNE = 0, 1, 2
+CHAMPS_CORRIGIBLES = ("bedtime", "risetime")
+
+# v1 → v2 (2026-09-15, écarts 1-3) : `night_correction.value` accepte NULL, la correction qui
+# revient au relevé. SQLite ne relâche pas une contrainte : la table est rebâtie, ses lignes
+# recopiées telles quelles (id et seq compris), en une transaction.
+MIGRATION_V2 = """
+BEGIN;
+CREATE TABLE night_correction_v2 (
+    id        INTEGER PRIMARY KEY AUTOINCREMENT,
+    seq       INTEGER NOT NULL,
+    night_id  INTEGER NOT NULL REFERENCES night (id),
+    ts        REAL NOT NULL,
+    field     TEXT NOT NULL,
+    value     REAL
+);
+INSERT INTO night_correction_v2 (id, seq, night_id, ts, field, value)
+    SELECT id, seq, night_id, ts, field, value FROM night_correction;
+DROP TABLE night_correction;
+ALTER TABLE night_correction_v2 RENAME TO night_correction;
+PRAGMA user_version = 2;
+COMMIT;
+"""
 
 
 def _pragmas(conn: sqlite3.Connection) -> None:
@@ -26,6 +48,35 @@ def _pragmas(conn: sqlite3.Connection) -> None:
     conn.execute("PRAGMA synchronous = FULL")     # coupure de courant en écriture = mode probable
     conn.execute("PRAGMA foreign_keys = ON")
     conn.row_factory = sqlite3.Row
+
+
+def _servir_nuits(conn: sqlite3.Connection, rows) -> list[dict]:
+    """Les nuits telles que l'API les sert, rattrapage compris (écarts 1-3, tranché le 2026-09-15).
+
+    En base, `night` porte le relevé, que seule la machine des nuits écrit ; les corrections
+    vivent à part, en ajout seul. Pour chaque heure, la dernière correction du champ fait foi
+    (origine `corrected`), et une correction NULL revient au relevé. Le relevé et son origine
+    sont toujours servis à côté (`*_observed`, `*_observed_origin`), avec le journal
+    (`corrections`). `day`, et le filtrage des routes par dates, restent ceux du relevé."""
+    nuits = [dict(r) for r in rows]
+    if not nuits:
+        return nuits
+    journal: dict[int, list[dict]] = {n["id"]: [] for n in nuits}
+    ids = list(journal)
+    for c in conn.execute(
+            f"SELECT * FROM night_correction WHERE night_id IN ({', '.join('?' * len(ids))}) "
+            "ORDER BY seq", ids):
+        journal[c["night_id"]].append(dict(c))
+    for n in nuits:
+        corrections = journal[n["id"]]
+        for champ in CHAMPS_CORRIGIBLES:
+            n[f"{champ}_observed"] = n[champ]
+            n[f"{champ}_observed_origin"] = n[f"{champ}_origin"]
+            derniere = next((c for c in reversed(corrections) if c["field"] == champ), None)
+            if derniere is not None and derniere["value"] is not None:
+                n[champ], n[f"{champ}_origin"] = derniere["value"], "corrected"
+        n["corrections"] = corrections
+    return nuits
 
 
 class Store:
@@ -41,6 +92,8 @@ class Store:
         _pragmas(self._w)
         schema = resources.files("somneo_collector.store").joinpath("schema.sql").read_text()
         with self._wlock, self._w:
+            if self._w.execute("PRAGMA user_version").fetchone()[0] == 1:
+                self._w.executescript(MIGRATION_V2)      # une base d'avant le 2026-09-15
             self._w.executescript(schema)
         self._dernier_corps: dict[str, str] = {}     # port -> dernier body JSON, pour « au changement »
         self._vu_a: dict[str, float] = {}           # port -> dernière lecture, même inchangée
@@ -267,18 +320,17 @@ class Store:
                                   "ORDER BY id DESC LIMIT 1").fetchone()
         return dict(row) if row else None
 
-    def add_night_correction(self, night_id: int, field: str, value: float,
+    def add_night_correction(self, night_id: int, field: str, value: float | None,
                              ts: float | None = None) -> int:
+        """Ajoute une correction au journal ; `value` None revient au relevé. La nuit garde son
+        relevé (écarts 1-3) : seul son `seq` est repris, pour que le rattrapage la renvoie."""
         ts = ts if ts is not None else time.time()
         with self._wlock, self._w:
             seq = self._next_seq()
             self._w.execute(
                 "INSERT INTO night_correction (seq, night_id, ts, field, value) "
                 "VALUES (?, ?, ?, ?, ?)", [seq, night_id, ts, field, value])
-            # la correction fait foi : la valeur servie de la nuit suit, sa valeur relevée reste
-            if field in ("bedtime", "risetime"):
-                self._w.execute(f"UPDATE night SET {field}=?, seq=? WHERE id=?",
-                                [value, self._next_seq(), night_id])
+            self._w.execute("UPDATE night SET seq=? WHERE id=?", [self._next_seq(), night_id])
         return seq
 
     def list_nights(self, debut: float, fin: float) -> list[dict]:
@@ -287,20 +339,16 @@ class Store:
             rows = conn.execute(
                 "SELECT * FROM night WHERE bedtime >= ? AND bedtime <= ? ORDER BY bedtime",
                 (debut, fin)).fetchall()
-            return [dict(r) for r in rows]
+            return _servir_nuits(conn, rows)
         finally:
             conn.close()
 
     def get_night(self, night_id: int) -> dict | None:
+        """La nuit servie : valeur qui fait foi, relevé à côté, journal des corrections."""
         conn = self._ro()
         try:
             row = conn.execute("SELECT * FROM night WHERE id=?", (night_id,)).fetchone()
-            if not row:
-                return None
-            night = dict(row)
-            night["corrections"] = [dict(c) for c in conn.execute(
-                "SELECT * FROM night_correction WHERE night_id=? ORDER BY seq", (night_id,))]
-            return night
+            return _servir_nuits(conn, [row])[0] if row else None
         finally:
             conn.close()
 
@@ -386,16 +434,16 @@ class Store:
     def changes_since(self, since_seq: int, limit: int = 500) -> list[dict]:
         """Tout ce qui a été créé OU modifié depuis `since_seq`, dans l'ordre du seq (rattrapage §7).
 
-        Une nuit corrigée voit son seq repris : elle revient ici d'office avec sa valeur à jour."""
+        Une nuit corrigée voit son seq repris : elle revient ici d'office, servie comme par
+        `get_night` — valeur qui fait foi, relevé, journal des corrections (écart 3)."""
         conn = self._ro()
         try:
             items: list[dict] = []
             for kind, table in (("reading", "reading"), ("aggregate", "window_aggregate"),
                                 ("night", "night"), ("outage", "outage")):
-                for r in conn.execute(
-                        f"SELECT * FROM {table} WHERE seq > ? ORDER BY seq LIMIT ?",
-                        (since_seq, limit)):
-                    d = dict(r)
+                rows = conn.execute(f"SELECT * FROM {table} WHERE seq > ? ORDER BY seq LIMIT ?",
+                                    (since_seq, limit)).fetchall()
+                for d in _servir_nuits(conn, rows) if table == "night" else map(dict, rows):
                     d["kind"] = kind
                     items.append(d)
             items.sort(key=lambda d: d["seq"])
@@ -409,7 +457,7 @@ class Store:
             rows = conn.execute(
                 "SELECT * FROM night WHERE bedtime < ? ORDER BY bedtime DESC LIMIT ?",
                 (jour_epoch, limit)).fetchall()
-            return [dict(r) for r in rows]
+            return _servir_nuits(conn, rows)
         finally:
             conn.close()
 
