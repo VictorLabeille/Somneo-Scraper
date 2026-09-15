@@ -166,6 +166,49 @@ arrêté » : ce serait inventer la cause.
 l'instant présent de plus de deux minutes, insérer une `outage` fermée (`start` = dernier
 battement, `end` = maintenant, cause `collecteur arrêté`).
 
+**Revu le 2026-09-15 : l'heure de la carte au démarrage fausse cette piste.** Mesuré sur la
+carte (détail dans `docs/radxa.md`). Le RTC est virtuel (`meson-vrtc`) et ne garde rien hors
+tension. Au démarrage, `systemd-timesyncd` ramène l'horloge au dernier instant qu'il a
+enregistré, puis la synchronise quand le réseau vient : à 51 s au démarrage du 23/08.
+`systemd-time-wait-sync` est désactivé, et attendrait sans limite. L'unité du collecteur
+n'attend que `network-online.target`. Or la carte est alimentée par le réveil : une coupure de
+courant est l'arrêt le plus probable. Après une coupure de durée D, le collecteur démarre avec
+une heure en retard d'environ D. « Maintenant » ressemble alors au dernier battement, la piste
+ne voit aucun arrêt, et les premiers relevés sont datés dans le passé. Le trou apparaît ensuite,
+sans cause, au saut de la synchronisation. Depuis `43bd867`, le battement bat dans le
+superviseur, redécouverte comprise.
+
+**Tranché par Victor le 2026-09-15.**
+
+- **Bornes.** « Collecteur arrêté » va du dernier signe de vie du processus précédent (le plus
+  tardif de son dernier battement et de son dernier relevé) au premier relevé réussi de la
+  reprise, comme au cadrage backend §3.B. Le suivi (`outages.py`) l'ouvre au démarrage, après la
+  réparation et avant le premier battement. Le premier relevé la ferme ; un échec la remplace
+  par sa cause, au même instant. Un dernier battement est écrit à l'arrêt propre (déploiement,
+  redémarrage) : la borne basse est alors exacte à la seconde, pas à la minute.
+- **Aucun seuil.** Chaque arrêt a sa ligne, un déploiement compris.
+- **L'heure d'abord.** Au démarrage, le superviseur attend `/run/systemd/timesync/synchronized`,
+  5 min au plus, avant la réparation, le premier battement et la collecte ; l'API sert la base
+  pendant ce temps. Passé ce délai, la collecte part quand même et `GET /v1/status` le dit
+  (`collecteur.heure_synchronisee`) : l'heure fausse est signalée, jamais corrigée (cadrage
+  backend §3.E). Écartés : attendre `time-sync.target`, qui touche au chemin de démarrage de la
+  carte et attend sans limite (sans Internet, plus de collecteur du tout, même avec le réveil
+  joignable) ; ne rien faire.
+
+Choix d'implémentation, garde-fou : une indisponibilité ne se ferme jamais avant son début,
+pour le cas où l'horloge reviendrait en arrière (délai d'attente dépassé, synchronisation
+tardive).
+
+**Corrigé dans le code le 2026-09-15** (`outages.py` : `open_stopped` ; `__main__.py` :
+`_attendre_heure`, dernier battement ; `config.py` : `synchro_ntp`, `attente_synchro_s` ;
+`tests/test_arret.py`). Les tests échouaient sur l'ancien code faute du paramètre de
+configuration, ce qui ne prouvait rien : la réfutation s'est faite par cinq mutations du
+correctif, chacune détectée par le test prévu (pas de dernier battement, pas d'attente de
+l'heure, pas de garde-fou de fin, signe de vie réduit au battement, `open_stopped` jamais
+appelé). La règle « rien de daté avant la synchronisation » est portée dans l'`AGENTS.md`, et
+les faits de la carte dans `docs/radxa.md`. Côté app, le contournement « cause non fournie par
+le collecteur » reste juste pour les trous d'avant le déploiement.
+
 ## 6. Le rattrapage « récent d'abord » ne porte que les nuits closes
 
 **Constat.** `GET /v1/sync?before=` rend des nuits, et n'y joint points et agrégats que si elles

@@ -58,6 +58,11 @@ class Config:
     sauvegardes: Path = Path("/var/lib/somneo-collector/backups")
     hote_force: str | None = None          # adresse imposée (tests, faux réveil) ; sinon SSDP
     espacement_s: float = 0.2              # entre deux requêtes au réveil (prudence, §7 doc)
+    # Le drapeau que `systemd-timesyncd` pose à la synchronisation NTP : la collecte l'attend avant
+    # de dater quoi que ce soit, car la carte repart en retard après une coupure (écart 5,
+    # docs/radxa.md). None : pas d'attente (tests). `attente_synchro_s = 0` fait de même en TOML.
+    synchro_ntp: Path | None = Path("/run/systemd/timesync/synchronized")
+    attente_synchro_s: float = 300.0       # passé ce délai, la collecte part, et le statut le dit
     api_host: str = "0.0.0.0"
     api_port: int = 8760
     mdns_service: str = "_somneo-scraper._tcp"   # contrat SleepMaxxer, ≤ 15 o (RFC 6763)

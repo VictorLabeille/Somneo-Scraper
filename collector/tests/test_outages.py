@@ -36,6 +36,7 @@ async def _attendre(condition, delai_s: float = 10.0) -> None:
 
 
 def _superviseur(store, **cfg) -> principal.Superviseur:
+    cfg.setdefault("synchro_ntp", None)      # pas d'attente de l'heure : pas de timesyncd ici
     return principal.Superviseur(store, Config(espacement_s=0.0, **cfg), RuntimeState())
 
 

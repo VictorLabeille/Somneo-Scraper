@@ -129,6 +129,27 @@ force successivement les lignes 10 puis 8 et laisse l'œil trancher. La ligne qu
 pas la LED part vers le header 40 points, où rien n'est branché — les deux essais sont donc
 sans conséquence.
 
+## Heure au démarrage — aucune horloge ne survit à une coupure
+
+Relevé le 2026-09-15, en lecture seule. La carte est alimentée par le réveil : **une coupure de
+courant est son arrêt le plus probable**, et rien ne lui garde l'heure pendant ce temps.
+
+- **RTC virtuel** : `/sys/class/rtc/rtc0/name` vaut `meson-vrtc`, `hctosys` vaut 0. Rien n'est
+  gardé hors tension.
+- **`fake-hwclock` est installé mais masqué.** C'est `systemd-timesyncd` (systemd 257) qui tient
+  l'heure d'un démarrage à l'autre. Il enregistre l'horloge régulièrement
+  (`/var/lib/systemd/timesync/clock`). Au démarrage, il **ramène l'horloge à cet instant**
+  (« System clock time advanced to recorded timestamp »), puis la synchronise quand le réseau
+  vient : **à 51 s** au démarrage du 2026-08-23. C'était un simple redémarrage, et l'instant
+  enregistré retardait d'une vingtaine de secondes. Après une coupure de durée D, tout ce qui
+  démarre avant la synchronisation voit une heure en retard d'environ D.
+- **`time-sync.target` ne garantit rien** : `systemd-time-wait-sync` est désactivé, et s'il
+  était activé il attendrait sans limite (`TimeoutStartUSec=infinity`). Sans Internet, tout ce
+  qui en dépend ne démarrerait jamais, même avec le réveil joignable.
+- **`/run/systemd/timesync/synchronized`** est posé par `timesyncd` à la synchronisation et
+  effacé à chaque démarrage (`/run` est en mémoire). C'est lui que le collecteur attend avant
+  de dater quoi que ce soit (écart 5 de `.claude/specs/2026-09-14-ecarts-contrat-sleepmaxxer.md`).
+
 ## Pièges du flash — `radxa-flash/`
 
 Ces points ont coûté une session entière de débogage. Les relire avant de toucher au flash.

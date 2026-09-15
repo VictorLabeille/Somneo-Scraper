@@ -90,9 +90,28 @@ class Superviseur:
             self.store.heartbeat()
             await self._attendre(BATTEMENT_S)
 
+    async def _attendre_heure(self) -> bool:
+        """L'heure d'abord (écart 5) : aucune horloge de la carte ne survit à une coupure, et elle
+        repart en retard jusqu'à la synchronisation NTP (docs/radxa.md). Attend le drapeau que
+        `timesyncd` pose alors, `attente_synchro_s` au plus ; passé ce délai, la collecte part
+        quand même, et `GET /v1/status` le dit. Rend False si l'arrêt est demandé entre-temps."""
+        drapeau = self.cfg.synchro_ntp
+        fin = time.monotonic() + self.cfg.attente_synchro_s
+        while drapeau is not None and not drapeau.exists() and not self._stop.is_set():
+            if time.monotonic() >= fin:
+                _LOGGER.warning("heure non synchronisée après %.0f s : la collecte part quand "
+                                "même, et le statut le signale", self.cfg.attente_synchro_s)
+                break
+            await self._attendre(min(1.0, fin - time.monotonic()))
+        return not self._stop.is_set()
+
     async def run(self) -> None:
+        if not await self._attendre_heure():
+            return
         # avant le premier battement : celui en base est encore celui de l'arrêt précédent
         self.outages.repair_stale()
+        if self.outages.open_stopped() is not None:
+            _LOGGER.warning("reprise après un arrêt du collecteur : indisponibilité nommée")
         battement = asyncio.create_task(self._battre())
         try:
             while not self._stop.is_set():
@@ -117,6 +136,8 @@ class Superviseur:
         finally:
             battement.cancel()
             await asyncio.gather(battement, return_exceptions=True)
+            # dernier signe de vie : la borne basse du prochain « collecteur arrêté », à la seconde
+            self.store.heartbeat()
 
     async def _signaler_perte(self) -> None:
         self._perte.set()

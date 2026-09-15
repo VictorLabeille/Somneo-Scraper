@@ -190,6 +190,9 @@ def _status(store: Store, cfg: Config, state: RuntimeState) -> dict:
             "demarre_at": state.started_at,
             "dernier_battement_at": hb,
             "cadence_wusrd_s": state.cadence_wusrd_s,
+            # l'heure de la carte est-elle synchronisée (NTP) ? Signalée, jamais corrigée (écart
+            # 5) ; None quand elle n'est pas surveillée
+            "heure_synchronisee": cfg.synchro_ntp.exists() if cfg.synchro_ntp else None,
         },
         "disque": {
             "total": du.total,

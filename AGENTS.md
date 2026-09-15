@@ -111,6 +111,10 @@ plan technique. Deux règles tiennent la connexion unique au réveil **par const
 - **Le poste de dev ne peut pas découvrir le réveil** : WSL2 est derrière un NAT que le
   multicast SSDP ne franchit pas. Toute sonde part de la Radxa, par SSH. Ne pas relancer
   cette impasse.
+- **Après un démarrage, l'heure de la carte est fausse jusqu'à la synchronisation NTP** (RTC
+  virtuel, ~50 s mesurées, sans limite si Internet manque). Rien de daté ne se lance avant
+  `/run/systemd/timesync/synchronized` : le collecteur l'attend, une sonde doit faire de même.
+  Et ne pas compter sur `time-sync.target`, qui ne garantit rien ici. `docs/radxa.md`.
 
 **Vis-à-vis du projet**
 
