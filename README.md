@@ -222,16 +222,16 @@ est dans `docs/radxa.md`.
       directe est refusée, la config de serveur de temps est ignorée, et la session cloud qui
       pose l'heure est chiffrée (clé non exposée). Le réveil reste donc connecté pour l'instant ;
       le collecteur mesure et signale la dérive (`docs/somneo-api.md` §4-5)
-- [~] **Collecteur** (`collector/`) — incréments 1 à 3 écrits et testés hors appareil, contre
-      un faux réveil : collecte de tous les ports, nuits (machine à états), rattrapage par
-      séquence, catalogue, annonce mDNS. L'incrément 5 (surveillance d'horloge) est couvert par
-      le premier. **Incrément 4 (relais du pilotage) écrit** : gestes de nuit (appui jamais
-      perdu), lumière, veilleuse, coucher de soleil (marche/arrêt et réglages), rappel, alarmes
-      (lecture, création, édition, masquage) et miroir de l'appareil ; seul le départ en douceur
-      (`sndss`) attend une mesure sur l'appareil. Porté le 2026-09-13 sur `pysomneo` 6.0 async, la
-      version retenue au plan : l'incrément 1 avait été écrit par erreur contre la 5.0.6, qui
-      réessaie un `500` douze fois. Reste le critère de chaque incrément sur la carte : tourner
-      sept jours, la capture arrêtée
+- [~] **Collecteur** (`collector/`) — les cinq incréments sont écrits et testés hors appareil,
+      contre un faux réveil (181 tests) : collecte de tous les ports, nuits (machine à états),
+      rattrapage par séquence, catalogue, annonce mDNS ; surveillance de l'horloge (couverte
+      par le premier incrément) ; relais du pilotage, avec gestes de nuit (appui jamais perdu),
+      lumière, veilleuse, coucher de soleil (marche/arrêt et réglages), rappel, alarmes
+      (lecture, création, édition, masquage) et miroir de l'appareil. Le départ en douceur
+      (`sndss`) a été mesuré sur l'appareil le 2026-09-13 : il est relayé en numéro brut, son
+      sens physique reste inconnu. Porté le 2026-09-13 sur `pysomneo` 6.0 async, la version
+      retenue au plan : l'incrément 1 avait été écrit par erreur contre la 5.0.6, qui réessaie
+      un `500` douze fois. Reste le critère de chaque incrément sur la carte : tourner sept jours
 - [~] **Déployé sur la carte le 13 septembre 2026, bascule faite** : le collecteur (service
       systemd) a remplacé la capture ; il découvre le réveil, collecte et sert l'API. Reste le
       *soak* de sept jours et la validation, sur l'appareil, que le relais n'a aucun effet non demandé
