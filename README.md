@@ -235,10 +235,10 @@ est dans `docs/radxa.md`.
 - [~] **Déployé sur la carte le 13 septembre 2026, bascule faite** : le collecteur (service
       systemd) a remplacé la capture ; il découvre le réveil, collecte et sert l'API. Reste le
       *soak* de sept jours et la validation, sur l'appareil, que le relais n'a aucun effet non demandé
-- [~] **Écarts au contrat de l'app, relevés le 14 septembre 2026** : les onze sont traités depuis
-      le 15 (`.claude/specs/2026-09-14-ecarts-contrat-sleepmaxxer.md`), dont un qui bloquait le
-      pilotage. Ils ne sont pas encore déployés ; le *soak*, que ce blocage a fait échouer,
-      reprendra à leur déploiement
+- [x] **Écarts au contrat de l'app, relevés le 14 septembre 2026** : les onze sont traités
+      (`.claude/specs/2026-09-14-ecarts-contrat-sleepmaxxer.md`) et déployés le 15, dont un qui
+      bloquait le pilotage. Le *soak*, que ce blocage avait fait échouer, est reparti au
+      déploiement
 - [ ] Conteneurisation
 
 ## Liens
