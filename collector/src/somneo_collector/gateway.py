@@ -128,6 +128,7 @@ class DeviceGateway:
         self._espacement = espacement_s
         self._lock = asyncio.Lock()
         self._fin_derniere = 0.0     # time.monotonic() de la fin de la dernière requête
+        self._verrou_profil = asyncio.Lock()   # sélection + relecture d'un profil : une paire à la fois
 
     @property
     def host(self) -> str:
@@ -166,6 +167,18 @@ class DeviceGateway:
         return await self._serialise(lambda: _capturer(
             produit, port,
             lambda: self._somneo._client._internal_call("PUT", chemin, payload=payload)))
+
+    async def read_profile(self, n: int) -> Releve:
+        """Sélectionne le profil n (`PUT wualm {"prfnr": n}`, sans effet — P3) et le relit
+        (`wualm/prfwu`), **d'un bloc**. Le verrou des requêtes n'en sérialise qu'une à la fois :
+        sans celui-ci, une autre sélection glissée entre les deux (le relais pour l'app, la collecte
+        des profils) ferait relire un autre profil (écart 7). Rend la relecture, ou le `PUT` s'il
+        a échoué ; l'appelant vérifie que le `prfnr` relu vaut bien n."""
+        async with self._verrou_profil:
+            choix = await self.put("wualm", {"prfnr": n})
+            if not choix.ok:
+                return choix
+            return await self.read("wualm/prfwu")
 
     async def write(self, port: str, appel: Callable[[Somneo], Awaitable[Any]]) -> Releve:
         """Écriture par une méthode de `pysomneo`, sérialisée, **cache vidé d'abord** (plan §7).

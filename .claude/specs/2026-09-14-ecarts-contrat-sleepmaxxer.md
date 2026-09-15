@@ -1,7 +1,9 @@
 # Écarts entre le collecteur et le contrat de SleepMaxxer
 
-> Statut : **à traiter** · Date : 2026-09-14 · Relevé en lisant le code du collecteur à `4019c88`
-> et en interrogeant le collecteur déployé, au moment d'écrire l'application.
+> Statut : **tranché et corrigé le 2026-09-15, pas encore déployé** · Date : 2026-09-14 · Relevé
+> en lisant le code du collecteur à `4019c88` et en interrogeant le collecteur déployé, au moment
+> d'écrire l'application. Victor a arbitré chaque écart le 2026-09-15 ; 6 et 9 amendent le contrat
+> sans code.
 
 Le contrat avec l'application est écrit dans deux documents : le cadrage de SleepMaxxer
 (`.claude/specs/2026-09-05-spec-fonctionnelle-sleepmaxxer.md` **du dépôt SleepMaxxer**) et le
@@ -227,6 +229,19 @@ par `seq`, les nuits par `id`. Le contrat actuel suffit ; c'est seulement plus d
 **Piste.** Soit rendre dans le mode `before` tout ce qui tombe dans la fenêtre de la page (points,
 agrégats, trous), soit documenter la troisième passe comme le mode d'emploi officiel.
 
+**Tranché par Victor le 2026-09-15 : les trois passes deviennent le mode d'emploi officiel,
+sans code.**
+
+1. `before` sur quelques pages, pour montrer vite les nuits récentes.
+2. `since_seq` depuis le dernier élément reçu, au fil de l'eau.
+3. `since_seq=0` jusqu'à la séquence de référence (le `current_seq` de la première réponse), en
+   fond.
+
+La troisième passe coûte des requêtes, pas des données : la copie est complète. Reporté dans
+l'`AGENTS.md` de SleepMaxxer. Écarté : élargir `before` à tout ce qui tombe dans la fenêtre d'une
+page. C'était plus de code, avec des bornes de fenêtre à définir entre deux nuits, pour une passe
+que l'app fait déjà.
+
 ## 7. Pas d'instantané des seize profils pour l'export
 
 **Constat.** Le collecteur relit les seize profils chaque jour et les historise dans
@@ -244,6 +259,41 @@ le thème, le son ni l'intensité de chaque profil.
 **Piste.** `GET /v1/settings/snapshot` : les derniers corps de `wualm/prfwu` par `prfnr`, plus
 les ports de réglage, tels que `port_change` les tient. Lecture seule, aucune requête au réveil.
 
+**Revu le 2026-09-15 : le constat est faux.** Le collecteur **ne relit pas** les seize profils.
+La lecture quotidienne est prévue au plan (§4 : « 1 fois par jour, et après tout changement de
+`aenvs`/`aalms` ») et tranchée « oui » le 2026-09-12 (§11 point 9), mais elle n'a jamais été
+écrite : aucune tâche `profils` dans `collect.py`, et `Cadences.profils` n'est utilisé nulle
+part. La piste suppose donc d'abord d'écrire cette tâche. Chaque lecture de profil commence par
+une sélection (`PUT wualm {"prfnr": n}`), sans effet d'après P3, mais c'est une écriture sur
+les alarmes, soumise à la règle « jamais sur les alarmes le soir » de l'`AGENTS.md`.
+
+**Tranché par Victor le 2026-09-15 : écrire la lecture, en journée.** Une tâche `profils` fait
+seize sélections et relectures une fois par jour entre 12 h et 18 h (heure de Paris). Elle les
+refait après un changement de `aenvs`/`aalms` s'il tombe dans cette fenêtre, sinon au passage
+suivant : jamais le soir. Chaque profil est historisé à son changement, puis servi par
+`GET /v1/settings/snapshot`, en lecture seule. Coût : 32 requêtes par jour. Écartés : un
+instantané de ce qui existe (vide pour les profils que l'app n'a jamais ouverts), et reporter.
+
+**Corrigé dans le code le 2026-09-15** (`collect.py` : `tache_profils` ; `gateway.py` :
+`read_profile` ; `store/db.py` : `record_profile`, `profiles_snapshot` ; route
+`GET /v1/settings/snapshot` ; `tests/test_profils.py`).
+
+**Relevé en l'écrivant : le relais avait déjà le défaut que la tâche aurait aggravé.** `_profil`
+sélectionnait puis relisait en deux requêtes, sérialisées chacune de son côté, sans vérifier le
+`prfnr` relu : deux ouvertures d'alarme simultanées dans l'app pouvaient rendre le mauvais
+profil. La sélection et la relecture se font désormais d'un bloc, sous un verrou propre
+(`read_profile`), et l'appelant vérifie le `prfnr`, pour le relais comme pour la collecte. Chaque
+profil est dédoublonné contre son propre dernier corps : contre le dernier corps du port, seize
+profils relus d'affilée auraient fait seize lignes par jour.
+
+Sept mutations sont détectées : le verrou, les deux vérifications de `prfnr`, la fenêtre, le
+dédoublonnage, la mémoire « déjà lus », et les indisponibilités ouvertes de l'écart 8. Forme
+servie : `{"profiles": {"1": {"body", "since"}, …}, "complete", "ports": {port: miroir}}`.
+
+**Reste, sur l'appareil** : regarder la première lecture en journée (façade, alarmes intactes).
+Le faux réveil ne peut pas dire qu'une sélection est sans effet ; P3 l'a dit une fois, sur une
+sélection à la main.
+
 ## 8. Deux routes du plan ne sont pas écrites
 
 **Constat.** Le plan technique §7 liste `GET /v1/outages?from=&to=` et `GET /v1/aggregates?from=&to=`.
@@ -253,6 +303,15 @@ Elles répondent `404` sur le collecteur déployé.
 rattrapage.
 
 **Piste.** Les écrire, ou les retirer du plan.
+
+**Tranché par Victor le 2026-09-15 : les écrire**, en lecture seule, par période (`from`/`to`).
+
+**Corrigé dans le code le 2026-09-15** (`tests/test_periodes.py`) :
+
+- `GET /v1/outages?from=&to=` rend les indisponibilités qui chevauchent la période, bornes
+  incluses, celle encore ouverte comprise ;
+- `GET /v1/aggregates?from=&to=` rend les agrégats de la période, avec leur type sous
+  `aggregate_kind` et `hist` en chaîne.
 
 ## 9. Le catalogue ne porte que ce que l'appareil sait
 
@@ -264,6 +323,13 @@ de SleepMapper, avec sa source citée ».
 
 **En attendant, côté app.** L'app porte elle-même ces libellés, avec leur source
 (`docs/sleepmapper/README.md` du dépôt SleepMaxxer). Non bloquant.
+
+**Tranché par Victor le 2026-09-15 : l'app garde ces libellés, le contrat s'amende.** Le
+catalogue sert ce que l'appareil publie (`source: "appareil"`), et l'app complète avec le relevé
+de SleepMapper, en citant sa source. « No light » n'a aucune valeur d'appareil établie : ni
+`docs/somneo-api.md` ni le code de l'app ne lui en donnent, et la servir obligerait le collecteur
+à deviner. Le cadrage backend §2.C (« complétée par le relevé de SleepMapper ») se lit désormais
+ainsi : c'est l'app qui complète. Reporté dans l'`AGENTS.md` de SleepMaxxer.
 
 ## 10. Une indisponibilité reste ouverte à jamais après une redécouverte — **bloque le pilotage**
 

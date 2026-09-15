@@ -97,6 +97,7 @@ class Store:
             self._w.executescript(schema)
         self._dernier_corps: dict[str, str] = {}     # port -> dernier body JSON, pour « au changement »
         self._dernier_agregat: dict[str, tuple] = {}  # type -> (avg, lo, hi, hist), idem (écart 11)
+        self._dernier_profil: dict[int, str] = {}     # prfnr -> dernier corps de wualm/prfwu (écart 7)
         self._vu_a: dict[str, float] = {}           # port -> dernière lecture, même inchangée
 
     # ---- allocation du seq global -------------------------------------------------------
@@ -167,6 +168,29 @@ class Store:
             self._w.execute("INSERT INTO port_change (seq, ts, port, body) VALUES (?, ?, ?, ?)",
                             [seq, ts, port, encode])
             self._dernier_corps[port] = encode
+        return seq
+
+    def record_profile(self, n: int, body: dict, ts: float | None = None) -> int | None:
+        """Un profil d'alarme (`wualm/prfwu`), historisé au changement DE CE PROFIL (écart 7).
+        `record_port_change` comparerait au dernier corps du port, c'est-à-dire à un autre profil :
+        seize profils relus d'affilée feraient seize lignes par jour. Rend le seq, ou None."""
+        port = "wualm/prfwu"
+        encode = json.dumps(body, sort_keys=True, ensure_ascii=False)
+        ts = ts if ts is not None else time.time()
+        with self._wlock, self._w:
+            self._vu_a[port] = max(ts, self._vu_a.get(port, ts))
+            if n not in self._dernier_profil:
+                row = self._w.execute(
+                    "SELECT body FROM port_change WHERE port=? AND json_extract(body, '$.prfnr')=? "
+                    "ORDER BY seq DESC LIMIT 1", (port, n)).fetchone()
+                if row is not None:
+                    self._dernier_profil[n] = row[0]
+            if self._dernier_profil.get(n) == encode:
+                return None
+            seq = self._next_seq()
+            self._w.execute("INSERT INTO port_change (seq, ts, port, body) VALUES (?, ?, ?, ?)",
+                            [seq, ts, port, encode])
+            self._dernier_profil[n] = self._dernier_corps[port] = encode
         return seq
 
     def see_device(self, serial: str, model: str | None, firmware: str | None,
@@ -435,6 +459,31 @@ class Store:
             return [dict(r) for r in rows]
         finally:
             conn.close()
+
+    def outages_between(self, debut: float, fin: float) -> list[dict]:
+        """Les indisponibilités qui chevauchent [debut, fin], bornes incluses, l'ouverte comprise."""
+        conn = self._ro()
+        try:
+            rows = conn.execute(
+                "SELECT * FROM outage WHERE start <= ? AND (end IS NULL OR end >= ?) ORDER BY start",
+                (fin, debut)).fetchall()
+            return [dict(r) for r in rows]
+        finally:
+            conn.close()
+
+    def profiles_snapshot(self) -> dict[int, dict]:
+        """Le dernier corps connu de chaque profil d'alarme, par `prfnr`, et depuis quand (écart 7)."""
+        conn = self._ro()
+        try:
+            rows = conn.execute(
+                "SELECT json_extract(body, '$.prfnr') AS n, ts, body FROM port_change p "
+                "WHERE port = 'wualm/prfwu' AND seq = (SELECT max(seq) FROM port_change q "
+                "WHERE q.port = 'wualm/prfwu' "
+                "AND json_extract(q.body, '$.prfnr') = json_extract(p.body, '$.prfnr'))").fetchall()
+        finally:
+            conn.close()
+        return {r["n"]: {"body": json.loads(r["body"]), "since": r["ts"]}
+                for r in rows if r["n"] is not None}
 
     def aggregates_between(self, debut: float, fin: float) -> list[dict]:
         conn = self._ro()

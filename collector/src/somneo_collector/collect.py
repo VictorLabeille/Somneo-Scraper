@@ -9,15 +9,17 @@ au suivi des indisponibilités (`outages.py`), qui ouvre une indisponibilité da
 au-delà d'un seuil d'échecs, on demande une redécouverte. Le succès la referme — que l'ait ouverte
 cette collecte, celle d'avant la redécouverte ou la redécouverte elle-même : le suivi est partagé,
 et survit au remplacement du `Collector`. `capture.py` est ainsi entièrement remplacé — en
-lecture seule, comme lui. La seule écriture de la collecte est le rejeu d'un geste de nuit
-retenu pendant que le réveil ne répondait pas (incrément 4, `relay.py`) : demandée par
-l'utilisateur, seulement différée.
+lecture seule, comme lui, à deux écritures près. Le rejeu d'un geste de nuit retenu pendant que
+le réveil ne répondait pas (incrément 4, `relay.py`) : demandé par l'utilisateur, seulement
+différé. Et la sélection d'un profil d'alarme avant de le relire (`PUT wualm {prfnr}`, sans effet
+d'après P3), en journée seulement (écart 7).
 """
 from __future__ import annotations
 
 import asyncio
 import logging
 import time
+from datetime import datetime
 from typing import TYPE_CHECKING
 
 from . import clock
@@ -25,6 +27,7 @@ from .config import Config
 from .gateway import DeviceGateway, Releve
 from .nights import NightTracker
 from .outages import OutageTracker
+from .relay import N_PROFILS
 from .store import Store
 
 if TYPE_CHECKING:
@@ -56,6 +59,7 @@ class Collector:
         # nights.py) ; une propre à défaut, pour les tests de la collecte seule
         self.nights = nights if nights is not None else NightTracker(store)
         self.relay = relay               # rejoue les gestes retenus (incrément 4)
+        self._profils_lus: tuple | None = None   # (jour, aenvs, aalms) de la dernière lecture complète
 
     # ---- suivi de la disponibilité ------------------------------------------------------
     def _succes(self) -> None:
@@ -139,6 +143,32 @@ class Collector:
             if r.ok:
                 self.store.record_port_change(port, r.corps, ts=r.observed_at)
 
+    async def tache_profils(self) -> None:
+        """Les seize profils d'alarme, pour l'instantané des réglages (écart 7, plan §4). Relus une
+        fois par jour, et de nouveau après un changement de `aenvs`/`aalms`, seulement dans la
+        fenêtre de journée (`cfg.profils`, heure de Paris). Chaque lecture commence par une
+        sélection, sans effet d'après P3 mais sur les alarmes : jamais le soir. Un échec, ou un
+        profil relu autre que celui demandé, interrompt le passage ; le suivant le reprend."""
+        maintenant = datetime.fromtimestamp(time.time(), clock.TZ)
+        if not self.cfg.profils.debut_h <= maintenant.hour < self.cfg.profils.fin_h:
+            return
+        etat = (maintenant.date().isoformat(), self.store.last_port_body("wualm/aenvs"),
+                self.store.last_port_body("wualm/aalms"))
+        if etat == self._profils_lus:
+            return
+        for n in range(1, N_PROFILS + 1):
+            r = await self.gw.read_profile(n)
+            if not r.ok:
+                await self._echec(r)
+                return
+            self._succes()
+            relu = (r.corps or {}).get("prfnr")
+            if relu != n:
+                _LOGGER.warning("profil %s relu comme %s : passage interrompu", n, relu)
+                return
+            self.store.record_profile(n, r.corps, ts=r.observed_at)
+        self._profils_lus = etat
+
     async def tache_gestes(self) -> None:
         """Rejoue les gestes de nuit retenus pendant que le réveil ne répondait pas (cadrage §5)."""
         if self.relay is not None and self.store.pending_gestures():
@@ -156,6 +186,7 @@ class Collector:
             ("horloge", self.tache_horloge, c.horloge),
             ("liaison", self.tache_liaison, c.liaison),
             ("fichiers", self.tache_fichiers, c.fichiers),
+            ("profils", self.tache_profils, c.profils),
             ("gestes", self.tache_gestes, c.wungt),
         ]
 

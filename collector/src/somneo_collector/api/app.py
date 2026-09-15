@@ -23,7 +23,7 @@ from pydantic import BaseModel, StrictBool, StrictInt
 
 from ..config import Config
 from ..nights import NightTracker
-from ..relay import Relay, Resultat
+from ..relay import N_PROFILS, Relay, Resultat
 from ..state import RuntimeState
 from ..store import Store
 
@@ -31,6 +31,8 @@ GRANDEURS = ("mslux", "mstmp", "msrhu", "mssnd")
 # Les ports que sert le miroir (plan §7), tels que la collecte les relève (§4).
 PORTS_MIROIR = ("wulgt", "wudsk", "wualm", "wualm/aenvs", "wualm/aalms", "wuply", "wusts",
                 "wungt")
+# Les ports de réglage de l'instantané (écart 7) : ce qu'il faut pour remettre un réveil en état.
+PORTS_REGLAGE = ("wulgt", "wudsk", "wualm", "wualm/aenvs", "wualm/aalms", "wuply")
 
 
 class Correction(BaseModel):
@@ -228,6 +230,34 @@ def create_app(store: Store, cfg: Config, state: RuntimeState | None = None,
         points = store.readings_between(from_, to, limit)
         return {"served_at": time.time(), "from": from_, "to": to,
                 "count": len(points), "readings": points}
+
+    @app.get("/v1/outages")
+    def outages(from_: float = Query(0.0, alias="from"),
+                to: float = Query(default_factory=time.time)) -> dict:
+        """Les indisponibilités qui chevauchent la période, nommées, l'ouverte comprise (écart 8)."""
+        rows = store.outages_between(from_, to)
+        return {"served_at": time.time(), "from": from_, "to": to,
+                "count": len(rows), "outages": rows}
+
+    @app.get("/v1/aggregates")
+    def aggregates(from_: float = Query(0.0, alias="from"),
+                   to: float = Query(default_factory=time.time)) -> dict:
+        """Les agrégats vus dans la période (écart 8) : type sous `aggregate_kind`, `hist` en
+        chaîne JSON, comme au rattrapage."""
+        rows = store.aggregates_between(from_, to)
+        return {"served_at": time.time(), "from": from_, "to": to,
+                "count": len(rows), "aggregates": rows}
+
+    @app.get("/v1/settings/snapshot")
+    def settings_snapshot() -> dict:
+        """L'instantané des réglages, pour l'export du téléphone (écart 7) : le dernier corps de
+        chacun des seize profils, relus en journée par la collecte ou à la demande de l'app, et
+        les ports de réglage. Lecture seule, aucune requête au réveil."""
+        profils = store.profiles_snapshot()
+        return {"served_at": time.time(),
+                "profiles": {str(n): p for n, p in sorted(profils.items())},
+                "complete": all(n in profils for n in range(1, N_PROFILS + 1)),
+                "ports": {p: store.last_port(p) for p in PORTS_REGLAGE}}
 
     @app.get("/v1/nights")
     def nights(from_: float = Query(0.0, alias="from"),

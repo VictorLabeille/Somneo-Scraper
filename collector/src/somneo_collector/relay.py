@@ -268,10 +268,15 @@ class Relay:
 
     # ---- alarmes (plan §7, décisions du 2026-09-13) -------------------------------------
     async def _profil(self, gw: DeviceGateway, n: int) -> dict | None:
-        """Sélectionne le profil n (`PUT wualm {prfnr}`, sans effet — P3) et le relit."""
-        await gw.put("wualm", {"prfnr": n})
-        relu = await gw.read("wualm/prfwu")
-        return relu.corps
+        """Le profil n, sélectionné et relu d'un bloc (`read_profile`, sans effet — P3), historisé
+        au changement de ce profil. None si la relecture échoue, ou rend un autre profil : deux
+        demandes de l'app, ou la collecte des profils, pouvaient s'intercaler (écart 7)."""
+        relu = await gw.read_profile(n)
+        profil = relu.corps
+        if profil is None or profil.get("prfnr") != n:
+            return None
+        self.store.record_profile(n, profil, ts=relu.observed_at)
+        return profil
 
     async def _rafraichir_liste(self, gw: DeviceGateway) -> None:
         """Après une écriture d'alarme, remet à jour le miroir de la liste (aenvs, aalms)."""
@@ -289,7 +294,6 @@ class Relay:
                                      f"réveil injoignable pendant l'écriture : {r.error}")
         profil = await self._profil(gw, n)
         if profil is not None:
-            self.store.record_port_change("wualm/prfwu", profil, ts=time.time())
             await self._rafraichir_liste(gw)
         corps = {"served_at": time.time(), "port": "wualm/prfwu", "n": n, "requested": attendu,
                  "profile": profil}
@@ -313,7 +317,6 @@ class Relay:
         profil = await self._profil(gw, n)
         if profil is None:
             return self._injoignable("wualm/prfwu", "relecture du profil impossible")
-        self.store.record_port_change("wualm/prfwu", profil, ts=time.time())
         return Resultat(200, {"served_at": time.time(), "n": n, "profile": profil})
 
     async def set_alarm(self, n: int, champs: dict) -> Resultat:

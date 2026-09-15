@@ -27,7 +27,8 @@ class Cadences:
     wungt: float = 30.0            # suivi de nuit
     dataupload: float = 300.0      # agrégats de fenêtre (moyenne, min, max, histogrammes)
     reglages: float = 60.0         # wulgt, wudsk, wualm/*, wuply — le miroir
-    profils: float = 86400.0       # les 16 profils d'alarme, une fois par jour
+    profils: float = 600.0         # 16 profils d'alarme : vérifié toutes les 10 min, relus une fois
+                                   # par jour ou au changement de aenvs/aalms, en journée (écart 7)
     horloge: float = 3600.0        # time, wutim, wutms — la dérive (§6)
     liaison: float = 3600.0        # backend, transport, device — l'isolement, dans la durée
     fichiers: float = 86400.0      # files/* — noms des thèmes et sons
@@ -41,6 +42,16 @@ class Horloge:
     bascule_dst_iso: str = "2026-10-25"    # jour de la prochaine bascule saisonnière
     bascule_debut_h: int = 1               # instrumentation minute par minute de 1 h…
     bascule_fin_h: int = 5                 # …à 5 h, heure locale, ce jour-là (§6)
+
+
+@dataclass(frozen=True)
+class FenetreProfils:
+    """Quand la collecte peut relire les profils (écart 7, tranché le 2026-09-15). Chaque lecture
+    commence par une sélection, une écriture sur les alarmes : jamais le soir (AGENTS.md). Heures
+    de Paris, début inclus, fin exclue."""
+
+    debut_h: int = 12
+    fin_h: int = 18
 
 
 @dataclass(frozen=True)
@@ -69,6 +80,7 @@ class Config:
     mdns_txt_api: str = "v1"
     cadences: Cadences = field(default_factory=Cadences)
     horloge: Horloge = field(default_factory=Horloge)
+    profils: FenetreProfils = field(default_factory=FenetreProfils)
     sauvegarde: Sauvegarde = field(default_factory=Sauvegarde)
 
 
