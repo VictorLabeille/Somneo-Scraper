@@ -96,6 +96,7 @@ class Store:
                 self._w.executescript(MIGRATION_V2)      # une base d'avant le 2026-09-15
             self._w.executescript(schema)
         self._dernier_corps: dict[str, str] = {}     # port -> dernier body JSON, pour « au changement »
+        self._dernier_agregat: dict[str, tuple] = {}  # type -> (avg, lo, hi, hist), idem (écart 11)
         self._vu_a: dict[str, float] = {}           # port -> dernière lecture, même inchangée
 
     # ---- allocation du seq global -------------------------------------------------------
@@ -121,14 +122,28 @@ class Store:
                 [seq, ts, *vals])
         return seq
 
-    def add_window_aggregate(self, kind: str, avg, lo, hi, hist, ts: float | None = None) -> int:
+    def add_window_aggregate(self, kind: str, avg, lo, hi, hist,
+                             ts: float | None = None) -> int | None:
+        """Insère l'agrégat SEULEMENT s'il diffère du dernier de son type (plan §3, écart 11, tranché
+        le 2026-09-15). Rend le seq, ou None. `ts` est donc l'heure de première lecture de la
+        fenêtre ; deux fenêtres identiques de suite n'en font qu'une — l'appareil ne les distingue
+        pas non plus (§5 de la doc). Comparé au dernier seulement : A, B, A garde ses trois lignes."""
         ts = ts if ts is not None else time.time()
+        valeurs = (avg, lo, hi, json.dumps(hist) if hist is not None else None)
         with self._wlock, self._w:
+            if kind not in self._dernier_agregat:          # après un redémarrage : relu en base
+                row = self._w.execute(
+                    "SELECT avg, lo, hi, hist FROM window_aggregate WHERE kind=? "
+                    "ORDER BY seq DESC LIMIT 1", (kind,)).fetchone()
+                if row is not None:
+                    self._dernier_agregat[kind] = tuple(row)
+            if self._dernier_agregat.get(kind) == valeurs:
+                return None
             seq = self._next_seq()
             self._w.execute(
                 "INSERT INTO window_aggregate (seq, ts, kind, avg, lo, hi, hist) "
-                "VALUES (?, ?, ?, ?, ?, ?, ?)",
-                [seq, ts, kind, avg, lo, hi, json.dumps(hist) if hist is not None else None])
+                "VALUES (?, ?, ?, ?, ?, ?, ?)", [seq, ts, kind, *valeurs])
+            self._dernier_agregat[kind] = valeurs
         return seq
 
     def record_port_change(self, port: str, body: Any, ts: float | None = None) -> int | None:
@@ -427,7 +442,8 @@ class Store:
             rows = conn.execute(
                 "SELECT * FROM window_aggregate WHERE ts >= ? AND ts <= ? ORDER BY ts",
                 (debut, fin)).fetchall()
-            return [dict(r) for r in rows]
+            # le type aussi sous `aggregate_kind`, comme dans `changes_since` (écart 4)
+            return [{**dict(r), "aggregate_kind": r["kind"]} for r in rows]
         finally:
             conn.close()
 
@@ -444,6 +460,10 @@ class Store:
                 rows = conn.execute(f"SELECT * FROM {table} WHERE seq > ? ORDER BY seq LIMIT ?",
                                     (since_seq, limit)).fetchall()
                 for d in _servir_nuits(conn, rows) if table == "night" else map(dict, rows):
+                    if table == "window_aggregate":
+                        # `kind` devient le genre de l'élément : le type de l'agrégat (temp, hum,
+                        # snd, lux) est servi à côté, sans rien renommer (écart 4, 2026-09-15)
+                        d["aggregate_kind"] = d["kind"]
                     d["kind"] = kind
                     items.append(d)
             items.sort(key=lambda d: d["seq"])

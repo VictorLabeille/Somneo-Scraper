@@ -135,6 +135,18 @@ les afficher ; ceux du mode `before` gardent leur type. Aucun écran actuel n'ut
 **Piste.** Nommer le genre de l'élément autrement (`item`, `type`) ; c'est un changement de
 contrat, à versionner ou à faire avant que l'app ne dépende de `kind`.
 
+**Tranché par Victor le 2026-09-15 : un champ ajouté, rien de renommé.** `kind` reste le genre de
+l'élément, comme l'app le lit. Chaque agrégat porte son type dans `aggregate_kind`, dans les deux
+modes du rattrapage. Le renommage a été écarté. L'app **dépend déjà** de `kind` (`sync.ts`) :
+son `switch` ignore en silence un genre inconnu, et son curseur avance sur tous les éléments
+reçus (`maxSeq(r.items)`). Un renommage aurait fait perdre sans bruit, dans la copie, tout ce
+qu'elle rattraperait entre le déploiement du collecteur et sa propre mise à jour. Les agrégats
+déjà copiés sans type ne reviennent pas d'eux-mêmes : c'est à l'app de les rattraper.
+
+**Corrigé dans le code le 2026-09-15** (`store/db.py` : `changes_since`, `aggregates_between` ;
+`tests/test_aggregates.py`). Côté app, le contournement (`kind: null` dans `pageFromItems`) peut
+laisser place à la lecture de `aggregate_kind`.
+
 ## 5. La cause « collecteur arrêté » n'est jamais écrite
 
 **Constat.** Seuls deux endroits ouvrent une indisponibilité : `collect.py` (`appareil saturé`,
@@ -314,3 +326,19 @@ fenêtre apparaît plusieurs fois.
 **Piste.** Dédoublonner par genre comme `record_port_change` le fait pour un port, sur `(avg, lo,
 hi, hist)` ; décoder `hist` avant de servir. Les doublons déjà en base restent, ou se purgent par
 une migration — à trancher.
+
+**Tranché par Victor le 2026-09-15 : dédoublonner ; `hist` reste une chaîne ; les doublons
+existants restent.** Un agrégat ne s'insère que s'il diffère du dernier de son type, comparé sur
+`(avg, lo, hi, hist)`, et `ts` devient l'heure de première lecture de la fenêtre, comme le schéma
+le dit déjà. On compare au dernier seulement : une suite A, B, A garde ses trois lignes. `hist`
+reste une chaîne JSON, désormais **écrite au contrat** : l'app la range telle quelle
+(`hist: string | null`, colonne `TEXT`), et un objet casserait son insertion. Deux options
+écartées : purger les doublons existants (le téléphone aurait des lignes que le collecteur n'a
+plus, et le cadrage lui fait signaler cet écart : fausses alertes), et servir `hist` en objet
+(cassant).
+
+**Corrigé dans le code le 2026-09-15** (`Store.add_window_aggregate`, `tests/test_aggregates.py`).
+Les tests qui échouaient avant le correctif : 8 lignes au lieu de 4 pour deux collectes
+identiques, et un doublon après un redémarrage. Vérifié sur une copie de la sauvegarde du 14 :
+réinsérer le dernier agrégat de chaque type, avec ses vrais flottants et son vrai `hist` passé
+par un aller-retour JSON, est refusé comme doublon.

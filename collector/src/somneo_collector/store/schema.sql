@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS window_aggregate (
     ts     REAL NOT NULL,
     kind   TEXT NOT NULL,           -- temp | hum | snd | lux
     avg    REAL, lo REAL, hi REAL,
-    hist   TEXT                     -- JSON brut (ab*/rl*), NULL pour temp/hum
+    hist   TEXT                     -- JSON brut (ab*/rl*), NULL pour temp/hum ; servi en chaîne
 );
 CREATE INDEX IF NOT EXISTS idx_wagg_kind_ts ON window_aggregate (kind, ts);
 

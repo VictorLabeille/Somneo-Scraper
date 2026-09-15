@@ -268,7 +268,12 @@ def create_app(store: Store, cfg: Config, state: RuntimeState | None = None,
              limit: int = Query(500, le=5000)) -> dict:
         """Rattrapage (§7). `since_seq` : tout ce qui a changé depuis, dans l'ordre. `before` :
         les nuits récentes d'un jour donné, avec leurs points et agrégats, du plus récent au
-        plus ancien. Le collecteur ne tient aucun état du client : même demande, même contenu."""
+        plus ancien. Le collecteur ne tient aucun état du client : même demande, même contenu.
+
+        Dans les deux modes, un agrégat porte son type (temp, hum, snd, lux) sous `aggregate_kind`
+        — en `since_seq`, `kind` est le genre de l'élément (écart 4) — et `hist` est une chaîne
+        JSON, pas un objet : l'app la range telle quelle (écart 11). Une nuit est servie comme par
+        `GET /v1/nights/{id}` : heure qui fait foi, relevé à côté, corrections (écarts 1-3)."""
         base = {"served_at": time.time(), "current_seq": store.seq_courant()}
         if since_seq is not None:
             items = store.changes_since(since_seq, limit)
