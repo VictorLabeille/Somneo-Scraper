@@ -126,6 +126,10 @@ plan technique. Deux règles tiennent la connexion unique au réveil **par const
   du réveil. **Le lire avant de concevoir le schéma** : il porte des exigences qui contraignent
   la base, et qu'on ne peut pas ajouter après coup. Décision du 2 septembre 2026, argumentée
   dans la note Obsidian.
+- **Ne jamais marquer « estimé » une heure que le collecteur a observée.** Un lever pris à
+  l'extinction de l'alarme est `observed` — le bit 11 de `wusts` est vu retomber, à 10 s près
+  (renversé le 2026-09-16 sur relevé : `.claude/specs/2026-09-16-origine-du-lever-observee.md`).
+  `estimated` reste défini, sans producteur, réservé à une heure réellement **déduite**.
 - **La remise à l'heure du réveil est une fonction de ce serveur**, pas de l'application :
   l'horloge dérive une fois le cloud coupé, et seul le collecteur tourne en continu.
 - **SQLite pour l'historique** ; pas de base séries temporelles dédiée sans besoin démontré.
