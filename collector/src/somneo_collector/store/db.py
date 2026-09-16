@@ -316,20 +316,20 @@ class Store:
         """La session est close côté `wungt`, mais le lever attend la fin de l'alarme (bit 11)."""
         with self._wlock, self._w:
             self._w.execute(
-                "UPDATE night SET state='closed', risetime=NULL, risetime_origin='estimated', "
+                "UPDATE night SET state='closed', risetime=NULL, risetime_origin='observed', "
                 "raw_tendb=?, seq=? WHERE id=?", [raw_tendb, self._next_seq(), night_id])
 
     def night_set_rise(self, night_id: int, risetime: float) -> None:
         with self._wlock, self._w:
             self._w.execute(
-                "UPDATE night SET risetime=?, state='closed', risetime_origin='estimated', seq=? "
+                "UPDATE night SET risetime=?, state='closed', risetime_origin='observed', seq=? "
                 "WHERE id=?", [risetime, self._next_seq(), night_id])
 
     def night_close(self, night_id: int, risetime: float, raw_tendb: str | None) -> None:
         """Ferme d'un coup avec un lever connu (alarme déjà finie à la clôture)."""
         with self._wlock, self._w:
             self._w.execute(
-                "UPDATE night SET risetime=?, state='closed', risetime_origin='estimated', "
+                "UPDATE night SET risetime=?, state='closed', risetime_origin='observed', "
                 "raw_tendb=?, seq=? WHERE id=?",
                 [risetime, raw_tendb, self._next_seq(), night_id])
 

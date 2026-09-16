@@ -71,7 +71,7 @@ class NightTracker:
             self._alarme_tombee_a = ts                 # bit 11 retombé : fin de l'alarme
             if self._awaiting_id is not None:          # une nuit attendait ce lever
                 self.store.night_set_rise(self._awaiting_id, ts)
-                _LOGGER.info("nuit %s : lever estimé à la fin de l'alarme", self._awaiting_id)
+                _LOGGER.info("nuit %s : lever observé à la fin de l'alarme", self._awaiting_id)
                 self._awaiting_id = None
         self._alarme_active = actif
 

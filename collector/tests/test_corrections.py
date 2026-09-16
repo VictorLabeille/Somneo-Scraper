@@ -77,7 +77,7 @@ def test_la_machine_n_ecrase_pas_une_correction(store):
     t.on_wusts(1, ts=FIN_ALARME)                                  # la machine écrit le relevé
     n = store.get_night(nid)
     assert n["risetime"] == 1500.0 and n["risetime_origin"] == "corrected"
-    assert (n["risetime_observed"], n["risetime_observed_origin"]) == (FIN_ALARME, "estimated")
+    assert (n["risetime_observed"], n["risetime_observed_origin"]) == (FIN_ALARME, "observed")
 
 
 def test_recorrigee_la_derniere_fait_foi_le_releve_reste(store, client):
@@ -96,8 +96,8 @@ def test_la_nuit_servie_porte_la_correction_et_le_releve(store, client):
     assert (n["bedtime"], n["bedtime_origin"]) == (900.0, "corrected")
     assert (n["bedtime_observed"], n["bedtime_observed_origin"]) == (COUCHER, "observed")
     # le champ non corrigé : servi et relevé confondus
-    assert (n["risetime"], n["risetime_origin"]) == (FIN_ALARME, "estimated")
-    assert (n["risetime_observed"], n["risetime_observed_origin"]) == (FIN_ALARME, "estimated")
+    assert (n["risetime"], n["risetime_origin"]) == (FIN_ALARME, "observed")
+    assert (n["risetime_observed"], n["risetime_observed_origin"]) == (FIN_ALARME, "observed")
     assert [(c["field"], c["value"]) for c in n["corrections"]] == [("bedtime", 900.0)]
 
 

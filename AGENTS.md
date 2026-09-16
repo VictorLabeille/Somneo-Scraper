@@ -111,6 +111,10 @@ plan technique. Deux règles tiennent la connexion unique au réveil **par const
 - **Le poste de dev ne peut pas découvrir le réveil** : WSL2 est derrière un NAT que le
   multicast SSDP ne franchit pas. Toute sonde part de la Radxa, par SSH. Ne pas relancer
   cette impasse.
+- **Le poste de dev ne peut pas non plus lancer la suite de `collector/`** : `pytest` n'y est
+  pas, et aucun venv ne peut l'installer — `ensurepip` manque à ce Python. Une modification de
+  `collector/` part donc d'ici **non testée** : la vérifier sur la carte, qui a le venv de
+  `deploy/install.sh`. Ne pas annoncer une suite verte qu'on n'a pas pu exécuter.
 - **Après un démarrage, l'heure de la carte est fausse jusqu'à la synchronisation NTP** (RTC
   virtuel, ~50 s mesurées, sans limite si Internet manque). Rien de daté ne se lance avant
   `/run/systemd/timesync/synchronized` : le collecteur l'attend, une sonde doit faire de même.

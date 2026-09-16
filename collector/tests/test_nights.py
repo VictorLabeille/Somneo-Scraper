@@ -46,7 +46,7 @@ def test_lever_a_la_fin_de_l_alarme_puis_recoucher(store):
     assert len(nuits) == 2
     premiere = [n for n in nuits if n["bedtime"] == 1000.0][0]
     assert premiere["state"] == "closed" and premiere["risetime"] == 25400.0
-    assert premiere["risetime_origin"] == "estimated"
+    assert premiere["risetime_origin"] == "observed"
 
 
 def test_expiration_sans_alarme_est_anormale(store):
