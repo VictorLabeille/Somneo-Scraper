@@ -69,5 +69,9 @@ y corriger. Le renversement est reporté dans les deux notes Obsidian
 (`_agents/Projets/SleepMaxxer/arbitrages.md` et `contrat-backend.md`), et dans les commentaires
 de `src/domain/nights.ts` et `src/data/types.ts` du dépôt SleepMaxxer.
 
+La suite de `collector/` passe (181 tests) : le venv se crée `--without-pip` et s'amorce par
+`get-pip.py`, comme le fait déjà `deploy/install.sh` — `ensurepip` manque au poste de dev comme
+à la carte. Piège consigné dans `AGENTS.md`.
+
 **Le collecteur doit être redéployé sur la carte** pour que le changement prenne effet ; les
 nuits déjà enregistrées gardent `estimated` et ne sont pas réécrites.
