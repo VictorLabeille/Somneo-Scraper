@@ -153,7 +153,7 @@ courant est son arrêt le plus probable**, et rien ne lui garde l'heure pendant 
 ## Pièges du flash — `radxa-flash/`
 
 Ces points ont coûté une session entière de débogage. Les relire avant de toucher au flash.
-La procédure elle-même est dans le `README.md`.
+L'inventaire de l'outillage et la procédure suivent.
 
 - **`pyamlboot/` est modifié localement.** Les timeouts USB codés en dur (1000 ms, et 100 ms
   sur une lecture) sont trop courts via USB/IP, où chaque URB ajoute un aller-retour TCP.
@@ -178,6 +178,98 @@ La procédure elle-même est dans le `README.md`.
   le gadget.
 - Le loader échoue environ une fois sur deux au démarrage (timeout bootrom via USB/IP).
   Refaire un cycle, ce n'est pas symptomatique d'une panne.
+
+## Outillage de `radxa-flash/` — inventaire
+
+Scripts issus de la session de débogage où l'outil officiel Windows (RZ USB Boot Helper) restait
+bloqué à « Start run » et où l'eMMC s'est révélée corrompue. **Terminé et archivé** : ne pas
+modifier sauf réinstallation explicite du système. Le détail de l'enquête est dans la note
+Obsidian `Projets/Somneo-Scraper.md`.
+
+**Orchestration (WSL2)** — la phase bootrom ne fonctionne que depuis Linux :
+
+| Fichier | Rôle |
+| --- | --- |
+| `go.sh` | Script principal. Attache le board à WSL via `usbipd`, charge un loader avec `boot-g12.py`, **détache immédiatement** après `[BL2 END]`, puis observe l'apparition du disque. Loader réglable par `LOADER=…`. |
+| `run_and_watch.sh` | Variante qui attend d'abord un cycle maskrom frais (débranchement puis réapparition) avant de démarrer. |
+| `autoflash.sh`, `boot_to_ums.sh` | Versions antérieures, conservées pour référence. |
+| `preconfig-wifi.sh` | Injecte la configuration WiFi dans l'image **avant** écriture (montage en loop device, clé dérivée PBKDF2, activation de `wpa_supplicant@wlan0`). Lit les identifiants depuis un fichier externe, jamais versionné. |
+
+**Diagnostic USB** :
+
+| Fichier | Rôle |
+| --- | --- |
+| `diag.py` | Compare transferts de contrôle standard et requêtes vendor, pour distinguer un lien USB mort d'un bootrom qui ne répond plus. |
+| `reset_test.py` | Reset de port USB et re-test. |
+| `ubcmd.py` | Envoi de commandes U-Boot arbitraires via `bulkCmd` (inopérant sur le gadget fastboot, conservé pour d'autres loaders). |
+| `oemtest.sh` | Sonde les commandes `fastboot oem` et les variables de partition. |
+
+**Loaders Radxa** (téléchargés depuis `dl.radxa.com`, non versionnés) :
+
+| Fichier | Rôle |
+| --- | --- |
+| `rz-udisk-loader.bin` | Expose l'eMMC en USB Mass Storage — le loader à utiliser pour flasher. |
+| `radxa-zero-erase-emmc.bin` | Efface l'eMMC. Indispensable si U-Boot n'arrive plus à l'initialiser. |
+| `rz-fastboot-loader.bin` | Expose un gadget fastboot. Surtout utile en diagnostic : il démarre même quand l'eMMC est illisible, ce qui permet d'isoler la panne. |
+
+**Scripts côté Windows** — l'écriture de l'image se fait depuis Windows, pas depuis WSL
+(`usb-storage` boucle sur des resets à travers USB/IP et ne crée jamais de `/dev/sd*`). Ils vivent
+hors du dépôt, dans `C:\Users\Victor\radxa-flash\`, **à consolider dans le dépôt lors d'une
+prochaine passe** :
+
+| Fichier | Rôle |
+| --- | --- |
+| `flash_emmc.ps1` | Écrit l'image sur l'eMMC. Refuse toute cible qui ne soit pas un disque USB nommé `*UMS disk*`, de 4 à 16 Go, différent du disque 0. Écrit par blocs de 4 Mo avec une **pause de 150 ms tous les 16 Mo** (voir pièges), consigne sa progression dans `flash_progress.txt` et accepte `-StartOffset` pour reprendre après interruption. |
+| `verify_emmc.ps1` | Relit l'eMMC et compare les empreintes SHA256 avec l'image (`-Full` pour l'intégralité). |
+| `check_ext4.ps1` | Lit le superbloc ext4 et rapporte le compteur de montages — preuve directe que le board a démarré. |
+| `boot_win.py` | Portage du boot bootrom en Python natif Windows. **Ne fonctionne pas** : la pile USB de Windows ne sert jamais l'endpoint bulk IN après `run()`. Conservé comme trace du diagnostic. |
+
+**Dépendance** : `pyamlboot/` est un clone de superna9999/pyamlboot, modifié localement — voir les
+pièges ci-dessus.
+
+## Procédure de flash
+
+Prérequis : WSL2 avec `usbipd-win` côté Windows, `usbutils`/`python3-usb` côté Debian.
+
+1. Armer le guetteur : `bash radxa-flash/run_and_watch.sh` (il attend un cycle maskrom frais).
+2. Mettre le board en maskrom : maintenir **USB BOOT**, brancher, relâcher à l'allumage de la LED.
+3. Si le busid n'est pas encore réservé, en PowerShell **administrateur** :
+   `usbipd bind --force --busid 2-1` (persistant, une seule fois).
+4. Le script attache, charge le loader et détache aussitôt. L'eMMC apparaît sous Windows
+   comme `Linux UMS disk 0`.
+5. Lancer `flash_emmc.ps1` **sans attendre**, puis débrancher et rebrancher **sans** toucher
+   au bouton : le board démarre sur Armbian.
+
+Le loader échoue environ une fois sur deux au démarrage (timeout bootrom aléatoire via
+USB/IP) : il suffit de refaire un cycle, ce n'est pas symptomatique.
+
+### Préconfigurer le WiFi avant écriture
+
+Sans Ethernet, sans console série et sans microSD, le seul accès headless passe par une
+préconfiguration dans l'image. `wsl --mount` ne fonctionne pas sur ce gadget UMS : monter
+l'**image** en loop device, pas le disque physique.
+
+Attention : **NetworkManager n'est pas installé** sur l'image minimale (seuls des fragments
+de conf y traînent). Le trio actif est `systemd-networkd` + `wpa_supplicant` + `ssh`. La
+configuration se fait donc dans `/etc/wpa_supplicant/wpa_supplicant-wlan0.conf` (droits 600,
+clé dérivée PBKDF2 plutôt que mot de passe en clair) avec activation de
+`wpa_supplicant@wlan0.service`. `freq_list` restreint la carte aux canaux 2,4 GHz.
+
+Attention : `freq_list` ne lie que les associations décidées par wpa_supplicant. Le firmware
+du CYW43455 fait du roaming pour son propre compte et peut basculer la carte en 5 GHz sans
+préavis ; il faut `options brcmfmac roamoff=1` pour l'en empêcher — voir le roaming du firmware
+WiFi plus haut.
+
+## Scripts de `radxa-config/` — configuration de la carte en service
+
+**Déjà déployés.** Modifier un script sans le redéployer fait diverger le dépôt et la carte,
+silencieusement.
+
+| Fichier | Rôle |
+| --- | --- |
+| `led-schedule.sh` | Éteint la LED verte de la carte de 22 h à 8 h — elle est fixée au dos du réveil, dans une chambre. Installe deux services `gpioset` qui se relaient et leurs minuteries systemd. À lancer en root sur la carte ; idempotent. Le pourquoi (ligne 10 du GPIO AO, relâcher la ligne ne rallume pas la LED) est plus haut. |
+| `wifi-roamoff.sh` | Pose `options brcmfmac roamoff=1`. **Se termine par un redémarrage** : le paramètre n'est lu qu'au chargement du module. Déjà appliqué ; utile après une réinstallation. |
+| `led-probe.sh` | Diagnostic : force successivement les lignes 10 puis 8 du GPIO AO pour identifier celle qui pilote la LED (elle varie selon la révision de carte). À lancer en vue de la LED. |
 
 ## Le poste de dev ne peut pas découvrir le réveil
 

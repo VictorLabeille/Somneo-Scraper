@@ -3,8 +3,9 @@
 > Source de vérité unique pour tout agent (humain ou IA) opérant sur ce dépôt.
 > Conventions **neutres et model-agnostic**. `CLAUDE.md` ne fait que rediriger ici.
 >
-> Ce fichier **oriente, il ne documente pas**. Le fonctionnel et les procédures sont dans
-> `README.md`, les faits techniques dans `docs/`, les décisions dans la note Obsidian.
+> Ce fichier **oriente, il ne documente pas**. La présentation du projet est dans `README.md`
+> (en anglais, c'est une vitrine), les faits techniques et les procédures dans `docs/`, les
+> décisions et l'avancement dans la note Obsidian.
 
 ## But du dépôt
 
@@ -17,7 +18,10 @@ SleepMapper). Voir `README.md`.
 
 | Question | Fichier |
 | --- | --- |
-| Que fait le projet, comment flasher, où en est l'avancement | `README.md` |
+| Que fait le projet, et pourquoi | `README.md` |
+| Comment flasher l'eMMC, et les pièges du flash | `docs/radxa.md` |
+| Où en est l'avancement | Note Obsidian `Projets/Somneo-Scraper.md`, et `git log` |
+| Ce qu'une sonde établit, et laquelle écrit sur l'appareil | `probes/README.md` |
 | Ce que le collecteur doit être, et pourquoi | `.claude/specs/2026-09-06-cadrage-backend-somneo-scraper.md` |
 | Comment le collecteur est construit : architecture, base, API, incréments, préalables à mesurer | `.claude/specs/2026-09-12-plan-technique-collecteur.md` |
 | Comment une mesure sur l'appareil a été obtenue, et comment la rejouer | `probes/` |
@@ -178,14 +182,14 @@ relèvent pas — c'est le rythme de sommeil qui est protégé, pas l'agenda de 
 ## Structure
 
 ```
-README.md          présentation, architecture, procédure de flash, avancement
+README.md          présentation du projet, en anglais — vitrine, pas de procédure
 AGENTS.md          ce fichier
 CLAUDE.md          pointeur vers AGENTS.md
 LICENSE            GPL-3.0
 docs/              somneo-api.md (protocole du réveil) · radxa.md (la carte) ·
                    wusts-bitfield.en.md (extrait anglais figé, cité par la PR #25)
-collector/         le collecteur (FastAPI) — à écrire, voir le plan technique
-probes/            sondes de mesure de l'appareil, et results/ leurs relevés nettoyés
+collector/         le collecteur (FastAPI) — son README couvre le lancer et le tester
+probes/            sondes de mesure de l'appareil (README), et results/ leurs relevés nettoyés
 radxa-flash/       outillage d'installation d'Armbian sur l'eMMC (ponctuel, archivé)
 radxa-config/      configuration de la carte en service, déployée par SSH
 ```
