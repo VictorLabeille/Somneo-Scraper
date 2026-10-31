@@ -105,7 +105,7 @@ L'appareil s'auto-décrit : `GET /di/v1/products/0/` renvoie la liste de ses por
 | `wifi` | SSID, IP, masque, passerelle, DHCP, MAC, `cppid`, SSID « voyage ». `password` vide |
 | `wifisettings` | Réseaux mémorisés |
 | `schedules` | `{}` |
-| `backend` | **URL du cloud Philips + état de la liaison** — voir §5 |
+| `backend` | **URL du cloud Philips + état de la liaison** — voir §5. `lastsignon` est en heure locale du réveil malgré son suffixe `Z`, et il change à chaque retour du réveil : 66 indisponibilités courtes sur 79 suivies d'un nouveau signon en 7 s (médiane), mesuré sur 20 jours |
 | `transport` | État de la session cloud (`state: closed`) |
 | `mem` | Tas ThreadX : `heap_size` 87 200 o, `heap_free` ~25 ko. Explique les timeouts |
 | `logsettings` | `contractid`, niveaux de log, `uploadperiod` |

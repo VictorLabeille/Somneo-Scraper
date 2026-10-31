@@ -109,9 +109,14 @@ Relevé du 2026-10-25, en lecture seule.
   2026-10-25, le plus récent date de l'installation du 2026-08-22 : noyau, `armbian-firmware`
   et `wpasupplicant` n'ont pas bougé depuis.
 - **Le journal ne remonte qu'à un mois** (`SystemMaxUse=20M`) : les messages du noyau au
-  démarrage disparaissent avec lui. Le boot du 2026-10-28 nomme le firmware chargé :
-  `BCM4345/6 wl0: Aug 25 2015 18:58:57 version 7.45.69 (r581703)`. En marche, le noyau n'écrit
-  rien lors d'un décrochage : ni erreur SDIO, ni plantage du firmware.
+  démarrage disparaissent avec lui. En marche, le noyau n'écrit rien lors d'un décrochage : ni
+  erreur SDIO, ni plantage du firmware.
+- **La carte charge un firmware WiFi générique de 2015.** Relevé au boot du 2026-10-28 :
+  `brcmfmac43455-sdio.radxa,zero.bin` est absent (`error -2`), le pilote retombe sur
+  `brcmfmac43455-sdio.bin`, `BCM4345/6 wl0: Aug 25 2015 18:58:57 version 7.45.69 (r581703)`, avec
+  la calibration générique `AP6255_NVRAM_V1.0_29052015`. Les liens `radxa,zero` présents visent
+  la puce `43456`, pas celle-ci. `cypress/cyfmac43455-sdio.bin`, plus gros de 160 Ko, est sur le
+  disque, non essayé.
 - **Une coupure de courant perd le journal depuis la dernière recopie** : `/var/log` est en RAM,
   et le journal du boot précédent s'arrête alors à la dernière recopie d'`armbian-ramlog` (22 h
   plus tôt le 2026-10-28, coupure vérifiée). Le collecteur écrit sur l'eMMC : `heartbeat` et
@@ -149,7 +154,10 @@ Relevé du 2026-10-25, en lecture seule.
   (36 balayages) puis déconnectée volontairement (6) : box en 2,4 GHz et voisin du canal 6 à
   100 %, contre 12 % et 4 % en panne ; canal 1 à 89-100 % contre 19-44 % ; canal 11 à 100 %
   contre 60 % ; box en 5 GHz à 100 % contre 96 %. Pendant une panne, c'est donc le 2,4 GHz qui
-  s'effondre pour la carte, le canal 6 le plus, et pas la seule box. L'origine reste inconnue.
+  s'effondre pour la carte, le canal 6 le plus, et pas la seule box. Le réveil, sur le même
+  point d'accès à quelques centimètres, ne se reconnecte pas à ces moments : 4 signons à ±2 min
+  d'une panne de la carte, 5 attendus par hasard. L'origine n'est pas prouvée, la carte est la
+  piste principale.
 - **`wpa_cli` marche sans root** : l'utilisateur est dans `netdev`. `wpa_cli -i wlan0 scan`
   déclenche un balayage, connecté ou non, `iw dev wlan0 scan dump` le relit. Ne pas lancer
   `save_config` : il réécrirait `wpa_supplicant-wlan0.conf`.
