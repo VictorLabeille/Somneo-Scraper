@@ -71,6 +71,86 @@ nécessaire — rien à toucher dans le chemin de boot.
 Si le symptôme réapparaît, chercher d'abord une association « nue » dans le journal avant de
 suspecter `wpa_supplicant-wlan0.conf` : cette configuration-là, elle, est correcte.
 
+### Lire une déconnexion dans le journal — ce que `brcmfmac` écrit vraiment
+
+Vérifié le 2026-10-25 dans le code source du noyau 6.18
+(`drivers/net/wireless/broadcom/brcm80211/brcmfmac/cfg80211.c`). Avec ce pilote, c'est le
+firmware qui gère l'association ; wpa_supplicant ne voit que ce que le pilote lui remonte, et
+deux des lignes du journal ne disent pas ce qu'elles ont l'air de dire.
+
+- **`CTRL-EVENT-DISCONNECTED reason=0 locally_generated=1`** : ce n'est **pas** la carte qui a
+  choisi de partir. `brcmf_map_fw_linkdown_reason()` met `reason=0` pour tout événement autre
+  qu'un deauth ou un disassoc, et `locally_generated` vaut 1 seulement pour l'événement
+  `BRCMF_E_LINK` (lien perdu). C'est le firmware qui ne capte plus le point d'accès, en général
+  par des balises manquées. Un deauth envoyé par la box arriverait avec `locally_generated=0`
+  et son propre code de raison.
+- **`CTRL-EVENT-ASSOC-REJECT status_code=16`** : ce n'est **pas** forcément la box qui refuse.
+  Dans la norme, 16 veut dire `WLAN_STATUS_AUTH_TIMEOUT` (authentification abandonnée faute de
+  la trame suivante dans le délai). Mais `brcmf_bss_connect_done()` met **16 en dur pour tout
+  échec de connexion**, quelle qu'en soit la cause : `SET_SSID` en échec, réseau introuvable
+  (`BRCMF_E_STATUS_NO_NETWORKS`), échec du supplicant interne. Le statut réel de la box, s'il
+  y en a un, n'est pas transmis.
+
+Lecture d'un incident : décrochage `locally_generated=1` puis une série de `status_code=16`, cela
+signifie « le firmware a perdu la box, puis ne l'a pas retrouvée pendant N minutes ». Ce que ce
+couple ne dit pas, c'est de quel côté vient la panne (radio de la carte, signal, box).
+
+### Diagnostiquer les décrochages — ce qui se mesure sans root, et ce qui manque
+
+Relevé du 2026-10-25, en lecture seule.
+
+- **`iw dev wlan0 get power_save` répond `off`** sans aucun réglage de notre part : l'économie
+  d'énergie du WiFi n'est pas active sur cette image.
+- **L'historique d'`apt` et de `dpkg` est perdu.** Armbian tient `/var/log` en RAM (zram,
+  `armbian-ramlog`) et le recopie dans `/var/log.hdd` ; `history.log` et `dpkg.log` y sont vides
+  depuis la rotation du 1er septembre, et le `.1.gz` restant date de la fabrication de l'image.
+  Pour dater une mise à jour, lire les dates des fichiers de dpkg, réécrits à chaque
+  installation : `ls -lt --time-style=+%F_%T /var/lib/dpkg/info/*.list | head`. Au
+  2026-10-25, le plus récent date de l'installation du 2026-08-22 : noyau, `armbian-firmware`
+  et `wpasupplicant` n'ont pas bougé depuis.
+- **Le journal ne remonte qu'à un mois** (`SystemMaxUse=20M`) : les messages du noyau au
+  démarrage disparaissent avec lui. Le boot du 2026-10-28 nomme le firmware chargé :
+  `BCM4345/6 wl0: Aug 25 2015 18:58:57 version 7.45.69 (r581703)`. En marche, le noyau n'écrit
+  rien lors d'un décrochage : ni erreur SDIO, ni plantage du firmware.
+- **Une coupure de courant perd le journal depuis la dernière recopie** : `/var/log` est en RAM,
+  et le journal du boot précédent s'arrête alors à la dernière recopie d'`armbian-ramlog` (22 h
+  plus tôt le 2026-10-28, coupure vérifiée). Le collecteur écrit sur l'eMMC : `heartbeat` et
+  `outage` restent la source pour dater ce genre d'arrêt.
+- **`iw dev wlan0 survey dump` ne renvoie rien** avec ce firmware : pas de mesure d'occupation
+  du canal par la carte.
+- **`ping` exige root** (`cap_net_raw` absent) ; `iw dev wlan0 station dump` (signal, `tx
+  failed`, débit, durée de connexion) se lit sans root, comme `journalctl -u
+  wpa_supplicant@wlan0`. Un balayage des réseaux voisins (`iw dev wlan0 scan`) demande root.
+- **`iw dev wlan0 scan dump` se lit sans root** : il rend le cache des derniers scans, y compris
+  ceux que wpa_supplicant lance pendant une panne. C'est la façon de savoir, hors connexion, si
+  la carte entend encore la box et les voisins.
+- **`freq_list` ne limite que le choix du réseau, pas les balayages.** Un `sudo iw dev wlan0
+  scan` couvre aussi le 5 GHz, et ceux de wpa_supplicant aussi : pendant les pannes du
+  2026-10-25 au 2026-10-27, la box en 5 GHz est reçue dans 96 % des balayages (718). `scan_freq`
+  serait l'option qui limite ceux de wpa_supplicant (non essayée). Pour un scan à la main limité
+  au 2,4 GHz :
+  `iw dev wlan0 scan freq 2412 2417 2422 2427 2432 2437 2442 2447 2452 2457 2462 2467 2472`.
+- **wpa_supplicant n'annonce pas le 5 GHz à la box** quand `freq_list` est posé dans le bloc
+  `network` : l'élément « Supported Operating Classes » de la demande d'association omet alors
+  les classes 115 à 130 (`wpa_supplicant/op_classes.c`, `wpas_op_class_supported()`, version
+  2.10). Posé en global, `freq_list` n'a pas cet effet.
+- **wpa_supplicant allonge lui-même les pannes.** Après chaque échec de connexion,
+  `wpas_auth_failed()` désactive le réseau 10, 20, 30, 60, 60 puis 90 s, plus un aléa
+  (`CTRL-EVENT-SSID-TEMP-DISABLED … duration=`). Ces durées sont en dur dans la version 2.10 et
+  aucune option ne les règle ; `wpa_cli -i wlan0 enable_network 0` lève l'attente en cours.
+  La liste d'ignorés (`BSSID … ignore list count incremented`) ne bloque pas un point d'accès
+  unique, elle change seulement l'ordre des essais.
+- **Une tentative d'association ne prouve pas que la box est entendue** : wpa_supplicant tente
+  aussi sur un résultat de scan en cache. Mesuré sur 48 h, 718 balayages en panne : la box en
+  2,4 GHz est reçue dans 12 % d'entre eux, à son niveau normal, alors que la box en 5 GHz et les
+  voisins restent reçus, et 2 balayages seulement ne reçoivent rien. `iw dev wlan0 scan dump` donne l'âge
+  de chaque réception (`last seen … ms ago`) : le filtrer, le cache garde les réseaux absents.
+  L'enregistreur ne lit ce cache que déconnecté : ces taux n'ont pas de référence hors panne.
+- **Les pannes se comptent dans le journal de wpa_supplicant** : une panne va d'un
+  `CTRL-EVENT-DISCONNECTED` au `CTRL-EVENT-CONNECTED` suivant, avec les `ASSOC-REJECT` entre
+  les deux. Comparer les instants en secondes (`journalctl -o short-unix`). La table `outage` du
+  collecteur en voit moins : une panne plus courte que l'intervalle de collecte lui échappe.
+
 Le mot de passe WiFi n'est jamais stocké en clair : il est converti en clé dérivée
 PBKDF2-HMAC-SHA1 avant d'être écrit dans l'image.
 
