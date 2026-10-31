@@ -203,6 +203,7 @@ de l'eMMC vivent encore hors du dépôt, dans `C:\Users\Victor\radxa-flash\`.
 
 - **Prose en français** : documentation, commentaires, messages de commit.
 - **Identifiants, noms de fichiers et de variables en anglais.**
+- **Git** : commits directement sur `main`, qui se pousse (Victor, 2026-10-31).
 
 ## Note Obsidian associée
 

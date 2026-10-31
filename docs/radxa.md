@@ -145,7 +145,14 @@ Relevé du 2026-10-25, en lecture seule.
   2,4 GHz est reçue dans 12 % d'entre eux, à son niveau normal, alors que la box en 5 GHz et les
   voisins restent reçus, et 2 balayages seulement ne reçoivent rien. `iw dev wlan0 scan dump` donne l'âge
   de chaque réception (`last seen … ms ago`) : le filtrer, le cache garde les réseaux absents.
-  L'enregistreur ne lit ce cache que déconnecté : ces taux n'ont pas de référence hors panne.
+- **Hors panne, la même carte entend tout.** Référence du 2026-10-31 à une heure calme, connectée
+  (36 balayages) puis déconnectée volontairement (6) : box en 2,4 GHz et voisin du canal 6 à
+  100 %, contre 12 % et 4 % en panne ; canal 1 à 89-100 % contre 19-44 % ; canal 11 à 100 %
+  contre 60 % ; box en 5 GHz à 100 % contre 96 %. Pendant une panne, c'est donc le 2,4 GHz qui
+  s'effondre pour la carte, le canal 6 le plus, et pas la seule box. L'origine reste inconnue.
+- **`wpa_cli` marche sans root** : l'utilisateur est dans `netdev`. `wpa_cli -i wlan0 scan`
+  déclenche un balayage, connecté ou non, `iw dev wlan0 scan dump` le relit. Ne pas lancer
+  `save_config` : il réécrirait `wpa_supplicant-wlan0.conf`.
 - **Les pannes se comptent dans le journal de wpa_supplicant** : une panne va d'un
   `CTRL-EVENT-DISCONNECTED` au `CTRL-EVENT-CONNECTED` suivant, avec les `ASSOC-REJECT` entre
   les deux. Comparer les instants en secondes (`journalctl -o short-unix`). La table `outage` du
