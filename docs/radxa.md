@@ -116,7 +116,20 @@ Relevé du 2026-10-25, en lecture seule.
   `brcmfmac43455-sdio.bin`, `BCM4345/6 wl0: Aug 25 2015 18:58:57 version 7.45.69 (r581703)`, avec
   la calibration générique `AP6255_NVRAM_V1.0_29052015`. Les liens `radxa,zero` présents visent
   la puce `43456`, pas celle-ci. `cypress/cyfmac43455-sdio.bin`, plus gros de 160 Ko, est sur le
-  disque, non essayé.
+  disque, non essayé : version `7.45.234` du 2021-04-15, même branche, avec son propre
+  `clm_blob`.
+- **`firmware_class.path` est disponible et vide** (`/sys/module/firmware_class/parameters/path`,
+  relevé du 2026-11-02, non essayé). Il ajoute un dossier de recherche en tête du chargeur de
+  firmware : pointé sur un tmpfs, il permettrait d'essayer un firmware sans écrire dans
+  `/lib/firmware`, un redémarrage rendant le générique. `wpa_supplicant@wlan0` dépend du
+  périphérique et n'a pas de `Restart=` : après un `modprobe -r`, le relancer à la main.
+- **Un balayage connecté fait tomber le débit affiché à 24 Mbit/s** : 52 % des lignes dans les
+  12 s suivant un départ de balayage, 0,02 % ailleurs (mesuré sur 36 h, 2026-11-02). Ne pas le
+  lire comme un signe avant-coureur. `tx retries` n'est jamais renseigné avec ce pilote.
+- **Un décrochage peut être précédé d'un canal 6 muet alors que la carte est encore associée.**
+  Sur 1 072 balayages connectés, la box en 2,4 GHz manque 3 fois, dont 2 à une dizaine de
+  secondes d'une perte de lien, avec la box en 5 GHz toujours reçue. Les voisins en 2,4 GHz
+  faiblissent déjà pendant un épisode de pannes, connecté comme déconnecté.
 - **Une coupure de courant perd le journal depuis la dernière recopie** : `/var/log` est en RAM,
   et le journal du boot précédent s'arrête alors à la dernière recopie d'`armbian-ramlog` (22 h
   plus tôt le 2026-10-28, coupure vérifiée). Le collecteur écrit sur l'eMMC : `heartbeat` et
